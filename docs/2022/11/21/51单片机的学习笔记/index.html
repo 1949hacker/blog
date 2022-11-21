@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>51单片机的学习笔记 | 1949hacker&#39;s Blog - 探索知识的宇宙</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="51单片机的学习及其关联知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机的学习笔记">
+<meta property="og:url" content="https://1949hacker.cn/2022/11/21/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="1949hacker&#39;s Blog - 探索知识的宇宙">
+<meta property="og:description" content="51单片机的学习及其关联知识">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-11-20T18:39:29.000Z">
+<meta property="article:modified_time" content="2022-11-21T01:00:52.263Z">
+<meta property="article:author" content="1949hacker">
+<meta property="article:tag" content="嵌入式开发">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="1949hacker's Blog - 探索知识的宇宙" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">1949hacker&#39;s Blog - 探索知识的宇宙</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Rechercher"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://1949hacker.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-51单片机的学习笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/21/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2022-11-20T18:39:29.000Z" itemprop="datePublished">2022-11-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/">知识库</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%A1%AC%E4%BB%B6/">硬件</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      51单片机的学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="51单片机的学习及其关联知识"><a href="#51单片机的学习及其关联知识" class="headerlink" title="51单片机的学习及其关联知识"></a>51单片机的学习及其关联知识</h2><span id="more"></span>
+
+<p><strong>开始前的一段话：</strong></p>
+<p>求知欲是人类进步的源泉，每接触一项新的知识就像是一滴墨滴在了宣纸上，向着四周疯狂扩散，这种极度的求知欲深深地刺激着我，撕裂我的思维向四周辐射，贪婪地、疯狂地汲取着接触到的每一项知识，这种知识爆炸的感觉带给我成瘾的快感！</p>
+<p>对于单片机的起步，始于我小时候的梦想，我想有高度智能的科技、机械围绕着我的生活，我想拥有一个高度智能的工厂，想要无数无数乃至我甚至不知如何形容的科技，我痴迷着这些技术，我疯狂的汲取各种知识，每一次突破一个新的知识面就像是进入一个未知的宇宙！偶然间，我发现我我的梦想可以从两个两个方面入手：</p>
+<ol>
+<li>软件层面的技术：编程，人工智能等</li>
+<li>硬件层面的技术：机械，电路开发等</li>
+</ol>
+<p>于是我有了方向，向着我想要的极力冲刺！</p>
+<p>我于2022.11.21日凌晨开始了51单片机的学习，从茫然无知，到那一滴墨滴在了宣纸上，围绕着单片机开始的知识爆炸让我无比亢奋！从一块小小的51单片机，知识开始爆炸开来，我从未接触过的领域，芯片，电路，逻辑……无数的知识冲刷着我的大脑，无法抑制的激动，发现未知的知识宇宙，我疯狂的汲取着无穷无尽的知识，感叹着人类智慧的结晶！</p>
+<p>越是学习，越是发觉自己的无知，知识是无穷无尽的，我永远不可能学完，真的太多太多了！</p>
+<p>人生的价值是集体利益，这些伟大的知识我无论学习多少，若不能将其贡献出来，则是对知识、对智慧、对人类乃至对我人生意义的亵渎！</p>
+<p>我将尽可能的将我所学的一切，用通俗易懂的语言描述出来，为同样渴望知识、同样有着疯狂求知欲的人们尽一份绵薄之力！</p>
+<p>如果你也有着相同的想法，同样渴望知识并为此痴迷，欢迎加入！</p>
+<p>如开头所述，求知欲是人类进步的源泉，所以在此，请允许我以<strong>先驱者</strong>尊称各位渴望知识的道友，并欢迎您加入到我们，您可以在本页底部找到我的联系方式，因某些原因，建议您使用Telegram进行交流。</p>
+<hr>
+<p><strong>注意：由于我是边学习边完善文章，所以文章可能存在大量错误，我个人的力量有限，恳请各位先驱者开放交流、互换知识，以集体的力量弥补个人的缺陷</strong></p>
+<hr>
+<h2 id="我使用的单片机"><a href="#我使用的单片机" class="headerlink" title="我使用的单片机"></a>我使用的单片机</h2><p>品牌：普中(PRECHIN)<br>型号：普中51-实验版<br>官方教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1RB4y1i71i">https://www.bilibili.com/video/BV1RB4y1i71i</a></p>
+<p>在官方教程中，介绍了该开发板的部分元器件：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4位一体数码管</td>
+<td>数字显示</td>
+<td>两个4位一体共阴数码管</td>
+</tr>
+<tr>
+<td>LCD1602液晶屏</td>
+<td>用于简单内容显示</td>
+<td>开发板提供了LCD1602&#x2F;9648&#x2F;12864&#x2F;TFT接口</td>
+</tr>
+<tr>
+<td>8*8LED矩阵</td>
+<td>常应用于LED广告牌等</td>
+<td>在矩阵旁边提供了编号J24的GND&#x2F;OE&#x2F;VCC三针引脚，跳线帽短接OE&#x2F;VCC可以关闭矩阵节省电源（OE我搜索出来的解释为<em>输出使能控制信号</em>，还请大佬科普补充一下，谢谢）</td>
+</tr>
+<tr>
+<td>LED流水灯</td>
+<td>可以用于心形流水灯表白（误）</td>
+<td>该开发板提供了8个流水灯</td>
+</tr>
+<tr>
+<td>74HC595A芯片</td>
+<td>该芯片用于扩展开发板IO口，驱动8*8点阵</td>
+<td>专业名称<em>高速 CMOS 8 位串行移位寄存器</em>其具体资料后续将专门设立电路知识栏目进行解释</td>
+</tr>
+<tr>
+<td>4*4键盘</td>
+<td>计算器啥的，挺实用</td>
+<td>普普通通</td>
+</tr>
+<tr>
+<td>红外接受</td>
+<td>红外遥控嘛，套餐给了遥控器</td>
+<td>NEC解码</td>
+</tr>
+<tr>
+<td>DS18B20温度传感器</td>
+<td>略</td>
+<td>略</td>
+</tr>
+<tr>
+<td>NRF24L01扩展接口</td>
+<td>该扩展接口可以用于扩展2.4G无线通信模块</td>
+<td>相当NICE的远程通信，几百米的遥控器？</td>
+</tr>
+<tr>
+<td>ASM1117稳压芯片</td>
+<td>提供3.3V稳定电压</td>
+<td>如视频中所述，大部分传感器为3.3V，所以嘛…</td>
+</tr>
+<tr>
+<td>CH340C芯片</td>
+<td>用于USB转TTL通信，该芯片内置晶振</td>
+<td>该板设计了4个引脚，分别是UTX-&gt;P30，RTX-&gt;P31，该设计十分优秀！在需要使用串口调试模块时，可以将U&#x2F;RTX针脚接到模块对应引脚，直接使用开发板MicroUSB进行调试，大赞！</td>
+</tr>
+</tbody></table>
+<h2 id="晶振临时科普栏"><a href="#晶振临时科普栏" class="headerlink" title="晶振临时科普栏"></a>晶振临时科普栏</h2><p>因我在学习过程中，对晶振的求知难度较大，特此临时记录！<br>晶振，全称石英晶体振荡器，英文名（quartz oscillator）<br>石英晶振具有高精度高稳度的特性，十分适合用于数字电路的时钟，是数字电路的心脏！</p>
+<p><strong>时钟这个概念比较抽象，我尝试将其描述的更加朴素一些：</strong></p>
+<p>在计算机中，关和开分别可以代表0和1，在最最原始的逻辑电路中，还没有晶振时，可以通过人工控制开关实现逻辑电路的控制，比如<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BC%82%E6%88%96%E9%97%A8/9036416">异或门</a></p>
+<table>
+<thead>
+<tr>
+<th>A开关</th>
+<th>B开关</th>
+<th>计算结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>关</td>
+<td>关</td>
+<td>0</td>
+</tr>
+<tr>
+<td>开</td>
+<td>关</td>
+<td>1</td>
+</tr>
+<tr>
+<td>关</td>
+<td>开</td>
+<td>1</td>
+</tr>
+<tr>
+<td>开</td>
+<td>开</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>于是我们可以通过这种简单逻辑的叠加，做出一些复杂的计算，如加法：x+y<br>设定，检测到<strong>A开B关</strong>一次设定x数值增加1，<strong>A关B开</strong>y数值增加1，那么我们要计算3+2，则需要进行一下操作：</p>
+<table>
+<thead>
+<tr>
+<th>给出X值</th>
+<th>给出B值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A开B关重复3次</td>
+<td>A关B开重复2次</td>
+</tr>
+</tbody></table>
+<p>由此可以看出，哪怕是及其简单的逻辑处理，也需要非常庞大的开关操作量。<br>因此，懒得一批的人类找到了晶振这玩意儿，<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E7%9F%B3%E8%8B%B1%E6%99%B6%E4%BD%93%E8%B0%90%E6%8C%AF%E5%99%A8">晶振的原理</a>解释起来有些许复杂，在此我们只需了解，晶振在电路板中工作的原理即可：<br>晶振可以在一定时间内以一定频率发出脉冲，脉冲一词仍有一些难以理解，而有些资料中对此的描述为高低电平的转换，对于一个初学者来说，最讨厌的无非就是看到这些难以理解的名词，在此我将其解释的更加直白一些，不过低电平并不等于0V，低电平只是一个相对较低的电压：<br>低电平：0V电压<br>高电平：5V电压<br>那么脉冲（高低电平转换）在电路中则是，打开开关：低电平（0V&#x3D;没电）转换为高电平（5V&#x3D;来电了），于是，就如我们上文所述，这就像是打开了A开关，利用晶振的这种脉冲，我们便可以在一定时间内实现一定次数的自动开关操作。<br>如果你仔细阅读并理解了，便会发现这真的是一个十分伟大的发明！从此让人类走上了废物(bushi)的道路，躺平~</p>
+<p><strong>文章亦是我的笔记，先暂时记录到这里，仍在学习总结中</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://1949hacker.cn/2022/11/21/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="claq2yhuu0000asvfafm267ey" data-title="51单片机的学习笔记" class="article-share-link">Partager</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/" rel="tag">嵌入式开发</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">重庆奕宸电源无法正常Reset问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/">知识库</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%A1%AC%E4%BB%B6/">硬件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SAS%E7%BA%BF%E7%BC%86/" rel="tag">SAS线缆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/" rel="tag">嵌入式开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E6%BA%90/" rel="tag">电源</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/SAS%E7%BA%BF%E7%BC%86/" style="font-size: 10px;">SAS线缆</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">嵌入式开发</a> <a href="/tags/%E7%94%B5%E6%BA%90/" style="font-size: 10px;">电源</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/11/21/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">51单片机的学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/">重庆奕宸电源无法正常Reset问题</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/17/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91/">Linux技巧(随时更新)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/04/%E5%B8%B8%E8%A7%81SAS%E7%BA%BF%E7%BC%86/">常见SAS线缆</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/26/vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/">vscode编写markdown的插件推荐</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 1949hacker<br>
+      Propulsé par <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
