@@ -74,6 +74,13 @@
 
   
   <url>
+    <loc>https://1949hacker.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2022-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://1949hacker.cn/tags/Linux/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -95,7 +102,7 @@
   </url>
   
   <url>
-    <loc>https://1949hacker.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://1949hacker.cn/tags/hexo/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -103,13 +110,6 @@
   
   <url>
     <loc>https://1949hacker.cn/tags/%E7%94%B5%E6%BA%90/</loc>
-    <lastmod>2022-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://1949hacker.cn/tags/hexo/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -132,14 +132,14 @@
   </url>
   
   <url>
-    <loc>https://1949hacker.cn/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6/</loc>
+    <loc>https://1949hacker.cn/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%A1%AC%E4%BB%B6/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://1949hacker.cn/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%A1%AC%E4%BB%B6/</loc>
+    <loc>https://1949hacker.cn/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
