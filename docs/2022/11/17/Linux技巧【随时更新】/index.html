@@ -25,7 +25,7 @@
 <meta property="og:description" content="若您有任何技术问题，可以通过本站展示的联系方式咨询我">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-11-17T08:15:48.000Z">
-<meta property="article:modified_time" content="2022-11-20T23:05:08.390Z">
+<meta property="article:modified_time" content="2022-12-23T04:16:42.760Z">
 <meta property="article:author" content="1949hacker">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -119,6 +119,229 @@
 <h2 id="Linux查看硬盘SN"><a href="#Linux查看硬盘SN" class="headerlink" title="Linux查看硬盘SN"></a>Linux查看硬盘SN</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将<span class="comment">#替换为你对应的硬盘号 如sda</span></span></span><br><span class="line">lsblk --nodeps -no serial /dev/sd*</span><br></pre></td></tr></table></figure>
 
 <h2 id="Linux接触文件、目录占用"><a href="#Linux接触文件、目录占用" class="headerlink" title="Linux接触文件、目录占用"></a>Linux接触文件、目录占用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用该命令查看占用文件、文件夹的程序<span class="built_in">id</span></span></span><br><span class="line">fuser -cu /你要查询的文件或目录</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例</span></span><br><span class="line">fuser -cu docker-application/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我的输出结果</span></span><br><span class="line">/mnt/TEST/docker-application: 16676m(root) 16702m(root)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中16676m(root)和16702m(root)便是表明该目录由<span class="built_in">id</span>为16676和16702的进程占用</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用<span class="built_in">kill</span> <span class="built_in">id</span>杀死进程后便可删除或使用mount -f强制卸载</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux使用iostat查看磁盘io信息"><a href="#Linux使用iostat查看磁盘io信息" class="headerlink" title="Linux使用iostat查看磁盘io信息"></a>Linux使用iostat查看磁盘io信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用iostat可以查看简要的磁盘io信息</span></span><br><span class="line">iostat</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在此列出部分iostat参数:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-c 查看CPU信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-d 仅显示磁盘信息,默认是显示CPU和磁盘信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-x 显示详细信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-k或-m分别是以KB/MB为显示单位</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-p显示磁盘及其分区的信息</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">演示实例</span></span><br><span class="line">iostat -x -m 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">输出结果为每1秒刷新一次以MB为单位的详细信息,一直刷新</span></span><br><span class="line">avg-cpu:  %user   %nice %system %iowait  %steal   %idle</span><br><span class="line">           1.12    1.12   20.66    5.81    0.00   71.29</span><br><span class="line"></span><br><span class="line">Device            r/s     rMB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wMB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dMB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util</span><br><span class="line">dm-0             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-1             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-2             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-3             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-4             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md123            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md124            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md125            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md126            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md127            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">nvme0n1          7.00      0.02     0.00   0.00    6.14     3.43  120.00      1.32     0.00   0.00    1.31    11.30    0.00      0.00     0.00   0.00    0.00     0.00    2.00    2.50    0.21   9.20</span><br><span class="line">sda              2.00      0.00     0.00   0.00   38.00     0.00  920.00     32.91     2.00   0.22    0.52    36.63    0.00      0.00     0.00   0.00    0.00     0.00    2.00   38.50    0.63  63.60</span><br><span class="line">sdb              3.00      0.00     0.00   0.00   35.33     1.33  964.00     34.25     3.00   0.31    0.37    36.38    0.00      0.00     0.00   0.00    0.00     0.00    2.00   38.00    0.54  61.20</span><br><span class="line">sdc              2.00      0.00     0.00   0.00   42.00     0.00  883.00     34.25     3.00   0.34    0.82    39.72    0.00      0.00     0.00   0.00    0.00     0.00    2.00   42.00    0.89  71.20</span><br><span class="line">sdd              2.00      0.00     0.00   0.00   39.50     0.00  956.00     34.21     2.00   0.21    0.36    36.65    0.00      0.00     0.00   0.00    0.00     0.00    2.00   39.00    0.50  59.20</span><br><span class="line">sde              3.00      0.00     0.00   0.00   36.00     1.33  780.00     34.26     1.00   0.13    0.43    44.98    0.00      0.00     0.00   0.00    0.00     0.00    2.00   44.50    0.53  61.20</span><br><span class="line">sdf              2.00      0.00     0.00   0.00   29.50     0.00  772.00     34.21     2.00   0.26    0.44    45.37    0.00      0.00     0.00   0.00    0.00     0.00    2.00   30.00    0.46  58.80</span><br><span class="line">sdg              3.00      0.00     0.00   0.00   22.00     1.33  773.00     34.21     2.00   0.26    0.43    45.31    0.00      0.00     0.00   0.00    0.00     0.00    2.00   33.00    0.46  58.00</span><br><span class="line">sdh              2.00      0.00     0.00   0.00   49.50     0.00  738.00     33.76     3.00   0.40    0.66    46.85    0.00      0.00     0.00   0.00    0.00     0.00    2.00   49.50    0.68  64.80</span><br><span class="line">sdi              3.00      0.00     0.00   0.00   31.33     1.33  680.00     34.21     2.00   0.29    0.86    51.52    0.00      0.00     0.00   0.00    0.00     0.00    2.00   47.00    0.77  66.80</span><br><span class="line">sdj              2.00      0.00     0.00   0.00   44.50     0.00  801.00     34.25     1.00   0.12    0.43    43.79    0.00      0.00     0.00   0.00    0.00     0.00    2.00   44.00    0.52  61.20</span><br><span class="line">sdk              2.00      0.00     0.00   0.00   49.00     0.00  675.00     33.88     3.00   0.44    1.00    51.39    0.00      0.00     0.00   0.00    0.00     0.00    2.00   49.00    0.87  71.20</span><br><span class="line">sdl              2.00      0.00     0.00   0.00   38.50     0.00  697.00     34.62     1.00   0.14    1.20    50.87    0.00      0.00     0.00   0.00    0.00     0.00    2.00   38.50    0.99  76.40</span><br><span class="line">sdm              0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">sr0              0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中1代表刷新频率,1秒,3代表次数,刷新3次,如果不填写3,则为一直刷新</span></span><br><span class="line">iostat -x -m 1 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>显示CPU利用率报告</td>
+</tr>
+<tr>
+<td>–compact</td>
+<td>不要将“设备利用率报告”拆分为子报告，以便所有指标都显示在一行中</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>显示设备利用率报告</td>
+</tr>
+<tr>
+<td>–dec&#x3D;{ 0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>官方对该参数的解释略微复杂,烦请查阅<a target="_blank" rel="noopener" href="https://manpages.debian.org/testing/sysstat/iostat.1.en.html#f">官方文档</a></td>
+</tr>
+<tr>
+<td>-g</td>
+<td>将所有设备汇总显示,-g参数后面填group_name</td>
+</tr>
+<tr>
+<td>-H</td>
+<td>此选项必须与选项-g一起使用，并指示只显示组的全局统计信息，而不显示组中单个设备的统计信息</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>该选项将输出结果分类显示,便于阅读</td>
+</tr>
+<tr>
+<td>–human</td>
+<td>以人类可读格式打印大小（例如1.0k、1.2M等）。使用此选项显示的单位将取代与度量相关的任何其他默认单位（例如千字节、扇区…）</td>
+</tr>
+<tr>
+<td>-j</td>
+<td>在参数后跟(ID&#x2F;LABEL&#x2F;PATH&#x2F;UUID)等,以替换原&#x2F;dev&#x2F;sd*的显示,<a target="_blank" rel="noopener" href="https://manpages.debian.org/testing/sysstat/iostat.1.en.html#j">官方文档</a></td>
+</tr>
+<tr>
+<td>-k</td>
+<td>以KB为单位进行显示</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>以MB为单位进行显示</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>显示任何设备映射器设备的注册设备映射器名称。用于查看LVM2统计信息</td>
+</tr>
+<tr>
+<td>-o JSON</td>
+<td>以json格式输出结果</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>显示磁盘及其分区信息,可以在后跟指定磁盘以显示单个磁盘的分区信息</td>
+</tr>
+<tr>
+<td>–pretty</td>
+<td>将报告以更易于阅读的方式显示,同–human</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>显示报告的短（窄）版本，该版本应适合80个字符宽的屏幕</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>打印显示的每个报告的时间。时间戳格式可能取决于S_TIME_format环境变量的值</td>
+</tr>
+<tr>
+<td>-V</td>
+<td>打印iostat版本号</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>显示扩展统计信息</td>
+</tr>
+<tr>
+<td>-y</td>
+<td>如果在给定的时间间隔内显示多个记录，则省略系统启动后的第一个统计报告</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>告诉iostat忽略在采样期间没有活动的任何设备的输出</td>
+</tr>
+</tbody></table>
+<h3 id="输出结果参数解读"><a href="#输出结果参数解读" class="headerlink" title="输出结果参数解读"></a>输出结果参数解读</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%user</td>
+<td>显示在用户级别（应用程序）执行时发生的 CPU 使用率百分比</td>
+</tr>
+<tr>
+<td>%nice</td>
+<td>显示在具有良好优先级的用户级别执行时发生的 CPU 使用率百分比</td>
+</tr>
+<tr>
+<td>%system</td>
+<td>显示在系统级别（内核）执行时发生的 CPU 使用率百分比</td>
+</tr>
+<tr>
+<td>%iowait</td>
+<td>显示系统有未完成的磁盘 I&#x2F;O 请求期间 CPU 或 CPU 空闲的时间百分比</td>
+</tr>
+<tr>
+<td>%steal</td>
+<td>显示虚拟机管理程序为另一个虚拟处理器提供服务时虚拟 CPU 或 CPU 非自愿等待所花费的时间百分比</td>
+</tr>
+<tr>
+<td>%idle</td>
+<td>显示 CPU 或 CPU 空闲且系统没有未完成的磁盘 I&#x2F;O 请求的时间百分比</td>
+</tr>
+<tr>
+<td>r&#x2F;s</td>
+<td>设备每秒完成的读取请求数（合并后）</td>
+</tr>
+<tr>
+<td>rMB&#x2F;s</td>
+<td>每秒读字节数,单位随参数-k&#x2F;-m分别对应KB和MB</td>
+</tr>
+<tr>
+<td>rrqm&#x2F;s</td>
+<td>每秒合并到设备队列的读取请求数</td>
+</tr>
+<tr>
+<td>%rrqm</td>
+<td>在发送到设备之前合并在一起的读取请求的百分比</td>
+</tr>
+<tr>
+<td>r_await</td>
+<td>平均每次设备读I&#x2F;O操作的等待时间 (毫秒)</td>
+</tr>
+<tr>
+<td>rareq-sz</td>
+<td>向设备发出的读取请求的平均大小（以KB为单位）</td>
+</tr>
+<tr>
+<td>w&#x2F;s</td>
+<td>设备每秒完成的写入请求数（合并后）</td>
+</tr>
+<tr>
+<td>wMB&#x2F;s</td>
+<td>每秒写字节数,单位随参数-k&#x2F;-m分别对应KB和MB</td>
+</tr>
+<tr>
+<td>wrqm&#x2F;s</td>
+<td>每秒合并到设备队列的写入请求数</td>
+</tr>
+<tr>
+<td>%wrqm</td>
+<td>在发送到设备之前合并在一起的写入请求的百分比</td>
+</tr>
+<tr>
+<td>w_await</td>
+<td>平均每次设备写I&#x2F;O操作的等待时间 (毫秒)</td>
+</tr>
+<tr>
+<td>wareq-sz</td>
+<td>向设备发出的写入请求的平均大小（以KB为单位）</td>
+</tr>
+<tr>
+<td>d&#x2F;s</td>
+<td>设备每秒完成的丢弃请求数（合并后）</td>
+</tr>
+<tr>
+<td>dMB&#x2F;s</td>
+<td>每秒为设备丢弃的扇区数,单位随参数-k&#x2F;-m分别对应KB和MB</td>
+</tr>
+<tr>
+<td>drqm&#x2F;s</td>
+<td>每秒排队到设备的合并丢弃请求数</td>
+</tr>
+<tr>
+<td>%drqm</td>
+<td>在发送到设备之前合并在一起的丢弃请求的百分比</td>
+</tr>
+<tr>
+<td>d_await</td>
+<td>向要服务的设备发出的丢弃请求的平均时间（以毫秒为单位）。这包括队列中的请求所花费的时间以及为它们提供服务所花费的</td>
+</tr>
+<tr>
+<td>dareq-sz</td>
+<td>向设备发出的丢弃请求的平均大小（以KB为单位）</td>
+</tr>
+<tr>
+<td>f&#x2F;s</td>
+<td>设备每秒完成的刷新请求数（合并后）。这对磁盘执行的刷新请求进行计数。不跟踪分区的刷新请求。在合并之前，刷新操作算作写入操作</td>
+</tr>
+<tr>
+<td>f_await</td>
+<td>向要服务的设备发出刷新请求的平均时间（以毫秒为单位）。块层合并刷新请求并且一次最多执行一个。因此刷新操作可能是两倍长：等待当前刷新请求，然后执行它，然后等待下一个</td>
+</tr>
+<tr>
+<td>aqu-sz</td>
+<td>向设备发出的请求的平均队列长度,在以前的版本中,此字段称为 avgqu-sz</td>
+</tr>
+<tr>
+<td>%util</td>
+<td>向设备发出 I&#x2F;O 请求所用时间的百分比（设备的带宽利用率）。对于串行服务请求的设备，当此值接近 100% 时，就会发生设备饱和。但对于并行处理请求的设备，例如 RAID 阵列和现代 SSD，这个数字并不反映它们的性能限制</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>%iowait的值过高,表示硬盘存在I&#x2F;O瓶颈<br>%idle值高,表示CPU较空闲<br>%idle值高但系统响应慢时,有可能是CPU等待分配内存,此时应加大内存容量<br>%idle值如果持续低于10,那么系统的CPU处理能力相对较低,表明系统中最需要解决的资源是CPU<br>%util 接近 100%，说明产生的I&#x2F;O请求太多，I&#x2F;O系统已经满负荷，该磁盘可能存在瓶颈</p>
+<p>该文章内容参考<a target="_blank" rel="noopener" href="https://manpages.debian.org/testing/sysstat/iostat.1.en.html">iostat官方文档https://manpages.debian.org/testing/sysstat/iostat.1.en.html</a></p>
+</blockquote>
 
       
     </div>
