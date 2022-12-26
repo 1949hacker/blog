@@ -17,7 +17,7 @@ date: 2022-11-17 16:15:48
 lsblk --nodeps -no serial /dev/sd*
 ```
 
-## Linux接触文件、目录占用
+## Linux解除文件、目录占用
 
 ```shell
 # 使用该命令查看占用文件、文件夹的程序id
@@ -147,3 +147,24 @@ iostat -x -m 1 3
 > %util 接近 100%，说明产生的I/O请求太多，I/O系统已经满负荷，该磁盘可能存在瓶颈
 >
 > 该文章内容参考[iostat官方文档https://manpages.debian.org/testing/sysstat/iostat.1.en.html](https://manpages.debian.org/testing/sysstat/iostat.1.en.html)
+
+## fio测试工具详细教程
+
+> 待完善,先临时记录一条
+
+```shell
+fio -name=stress_disk -filename=/mnt/DATA/test/a -size=30T -runtime=240h -bs=1m -direct=1 -rw=randrw -ioengine=libaio -numjobs=12 -group_reporting -iodepth=8 -rwmixwrite=50
+
+# 其中name是本次测试任务的名称
+# filename则为指定测试目录和文件名
+# size则为指定测试文件大小,此处为30T,无论运行多久,该测试文件a都不会超过30T
+# runtime为指定运行时间,240h则为240小时,单位可以为秒s分m时h
+# bs为块大小,顺序读写通常为1m,4k则填写4k即可
+# direct有0和1选项,0为使用文件系统缓存,1则为直接操作磁盘
+# rw可选的参数有read/write/rw/randread/randwrite/randrw,分别为读/写/读写/随机读/随机写/随机读写
+# ioengine IO测试引擎,在linux下选择libaio即可
+# numjobs线程数,一般设置为硬盘数量,根据实际需要自行调整
+# group_reporting合并报告,将性能测试结果合并汇报,显示所有硬盘性能测试的总结果
+# iodepth IO队列深度,指定IO队列深度,提高每次请求的IO数量
+# rwmixwrite/rwmixread 这两个参数都可以指定,按百分比指定,如rwmixwrite=30则表示写占比30%,只需使用其中一个即可,无需同时指定两个参数
+```
