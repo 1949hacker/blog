@@ -9,6 +9,8 @@ date: 2023-01-03 12:00:25
 
 >在传统物理机上，如需使用UEFI引导，仅仅需要在硬盘上创建EFI分区即可，无论是Windows还是Linux均是如此，但在使用Proxmox-VE创建虚拟机时，却需要额外添加EFI磁盘，对此提出疑问并进行探讨。
 
+<!-- more -->
+
 直接在网络上搜寻并无相关信息，查询[官方wiki](https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines)得到如下解释：
 
 BIOS 和 UEFI
