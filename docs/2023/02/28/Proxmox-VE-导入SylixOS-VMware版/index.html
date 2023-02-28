@@ -19,29 +19,36 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"1949hacker.cn","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="在传统物理机上，如需使用UEFI引导，仅仅需要在硬盘上创建EFI分区即可，无论是Windows还是Linux均是如此，但在使用Proxmox-VE创建虚拟机时，却需要额外添加EFI磁盘，对此提出疑问并进行探讨。">
+    <meta name="description" content="将SylixOS传到服务器 解压SylixOS VMware版，找到其中的 12x86_boot.vmdkx86_main.vmdk  将这两个文件上传到服务器，使用qemu-img命令将vmdk虚拟机磁盘转为qcow2格式 12qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_main.qcow2qemu-img convert -f vmd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题">
-<meta property="og:url" content="https://1949hacker.cn/2023/01/03/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="Proxmox-VE 导入SylixOS VMware版">
+<meta property="og:url" content="https://1949hacker.cn/2023/02/28/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88/index.html">
 <meta property="og:site_name" content="1949hacker&#39;s Blog - 探索知识的宇宙">
-<meta property="og:description" content="在传统物理机上，如需使用UEFI引导，仅仅需要在硬盘上创建EFI分区即可，无论是Windows还是Linux均是如此，但在使用Proxmox-VE创建虚拟机时，却需要额外添加EFI磁盘，对此提出疑问并进行探讨。">
+<meta property="og:description" content="将SylixOS传到服务器 解压SylixOS VMware版，找到其中的 12x86_boot.vmdkx86_main.vmdk  将这两个文件上传到服务器，使用qemu-img命令将vmdk虚拟机磁盘转为qcow2格式 12qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_main.qcow2qemu-img convert -f vmd">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-03T04:00:25.000Z">
-<meta property="article:modified_time" content="2023-02-14T09:44:05.617Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224155828.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224155929.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224160025.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224160056.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224160513.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224160856.png">
+<meta property="article:published_time" content="2023-02-28T08:31:43.000Z">
+<meta property="article:modified_time" content="2023-02-28T08:33:02.971Z">
 <meta property="article:author" content="1949hacker">
 <meta property="article:tag" content="Proxmox-VE">
-<meta property="article:tag" content="虚拟机">
+<meta property="article:tag" content="SylixOS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224155828.png">
 
 
-<link rel="canonical" href="https://1949hacker.cn/2023/01/03/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="https://1949hacker.cn/2023/02/28/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh_CN","comments":true,"permalink":"https://1949hacker.cn/2023/01/03/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98/","path":"2023/01/03/关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题/","title":"关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh_CN","comments":true,"permalink":"https://1949hacker.cn/2023/02/28/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88/","path":"2023/02/28/Proxmox-VE-导入SylixOS-VMware版/","title":"Proxmox-VE 导入SylixOS VMware版"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题 | 1949hacker's Blog - 探索知识的宇宙</title>
+<title>Proxmox-VE 导入SylixOS VMware版 | 1949hacker's Blog - 探索知识的宇宙</title>
   
 
 
@@ -155,7 +162,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh_CN">
-    <link itemprop="mainEntityOfPage" href="https://1949hacker.cn/2023/01/03/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://1949hacker.cn/2023/02/28/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,12 +175,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题 | 1949hacker's Blog - 探索知识的宇宙">
+      <meta itemprop="name" content="Proxmox-VE 导入SylixOS VMware版 | 1949hacker's Blog - 探索知识的宇宙">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题
+          Proxmox-VE 导入SylixOS VMware版
         </h1>
 
         <div class="post-meta-container">
@@ -183,15 +190,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">نُشر في</span>
+      
 
-      <time title="أُنشأ: 2023-01-03 12:00:25" itemprop="dateCreated datePublished" datetime="2023-01-03T12:00:25+08:00">2023-01-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">عُدل في</span>
-      <time title="عُدل: 2023-02-14 17:44:05" itemprop="dateModified" datetime="2023-02-14T17:44:05+08:00">2023-02-14</time>
+      <time title="أُنشأ: 2023-02-28 16:31:43 / عُدل: 16:33:02" itemprop="dateCreated datePublished" datetime="2023-02-28T16:31:43+08:00">2023-02-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -221,28 +222,36 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <blockquote>
-<p>在传统物理机上，如需使用UEFI引导，仅仅需要在硬盘上创建EFI分区即可，无论是Windows还是Linux均是如此，但在使用Proxmox-VE创建虚拟机时，却需要额外添加EFI磁盘，对此提出疑问并进行探讨。</p>
-</blockquote>
-<span id="more"></span>
+        <p>将SylixOS传到服务器</p>
+<p>解压SylixOS VMware版，找到其中的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x86_boot.vmdk</span><br><span class="line">x86_main.vmdk</span><br></pre></td></tr></table></figure>
 
-<p>直接在网络上搜寻并无相关信息，查询<a target="_blank" rel="noopener" href="https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines">官方wiki</a>得到如下解释：</p>
-<p>BIOS 和 UEFI</p>
-<p>为了正确模拟计算机，QEMU 需要使用固件。在通常称为 BIOS 或 (U)EFI 的普通 PC 上，它作为启动 VM 时的第一步执行。它负责进行基本的硬件初始化，并为操作系统提供固件和硬件接口。默认情况下，QEMU 为此使用SeaBIOS，这是一个开源的 x86 BIOS 实现。SeaBIOS 是大多数标准设置的不错选择。</p>
-<p>某些操作系统（例如 Windows 11）可能需要使用 UEFI 兼容实现。在这种情况下，您必须使用OVMF，它是一种开源 UEFI 实现。</p>
-<p>在其他情况下，SeaBIOS 可能不是理想的启动固件，例如，如果您想进行 VGA 直通。</p>
-<p>如果要使用 OVMF，需要考虑以下几点：</p>
-<p>为了保存引导顺序之类的东西，需要有一个 EFI 磁盘。该磁盘将包含在备份和快照中，并且只能有一个。</p>
-<p>您可以使用以下命令创建这样的磁盘：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qm set &lt;vmid&gt; -efidisk0 &lt;storage&gt;:1,format=&lt;format&gt;,efitype=4m,pre-enrolled-keys=1</span><br></pre></td></tr></table></figure>
+<p>将这两个文件上传到服务器，使用qemu-img命令将vmdk虚拟机磁盘转为qcow2格式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_main.qcow2</span><br><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_boot.qcow2</span><br></pre></td></tr></table></figure>
 
-<p>其中<strong>storage</strong>是您希望拥有磁盘的存储，而<strong>format</strong>是存储支持的格式。或者，您可以通过VM 硬件部分中的添加 EFI 磁盘的 Web 界面创建这样的磁盘。</p>
-<p>efitype选项指定应使用哪个版本的 OVMF 固件。对于新的 VM，这应该始终是4m，因为它支持安全启动并且分配了更多空间来支持未来的开发（这是 GUI 中的默认值）。</p>
-<p>pre-enroll-keys指定 efidisk 是否应预加载特定于发行版和 Microsoft 标准安全启动密钥。它还默认启用安全启动（尽管它仍然可以在 VM 的 OVMF 菜单中禁用）。</p>
-<p>笔记	如果要在现有 VM（仍使用2m efidisk）中开始使用安全启动，则需要重新创建 efidisk。为此，删除旧的 ( <code>qm set &lt;vmid&gt; -delete efidisk0</code> ) 并添加一个新的，如上所述。这将重置您在 OVMF 菜单中所做的任何自定义配置！<br>当使用带有虚拟显示器的 OVMF（没有 VGA 直通）时，您需要在 OVMF 菜单中设置客户端分辨率（您可以在启动期间按 ESC 按钮到达），或者您必须选择 SPICE 作为显示类型.</p>
-<hr>
-<p>为了保存引导顺序？或许是类似于物理机上，启动菜单中除了UEFI的硬盘启动项外，还有一个额外的操作系统名称的启动项？如<code>Windows Boot Manager</code>或是<code>Debian</code></p>
-<p>EFI磁盘 &#x3D; 操作系统引导项？</p>
+<p>切换到虚拟化服务器web界面，创建新虚拟机</p>
+<ol>
+<li><p>操作系统类型：Linux kernel 2.4，不使用任何光盘介质<br> <img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224155828.png" alt="20230224155828"></p>
+</li>
+<li><p>创建IDE硬盘，硬盘大小无所谓<br> <img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224155929.png" alt="20230224155929"></p>
+</li>
+<li><p>配置CPU，内核数量根据自己需求而定，类型为host<br><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224160025.png" alt="20230224160025"></p>
+</li>
+<li><p>修改网络模型，如果网卡不可用，尝试修改为其他模型<br> <img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224160056.png" alt="20230224160056"></p>
+</li>
+</ol>
+<p>创建虚拟机的步骤完毕，现在连接到服务器的shell，可以使用web shell或另行连接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入到虚拟机配置文件目录</span></span><br><span class="line">cd /etc/pve/qemu-server/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑刚刚创建的ID为125的虚拟机所属配置文件</span></span><br><span class="line">vim 125.conf</span><br></pre></td></tr></table></figure>
+
+<p>原配置文件如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224160513.png" alt="20230224160513"></p>
+<p>修改第6行ide0开头的内容如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ide0: nfshare:125/x86_boot.qcow2</span><br><span class="line">ide1: nfshare:125/x86_main.qcow2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，ide0 ide1务必不要重复，以免冲突</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，nfshare为我虚拟化服务器所在的存储名称，实际名称以你为准！</span></span><br></pre></td></tr></table></figure>
+
+<p>修改完毕后，将刚刚转化完毕的两个qcow2文件移动到虚拟机磁盘映像所在目录</p>
+<p><strong>先删除现有的文件</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230224160856.png" alt="20230224160856"></p>
+<p>随后打开web界面，启动虚拟机即可！</p>
 
     </div>
 
@@ -253,21 +262,18 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Proxmox-VE/" rel="tag"># Proxmox-VE</a>
-              <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag"># 虚拟机</a>
+              <a href="/tags/SylixOS/" rel="tag"># SylixOS</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/11/21/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="51单片机的学习笔记">
-                  <i class="fa fa-chevron-left"></i> 51单片机的学习笔记
+                <a href="/2023/01/03/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98/" rel="prev" title="关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题">
+                  <i class="fa fa-chevron-left"></i> 关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/02/28/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88/" rel="next" title="Proxmox-VE 导入SylixOS VMware版">
-                  Proxmox-VE 导入SylixOS VMware版 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
