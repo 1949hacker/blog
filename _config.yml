@@ -104,10 +104,9 @@ theme: next
 deploy:
   type: ''
 
-
-#local search
+# local search
 search:
-path: search.xml
-field: post
-format: html
-limit: 10000
+  path: search.xml
+  field: post
+  content: true
+  format: html
