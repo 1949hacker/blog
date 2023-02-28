@@ -16,6 +16,8 @@ x86_boot.vmdk
 x86_main.vmdk
 ```
 
+<!-- more -->
+
 将这两个文件上传到服务器，使用qemu-img命令将vmdk虚拟机磁盘转为qcow2格式
 
 ```shell
