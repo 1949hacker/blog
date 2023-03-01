@@ -1,6 +1,6 @@
 ---
 title: Linux技巧【持续更新】
-categories: [知识库,技术笔记,软件]
+categories: [知识库]
 tags:
   - Linux
 date: 2022-11-17 16:15:48

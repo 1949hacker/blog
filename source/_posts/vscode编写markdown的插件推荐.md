@@ -1,7 +1,7 @@
 ---
 title: vscode编写markdown的插件推荐
 date: 2022-10-26 11:09:08
-categories: [知识库,技术笔记,软件]
+categories: [知识库]
 tags:
     - markdown
 ---

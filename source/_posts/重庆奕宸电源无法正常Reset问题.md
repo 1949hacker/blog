@@ -1,6 +1,6 @@
 ---
 title: 重庆奕宸电源无法正常Reset问题
-categories: [知识库,技术笔记,硬件]
+categories: [知识库]
 tags:
   - 电源
 date: 2022-11-21 02:39:29

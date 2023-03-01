@@ -153,16 +153,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -183,6 +183,142 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://1949hacker.cn/2023/03/01/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="1949hacker">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="1949hacker's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="1949hacker's Blog - 探索知识的宇宙">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 1949hacker's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/01/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91/" class="post-title-link" itemprop="url">Debian基础知识【持续更新】.md</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-03-01 15:45:44 / 修改时间：17:11:02" itemprop="dateCreated datePublished" datetime="2023-03-01T15:45:44+08:00">2023-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2023/03/01/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/03/01/Debian基础知识【持续更新】/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"><a href="#本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我" class="headerlink" title="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"></a>本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我</h1><p><strong>根据红帽的公告，CentOS将不再适合作为生产环境的稳定系统使用，为此我个人建议您尝试著名且优秀的Debian系统</strong></p>
+<blockquote>
+<p>2020年12月08日，CentOS官方宣布了停止维护CentOS Linux 8的计划，并推出了CentOS Stream项目。具体信息，请阅读CentOS官方公告。其具体规划如下：</p>
+<ul>
+<li>CentOS Linux 8作为RHEL 8的复刻版本，生命周期缩短，于2021年12月31日停止更新并停止维护（EOL）。</li>
+<li>基于以上官方变更计划，CentOS Linux 8用户将无法获得包括问题修复和功能更新在内的任何软件维护和支持。CentOS官方建议停止维护后：对于开发或测试环境，可以将环境迁移至CentOS Stream版本； 对于生产环境或部署关键业务的系统，建议使用稳定的Red Hat Enterprise Linux。对此，用户需评估以下问题：</li>
+<li>CentOS Stream是一个滚动发行的版本，仅为RHEL前置测试版，运用于生产环境时，可能存在一定风险。<br><a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/blogs/china/aws-choices-for-centos-after-stopping-maintenance/">亚马逊云科技上在CentOS在停止维护后的几种选择</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="Debian-更换国内源"><a href="#Debian-更换国内源" class="headerlink" title="Debian 更换国内源"></a>Debian 更换国内源</h2><p>在使用过阿里云、网易163、清华、中科大源之后，我个人建议更换为中科大源，Debian更换源的方式非常简单，在此非常感谢<a target="_blank" rel="noopener" href="https://github.com/snullp">sNullp先生</a>的<a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>!</p>
+<p>在使用该配置生成器之前，你需要先确认你的Debian版本，使用<code>cat /etc/os-release</code>命令，在输出的结果中找到<code>VERSION_CODENAME=bullseye</code>，位于<code>=</code>后面的就是你的版本代号，如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301160807.png" alt="20230301160807"></p>
+<p>然后打开<a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>，找到Debian并选择你对应的版本号，如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301161044.png" alt="20230301161044"></p>
+<p>其中，HTTPS&#x2F;HTTP不必赘述，就是字母意思，而IPv4也很好理解，就是选择IPv4或IPv6地址访问，默认HTTPS和IPv4即可</p>
+<p>复制红框中的内容后，回到你的Debian系统，使用<code>vim /etc/apt/sources.list</code>命令编辑apt源配置文件，如果提示<code>-bash: /usr/bin/vim: No such file or directory</code>则是因为你没有安装<code>vim</code>编辑器，我强烈建议你安装<code>vim</code>编辑器，如果暂时无法安装，也可使用<code>nano</code>编辑器，对应命令为<code>nano /etc/apt/sources.list</code>，使用编辑器打开<code>sources.list</code>文件后，如果你是<code>vim</code>编辑器，则可以将光标移到首行，然后按<code>d</code>再按<code>Shift+G</code>即可直接清空内容，然后粘贴你在源配置生成器复制的红框中内容即可，如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301161642.png" alt="20230301161642"></p>
+<p><code>vim</code>编辑器在编辑完成后按<code>ESC</code>再输入<code>:wq</code>回车即可退出保存，编辑器的操作方式在此不过多赘述。</p>
+<p>完成源配置文件的编辑后，还需要使用<code>apt update</code>命令更新源，至此，Debian更换中科大源的教程结束。</p>
+<h2 id="Debian-iSCSI挂载卷"><a href="#Debian-iSCSI挂载卷" class="headerlink" title="Debian iSCSI挂载卷"></a>Debian iSCSI挂载卷</h2><p>首先，你需要安装<code>open-iscsi</code>，使用<code>apt install -y open-iscsi</code>进行安装，然后运行<code>iscsiadm -m discovery -t st -p 服务器地址</code>探测服务器发布的卷，如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301162849.png" alt="20230301162849"></p>
+<p>随后使用<code>iscsiadm -m node -T iqn开头的对应地址 -p 服务器地址 -l</code>即可完成挂载，如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301164715.png" alt="20230301164715"></p>
+<p>随后使用<code>lsblk</code>命令发现新的磁盘，如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301164844.png" alt="20230301164844"></p>
+<p>扩展内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 --op update -n node.startup -v automatic</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 -u</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除所有连接</span></span><br><span class="line">iscsiadm -m node --logoutall=all</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有iscsi连接</span></span><br><span class="line">iscsiadm -m session</span><br></pre></td></tr></table></figure>
+
+<h2 id="Debian-格式化并挂载磁盘以及lvm逻辑卷的使用"><a href="#Debian-格式化并挂载磁盘以及lvm逻辑卷的使用" class="headerlink" title="Debian 格式化并挂载磁盘以及lvm逻辑卷的使用"></a>Debian 格式化并挂载磁盘以及lvm逻辑卷的使用</h2><p>紧跟上文，iscsi挂载后的卷无法直接使用，需要像磁盘一样进行分区及挂载到系统目录</p>
+<p>安装parted：<code>apt install -y parted</code></p>
+<p>使用<code>parted /dev/设备</code>命令进入磁盘分区管理，随后使用<code>mklable gpt</code>将磁盘设置为优秀的<code>GPT</code>分区表，然后使用<code>mkpart 名称 文件系统 起始扇区 结束地址</code>创建分区，如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301165916.png" alt="20230301165916"></p>
+<p>其中，2048s是为了将扇区进行对齐，有利于提升性能，而100%则是指定结束地址为最后，100%可以替换为明确的扇区、容量，如9999s（扇区）或100G（容量），同理，起始地址也是如此，如果你需要创建多个分区，则之后的分区起始地址应紧随上一个分区的结束地址。</p>
+<p>分区创建完毕后，输入<code>q</code>回车即可退出parted，将分区格式化之后即可挂载使用</p>
+<p><strong>但，我在此强烈建议你使用lvm逻辑卷，因为lvm优点有便于容量调整、创建跨区卷等</strong></p>
+<p>lvm卷的使用步骤有创建物理卷，创建卷组，创建逻辑卷</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建物理卷</span></span><br><span class="line">pvcreate /dev/设备</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建卷组</span></span><br><span class="line">vgcreate 卷组名 物理卷</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建逻辑卷</span></span><br><span class="line">lvcreate -l +100%FREE -n 逻辑卷名 所属卷组名</span><br></pre></td></tr></table></figure>
+
+<p>示例如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301170847.png" alt="20230301170847"></p>
+<p>lvm的逻辑卷地址位于<code>/dev/mapper/</code>下，命名格式为<code>卷组名-逻辑卷名</code>，将逻辑卷格式化后即可挂载使用，如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301171003.png" alt="20230301171003"></p>
+<p>至此，Debian 磁盘分区及lvm逻辑卷教程完毕，如有疑问，欢迎咨询！</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -220,9 +356,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-02-28 16:31:43 / 修改时间：17:33:26" itemprop="dateCreated datePublished" datetime="2023-02-28T16:31:43+08:00">2023-02-28</time>
+      <time title="创建时间：2023-02-28 16:31:43" itemprop="dateCreated datePublished" datetime="2023-02-28T16:31:43+08:00">2023-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-01 15:47:23" itemprop="dateModified" datetime="2023-03-01T15:47:23+08:00">2023-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -231,14 +373,6 @@
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
         </span>
     </span>
 
@@ -338,7 +472,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-14 17:44:05" itemprop="dateModified" datetime="2023-02-14T17:44:05+08:00">2023-02-14</time>
+      <time title="修改时间：2023-03-01 15:47:05" itemprop="dateModified" datetime="2023-03-01T15:47:05+08:00">2023-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -347,14 +481,6 @@
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
         </span>
     </span>
 
@@ -454,7 +580,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-14 17:44:05" itemprop="dateModified" datetime="2023-02-14T17:44:05+08:00">2023-02-14</time>
+      <time title="修改时间：2023-03-01 15:46:50" itemprop="dateModified" datetime="2023-03-01T15:46:50+08:00">2023-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -463,14 +589,6 @@
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%A1%AC%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">硬件</span></a>
         </span>
     </span>
 
@@ -568,7 +686,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-14 17:44:05" itemprop="dateModified" datetime="2023-02-14T17:44:05+08:00">2023-02-14</time>
+      <time title="修改时间：2023-03-01 15:46:57" itemprop="dateModified" datetime="2023-03-01T15:46:57+08:00">2023-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -577,14 +695,6 @@
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%A1%AC%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">硬件</span></a>
         </span>
     </span>
 
@@ -682,7 +792,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-01 14:11:45" itemprop="dateModified" datetime="2023-03-01T14:11:45+08:00">2023-03-01</time>
+      <time title="修改时间：2023-03-01 15:47:16" itemprop="dateModified" datetime="2023-03-01T15:47:16+08:00">2023-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -691,14 +801,6 @@
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
         </span>
     </span>
 
@@ -798,7 +900,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-14 17:44:05" itemprop="dateModified" datetime="2023-02-14T17:44:05+08:00">2023-02-14</time>
+      <time title="修改时间：2023-03-01 15:46:44" itemprop="dateModified" datetime="2023-03-01T15:46:44+08:00">2023-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -807,14 +909,6 @@
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%A1%AC%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">硬件</span></a>
         </span>
     </span>
 
@@ -912,7 +1006,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-14 17:44:05" itemprop="dateModified" datetime="2023-02-14T17:44:05+08:00">2023-02-14</time>
+      <time title="修改时间：2023-03-01 15:47:29" itemprop="dateModified" datetime="2023-03-01T15:47:29+08:00">2023-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -921,14 +1015,6 @@
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
         </span>
     </span>
 

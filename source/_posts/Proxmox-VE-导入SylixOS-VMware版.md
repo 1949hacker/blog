@@ -4,7 +4,7 @@ date: 2023-02-28 16:31:43
 tags:
     - Proxmox-VE
     - SylixOS
-categories: [知识库,技术笔记,软件]
+categories: [知识库]
 ---
 
 将SylixOS传到服务器
