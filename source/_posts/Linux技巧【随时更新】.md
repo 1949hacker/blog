@@ -1,5 +1,5 @@
 ---
-title: Linux技巧(随时更新)
+title: Linux技巧【持续更新】
 categories: [知识库,技术笔记,软件]
 tags:
   - Linux
@@ -167,4 +167,40 @@ fio -name=stress_disk -filename=/mnt/DATA/test/a -size=30T -runtime=240h -bs=1m 
 # group_reporting合并报告,将性能测试结果合并汇报,显示所有硬盘性能测试的总结果
 # iodepth IO队列深度,指定IO队列深度,提高每次请求的IO数量
 # rwmixwrite/rwmixread 这两个参数都可以指定,按百分比指定,如rwmixwrite=30则表示写占比30%,只需使用其中一个即可,无需同时指定两个参数
+```
+
+## Linux NFS挂载及使用systemctl自动挂载
+
+```shell
+# NFS挂载基础命令及其作用
+mount -t nfs -o vers=3,rw,hard,sync 10.0.0.100:/mnt/TEST/nfs /mnt/100nfs
+# mount linux挂载命令
+# -t nfs 指定挂载协议为nfs -o也就是options，选项的意思
+# vers=3 指定NFS版本，NFSv3
+# rw 读写
+# hard硬链接
+# 补充：soft为软连接，二者的特点是硬链接保障数据安全但需要持续等待服务器响应，软连接的特点是快速响应但如果服务器断开则可能导致数据损坏或丢失
+# 简单来说，硬链接适合网络环境较差或数据安全要求严格的场景，软连接适合网络稳定需要快速响应的场景
+# 【技术是严谨的，如果我的解释有误烦请立刻指正，十分感谢！】
+# sync，同步写入，写入到磁盘，IO响应较慢但数据安全，async，异步写入，IO响应快，数据安全性低，类似RAID write back
+# 参数指定完成后便是服务器路径和本地路径，格式为 服务器地址:路径 本地路径，如 example:/example /example
+
+# 使用systemctl管理nfs挂载
+# 创建nfs.service文件【我的环境为Debian 11.6，该文件放在/usr/lib/systemd/system/下】
+[Unit]
+Description=auto mount nfs
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/mount -t nfs -o vers=3,rw,hard,sync 192.168.0.142:/mnt/data /data
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
+
+# 挂载nfs
+systemctl start nfs.service
+# 开机自动挂载
+systemctl enable nfs.service
 ```
