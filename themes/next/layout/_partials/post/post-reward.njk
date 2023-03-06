@@ -6,7 +6,7 @@
   <div class="post-reward">
 
     {%- for name, image in theme.reward %}
-      {%- set builtin = ['wechatpay', 'alipay', 'paypal', 'bitcoin'] %}
+      {%- set builtin = ['wechatpay', 'alipay', 'paypal', 'okx', 'xmr'] %}
       {%- set translation = __('reward.' + name) if builtin.includes(name) else name %}
       <div>
         <img src="{{ url_for(image) }}" alt="{{ author }} {{ translation }}">
