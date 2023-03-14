@@ -714,7 +714,7 @@
 <h4 id="创建用户密码、指纹"><a href="#创建用户密码、指纹" class="headerlink" title="创建用户密码、指纹"></a>创建用户密码、指纹</h4><p>在完成创建管理员后，按照上文的操作，此时你已来到主菜单，按<strong>2</strong>即可进入用户菜单，出现语音，继续操作，按<strong>1</strong>创建用户，此时，密码和指纹<strong>二选一</strong>，创建用户密码则如同创建管理员一样，直接输入<strong>8位密码</strong>，按<strong>#</strong>确认，重复一次，然后会播报用户序号（010开始）按<strong>*</strong>返回，创建第二个密码，你仍旧可以再次创建密码用户，当然，如果需要创建指纹用户，则直接用对应手指按指纹感应器，<strong>重复5次</strong>即可完成指纹用户创建。</p>
 <p><strong>至此，智能门锁操作教程结束！</strong></p>
 <hr>
-<h3 id="维权清单"><a href="#维权清单" class="headerlink" title="维权清单"></a>维权清单</h3><table>
+<h2 id="维权清单"><a href="#维权清单" class="headerlink" title="维权清单"></a>维权清单</h2><table>
 <thead>
 <tr>
 <th>序号</th>
@@ -748,7 +748,7 @@
 <td>楼栋信箱对于用户来说也是一个非常便捷的设施，但城投并未将其钥匙交给住户，信箱可以用于快递投放重要的发票、文件等，直接投放到对应信箱，避免了重要快递丢失的风险。且平时信箱还可用于住户临时存放物品、备用钥匙等，非常方便，城投应当将信箱钥匙交给物业暂为保管，物业配合主动将信箱钥匙交给<strong>前来领取的住户</strong></td>
 </tr>
 </tbody></table>
-<h3 id="小区公告栏"><a href="#小区公告栏" class="headerlink" title="小区公告栏"></a>小区公告栏</h3><blockquote>
+<h2 id="小区公告栏"><a href="#小区公告栏" class="headerlink" title="小区公告栏"></a>小区公告栏</h2><blockquote>
 <p>该板块用于登记小区内的各项公告</p>
 </blockquote>
 <table>
@@ -767,7 +767,7 @@
 <td><img src="https://img.1949hacker.cn/20230314113721.png" alt="物业公告"></td>
 </tr>
 </tbody></table>
-<h3 id="交流栏"><a href="#交流栏" class="headerlink" title="交流栏"></a>交流栏</h3><blockquote>
+<h2 id="交流栏"><a href="#交流栏" class="headerlink" title="交流栏"></a>交流栏</h2><blockquote>
 <p>该板块用于邻居们的交流，可以登记任何合法内容，无限制</p>
 </blockquote>
 <table>
