@@ -657,7 +657,7 @@
 <span id="more"></span>
 
 <h3 id="1-以下是智能门锁操作教程"><a href="#1-以下是智能门锁操作教程" class="headerlink" title="1. 以下是智能门锁操作教程"></a>1. 以下是智能门锁操作教程</h3><h4 id="1-1-第一步：恢复出厂设置"><a href="#1-1-第一步：恢复出厂设置" class="headerlink" title="1.1 第一步：恢复出厂设置"></a>1.1 第一步：恢复出厂设置</h4><p>将门锁的后面板向上滑开，找到恢复出厂设置的按钮，如图所示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/2a7bd93a17a564ef1d2598af3285741.jpg" alt="2a7bd93a17a564ef1d2598af3285741"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/2a7bd93a17a564ef1d2598af3285741.jpg" alt="密码锁重置按钮"></p>
 <p><strong>按住</strong>红圈中的按钮不放，门锁会连续发出响声“滴滴滴”，<strong>响声结束后</strong>，<strong>等待几秒</strong>，随后会语音提示”初始化成功“</p>
 <p>来到前面板，触摸<strong>密码输入区</strong>，激活面板，然后按住**#**，直到出现较长的提示音”滴——！“，然后会听到菜单播报，菜单功能如下：</p>
 <h5 id="1-1-1-主菜单"><a href="#1-1-1-主菜单" class="headerlink" title="1.1.1 主菜单"></a>1.1.1 主菜单</h5><table>
@@ -751,7 +751,22 @@
 <h3 id="3-小区公告栏"><a href="#3-小区公告栏" class="headerlink" title="3. 小区公告栏"></a>3. 小区公告栏</h3><blockquote>
 <p>该板块用于登记小区内的各项公告</p>
 </blockquote>
-<p>|日期|公告所属|标题|内容|<br>|—|—|—|—|—|<br>|2023.03.13|物业|质量问题反馈方式|<img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230314113721.png" alt="20230314113721"><br>物业前台：028-81206699|</p>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>公告所属</th>
+<th>标题</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2023.03.13</td>
+<td>物业</td>
+<td>质量问题反馈方式</td>
+<td><img src="https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230314113721.png" alt="物业公告"></td>
+</tr>
+</tbody></table>
 <h3 id="4-交流栏"><a href="#4-交流栏" class="headerlink" title="4. 交流栏"></a>4. 交流栏</h3><blockquote>
 <p>该板块用于邻居们的交流，可以登记任何合法内容，无限制</p>
 </blockquote>
