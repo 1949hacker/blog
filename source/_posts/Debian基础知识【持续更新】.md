@@ -28,17 +28,17 @@ tags:
 
 在使用该配置生成器之前，你需要先确认你的Debian版本，使用`cat /etc/os-release`命令，在输出的结果中找到`VERSION_CODENAME=bullseye`，位于`=`后面的就是你的版本代号，如图：
 
-![20230301160807](https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301160807.png)
+![20230301160807](https://img.1949hacker.cn/20230301160807.png)
 
 然后打开[源配置生成器](https://mirrors.ustc.edu.cn/repogen/)，找到Debian并选择你对应的版本号，如图：
 
-![20230301161044](https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301161044.png)
+![20230301161044](https://img.1949hacker.cn/20230301161044.png)
 
 其中，HTTPS/HTTP不必赘述，就是字母意思，而IPv4也很好理解，就是选择IPv4或IPv6地址访问，默认HTTPS和IPv4即可
 
 复制红框中的内容后，回到你的Debian系统，使用`vim /etc/apt/sources.list`命令编辑apt源配置文件，如果提示`-bash: /usr/bin/vim: No such file or directory`则是因为你没有安装`vim`编辑器，我强烈建议你安装`vim`编辑器，如果暂时无法安装，也可使用`nano`编辑器，对应命令为`nano /etc/apt/sources.list`，使用编辑器打开`sources.list`文件后，如果你是`vim`编辑器，则可以将光标移到首行，然后按`d`再按`Shift+G`即可直接清空内容，然后粘贴你在源配置生成器复制的红框中内容即可，如图：
 
-![20230301161642](https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301161642.png)
+![20230301161642](https://img.1949hacker.cn/20230301161642.png)
 
 `vim`编辑器在编辑完成后按`ESC`再输入`:wq`回车即可退出保存，编辑器的操作方式在此不过多赘述。
 
@@ -48,15 +48,15 @@ tags:
 
 首先，你需要安装`open-iscsi`，使用`apt install -y open-iscsi`进行安装，然后运行`iscsiadm -m discovery -t st -p 服务器地址`探测服务器发布的卷，如图：
 
-![20230301162849](https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301162849.png)
+![20230301162849](https://img.1949hacker.cn/20230301162849.png)
 
 随后使用`iscsiadm -m node -T iqn开头的对应地址 -p 服务器地址 -l`即可完成挂载，如图：
 
-![20230301164715](https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301164715.png)
+![20230301164715](https://img.1949hacker.cn/20230301164715.png)
 
 随后使用`lsblk`命令发现新的磁盘，如图：
 
-![20230301164844](https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301164844.png)
+![20230301164844](https://img.1949hacker.cn/20230301164844.png)
 
 扩展内容：
 
@@ -82,7 +82,7 @@ iscsiadm -m session
 
 使用`parted /dev/设备`命令进入磁盘分区管理，随后使用`mklable gpt`将磁盘设置为优秀的`GPT`分区表，然后使用`mkpart 名称 文件系统 起始扇区 结束地址`创建分区，如图：
 
-![20230301165916](https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301165916.png)
+![20230301165916](https://img.1949hacker.cn/20230301165916.png)
 
 其中，2048s是为了将扇区进行对齐，有利于提升性能，而100%则是指定结束地址为最后，100%可以替换为明确的扇区、容量，如9999s（扇区）或100G（容量），同理，起始地址也是如此，如果你需要创建多个分区，则之后的分区起始地址应紧随上一个分区的结束地址。
 
@@ -105,10 +105,10 @@ lvcreate -l +100%FREE -n 逻辑卷名 所属卷组名
 
 示例如图：
 
-![20230301170847](https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301170847.png)
+![20230301170847](https://img.1949hacker.cn/20230301170847.png)
 
 lvm的逻辑卷地址位于`/dev/mapper/`下，命名格式为`卷组名-逻辑卷名`，将逻辑卷格式化后即可挂载使用，如图：
 
-![20230301171003](https://cdn.jsdelivr.net/gh/1949hacker/picgo/20230301171003.png)
+![20230301171003](https://img.1949hacker.cn/20230301171003.png)
 
 至此，Debian 磁盘分区及lvm逻辑卷教程完毕，如有疑问，欢迎咨询！
