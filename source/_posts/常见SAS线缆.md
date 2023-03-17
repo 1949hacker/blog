@@ -5,7 +5,6 @@ tags:
   - SAS线缆
 date: 2022-11-04 16:37:47
 keywords: SAS
-description: 常见SAS线缆
 ---
 
 ## 常见的三种SAS线缆

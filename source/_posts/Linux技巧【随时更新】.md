@@ -5,7 +5,6 @@ tags:
   - Linux
 date: 2022-11-17 16:15:48
 keywords: Linux
-description: Linux技巧【持续更新】
 ---
 
 >若您有任何技术问题，可以通过本站展示的联系方式咨询我

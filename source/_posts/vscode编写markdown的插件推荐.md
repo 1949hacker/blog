@@ -2,7 +2,6 @@
 title: vscode编写markdown的插件推荐
 date: 2022-10-26 11:09:08
 keywords: vscode,markdown
-description: vscode编写markdown的插件推荐
 categories: [知识库]
 tags:
     - markdown
