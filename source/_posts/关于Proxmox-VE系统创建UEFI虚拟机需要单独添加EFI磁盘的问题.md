@@ -1,5 +1,7 @@
 ---
 title: 关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题
+keywords: Promox-VE,UEFI,虚拟机
+description: 关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题
 categories: [知识库]
 tags:
   - Proxmox-VE

@@ -6,7 +6,7 @@
 title: "1949hacker's Blog - 探索知识的宇宙"
 subtitle: "1949hacker's Blog - 探索知识的宇宙"
 description: "1949hacker's Blog - 探索知识的宇宙"
-keywords: "1949hacker"
+keywords: 1949hacker,1949,hacker,凤起兰庭,Linux,Debian
 author: 1949hacker
 language: zh-CN
 timezone: 'Asia/Chongqing'
@@ -14,7 +14,7 @@ timezone: 'Asia/Chongqing'
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://1949hacker.cn
-permalink: :year/:month/:day/:title/
+permalink: :title.html
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks

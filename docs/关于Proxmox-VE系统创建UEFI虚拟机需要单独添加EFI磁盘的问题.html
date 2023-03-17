@@ -21,28 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"1949hacker.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="重庆奕宸电源无法正常Reset问题问题详情时间：2022&#x2F;10&#x2F;17故障：在TyanS7106主板上完成一次正常启动后按PowerSW5秒强制断电，再次启动时在进入BIOS之前，自检过程中按ResetSW后异常断电无法启动">
+    <meta name="description" content="关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="重庆奕宸电源无法正常Reset问题">
-<meta property="og:url" content="https://1949hacker.cn/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题">
+<meta property="og:url" content="https://1949hacker.cn/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html">
 <meta property="og:site_name" content="1949hacker&#39;s Blog - 探索知识的宇宙">
-<meta property="og:description" content="重庆奕宸电源无法正常Reset问题问题详情时间：2022&#x2F;10&#x2F;17故障：在TyanS7106主板上完成一次正常启动后按PowerSW5秒强制断电，再次启动时在进入BIOS之前，自检过程中按ResetSW后异常断电无法启动">
+<meta property="og:description" content="关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-20T18:39:29.000Z">
-<meta property="article:modified_time" content="2023-03-01T07:46:57.427Z">
+<meta property="article:published_time" content="2023-01-03T04:00:25.000Z">
+<meta property="article:modified_time" content="2023-03-17T06:38:21.048Z">
 <meta property="article:author" content="1949hacker">
-<meta property="article:tag" content="电源">
+<meta property="article:tag" content="Proxmox-VE">
+<meta property="article:tag" content="虚拟机">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://1949hacker.cn/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="https://1949hacker.cn/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://1949hacker.cn/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/","path":"2022/11/21/重庆奕宸电源无法正常Reset问题/","title":"重庆奕宸电源无法正常Reset问题"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://1949hacker.cn/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html","path":"关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题.html","title":"关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>重庆奕宸电源无法正常Reset问题 | 1949hacker's Blog - 探索知识的宇宙</title>
+<title>关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题 | 1949hacker's Blog - 探索知识的宇宙</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENLG4193WB"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ENLG4193WB","only_pageview":false}</script>
@@ -130,7 +131,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -143,7 +144,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">重庆奕宸电源无法正常Reset问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%AF%A6%E6%83%85"><span class="nav-number">2.</span> <span class="nav-text">问题详情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%87%BA%E7%96%91%E9%97%AE"><span class="nav-number">3.</span> <span class="nav-text">提出疑问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E7%AD%94%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">寻找答案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -196,7 +196,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1949hacker.cn/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://1949hacker.cn/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -209,12 +209,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="重庆奕宸电源无法正常Reset问题 | 1949hacker's Blog - 探索知识的宇宙">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题 | 1949hacker's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          重庆奕宸电源无法正常Reset问题<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -225,14 +225,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-11-21 02:39:29" itemprop="dateCreated datePublished" datetime="2022-11-21T02:39:29+08:00">2022-11-21</time>
+      <time title="创建时间：2023-01-03 12:00:25" itemprop="dateCreated datePublished" datetime="2023-01-03T12:00:25+08:00">2023-01-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-01 15:46:57" itemprop="dateModified" datetime="2023-03-01T15:46:57+08:00">2023-03-01</time>
+      <time title="修改时间：2023-03-17 14:38:21" itemprop="dateModified" datetime="2023-03-17T14:38:21+08:00">2023-03-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -245,6 +245,13 @@
     </span>
 
   
+    <span id="/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html" class="post-meta-item leancloud_visitors" data-flag-title="关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
   
   <span class="post-meta-item">
     
@@ -253,14 +260,15 @@
     </span>
     <span class="post-meta-item-text">Waline：</span>
   
-    <a title="waline" href="/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
+    <a title="waline" href="/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html" itemprop="commentCount"></span>
     </a>
   </span>
   
   
 </div>
 
+            <div class="post-description">关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题</div>
         </div>
       </header>
 
@@ -268,28 +276,28 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="重庆奕宸电源无法正常Reset问题"><a href="#重庆奕宸电源无法正常Reset问题" class="headerlink" title="重庆奕宸电源无法正常Reset问题"></a>重庆奕宸电源无法正常Reset问题</h2><h2 id="问题详情"><a href="#问题详情" class="headerlink" title="问题详情"></a>问题详情</h2><p>时间：2022&#x2F;10&#x2F;17<br>故障：在TyanS7106主板上完成一次正常启动后按PowerSW5秒强制断电，再次启动时在进入BIOS之前，自检过程中按ResetSW后异常断电无法启动</p>
+        <blockquote>
+<p>在传统物理机上，如需使用UEFI引导，仅仅需要在硬盘上创建EFI分区即可，无论是Windows还是Linux均是如此，但在使用Proxmox-VE创建虚拟机时，却需要额外添加EFI磁盘，对此提出疑问并进行探讨。</p>
+</blockquote>
 <span id="more"></span>
 
-<h2 id="提出疑问"><a href="#提出疑问" class="headerlink" title="提出疑问"></a>提出疑问</h2><ol>
-<li>主板PowerSW和ResetSW给到电源的控制信号是否不同，是否可能存在Tyan给到电源的信号错误</li>
-<li>IPMI日志是否有报告与电源相关的日志</li>
-<li>电源的控制电路是否存在问题</li>
-</ol>
-<h2 id="寻找答案"><a href="#寻找答案" class="headerlink" title="寻找答案"></a>寻找答案</h2><ol>
-<li>向电源厂商了解到：主板Power&#x2F;Reset SW给到电源的控制信号是由电源控制芯片输出高低电平，从而触发电源的响应，实现对电源的控制</li>
-<li>IPMI日志报告PCH_P1V05&#x2F;PVNN&#x2F;P1V8，VCC3_AU 临界值过低，厂商回复该日志的意思是电压过低，属于正常现象，但经对比测试，其他电源无此现象。</li>
-<li>主板控制电源的信号通用、电源响应主板控制信号的方式通用、排除主板和电源程序上的故障，和厂商进一步探讨后，得知电源收到PS-ON信号后，开机通常延迟300ms后输出PWR-OK信号，关机则是100ms，但关机的100ms延迟参数来源于网上非权威渠道，同时提出疑问，主板Reset的逻辑是怎样的？<blockquote>
-<p>发出关机指令，等待电源回复PWR-OK后再次给出PS-ON完成开机？<br>还是发出PS-ON后，不等待电源返回PWR-OK，直接延迟一会儿后再次发出PS-ON进行开机？</p>
-</blockquote>
-</li>
-<li>等待Tyan回复的同时，和电源厂家沟通安排测试，将关机100ms的延迟在多个主板上进行复现，观察是否存在错误：<blockquote>
-<p>逐步递减100ms、80ms、60ms………<br>直接设置为最低值，无限接近0ms进行观测</p>
-</blockquote>
-</li>
-<li>根据测试结果，将电源关机时序调整为最优默认值</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在发现问题时，善用对比法、排除法进行思路梳理</p>
+<p>直接在网络上搜寻并无相关信息，查询<a target="_blank" rel="noopener" href="https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines">官方wiki</a>得到如下解释：</p>
+<p>BIOS 和 UEFI</p>
+<p>为了正确模拟计算机，QEMU 需要使用固件。在通常称为 BIOS 或 (U)EFI 的普通 PC 上，它作为启动 VM 时的第一步执行。它负责进行基本的硬件初始化，并为操作系统提供固件和硬件接口。默认情况下，QEMU 为此使用SeaBIOS，这是一个开源的 x86 BIOS 实现。SeaBIOS 是大多数标准设置的不错选择。</p>
+<p>某些操作系统（例如 Windows 11）可能需要使用 UEFI 兼容实现。在这种情况下，您必须使用OVMF，它是一种开源 UEFI 实现。</p>
+<p>在其他情况下，SeaBIOS 可能不是理想的启动固件，例如，如果您想进行 VGA 直通。</p>
+<p>如果要使用 OVMF，需要考虑以下几点：</p>
+<p>为了保存引导顺序之类的东西，需要有一个 EFI 磁盘。该磁盘将包含在备份和快照中，并且只能有一个。</p>
+<p>您可以使用以下命令创建这样的磁盘：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qm set &lt;vmid&gt; -efidisk0 &lt;storage&gt;:1,format=&lt;format&gt;,efitype=4m,pre-enrolled-keys=1</span><br></pre></td></tr></table></figure>
+
+<p>其中<strong>storage</strong>是您希望拥有磁盘的存储，而<strong>format</strong>是存储支持的格式。或者，您可以通过VM 硬件部分中的添加 EFI 磁盘的 Web 界面创建这样的磁盘。</p>
+<p>efitype选项指定应使用哪个版本的 OVMF 固件。对于新的 VM，这应该始终是4m，因为它支持安全启动并且分配了更多空间来支持未来的开发（这是 GUI 中的默认值）。</p>
+<p>pre-enroll-keys指定 efidisk 是否应预加载特定于发行版和 Microsoft 标准安全启动密钥。它还默认启用安全启动（尽管它仍然可以在 VM 的 OVMF 菜单中禁用）。</p>
+<p>笔记	如果要在现有 VM（仍使用2m efidisk）中开始使用安全启动，则需要重新创建 efidisk。为此，删除旧的 ( <code>qm set &lt;vmid&gt; -delete efidisk0</code> ) 并添加一个新的，如上所述。这将重置您在 OVMF 菜单中所做的任何自定义配置！<br>当使用带有虚拟显示器的 OVMF（没有 VGA 直通）时，您需要在 OVMF 菜单中设置客户端分辨率（您可以在启动期间按 ESC 按钮到达），或者您必须选择 SPICE 作为显示类型.</p>
+<hr>
+<p>为了保存引导顺序？或许是类似于物理机上，启动菜单中除了UEFI的硬盘启动项外，还有一个额外的操作系统名称的启动项？如<code>Windows Boot Manager</code>或是<code>Debian</code></p>
+<p>EFI磁盘 &#x3D; 操作系统引导项？</p>
 
     </div>
 
@@ -364,20 +372,21 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E7%94%B5%E6%BA%90/" rel="tag"># 电源</a>
+              <a href="/tags/Proxmox-VE/" rel="tag"># Proxmox-VE</a>
+              <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag"># 虚拟机</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/11/17/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91/" rel="prev" title="Linux技巧【持续更新】">
-                  <i class="fa fa-chevron-left"></i> Linux技巧【持续更新】
+                <a href="/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html" rel="prev" title="51单片机的学习笔记">
+                  <i class="fa fa-chevron-left"></i> 51单片机的学习笔记
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/11/21/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="51单片机的学习笔记">
-                  51单片机的学习笔记 <i class="fa fa-chevron-right"></i>
+                <a href="/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html" rel="next" title="Proxmox-VE 导入SylixOS VMware版">
+                  Proxmox-VE 导入SylixOS VMware版 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -443,9 +452,11 @@
   
 
 
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"7Lox1BgpUUuHQiZ0pEnbWhqC-MdYXbMMI","app_key":"4PCqALYUq2jO0dlxESO7rP4g","server_url":"https://1949hacker.cn","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline.1949hacker.cn","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline.1949hacker.cn","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {

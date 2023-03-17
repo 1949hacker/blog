@@ -1,5 +1,7 @@
 ---
 title: Debian基础知识【持续更新】
+keywords: Debian
+description: Debian基础知识【持续更新】
 categories: [知识库]
 date: 2023-03-01 15:45:44
 tags:

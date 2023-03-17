@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>51单片机的学习笔记</title>
-    <url>/2022/11/21/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</url>
     <content><![CDATA[<h2 id="51单片机的学习及其关联知识"><a href="#51单片机的学习及其关联知识" class="headerlink" title="51单片机的学习及其关联知识"></a>51单片机的学习及其关联知识</h2><span id="more"></span>
 
 <p><strong>开始前的一段话：</strong></p>
@@ -145,7 +145,7 @@
   </entry>
   <entry>
     <title>Linux技巧【持续更新】</title>
-    <url>/2022/11/17/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91/</url>
+    <url>/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
     <content><![CDATA[<blockquote>
 <p>若您有任何技术问题，可以通过本站展示的联系方式咨询我</p>
 </blockquote>
@@ -392,7 +392,7 @@
   </entry>
   <entry>
     <title>vscode编写markdown的插件推荐</title>
-    <url>/2022/10/26/vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/</url>
+    <url>/vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90.html</url>
     <content><![CDATA[<h1 id="使用-VScode-编写-Markdown-的插件推荐及其技巧"><a href="#使用-VScode-编写-Markdown-的插件推荐及其技巧" class="headerlink" title="使用 VScode 编写 Markdown 的插件推荐及其技巧"></a>使用 VScode 编写 Markdown 的插件推荐及其技巧</h1><span id="more"></span>
 
 <h2 id="Markdown-插件推荐"><a href="#Markdown-插件推荐" class="headerlink" title="Markdown 插件推荐"></a>Markdown 插件推荐</h2><ul>
@@ -445,7 +445,7 @@
   </entry>
   <entry>
     <title>关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题</title>
-    <url>/2023/01/03/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <url>/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html</url>
     <content><![CDATA[<blockquote>
 <p>在传统物理机上，如需使用UEFI引导，仅仅需要在硬盘上创建EFI分区即可，无论是Windows还是Linux均是如此，但在使用Proxmox-VE创建虚拟机时，却需要额外添加EFI磁盘，对此提出疑问并进行探讨。</p>
 </blockquote>
@@ -479,7 +479,7 @@
   </entry>
   <entry>
     <title>常见SAS线缆</title>
-    <url>/2022/11/04/%E5%B8%B8%E8%A7%81SAS%E7%BA%BF%E7%BC%86/</url>
+    <url>/%E5%B8%B8%E8%A7%81SAS%E7%BA%BF%E7%BC%86.html</url>
     <content><![CDATA[<h2 id="常见的三种SAS线缆"><a href="#常见的三种SAS线缆" class="headerlink" title="常见的三种SAS线缆"></a>常见的三种SAS线缆</h2><span id="more"></span>
 
 <h2 id="SFF-8643-amp-INI-SAS-HD"><a href="#SFF-8643-amp-INI-SAS-HD" class="headerlink" title="SFF-8643 &amp; INI SAS HD"></a>SFF-8643 &amp; INI SAS HD</h2><p><img src="https://img.1949hacker.cn/2022-10-25-10-45-40.png" alt="2022-10-25-10-45-40"></p>
@@ -495,7 +495,7 @@
   </entry>
   <entry>
     <title>重庆奕宸电源无法正常Reset问题</title>
-    <url>/2022/11/21/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98/</url>
+    <url>/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98.html</url>
     <content><![CDATA[<h2 id="重庆奕宸电源无法正常Reset问题"><a href="#重庆奕宸电源无法正常Reset问题" class="headerlink" title="重庆奕宸电源无法正常Reset问题"></a>重庆奕宸电源无法正常Reset问题</h2><h2 id="问题详情"><a href="#问题详情" class="headerlink" title="问题详情"></a>问题详情</h2><p>时间：2022&#x2F;10&#x2F;17<br>故障：在TyanS7106主板上完成一次正常启动后按PowerSW5秒强制断电，再次启动时在进入BIOS之前，自检过程中按ResetSW后异常断电无法启动</p>
 <span id="more"></span>
 
@@ -528,7 +528,7 @@
   </entry>
   <entry>
     <title>Proxmox-VE 导入SylixOS VMware版</title>
-    <url>/2023/02/28/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88/</url>
+    <url>/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html</url>
     <content><![CDATA[<p>将SylixOS传到服务器</p>
 <p>解压SylixOS VMware版，找到其中的</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">x86_boot.vmdk</span><br><span class="line">x86_main.vmdk</span><br></pre></td></tr></table></figure>
@@ -572,7 +572,7 @@
   </entry>
   <entry>
     <title>Debian基础知识【持续更新】</title>
-    <url>/2023/03/01/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91/</url>
+    <url>/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
     <content><![CDATA[<h1 id="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"><a href="#本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我" class="headerlink" title="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"></a>本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我</h1><p><strong>根据红帽的公告，CentOS将不再适合作为生产环境的稳定系统使用，为此我个人建议您尝试著名且优秀的Debian系统</strong></p>
 <span id="more"></span>
 
@@ -630,7 +630,7 @@
   </entry>
   <entry>
     <title>成都凤起兰庭居民交流平台</title>
-    <url>/2023/03/14/%E6%88%90%E9%83%BD%E5%87%A4%E8%B5%B7%E5%85%B0%E5%BA%AD%E5%B1%85%E6%B0%91%E4%BA%A4%E6%B5%81%E5%B9%B3%E5%8F%B0/</url>
+    <url>/%E6%88%90%E9%83%BD%E5%87%A4%E8%B5%B7%E5%85%B0%E5%BA%AD%E5%B1%85%E6%B0%91%E4%BA%A4%E6%B5%81%E5%B9%B3%E5%8F%B0.html</url>
     <content><![CDATA[<h1 id="本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！"><a href="#本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！" class="headerlink" title="本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！"></a>本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！</h1><h2 id="成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁"><a href="#成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁" class="headerlink" title="成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁"></a>成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁</h2><p><strong>可以通过本页末尾的联系方式联系我，在本页末尾维权列表登记你的诉求</strong></p>
 <span id="more"></span>
 
@@ -813,7 +813,7 @@
   </entry>
   <entry>
     <title>凤起兰庭美食广场</title>
-    <url>/2023/03/15/%E5%87%A4%E8%B5%B7%E5%85%B0%E5%BA%AD%E7%BE%8E%E9%A3%9F%E5%B9%BF%E5%9C%BA/</url>
+    <url>/%E5%87%A4%E8%B5%B7%E5%85%B0%E5%BA%AD%E7%BE%8E%E9%A3%9F%E5%B9%BF%E5%9C%BA.html</url>
     <content><![CDATA[<h1 id="凤起兰庭小区美食广场"><a href="#凤起兰庭小区美食广场" class="headerlink" title="凤起兰庭小区美食广场"></a>凤起兰庭小区美食广场</h1><p><strong>位于凤起兰庭小区内的美食小吃摊将展示在此，如你也想在此展示你的店铺，可以联系我或在下方评论区留言！<br>只登记小区内和门口的哦，远了的不登记。</strong></p>
 <blockquote>
 <p>需要登记：店铺名、地点、联系方式、营业时间、菜单、店铺图片</p>
@@ -840,7 +840,7 @@
   </entry>
   <entry>
     <title>如何在家庭环境下去除甲醛，以及甲醛的科普知识</title>
-    <url>/2023/03/15/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%B6%E5%BA%AD%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%8E%BB%E9%99%A4%E7%94%B2%E9%86%9B%EF%BC%8C%E4%BB%A5%E5%8F%8A%E7%94%B2%E9%86%9B%E7%9A%84%E7%A7%91%E6%99%AE%E7%9F%A5%E8%AF%86/</url>
+    <url>/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%B6%E5%BA%AD%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%8E%BB%E9%99%A4%E7%94%B2%E9%86%9B%EF%BC%8C%E4%BB%A5%E5%8F%8A%E7%94%B2%E9%86%9B%E7%9A%84%E7%A7%91%E6%99%AE%E7%9F%A5%E8%AF%86.html</url>
     <content><![CDATA[<h1 id="结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷"><a href="#结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷" class="headerlink" title="结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷"></a>结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷</h1><ol>
 <li>通风，是的，就是通风，甲醛是气体，通风，吹走了，这就搞定了啊，就是这么简单</li>
 <li>植物净化，除了通风之外，植物净化空气是最省心、省钱、省时的，推荐植物：波士顿蕨类植物【淘宝价格20以内，均价10元左右】</li>
