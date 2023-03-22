@@ -21,8 +21,8 @@ import subprocess, re
 # 随机写
 def randwrite():
     # 初始化用于存储运行结果的列表
-    bw = [0, 0, 0]
-    iops = [0, 0, 0]
+    bw = [0, 0, 0, 0, 0, 0]
+    iops = [0, 0, 0, 0, 0, 0]
 
     # fio重复运行4次
     print("随机写进行中...")
@@ -32,7 +32,7 @@ def randwrite():
             "fio",
             "-name=YEOS",
             f"-size=32G",
-            "-runtime=5s",
+            "-runtime=120s",
             f"-bs=4k",
             "-direct=1",
             f"-rw=randwrite",
@@ -92,7 +92,7 @@ def randwrite():
 
 # 创建读文件
 def create_readFile():
-    print("初始化读测试环境,至少需要,等待...")
+    print("初始化读测试环境,至少需要十几分钟甚至几十分钟,等着...")
     cmd = [
         "fio",
         "-name=create_read",
@@ -122,7 +122,7 @@ def randread():
             "fio",
             "-name=YEOS",
             f"-size=32G",
-            "-runtime=5s",
+            "-runtime=120s",
             f"-bs=4k",
             "-direct=1",
             f"-rw=randwrite",
@@ -193,7 +193,7 @@ def randrw():
             "fio",
             "-name=YEOS",
             f"-size=32G",
-            "-runtime=5s",
+            "-runtime=120s",
             f"-bs=4k",
             "-direct=1",
             f"-rw=randwrite",

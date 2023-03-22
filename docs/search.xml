@@ -1,870 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>51单片机的学习笔记</title>
-    <url>/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</url>
-    <content><![CDATA[<h2 id="51单片机的学习及其关联知识"><a href="#51单片机的学习及其关联知识" class="headerlink" title="51单片机的学习及其关联知识"></a>51单片机的学习及其关联知识</h2><span id="more"></span>
-
-<p><strong>开始前的一段话：</strong></p>
-<p>求知欲是人类进步的源泉，每接触一项新的知识就像是一滴墨滴在了宣纸上，向着四周疯狂扩散，这种极度的求知欲深深地刺激着我，撕裂我的思维向四周辐射，贪婪地、疯狂地汲取着接触到的每一项知识，这种知识爆炸的感觉带给我成瘾的快感！</p>
-<p>对于单片机的起步，始于我小时候的梦想，我想有高度智能的科技、机械围绕着我的生活，我想拥有一个高度智能的工厂，想要无数无数乃至我甚至不知如何形容的科技，我痴迷着这些技术，我疯狂的汲取各种知识，每一次突破一个新的知识面就像是进入一个未知的宇宙！偶然间，我发现我我的梦想可以从两个两个方面入手：</p>
-<ol>
-<li>软件层面的技术：编程，人工智能等</li>
-<li>硬件层面的技术：机械，电路开发等</li>
-</ol>
-<p>于是我有了方向，向着我想要的极力冲刺！</p>
-<p>我于2022.11.21日凌晨开始了51单片机的学习，从茫然无知，到那一滴墨滴在了宣纸上，围绕着单片机开始的知识爆炸让我无比亢奋！从一块小小的51单片机，知识开始爆炸开来，我从未接触过的领域，芯片，电路，逻辑……无数的知识冲刷着我的大脑，无法抑制的激动，发现未知的知识宇宙，我疯狂的汲取着无穷无尽的知识，感叹着人类智慧的结晶！</p>
-<p>越是学习，越是发觉自己的无知，知识是无穷无尽的，我永远不可能学完，真的太多太多了！</p>
-<p>人生的价值是集体利益，这些伟大的知识我无论学习多少，若不能将其贡献出来，则是对知识、对智慧、对人类乃至对我人生意义的亵渎！</p>
-<p>我将尽可能的将我所学的一切，用通俗易懂的语言描述出来，为同样渴望知识、同样有着疯狂求知欲的人们尽一份绵薄之力！</p>
-<p>如果你也有着相同的想法，同样渴望知识并为此痴迷，欢迎加入！</p>
-<p>如开头所述，求知欲是人类进步的源泉，所以在此，请允许我以<strong>探索者</strong>尊称各位渴望知识的道友，并欢迎您加入到我们，您可以在本页底部找到我的联系方式，因某些原因，建议您使用Telegram进行交流。</p>
-<hr>
-<p><strong>注意：由于我是边学习边完善文章，所以文章可能存在大量错误，我个人的力量有限，恳请各位探索者开放交流、互换知识，以集体的力量弥补个人的缺陷</strong></p>
-<hr>
-<h2 id="我使用的单片机"><a href="#我使用的单片机" class="headerlink" title="我使用的单片机"></a>我使用的单片机</h2><p>品牌：普中(PRECHIN)<br>型号：普中51-实验版<br>官方教程：<a href="https://www.bilibili.com/video/BV1RB4y1i71i">https://www.bilibili.com/video/BV1RB4y1i71i</a></p>
-<p>在官方教程中，介绍了该开发板的部分元器件：</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>作用</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>4位一体数码管</td>
-<td>数字显示</td>
-<td>两个4位一体共阴数码管</td>
-</tr>
-<tr>
-<td>LCD1602液晶屏</td>
-<td>用于简单内容显示</td>
-<td>开发板提供了LCD1602&#x2F;9648&#x2F;12864&#x2F;TFT接口</td>
-</tr>
-<tr>
-<td>8*8LED矩阵</td>
-<td>常应用于LED广告牌等</td>
-<td>在矩阵旁边提供了编号J24的GND&#x2F;OE&#x2F;VCC三针引脚，跳线帽短接OE&#x2F;VCC可以关闭矩阵节省电源（OE我搜索出来的解释为<em>输出使能控制信号</em>，还请大佬科普补充一下，谢谢）</td>
-</tr>
-<tr>
-<td>LED流水灯</td>
-<td>可以用于心形流水灯表白（误）</td>
-<td>该开发板提供了8个流水灯</td>
-</tr>
-<tr>
-<td>74HC595A芯片</td>
-<td>该芯片用于扩展开发板IO口，驱动8*8点阵</td>
-<td>专业名称<em>高速 CMOS 8 位串行移位寄存器</em>其具体资料后续将专门设立电路知识栏目进行解释</td>
-</tr>
-<tr>
-<td>4*4键盘</td>
-<td>计算器啥的，挺实用</td>
-<td>普普通通</td>
-</tr>
-<tr>
-<td>红外接受</td>
-<td>红外遥控嘛，套餐给了遥控器</td>
-<td>NEC解码</td>
-</tr>
-<tr>
-<td>DS18B20温度传感器</td>
-<td>略</td>
-<td>略</td>
-</tr>
-<tr>
-<td>NRF24L01扩展接口</td>
-<td>该扩展接口可以用于扩展2.4G无线通信模块</td>
-<td>相当NICE的远程通信，几百米的遥控器？</td>
-</tr>
-<tr>
-<td>ASM1117稳压芯片</td>
-<td>提供3.3V稳定电压</td>
-<td>如视频中所述，大部分传感器为3.3V，所以嘛…</td>
-</tr>
-<tr>
-<td>CH340C芯片</td>
-<td>用于USB转TTL通信，该芯片内置晶振</td>
-<td>该板设计了4个引脚，分别是UTX-&gt;P30，RTX-&gt;P31，该设计十分优秀！在需要使用串口调试模块时，可以将U&#x2F;RTX针脚接到模块对应引脚，直接使用开发板MicroUSB进行调试，大赞！</td>
-</tr>
-</tbody></table>
-<h2 id="晶振临时科普栏"><a href="#晶振临时科普栏" class="headerlink" title="晶振临时科普栏"></a>晶振临时科普栏</h2><p>因我在学习过程中，对晶振的求知难度较大，特此临时记录！<br>晶振，全称石英晶体振荡器，英文名（quartz oscillator）<br>石英晶振具有高精度高稳度的特性，十分适合用于数字电路的时钟，是数字电路的心脏！</p>
-<p><strong>时钟这个概念比较抽象，我尝试将其描述的更加朴素一些：</strong></p>
-<p>在计算机中，关和开分别可以代表0和1，在最最原始的逻辑电路中，还没有晶振时，可以通过人工控制开关实现逻辑电路的控制，比如<a href="https://baike.baidu.com/item/%E5%BC%82%E6%88%96%E9%97%A8/9036416">异或门</a></p>
-<table>
-<thead>
-<tr>
-<th>A开关</th>
-<th>B开关</th>
-<th>计算结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>关</td>
-<td>关</td>
-<td>0</td>
-</tr>
-<tr>
-<td>开</td>
-<td>关</td>
-<td>1</td>
-</tr>
-<tr>
-<td>关</td>
-<td>开</td>
-<td>1</td>
-</tr>
-<tr>
-<td>开</td>
-<td>开</td>
-<td>0</td>
-</tr>
-</tbody></table>
-<p>于是我们可以通过这种简单逻辑的叠加，做出一些复杂的计算，如加法：x+y<br>设定，检测到<strong>A开B关</strong>一次设定x数值增加1，<strong>A关B开</strong>y数值增加1，那么我们要计算3+2，则需要进行一下操作：</p>
-<table>
-<thead>
-<tr>
-<th>给出X值</th>
-<th>给出B值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A开B关重复3次</td>
-<td>A关B开重复2次</td>
-</tr>
-</tbody></table>
-<p>由此可以看出，哪怕是及其简单的逻辑处理，也需要非常庞大的开关操作量。<br>因此，懒得一批的人类找到了晶振这玩意儿，<a href="https://zh.wikipedia.org/zh-cn/%E7%9F%B3%E8%8B%B1%E6%99%B6%E4%BD%93%E8%B0%90%E6%8C%AF%E5%99%A8">晶振的原理</a>解释起来有些许复杂，在此我们只需了解，晶振在电路板中工作的原理即可：<br>晶振可以在一定时间内以一定频率发出脉冲，脉冲一词仍有一些难以理解，而有些资料中对此的描述为高低电平的转换，对于一个初学者来说，最讨厌的无非就是看到这些难以理解的名词，在此我将其解释的更加直白一些，不过低电平并不等于0V，低电平只是一个相对较低的电压：<br>低电平：0V电压<br>高电平：5V电压<br>那么脉冲（高低电平转换）在电路中则是，打开开关：低电平（0V&#x3D;没电）转换为高电平（5V&#x3D;来电了），于是，就如我们上文所述，这就像是打开了A开关，利用晶振的这种脉冲，我们便可以在一定时间内实现一定次数的自动开关操作。<br>如果你仔细阅读并理解了，便会发现这真的是一个十分伟大的发明！从此让人类走上了废物(bushi)的道路，躺平~</p>
-<p><strong>文章亦是我的笔记，先暂时记录到这里，仍在学习总结中</strong></p>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>记录初学Python开发fio测试工具</title>
+      <link href="/%E8%AE%B0%E5%BD%95%E5%88%9D%E5%AD%A6Python%E5%BC%80%E5%8F%91fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.html"/>
+      <url>/%E8%AE%B0%E5%BD%95%E5%88%9D%E5%AD%A6Python%E5%BC%80%E5%8F%91fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="使用Python自动测试IOPS性能并格式化输出"><a href="#使用Python自动测试IOPS性能并格式化输出" class="headerlink" title="使用Python自动测试IOPS性能并格式化输出"></a>使用Python自动测试IOPS性能并格式化输出</h1><blockquote><p>代码过多,请点击<strong>阅读全文</strong>查看</p></blockquote><span id="more"></span><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="keyword">import</span> subprocess, re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机写</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randwrite</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机写进行中...&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="comment"># TODO 根据测试表自行修改cmd中参数</span></span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=120s&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-numjobs=12&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-filename=/data/<span class="subst">&#123;i&#125;</span>&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 将每次运行结果保存到列表</span></span><br><span class="line">            bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">            bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">            bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">            iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">            iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">            iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    bwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    bwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    bwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;随机写均值如下:\n带宽最小值:<span class="subst">&#123;bwMin&#125;</span>,最大值<span class="subst">&#123;bwMax&#125;</span>,均值<span class="subst">&#123;bwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;iopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;iopsMax&#125;</span>,均值<span class="subst">&#123;iopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建读文件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_readFile</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;初始化读测试环境,至少需要十几分钟甚至几十分钟,等着...&quot;</span>)</span><br><span class="line">    cmd = [</span><br><span class="line">        <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-name=create_read&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;-size=32G&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;-bs=1M&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;-rw=write&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;-numjobs=12&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-filename=/data/read&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line">    create = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">    done = create.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机读</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randread</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机读进行中...&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="comment"># TODO 根据测试表自行修改cmd中参数</span></span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=120s&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-numjobs=12&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-filename=/data/read&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 将每次运行结果保存到列表</span></span><br><span class="line">            bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">            bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">            bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">            iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">            iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">            iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    bwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    bwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    bwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;随机读均值如下:\n带宽最小值:<span class="subst">&#123;bwMin&#125;</span>,最大值<span class="subst">&#123;bwMax&#125;</span>,均值<span class="subst">&#123;bwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;iopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;iopsMax&#125;</span>,均值<span class="subst">&#123;iopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机读写</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randrw</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机读写进行中...&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="comment"># TODO 根据测试表自行修改cmd中参数</span></span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=120s&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-numjobs=12&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-filename=/data/read&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rwmixwrite=30&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 将每次运行结果保存到列表</span></span><br><span class="line">            bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]  <span class="comment"># Rbw Min</span></span><br><span class="line">            bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]  <span class="comment"># Rbw Max</span></span><br><span class="line">            bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]  <span class="comment"># Rbw Avg</span></span><br><span class="line">            bw[<span class="number">3</span>] += iops_num[<span class="number">0</span>]  <span class="comment"># Riops Min</span></span><br><span class="line">            bw[<span class="number">4</span>] += iops_num[<span class="number">1</span>]  <span class="comment"># Riops Max</span></span><br><span class="line">            bw[<span class="number">5</span>] += iops_num[<span class="number">3</span>]  <span class="comment"># RiopsAvg</span></span><br><span class="line">            iops[<span class="number">0</span>] += bw_num[<span class="number">6</span>]  <span class="comment"># Wbw Min</span></span><br><span class="line">            iops[<span class="number">1</span>] += iops_num[<span class="number">7</span>]  <span class="comment"># Wbw Max</span></span><br><span class="line">            iops[<span class="number">2</span>] += iops_num[<span class="number">8</span>]  <span class="comment"># Wbw Avg</span></span><br><span class="line">            iops[<span class="number">3</span>] += iops_num[<span class="number">6</span>]  <span class="comment"># Wiops Min</span></span><br><span class="line">            iops[<span class="number">4</span>] += iops_num[<span class="number">7</span>]  <span class="comment"># Wiops Max</span></span><br><span class="line">            iops[<span class="number">5</span>] += iops_num[<span class="number">8</span>]  <span class="comment"># Wiops Avg</span></span><br><span class="line"></span><br><span class="line">    RbwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    RbwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    RbwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsMin = <span class="built_in">int</span>(iops[<span class="number">3</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsMax = <span class="built_in">int</span>(iops[<span class="number">4</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsAvg = <span class="built_in">int</span>(iops[<span class="number">5</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwMin = <span class="built_in">int</span>(bw[<span class="number">3</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwMax = <span class="built_in">int</span>(bw[<span class="number">4</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwAvg = <span class="built_in">int</span>(bw[<span class="number">5</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;随机读写均值如下:\n&quot;</span></span><br><span class="line">        <span class="string">f&quot;读:\n带宽最小值:<span class="subst">&#123;RbwMin&#125;</span>,最大值<span class="subst">&#123;RbwMax&#125;</span>,均值<span class="subst">&#123;RbwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;RiopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;RiopsMax&#125;</span>,均值<span class="subst">&#123;RiopsAvg&#125;</span>&quot;</span></span><br><span class="line">        <span class="string">&quot;\n&quot;</span></span><br><span class="line">        <span class="string">f&quot;写:\n带宽最小值:<span class="subst">&#123;WbwMin&#125;</span>,最大值<span class="subst">&#123;WbwMax&#125;</span>,均值<span class="subst">&#123;WbwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;WiopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;WiopsMax&#125;</span>,均值<span class="subst">&#123;WiopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rm_file</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请等待程序清除测试残留文件...&quot;</span>)</span><br><span class="line">    rm = subprocess.Popen(<span class="string">&quot;rm&quot;</span>, <span class="string">&quot;-rf&quot;</span>, <span class="string">&quot;/data/*&quot;</span>, shell=<span class="literal">False</span>)</span><br><span class="line">    rm_done = rm.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;清除完毕,程序结束!&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    create_readFile()</span><br><span class="line">    randwrite()</span><br><span class="line">    randread()</span><br><span class="line">    randrw()</span><br><span class="line">    rm_file()</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>知识库</category>
+          
+          <category> 软件开发 </category>
+          
       </categories>
-      <tags>
-        <tag>嵌入式开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux技巧【持续更新】</title>
-    <url>/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
-    <content><![CDATA[<blockquote>
-<p>若您有任何技术问题，可以通过本站展示的联系方式咨询我</p>
-</blockquote>
-<span id="more"></span>
-
-<h2 id="Linux查看硬盘SN"><a href="#Linux查看硬盘SN" class="headerlink" title="Linux查看硬盘SN"></a>Linux查看硬盘SN</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将<span class="comment">#替换为你对应的硬盘号 如sda</span></span></span><br><span class="line">lsblk --nodeps -no serial /dev/sd*</span><br></pre></td></tr></table></figure>
-
-<h2 id="Linux解除文件、目录占用"><a href="#Linux解除文件、目录占用" class="headerlink" title="Linux解除文件、目录占用"></a>Linux解除文件、目录占用</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用该命令查看占用文件、文件夹的程序<span class="built_in">id</span></span></span><br><span class="line">fuser -cu /你要查询的文件或目录</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例</span></span><br><span class="line">fuser -cu docker-application/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我的输出结果</span></span><br><span class="line">/mnt/TEST/docker-application: 16676m(root) 16702m(root)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中16676m(root)和16702m(root)便是表明该目录由<span class="built_in">id</span>为16676和16702的进程占用</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用<span class="built_in">kill</span> <span class="built_in">id</span>杀死进程后便可删除或使用mount -f强制卸载</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Linux使用iostat查看磁盘io信息"><a href="#Linux使用iostat查看磁盘io信息" class="headerlink" title="Linux使用iostat查看磁盘io信息"></a>Linux使用iostat查看磁盘io信息</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用iostat可以查看简要的磁盘io信息</span></span><br><span class="line">iostat</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在此列出部分iostat参数:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-c 查看CPU信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-d 仅显示磁盘信息,默认是显示CPU和磁盘信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-x 显示详细信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-k或-m分别是以KB/MB为显示单位</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-p显示磁盘及其分区的信息</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">演示实例</span></span><br><span class="line">iostat -x -m 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">输出结果为每1秒刷新一次以MB为单位的详细信息,一直刷新</span></span><br><span class="line">avg-cpu:  %user   %nice %system %iowait  %steal   %idle</span><br><span class="line">           1.12    1.12   20.66    5.81    0.00   71.29</span><br><span class="line"></span><br><span class="line">Device            r/s     rMB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wMB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dMB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util</span><br><span class="line">dm-0             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-1             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-2             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-3             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-4             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md123            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md124            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md125            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md126            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md127            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">nvme0n1          7.00      0.02     0.00   0.00    6.14     3.43  120.00      1.32     0.00   0.00    1.31    11.30    0.00      0.00     0.00   0.00    0.00     0.00    2.00    2.50    0.21   9.20</span><br><span class="line">sda              2.00      0.00     0.00   0.00   38.00     0.00  920.00     32.91     2.00   0.22    0.52    36.63    0.00      0.00     0.00   0.00    0.00     0.00    2.00   38.50    0.63  63.60</span><br><span class="line">sdb              3.00      0.00     0.00   0.00   35.33     1.33  964.00     34.25     3.00   0.31    0.37    36.38    0.00      0.00     0.00   0.00    0.00     0.00    2.00   38.00    0.54  61.20</span><br><span class="line">sdc              2.00      0.00     0.00   0.00   42.00     0.00  883.00     34.25     3.00   0.34    0.82    39.72    0.00      0.00     0.00   0.00    0.00     0.00    2.00   42.00    0.89  71.20</span><br><span class="line">sdd              2.00      0.00     0.00   0.00   39.50     0.00  956.00     34.21     2.00   0.21    0.36    36.65    0.00      0.00     0.00   0.00    0.00     0.00    2.00   39.00    0.50  59.20</span><br><span class="line">sde              3.00      0.00     0.00   0.00   36.00     1.33  780.00     34.26     1.00   0.13    0.43    44.98    0.00      0.00     0.00   0.00    0.00     0.00    2.00   44.50    0.53  61.20</span><br><span class="line">sdf              2.00      0.00     0.00   0.00   29.50     0.00  772.00     34.21     2.00   0.26    0.44    45.37    0.00      0.00     0.00   0.00    0.00     0.00    2.00   30.00    0.46  58.80</span><br><span class="line">sdg              3.00      0.00     0.00   0.00   22.00     1.33  773.00     34.21     2.00   0.26    0.43    45.31    0.00      0.00     0.00   0.00    0.00     0.00    2.00   33.00    0.46  58.00</span><br><span class="line">sdh              2.00      0.00     0.00   0.00   49.50     0.00  738.00     33.76     3.00   0.40    0.66    46.85    0.00      0.00     0.00   0.00    0.00     0.00    2.00   49.50    0.68  64.80</span><br><span class="line">sdi              3.00      0.00     0.00   0.00   31.33     1.33  680.00     34.21     2.00   0.29    0.86    51.52    0.00      0.00     0.00   0.00    0.00     0.00    2.00   47.00    0.77  66.80</span><br><span class="line">sdj              2.00      0.00     0.00   0.00   44.50     0.00  801.00     34.25     1.00   0.12    0.43    43.79    0.00      0.00     0.00   0.00    0.00     0.00    2.00   44.00    0.52  61.20</span><br><span class="line">sdk              2.00      0.00     0.00   0.00   49.00     0.00  675.00     33.88     3.00   0.44    1.00    51.39    0.00      0.00     0.00   0.00    0.00     0.00    2.00   49.00    0.87  71.20</span><br><span class="line">sdl              2.00      0.00     0.00   0.00   38.50     0.00  697.00     34.62     1.00   0.14    1.20    50.87    0.00      0.00     0.00   0.00    0.00     0.00    2.00   38.50    0.99  76.40</span><br><span class="line">sdm              0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">sr0              0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中1代表刷新频率,1秒,3代表次数,刷新3次,如果不填写3,则为一直刷新</span></span><br><span class="line">iostat -x -m 1 3</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>释义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-c</td>
-<td>显示CPU利用率报告</td>
-</tr>
-<tr>
-<td>–compact</td>
-<td>不要将“设备利用率报告”拆分为子报告，以便所有指标都显示在一行中</td>
-</tr>
-<tr>
-<td>-d</td>
-<td>显示设备利用率报告</td>
-</tr>
-<tr>
-<td>–dec&#x3D;{ 0 | 1 | 2 }</td>
-<td>指定要使用的小数位数（0到2，默认值为2）</td>
-</tr>
-<tr>
-<td>-f</td>
-<td>官方对该参数的解释略微复杂,烦请查阅<a href="https://manpages.debian.org/testing/sysstat/iostat.1.en.html#f">官方文档</a></td>
-</tr>
-<tr>
-<td>-g</td>
-<td>将所有设备汇总显示,-g参数后面填group_name</td>
-</tr>
-<tr>
-<td>-H</td>
-<td>此选项必须与选项-g一起使用，并指示只显示组的全局统计信息，而不显示组中单个设备的统计信息</td>
-</tr>
-<tr>
-<td>-h</td>
-<td>该选项将输出结果分类显示,便于阅读</td>
-</tr>
-<tr>
-<td>–human</td>
-<td>以人类可读格式打印大小（例如1.0k、1.2M等）。使用此选项显示的单位将取代与度量相关的任何其他默认单位（例如千字节、扇区…）</td>
-</tr>
-<tr>
-<td>-j</td>
-<td>在参数后跟(ID&#x2F;LABEL&#x2F;PATH&#x2F;UUID)等,以替换原&#x2F;dev&#x2F;sd*的显示,<a href="https://manpages.debian.org/testing/sysstat/iostat.1.en.html#j">官方文档</a></td>
-</tr>
-<tr>
-<td>-k</td>
-<td>以KB为单位进行显示</td>
-</tr>
-<tr>
-<td>-m</td>
-<td>以MB为单位进行显示</td>
-</tr>
-<tr>
-<td>-N</td>
-<td>显示任何设备映射器设备的注册设备映射器名称。用于查看LVM2统计信息</td>
-</tr>
-<tr>
-<td>-o JSON</td>
-<td>以json格式输出结果</td>
-</tr>
-<tr>
-<td>-p</td>
-<td>显示磁盘及其分区信息,可以在后跟指定磁盘以显示单个磁盘的分区信息</td>
-</tr>
-<tr>
-<td>–pretty</td>
-<td>将报告以更易于阅读的方式显示,同–human</td>
-</tr>
-<tr>
-<td>-s</td>
-<td>显示报告的短（窄）版本，该版本应适合80个字符宽的屏幕</td>
-</tr>
-<tr>
-<td>-t</td>
-<td>打印显示的每个报告的时间。时间戳格式可能取决于S_TIME_format环境变量的值</td>
-</tr>
-<tr>
-<td>-V</td>
-<td>打印iostat版本号</td>
-</tr>
-<tr>
-<td>-x</td>
-<td>显示扩展统计信息</td>
-</tr>
-<tr>
-<td>-y</td>
-<td>如果在给定的时间间隔内显示多个记录，则省略系统启动后的第一个统计报告</td>
-</tr>
-<tr>
-<td>-z</td>
-<td>告诉iostat忽略在采样期间没有活动的任何设备的输出</td>
-</tr>
-</tbody></table>
-<h3 id="输出结果参数解读"><a href="#输出结果参数解读" class="headerlink" title="输出结果参数解读"></a>输出结果参数解读</h3><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>释义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%user</td>
-<td>显示在用户级别（应用程序）执行时发生的 CPU 使用率百分比</td>
-</tr>
-<tr>
-<td>%nice</td>
-<td>显示在具有良好优先级的用户级别执行时发生的 CPU 使用率百分比</td>
-</tr>
-<tr>
-<td>%system</td>
-<td>显示在系统级别（内核）执行时发生的 CPU 使用率百分比</td>
-</tr>
-<tr>
-<td>%iowait</td>
-<td>显示系统有未完成的磁盘 I&#x2F;O 请求期间 CPU 或 CPU 空闲的时间百分比</td>
-</tr>
-<tr>
-<td>%steal</td>
-<td>显示虚拟机管理程序为另一个虚拟处理器提供服务时虚拟 CPU 或 CPU 非自愿等待所花费的时间百分比</td>
-</tr>
-<tr>
-<td>%idle</td>
-<td>显示 CPU 或 CPU 空闲且系统没有未完成的磁盘 I&#x2F;O 请求的时间百分比</td>
-</tr>
-<tr>
-<td>r&#x2F;s</td>
-<td>设备每秒完成的读取请求数（合并后）</td>
-</tr>
-<tr>
-<td>rMB&#x2F;s</td>
-<td>每秒读字节数,单位随参数-k&#x2F;-m分别对应KB和MB</td>
-</tr>
-<tr>
-<td>rrqm&#x2F;s</td>
-<td>每秒合并到设备队列的读取请求数</td>
-</tr>
-<tr>
-<td>%rrqm</td>
-<td>在发送到设备之前合并在一起的读取请求的百分比</td>
-</tr>
-<tr>
-<td>r_await</td>
-<td>平均每次设备读I&#x2F;O操作的等待时间 (毫秒)</td>
-</tr>
-<tr>
-<td>rareq-sz</td>
-<td>向设备发出的读取请求的平均大小（以KB为单位）</td>
-</tr>
-<tr>
-<td>w&#x2F;s</td>
-<td>设备每秒完成的写入请求数（合并后）</td>
-</tr>
-<tr>
-<td>wMB&#x2F;s</td>
-<td>每秒写字节数,单位随参数-k&#x2F;-m分别对应KB和MB</td>
-</tr>
-<tr>
-<td>wrqm&#x2F;s</td>
-<td>每秒合并到设备队列的写入请求数</td>
-</tr>
-<tr>
-<td>%wrqm</td>
-<td>在发送到设备之前合并在一起的写入请求的百分比</td>
-</tr>
-<tr>
-<td>w_await</td>
-<td>平均每次设备写I&#x2F;O操作的等待时间 (毫秒)</td>
-</tr>
-<tr>
-<td>wareq-sz</td>
-<td>向设备发出的写入请求的平均大小（以KB为单位）</td>
-</tr>
-<tr>
-<td>d&#x2F;s</td>
-<td>设备每秒完成的丢弃请求数（合并后）</td>
-</tr>
-<tr>
-<td>dMB&#x2F;s</td>
-<td>每秒为设备丢弃的扇区数,单位随参数-k&#x2F;-m分别对应KB和MB</td>
-</tr>
-<tr>
-<td>drqm&#x2F;s</td>
-<td>每秒排队到设备的合并丢弃请求数</td>
-</tr>
-<tr>
-<td>%drqm</td>
-<td>在发送到设备之前合并在一起的丢弃请求的百分比</td>
-</tr>
-<tr>
-<td>d_await</td>
-<td>向要服务的设备发出的丢弃请求的平均时间（以毫秒为单位）。这包括队列中的请求所花费的时间以及为它们提供服务所花费的</td>
-</tr>
-<tr>
-<td>dareq-sz</td>
-<td>向设备发出的丢弃请求的平均大小（以KB为单位）</td>
-</tr>
-<tr>
-<td>f&#x2F;s</td>
-<td>设备每秒完成的刷新请求数（合并后）。这对磁盘执行的刷新请求进行计数。不跟踪分区的刷新请求。在合并之前，刷新操作算作写入操作</td>
-</tr>
-<tr>
-<td>f_await</td>
-<td>向要服务的设备发出刷新请求的平均时间（以毫秒为单位）。块层合并刷新请求并且一次最多执行一个。因此刷新操作可能是两倍长：等待当前刷新请求，然后执行它，然后等待下一个</td>
-</tr>
-<tr>
-<td>aqu-sz</td>
-<td>向设备发出的请求的平均队列长度,在以前的版本中,此字段称为 avgqu-sz</td>
-</tr>
-<tr>
-<td>%util</td>
-<td>向设备发出 I&#x2F;O 请求所用时间的百分比（设备的带宽利用率）。对于串行服务请求的设备，当此值接近 100% 时，就会发生设备饱和。但对于并行处理请求的设备，例如 RAID 阵列和现代 SSD，这个数字并不反映它们的性能限制</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>%iowait的值过高,表示硬盘存在I&#x2F;O瓶颈<br>%idle值高,表示CPU较空闲<br>%idle值高但系统响应慢时,有可能是CPU等待分配内存,此时应加大内存容量<br>%idle值如果持续低于10,那么系统的CPU处理能力相对较低,表明系统中最需要解决的资源是CPU<br>%util 接近 100%，说明产生的I&#x2F;O请求太多，I&#x2F;O系统已经满负荷，该磁盘可能存在瓶颈</p>
-<p>该文章内容参考<a href="https://manpages.debian.org/testing/sysstat/iostat.1.en.html">iostat官方文档https://manpages.debian.org/testing/sysstat/iostat.1.en.html</a></p>
-</blockquote>
-<h2 id="fio测试工具详细教程"><a href="#fio测试工具详细教程" class="headerlink" title="fio测试工具详细教程"></a>fio测试工具详细教程</h2><blockquote>
-<p>待完善,先临时记录一条</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fio -name=stress_disk -filename=/mnt/DATA/test/a -size=30T -runtime=240h -bs=1m -direct=1 -rw=randrw -ioengine=libaio -numjobs=12 -group_reporting -iodepth=8 -rwmixwrite=50</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中name是本次测试任务的名称</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">filename则为指定测试目录和文件名</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">size则为指定测试文件大小,此处为30T,无论运行多久,该测试文件a都不会超过30T</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">runtime为指定运行时间,240h则为240小时,单位可以为秒s分m时h</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">bs为块大小,顺序读写通常为1m,4k则填写4k即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">direct有0和1选项,0为使用文件系统缓存,1则为直接操作磁盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rw可选的参数有<span class="built_in">read</span>/write/rw/randread/randwrite/randrw,分别为读/写/读写/随机读/随机写/随机读写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ioengine IO测试引擎,在linux下选择libaio即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">numjobs线程数,一般设置为硬盘数量,根据实际需要自行调整</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">group_reporting合并报告,将性能测试结果合并汇报,显示所有硬盘性能测试的总结果</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">iodepth IO队列深度,指定IO队列深度,提高每次请求的IO数量</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rwmixwrite/rwmixread 这两个参数都可以指定,按百分比指定,如rwmixwrite=30则表示写占比30%,只需使用其中一个即可,无需同时指定两个参数</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Linux-NFS挂载及使用systemctl自动挂载"><a href="#Linux-NFS挂载及使用systemctl自动挂载" class="headerlink" title="Linux NFS挂载及使用systemctl自动挂载"></a>Linux NFS挂载及使用systemctl自动挂载</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">NFS挂载基础命令及其作用</span></span><br><span class="line">mount -t nfs -o vers=3,rw,hard,sync 10.0.0.100:/mnt/TEST/nfs /mnt/100nfs</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mount linux挂载命令</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-t nfs 指定挂载协议为nfs -o也就是options，选项的意思</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">vers=3 指定NFS版本，NFSv3</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rw 读写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">hard硬链接</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">补充：soft为软连接，二者的特点是硬链接保障数据安全但需要持续等待服务器响应，软连接的特点是快速响应但如果服务器断开则可能导致数据损坏或丢失</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">简单来说，硬链接适合网络环境较差或数据安全要求严格的场景，软连接适合网络稳定需要快速响应的场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">【技术是严谨的，如果我的解释有误烦请立刻指正，十分感谢！】</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">sync</span>，同步写入，写入到磁盘，IO响应较慢但数据安全，async，异步写入，IO响应快，数据安全性低，类似RAID write back</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数指定完成后便是服务器路径和本地路径，格式为 服务器地址:路径 本地路径，如 example:/example /example</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用systemctl管理nfs挂载</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建nfs.service文件【我的环境为Debian 11.6，该文件放在/usr/lib/systemd/system/下】</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=auto mount nfs</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/mount -t nfs -o vers=3,rw,hard,sync 192.168.0.142:/mnt/data /data</span><br><span class="line">Restart=no</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">挂载nfs</span></span><br><span class="line">systemctl start nfs.service</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开机自动挂载</span></span><br><span class="line">systemctl enable nfs.service</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何在家庭环境下去除甲醛，以及甲醛的科普知识</title>
+      <link href="/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%B6%E5%BA%AD%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%8E%BB%E9%99%A4%E7%94%B2%E9%86%9B%EF%BC%8C%E4%BB%A5%E5%8F%8A%E7%94%B2%E9%86%9B%E7%9A%84%E7%A7%91%E6%99%AE%E7%9F%A5%E8%AF%86.html"/>
+      <url>/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%B6%E5%BA%AD%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%8E%BB%E9%99%A4%E7%94%B2%E9%86%9B%EF%BC%8C%E4%BB%A5%E5%8F%8A%E7%94%B2%E9%86%9B%E7%9A%84%E7%A7%91%E6%99%AE%E7%9F%A5%E8%AF%86.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷"><a href="#结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷" class="headerlink" title="结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷"></a>结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷</h1><ol><li>通风，是的，就是通风，甲醛是气体，通风，吹走了，这就搞定了啊，就是这么简单</li><li>植物净化，除了通风之外，植物净化空气是最省心、省钱、省时的，推荐植物：波士顿蕨类植物【淘宝价格20以内，均价10元左右】</li><li>活性炭净化，活性炭的净化能力不必再过多赘述，干燥低温情况下，活性炭吸附能力增加，气流速率低【无风】时，活性炭接触甲醛时间更长，吸附效果更好，活性炭粒径越小，相等重量下接触面积越大，以及孔洞越多的同样接触面越大，简而言之，小颗粒，多孔活性炭。</li></ol><p><strong>总结：</p><ol><li>打开门窗</li><li>每个房间摆上适量的波蕨【美观即可，波蕨是持续净化空气（包括甲醛），是长期使用】</li><li>将小颗粒多孔活性炭放置到空气不易流通的地方，且需要保持活性炭低温干燥。</strong></li></ol><blockquote><p>最近太太太忙了，详情及科普内容空了补充…</p></blockquote><span id="more"></span>]]></content>
+      
+      
       <categories>
-        <category>知识库</category>
+          
+          <category> 生活常识 </category>
+          
       </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vscode编写markdown的插件推荐</title>
-    <url>/vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90.html</url>
-    <content><![CDATA[<h1 id="使用-VScode-编写-Markdown-的插件推荐及其技巧"><a href="#使用-VScode-编写-Markdown-的插件推荐及其技巧" class="headerlink" title="使用 VScode 编写 Markdown 的插件推荐及其技巧"></a>使用 VScode 编写 Markdown 的插件推荐及其技巧</h1><span id="more"></span>
-
-<h2 id="Markdown-插件推荐"><a href="#Markdown-插件推荐" class="headerlink" title="Markdown 插件推荐"></a>Markdown 插件推荐</h2><ul>
-<li>Markdown Preview Enhanced</li>
-<li>Markdown PDF</li>
-<li>LaTeX Workshop</li>
-<li>Paste Image</li>
-<li>Markdown All in One</li>
-</ul>
-<h2 id="Markdown-插件详细介绍"><a href="#Markdown-插件详细介绍" class="headerlink" title="Markdown 插件详细介绍"></a>Markdown 插件详细介绍</h2><h3 id="Markdown-Preview-Enhanced"><a href="#Markdown-Preview-Enhanced" class="headerlink" title="Markdown Preview Enhanced"></a>Markdown Preview Enhanced</h3><p>该插件可以对 Markdown 源码进行实时渲染预览，通过配置插件的</p>
-<blockquote>
-<p>Markdown-preview-enhanced: Automatically Show Preview Of Markdown Being Edited</p>
-<ul>
-<li><input checked="" disabled="" type="checkbox"> Automatically show preview of markdown being edited.</li>
-</ul>
-</blockquote>
-<p>可以实现点击 md 文件编辑的同时自动打开实时渲染界面</p>
-<p><img src="https://img.1949hacker.cn//2022-10-14-16-18-21.png" alt="2022-10-14-16-18-21"></p>
-<h3 id="Markdown-PDF"><a href="#Markdown-PDF" class="headerlink" title="Markdown PDF"></a>Markdown PDF</h3><p>该插件可以将 md 文件转换为<strong>pdf、html、png、jpeg</strong>四种格式，配合 vscode 快捷键<code>Ctrl+Shift+P</code>并输入<code>&gt;export (pdf)</code>后回车即可将当前打开的 md 文件转换为 PDF 格式，替换<code>(pdf)</code>中的<code>pdf</code>为<code>html、png、jpeg</code>其中任意一种，即可导出对应的格式<br>使用<code>&gt;export (all: pdf,html,png,jpeg)</code>可以一次性导出为 4 种格式</p>
-<h3 id="LaTeX-Workshop"><a href="#LaTeX-Workshop" class="headerlink" title="LaTeX Workshop"></a>LaTeX Workshop</h3><p>该插件可以使 vscode 支持 latex 数学公式代码<br>示例如下：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line">M =</span><br><span class="line"><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1 <span class="built_in">&amp;</span> 0 <span class="keyword">\\</span></span><br><span class="line">0 <span class="built_in">&amp;</span> 1</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1 <span class="built_in">&amp;</span> 0 <span class="keyword">\\</span></span><br><span class="line">0 <span class="built_in">&amp;</span> 1</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-
-<p>LaTeX 语法可以自行搜索，此处给出一条参考链接：<a href="http://www.uinio.com/Math/LaTex/">LaTeX 语法</a></p>
-<h3 id="Paste-Image"><a href="#Paste-Image" class="headerlink" title="Paste Image"></a>Paste Image</h3><p>使用 Paste Image 可以快速将粘贴板中的图片粘贴到 Markdown 源码中，快捷键是<code>Ctrl+Shift+V</code><br>示例：</p>
-<p><img src="https://img.1949hacker.cn//2022-10-14-16-37-29.png" alt="2022-10-14-16-37-29"></p>
-<p>Paste Image 默认会将图片复制到当前 md 文件所在目录，并根据<strong>年月日时分秒</strong>自动命名，可以在 vscode 设置中找到 paste image 的配置参数进行修改<br>图片自动复制的目录参数为：</p>
-<p><img src="https://img.1949hacker.cn//2022-10-14-16-42-28.png" alt="2022-10-14-16-42-28"></p>
-<p>其中<code>$&#123;currentFileDir&#125;</code>为当前 md 文件所在目录，可以修改为项目根目录<code>$&#123;projectRoot&#125;</code>，还可在二者后面跟上<code>\</code>，如<code>$&#123;currentFileDir&#125;/md_img</code>，则会将图片复制到当前 md 文件所在目录下的<strong>md_img</strong>目录，若没有<strong>md_img</strong>目录则自动创建</p>
-<p><strong>修改图片保存路径后需要修改<code>Paste Image: Prefix</code>，以便路径可以正常匹配</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Paste Image: Prefix</span><br><span class="line">The string prepend to the resolved image path before paste.</span><br></pre></td></tr></table></figure>
-
-<p>如上文示例，将图片目录自定义为当前目录中<code>/md_img</code>文件夹，那么此处需修改为：</p>
-<p><img src="https://img.1949hacker.cn//20221027132513.png" alt="20221027132513"></p>
-<p>当使用<code>Ctrl+Shift+V</code>粘贴后，图片路径会自动设定为<code>md_img/图片名称</code></p>
-<p>图片自动命名的参数为：</p>
-<p><img src="https://img.1949hacker.cn//2022-10-14-16-45-50.png" alt="2022-10-14-16-45-50"></p>
-<p>其中<code>Y-MM-DD-HH-mm-ss</code>为<strong>年-月-日-时-分-秒</strong>，该参数采用的是<strong>Moment.js</strong><br><a href="https://momentjs.com/#/displaying/format">Moment.js 语法教程</a></p>
-<h3 id="Markdown-All-in-One"><a href="#Markdown-All-in-One" class="headerlink" title="Markdown All in One"></a>Markdown All in One</h3><p>该插件可以使vscode自动补全markdown语法，如使用<code>- 无序列表</code>时，回车将在下一行自动补全<code>- </code><br>示例如图：</p>
-<p><img src="https://img.1949hacker.cn//2022-10-14-16-55-11.png" alt="2022-10-14-16-55-11"></p>
-<p>基于vscode的特点，按下<code>Ctrl+Shift+P</code>调出控制台后，可以使用<strong>maio</strong>的缩写快速筛出本插件的命令，如图：</p>
-<p><img src="https://img.1949hacker.cn//2022-10-14-17-00-34.png" alt="2022-10-14-17-00-34"></p>
-<p><a href="https://markdown-all-in-one.github.io/guide/#features">Markdown All in One官网详细介绍</a></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 空气净化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>成都凤起兰庭居民交流平台</title>
+      <link href="/%E6%88%90%E9%83%BD%E5%87%A4%E8%B5%B7%E5%85%B0%E5%BA%AD%E5%B1%85%E6%B0%91%E4%BA%A4%E6%B5%81%E5%B9%B3%E5%8F%B0.html"/>
+      <url>/%E6%88%90%E9%83%BD%E5%87%A4%E8%B5%B7%E5%85%B0%E5%BA%AD%E5%B1%85%E6%B0%91%E4%BA%A4%E6%B5%81%E5%B9%B3%E5%8F%B0.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！"><a href="#本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！" class="headerlink" title="本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！"></a>本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！</h1><h2 id="成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁"><a href="#成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁" class="headerlink" title="成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁"></a>成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁</h2><p><strong>可以通过本页末尾的联系方式联系我，在本页末尾维权列表登记你的诉求</strong></p><span id="more"></span><hr><blockquote><p>前言：<br>城投未将门锁钥匙、管理权交由承租人，智能门锁管理密码<strong>疑似</strong>同一个，若管理密码不慎泄露，不法分子可以通过管理密码直接开门，因此严重威胁到住户的人身安全，为此！<strong>强烈建议你自行修改智能门锁的管理密码、用户密码、开锁指纹！</strong><br>同样的，因为机械钥匙城投拒绝交付给承租人，所以机械钥匙也存在可能丢失导致被不法分子利用的风险，虽然相较管理密码，被利用的风险较低，但不得不承认，其仍然存在风险！</p><p>部分承租人提出一下疑问：</p><ol><li><p>修改密码后是否会被城投强制要求改回，或清退等？</p><ul><li>回复：我们是通过合法途径，合法租赁了此房屋，我们理应在承租期间享有房屋的使用权、管理权，城投无权拒绝交付钥匙，更无权禁止我们合理适当的使用房屋！<strong>邻居们应当团结一致，如若遇到城投侵犯我们的任何合法权益，务必一致抗议并相互帮助抵抗城投的非法侵犯！</strong></li></ul></li><li><p>城投拒绝交付门锁完全管理权，我们如何维权？</p><ul><li>维权途径我个人建议如下：<ol><li>凤起兰庭项目超过50%承租人联名签字抗议、申诉、上访，要求城投交出门锁完全管理权，以确保住户能将人身安全掌握在自己手里，而不是由<strong>城投的担保</strong>来保障，人身安全必须自己做主！</li><li>如若城投拒绝我们的诉求，则集体向政府有关部门反映、上访！</li><li>若此事连政府都不为我们做主，那我们则集体各自更换门锁，并确保一旦有城投因此对任何承租人进行清退等侵犯承租人权益的行为是，集体抵抗！</li></ol></li></ul></li></ol></blockquote><h3 id="以下是智能门锁操作教程"><a href="#以下是智能门锁操作教程" class="headerlink" title="以下是智能门锁操作教程"></a>以下是智能门锁操作教程</h3><h4 id="第一步：恢复出厂设置"><a href="#第一步：恢复出厂设置" class="headerlink" title="第一步：恢复出厂设置"></a>第一步：恢复出厂设置</h4><p>将门锁的后面板向上滑开，找到恢复出厂设置的按钮，如图所示：</p><p><img src="https://img.1949hacker.cn/2a7bd93a17a564ef1d2598af3285741.jpg" alt="密码锁重置按钮"></p><p><strong>按住</strong>红圈中的按钮不放，门锁会连续发出响声“滴滴滴”，<strong>响声结束后</strong>，<strong>等待几秒</strong>，随后会语音提示”初始化成功“</p><p>来到前面板，触摸<strong>密码输入区</strong>，激活面板，然后按住<strong>#</strong>，直到出现较长的提示音”滴——！“，然后会听到菜单播报，菜单功能如下：</p><h5 id="主菜单"><a href="#主菜单" class="headerlink" title="主菜单"></a>主菜单</h5><table><thead><tr><th>按键</th><th>功能</th></tr></thead><tbody><tr><td>1</td><td>管理员设置</td></tr><tr><td>2</td><td>用户设置</td></tr><tr><td>其他</td><td>略过，用不住，如有需要补充，联系我，后续抽空补全</td></tr></tbody></table><h5 id="子菜单"><a href="#子菜单" class="headerlink" title="子菜单"></a>子菜单</h5><table><thead><tr><th>主菜单</th><th>按键</th><th>功能</th></tr></thead><tbody><tr><td>管理员设置</td><td>1</td><td>添加管理员</td></tr><tr><td></td><td>2</td><td>删除管理员</td></tr><tr><td>用户设置</td><td>1</td><td>添加用户</td></tr><tr><td></td><td>2</td><td>删除用户</td></tr></tbody></table><h4 id="创建管理员"><a href="#创建管理员" class="headerlink" title="创建管理员"></a>创建管理员</h4><p>紧跟上一步操作，在初始化完成并进入菜单后，先按<strong>1</strong>听到播报“1、创建管理员，2、删除管理员”后，无需等待语音播报完成，只要听到有语音播报就可以继续操作了，接着按<strong>1</strong>，然后输入管理员密码，<strong>8位数字</strong>，输入后按<strong>#</strong>，这个就是确认键的功能，密码需要输入两次，随后会出现<strong>001</strong>的语音，这个是管理员序号，创建管理员时会依次自动从001到009编号。</p><p>完成密码设置后，按<strong>*</strong>键返回上一层，是的，<strong>*</strong>是返回，<strong>#</strong>是确认。</p><h4 id="创建用户密码、指纹"><a href="#创建用户密码、指纹" class="headerlink" title="创建用户密码、指纹"></a>创建用户密码、指纹</h4><p>在完成创建管理员后，按照上文的操作，此时你已来到主菜单，按<strong>2</strong>即可进入用户菜单，出现语音，继续操作，按<strong>1</strong>创建用户，此时，密码和指纹<strong>二选一</strong>，创建用户密码则如同创建管理员一样，直接输入<strong>8位密码</strong>，按<strong>#</strong>确认，重复一次，然后会播报用户序号（010开始）按<strong>*</strong>返回，创建第二个密码，你仍旧可以再次创建密码用户，当然，如果需要创建指纹用户，则直接用对应手指按指纹感应器，<strong>重复5次</strong>即可完成指纹用户创建。</p><p><strong>至此，智能门锁操作教程结束！</strong></p><h3 id="门锁功能介绍"><a href="#门锁功能介绍" class="headerlink" title="门锁功能介绍"></a>门锁功能介绍</h3><p><img src="https://img.1949hacker.cn//4f06eca22753f859ab07b11e131b155.png" alt="ON/OFF开关作用"></p><p><img src="https://img.1949hacker.cn//20230317141458.png" alt="猫眼开锁"></p><p><strong>将开关拨到OFF，按压把手也无法开锁，所以可以防止通过猫眼开锁入室盗窃。<br>我们没猫眼，没球鸡儿用，不管它，保持ON即可。</strong></p><hr><h2 id="维权清单"><a href="#维权清单" class="headerlink" title="维权清单"></a>维权清单</h2><table><thead><tr><th>序号</th><th>责任方</th><th>简介</th><th>详情</th></tr></thead><tbody><tr><td>1</td><td>城投</td><td>要求城投交出门锁完全管理权</td><td>门锁目前已知有机械钥匙、密码开门、指纹开门，尚不确定是否有IC卡开门功能，为了承租人、住户，能将自己的人身安全把握在自己手里，在此要求城投交出门锁的所有钥匙及管理权！我们不能将自己的人身安全建立在城投的一句承诺上！机械钥匙虽然丢失、盗用的可能性较小，但依旧有可能！我们不能冒这个风险！管理密码泄露的风险则更加危险！也正因此，本文特此讲解了门锁的操作教程！<br>对于承租人、住户来说，万一出现城投工作人员工作失误，误以为该户发生火灾等紧急情况，进了门，碰巧此时出现很尴尬的情况，住户或许是在沐浴，亦或许是在家很放松，虽然人身安全没有威胁，但是住户个人隐私被工作人员意外看了个精光，这又如何能补救呢？<br>再或者，管理密码、机械钥匙泄露、丢失，被不法分子获取，因此对住户产生了不可挽回的损失，如人身侵犯，入室抢劫甚至是被杀害，城投能担得起责任吗？至少我个人认为，出现这样的事，什么补救措施都不会有用！<br>基于上述，我代表我个人建议，城投将门锁我完全管理权交由住户自行负责，这样住户能够安心，而且如果出现任何安全等问题，责任很明确，由住户承担即可！<br>望城投处理此诉求！</td></tr><tr><td>2</td><td>物业</td><td>启用门禁人脸识别，IC写卡，NFC写卡</td><td>小区住户很多，老年人也不在少数，以及需要更便捷门禁的<strong>时尚潮流人士</strong>，首先是人脸识别，启用后住户不再需要带手机或掏钥匙，非常方便，尤其是不方便操作手机的老年人，其次是IC写卡，现在有各种各样美观便携的IC卡，如手环IC卡，手机贴片IC卡，以及智能设备的NFC功能，这些对于住户来说是非常方便的选择，只需要一贴、一靠即可开门，尤其是<strong>时尚潮流人士们</strong>，可以通过独具个性的IC卡或NFC功能开门，是一个非常棒的选择！</td></tr><tr><td>3</td><td>物业</td><td>顶楼门禁权限</td><td>顶楼天台无论是对于住户的溜达放松还是紧急情况下用于救灾救援都是非常重要的！强烈要求物业对住户开放天台的进入权限！在相关法律中有说明，顶楼天台是属于该建筑内所有住户的公共区域，任何人、单位均无权私占！</td></tr><tr><td>4</td><td>城投</td><td>楼栋信箱</td><td>楼栋信箱对于用户来说也是一个非常便捷的设施，但城投并未将其钥匙交给住户，信箱可以用于快递投放重要的发票、文件等，直接投放到对应信箱，避免了重要快递丢失的风险。且平时信箱还可用于住户临时存放物品、备用钥匙等，非常方便，城投应当将信箱钥匙交给物业暂为保管，物业配合主动将信箱钥匙交给<strong>前来领取的住户</strong></td></tr></tbody></table><h2 id="小区公告栏"><a href="#小区公告栏" class="headerlink" title="小区公告栏"></a>小区公告栏</h2><blockquote><p>该板块用于登记小区内的各项公告</p></blockquote><table><thead><tr><th>日期</th><th>公告所属</th><th>标题</th><th>内容</th></tr></thead><tbody><tr><td>2023.03.13</td><td>物业</td><td>质量问题反馈方式</td><td><img src="https://img.1949hacker.cn/20230314113721.png" alt="物业公告"></td></tr><tr><td>2023.03.15</td><td>平台</td><td>功能新增</td><td>平台新增导航栏，点击页面左下角即可展开文章目录<br><img src="https://img.1949hacker.cn//20230315170352.png" alt="菜单按钮"><br><img src="https://img.1949hacker.cn//20230315170326.png" alt="文章目录"></td></tr><tr><td>2023.03.16</td><td>物业</td><td>门禁、天台问题</td><td>已致电物业028-81206699，等待回复中…<br>1、楼顶天台属于逃生通道、公告区域【是否属于消防通道尚未查到，无明确法律规定我不妄下结论】，要求物业开放天台，但是，如果我没记错的话，根据城市管理规定，楼顶不得违建，且晾衣服种菜那些是不会有法律保护的，好像物业是有权清退楼顶除建筑外的其他杂物的。<br>2、门禁IC卡、NFC写卡、人脸：反馈了老年人操作手机不便，要求启用人脸识别，IC卡NFC卡理由同上，额外说明了，外出健身跑步，是不会携带随身物品的，只会是带个运动手表，所以手机手表手环的NFC写卡也要启用。</td></tr><tr><td>2023.03.21</td><td>平台</td><td>2栋楼顶天台问题</td><td>已于3.19联系物业上天台，经实地考察，楼顶天台无女儿墙，远离边缘的中心区域用铁栏杆做了围挡，楼顶建筑设计确实符合不上人屋面规定，因此，建议各位邻居遵守此规定，避免发生意外坠楼！</td></tr><tr><td>2023.03.21</td><td>平台</td><td>小区门禁IC、NFC、人脸识别问题</td><td>物业回复不提供IC、NFC开门方式，人脸识别正在接入公安视频网，但我对此持怀疑态度，人脸识别只需要有比对图片和算法即可，所以人脸识别开门并没有需要接入公安视频网的需要</td></tr></tbody></table><h2 id="交流栏"><a href="#交流栏" class="headerlink" title="交流栏"></a>交流栏</h2><blockquote><p>该板块用于邻居们的交流，可以登记任何合法内容，无限制</p></blockquote><table><thead><tr><th>标题</th><th>内容</th></tr></thead><tbody><tr><td>互帮互助</td><td>邻居们应当都是在各行各业身怀绝技的卧龙凤雏，俗话说远亲不如近邻，建议邻居们平时多交流，多互帮互助，秀出各自的<strong>绝技</strong>！美食、IT、汽车、宠物、育儿等！</td></tr><tr><td>光触媒除甲醛的简洁科普</td><td>光触媒是作为催化剂（主要成分是纳米级二氧化钛），在<strong>紫外线</strong>下将空气中的水或氧气催化成具有强氧化能力的活性基团，这些活性基团可强效分解各种具有不稳定化学键的有机化合物和部分无机物，并可破坏细菌的细胞膜和凝固病毒的蛋白质载体，包括甲醛（与甲醛反应生成水、二氧化碳和其他无害物质）<br>光触媒属于前期分解后期封闭为主，这种方法在工业场景使用效果好，但是家庭效果差。因为实验表明，要达到良好去甲醛效果需要充足的紫外线强度及适合的室内化学污染物浓度（在安全标准浓度以上则效果不佳），实际家里的光线紫外线强度低，再假如室内污染浓度较低，效果可想而知！<br>而那些宣称可以用可见光除甲醛的光触媒，是在二氧化钛中加入了银、铜或铁等元素，能利用蓝光、甚至部分绿光来分解甲醛。但是，这种光触媒一般对蓝光的吸收率不到5%<br>在家庭实际效果中，它最初会部分分解已从板材等释放出的甲醛（前面提到这些甲醛通风很快散发），接着更多是成为一种保护膜，封住甲醛（作为催化剂它本身不反应，因此自身不会消耗），就跟家具制造过程的封边工艺作用差不多，然后随着材料老化脱落，甲醛继续它的3-15年缓慢释放，光触媒继续微弱地分解释放甲醛。<br>如果你确定要使用光触媒除甲醛，那么最关键的一点需要注意！如果你使用紫外线灯辅助催化，一定要注意！<strong>长期暴露在强紫外线下，会损失皮肤和视力！</strong></td></tr><tr><td>集体维权建议</td><td>首先，<strong>我们是物业的甲方</strong>，我们是物业服务的购买者，我们理应维护我们的正当权益！以及对于城投的问题，我们应当联合起来，<strong>整理维权清单</strong>，然后约定一个各位承租人方便的时间，一起找城投和物业共同协商。协商前上报社区，最好社区安排工作人员在场监督，以便调解，同时，现场人数会较多，为避免被别有用心的人利用，引起混乱、冲突，是很有必要让社区工作人员在场监督并由承租人代表现场声明文明协商后，再开始协商维权内容。至于为何是让社区到场而不是公安，我仅代表个人提出一个假设：“被公安要求解散”……</td></tr></tbody></table><h2 id="居家知识导航"><a href="#居家知识导航" class="headerlink" title="居家知识导航"></a>居家知识导航</h2><p><a href="https://1949hacker.cn/2023/03/15/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%B6%E5%BA%AD%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%8E%BB%E9%99%A4%E7%94%B2%E9%86%9B%EF%BC%8C%E4%BB%A5%E5%8F%8A%E7%94%B2%E9%86%9B%E7%9A%84%E7%A7%91%E6%99%AE%E7%9F%A5%E8%AF%86/">居家环境除甲醛及甲醛的科普</a></p>]]></content>
+      
+      
       <categories>
-        <category>知识库</category>
+          
+          <category> 生活常识 </category>
+          
       </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题</title>
-    <url>/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html</url>
-    <content><![CDATA[<blockquote>
-<p>在传统物理机上，如需使用UEFI引导，仅仅需要在硬盘上创建EFI分区即可，无论是Windows还是Linux均是如此，但在使用Proxmox-VE创建虚拟机时，却需要额外添加EFI磁盘，对此提出疑问并进行探讨。</p>
-</blockquote>
-<span id="more"></span>
-
-<p>直接在网络上搜寻并无相关信息，查询<a href="https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines">官方wiki</a>得到如下解释：</p>
-<p>BIOS 和 UEFI</p>
-<p>为了正确模拟计算机，QEMU 需要使用固件。在通常称为 BIOS 或 (U)EFI 的普通 PC 上，它作为启动 VM 时的第一步执行。它负责进行基本的硬件初始化，并为操作系统提供固件和硬件接口。默认情况下，QEMU 为此使用SeaBIOS，这是一个开源的 x86 BIOS 实现。SeaBIOS 是大多数标准设置的不错选择。</p>
-<p>某些操作系统（例如 Windows 11）可能需要使用 UEFI 兼容实现。在这种情况下，您必须使用OVMF，它是一种开源 UEFI 实现。</p>
-<p>在其他情况下，SeaBIOS 可能不是理想的启动固件，例如，如果您想进行 VGA 直通。</p>
-<p>如果要使用 OVMF，需要考虑以下几点：</p>
-<p>为了保存引导顺序之类的东西，需要有一个 EFI 磁盘。该磁盘将包含在备份和快照中，并且只能有一个。</p>
-<p>您可以使用以下命令创建这样的磁盘：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">qm set &lt;vmid&gt; -efidisk0 &lt;storage&gt;:1,format=&lt;format&gt;,efitype=4m,pre-enrolled-keys=1</span><br></pre></td></tr></table></figure>
-
-<p>其中<strong>storage</strong>是您希望拥有磁盘的存储，而<strong>format</strong>是存储支持的格式。或者，您可以通过VM 硬件部分中的添加 EFI 磁盘的 Web 界面创建这样的磁盘。</p>
-<p>efitype选项指定应使用哪个版本的 OVMF 固件。对于新的 VM，这应该始终是4m，因为它支持安全启动并且分配了更多空间来支持未来的开发（这是 GUI 中的默认值）。</p>
-<p>pre-enroll-keys指定 efidisk 是否应预加载特定于发行版和 Microsoft 标准安全启动密钥。它还默认启用安全启动（尽管它仍然可以在 VM 的 OVMF 菜单中禁用）。</p>
-<p>笔记	如果要在现有 VM（仍使用2m efidisk）中开始使用安全启动，则需要重新创建 efidisk。为此，删除旧的 ( <code>qm set &lt;vmid&gt; -delete efidisk0</code> ) 并添加一个新的，如上所述。这将重置您在 OVMF 菜单中所做的任何自定义配置！<br>当使用带有虚拟显示器的 OVMF（没有 VGA 直通）时，您需要在 OVMF 菜单中设置客户端分辨率（您可以在启动期间按 ESC 按钮到达），或者您必须选择 SPICE 作为显示类型.</p>
-<hr>
-<p>为了保存引导顺序？或许是类似于物理机上，启动菜单中除了UEFI的硬盘启动项外，还有一个额外的操作系统名称的启动项？如<code>Windows Boot Manager</code>或是<code>Debian</code></p>
-<p>EFI磁盘 &#x3D; 操作系统引导项？</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 智能门锁 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Debian基础知识【持续更新】</title>
+      <link href="/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91.html"/>
+      <url>/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"><a href="#本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我" class="headerlink" title="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"></a>本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我</h1><p><strong>根据红帽的公告，CentOS将不再适合作为生产环境的稳定系统使用，为此我个人建议您尝试著名且优秀的Debian系统</strong></p><span id="more"></span><blockquote><p>2020年12月08日，CentOS官方宣布了停止维护CentOS Linux 8的计划，并推出了CentOS Stream项目。具体信息，请阅读CentOS官方公告。其具体规划如下：</p><ul><li>CentOS Linux 8作为RHEL 8的复刻版本，生命周期缩短，于2021年12月31日停止更新并停止维护（EOL）。</li><li>基于以上官方变更计划，CentOS Linux 8用户将无法获得包括问题修复和功能更新在内的任何软件维护和支持。CentOS官方建议停止维护后：对于开发或测试环境，可以将环境迁移至CentOS Stream版本； 对于生产环境或部署关键业务的系统，建议使用稳定的Red Hat Enterprise Linux。对此，用户需评估以下问题：</li><li>CentOS Stream是一个滚动发行的版本，仅为RHEL前置测试版，运用于生产环境时，可能存在一定风险。<br><a href="https://aws.amazon.com/cn/blogs/china/aws-choices-for-centos-after-stopping-maintenance/">亚马逊云科技上在CentOS在停止维护后的几种选择</a></li></ul></blockquote><hr><h2 id="Debian-更换国内源"><a href="#Debian-更换国内源" class="headerlink" title="Debian 更换国内源"></a>Debian 更换国内源</h2><p>在使用过阿里云、网易163、清华、中科大源之后，我个人建议更换为中科大源，Debian更换源的方式非常简单，在此非常感谢<a href="https://github.com/snullp">sNullp先生</a>的<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>!</p><p>在使用该配置生成器之前，你需要先确认你的Debian版本，使用<code>cat /etc/os-release</code>命令，在输出的结果中找到<code>VERSION_CODENAME=bullseye</code>，位于<code>=</code>后面的就是你的版本代号，如图：</p><p><img src="https://img.1949hacker.cn/20230301160807.png" alt="20230301160807"></p><p>然后打开<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>，找到Debian并选择你对应的版本号，如图：</p><p><img src="https://img.1949hacker.cn/20230301161044.png" alt="20230301161044"></p><p>其中，HTTPS&#x2F;HTTP不必赘述，就是字母意思，而IPv4也很好理解，就是选择IPv4或IPv6地址访问，默认HTTPS和IPv4即可</p><p>复制红框中的内容后，回到你的Debian系统，使用<code>vim /etc/apt/sources.list</code>命令编辑apt源配置文件，如果提示<code>-bash: /usr/bin/vim: No such file or directory</code>则是因为你没有安装<code>vim</code>编辑器，我强烈建议你安装<code>vim</code>编辑器，如果暂时无法安装，也可使用<code>nano</code>编辑器，对应命令为<code>nano /etc/apt/sources.list</code>，使用编辑器打开<code>sources.list</code>文件后，如果你是<code>vim</code>编辑器，则可以将光标移到首行，然后按<code>d</code>再按<code>Shift+G</code>即可直接清空内容，然后粘贴你在源配置生成器复制的红框中内容即可，如图：</p><p><img src="https://img.1949hacker.cn/20230301161642.png" alt="20230301161642"></p><p><code>vim</code>编辑器在编辑完成后按<code>ESC</code>再输入<code>:wq</code>回车即可退出保存，编辑器的操作方式在此不过多赘述。</p><p>完成源配置文件的编辑后，还需要使用<code>apt update</code>命令更新源，至此，Debian更换中科大源的教程结束。</p><h2 id="Debian-iSCSI挂载卷"><a href="#Debian-iSCSI挂载卷" class="headerlink" title="Debian iSCSI挂载卷"></a>Debian iSCSI挂载卷</h2><p>首先，你需要安装<code>open-iscsi</code>，使用<code>apt install -y open-iscsi</code>进行安装，然后运行<code>iscsiadm -m discovery -t st -p 服务器地址</code>探测服务器发布的卷，如图：</p><p><img src="https://img.1949hacker.cn/20230301162849.png" alt="20230301162849"></p><p>随后使用<code>iscsiadm -m node -T iqn开头的对应地址 -p 服务器地址 -l</code>即可完成挂载，如图：</p><p><img src="https://img.1949hacker.cn/20230301164715.png" alt="20230301164715"></p><p>随后使用<code>lsblk</code>命令发现新的磁盘，如图：</p><p><img src="https://img.1949hacker.cn/20230301164844.png" alt="20230301164844"></p><p>扩展内容：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 --op update -n node.startup -v automatic</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 -u</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除所有连接</span></span><br><span class="line">iscsiadm -m node --logoutall=all</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有iscsi连接</span></span><br><span class="line">iscsiadm -m session</span><br></pre></td></tr></table></figure><h2 id="Debian-格式化并挂载磁盘以及lvm逻辑卷的使用"><a href="#Debian-格式化并挂载磁盘以及lvm逻辑卷的使用" class="headerlink" title="Debian 格式化并挂载磁盘以及lvm逻辑卷的使用"></a>Debian 格式化并挂载磁盘以及lvm逻辑卷的使用</h2><p>紧跟上文，iscsi挂载后的卷无法直接使用，需要像磁盘一样进行分区及挂载到系统目录</p><p>安装parted：<code>apt install -y parted</code></p><p>使用<code>parted /dev/设备</code>命令进入磁盘分区管理，随后使用<code>mklable gpt</code>将磁盘设置为优秀的<code>GPT</code>分区表，然后使用<code>mkpart 名称 文件系统 起始扇区 结束地址</code>创建分区，如图：</p><p><img src="https://img.1949hacker.cn/20230301165916.png" alt="20230301165916"></p><p>其中，2048s是为了将扇区进行对齐，有利于提升性能，而100%则是指定结束地址为最后，100%可以替换为明确的扇区、容量，如9999s（扇区）或100G（容量），同理，起始地址也是如此，如果你需要创建多个分区，则之后的分区起始地址应紧随上一个分区的结束地址。</p><p>分区创建完毕后，输入<code>q</code>回车即可退出parted，将分区格式化之后即可挂载使用</p><p><strong>但，我在此强烈建议你使用lvm逻辑卷，因为lvm优点有便于容量调整、创建跨区卷等</strong></p><p>lvm卷的使用步骤有创建物理卷，创建卷组，创建逻辑卷</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建物理卷</span></span><br><span class="line">pvcreate /dev/设备</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建卷组</span></span><br><span class="line">vgcreate 卷组名 物理卷</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建逻辑卷</span></span><br><span class="line">lvcreate -l +100%FREE -n 逻辑卷名 所属卷组名</span><br></pre></td></tr></table></figure><p>示例如图：</p><p><img src="https://img.1949hacker.cn/20230301170847.png" alt="20230301170847"></p><p>lvm的逻辑卷地址位于<code>/dev/mapper/</code>下，命名格式为<code>卷组名-逻辑卷名</code>，将逻辑卷格式化后即可挂载使用，如图：</p><p><img src="https://img.1949hacker.cn/20230301171003.png" alt="20230301171003"></p><p>至此，Debian 磁盘分区及lvm逻辑卷教程完毕，如有疑问，欢迎咨询！</p>]]></content>
+      
+      
       <categories>
-        <category>知识库</category>
+          
+          <category> 知识库 </category>
+          
       </categories>
-      <tags>
-        <tag>Proxmox-VE</tag>
-        <tag>虚拟机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常见SAS线缆</title>
-    <url>/%E5%B8%B8%E8%A7%81SAS%E7%BA%BF%E7%BC%86.html</url>
-    <content><![CDATA[<h2 id="常见的三种SAS线缆"><a href="#常见的三种SAS线缆" class="headerlink" title="常见的三种SAS线缆"></a>常见的三种SAS线缆</h2><span id="more"></span>
-
-<h2 id="SFF-8643-amp-INI-SAS-HD"><a href="#SFF-8643-amp-INI-SAS-HD" class="headerlink" title="SFF-8643 &amp; INI SAS HD"></a>SFF-8643 &amp; INI SAS HD</h2><p><img src="https://img.1949hacker.cn/2022-10-25-10-45-40.png" alt="2022-10-25-10-45-40"></p>
-<h2 id="SFF-8087-amp-MINI-SAS"><a href="#SFF-8087-amp-MINI-SAS" class="headerlink" title="SFF-8087 &amp; MINI SAS"></a>SFF-8087 &amp; MINI SAS</h2><p><img src="https://img.1949hacker.cn/2022-10-25-10-46-10.png" alt="2022-10-25-10-46-10"></p>
-<h2 id="SFF-8654-amp-SLIM-SAS"><a href="#SFF-8654-amp-SLIM-SAS" class="headerlink" title="SFF-8654 &amp; SLIM SAS"></a>SFF-8654 &amp; SLIM SAS</h2><p><img src="https://img.1949hacker.cn/2022-10-25-10-44-50.png" alt="2022-10-25-10-44-50"></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Debian </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Proxmox-VE 导入SylixOS VMware版</title>
+      <link href="/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html"/>
+      <url>/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html</url>
+      
+        <content type="html"><![CDATA[<p>将SylixOS传到服务器</p><p>解压SylixOS VMware版，找到其中的</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x86_boot.vmdk</span><br><span class="line">x86_main.vmdk</span><br></pre></td></tr></table></figure><span id="more"></span><p>将这两个文件上传到服务器，使用qemu-img命令将vmdk虚拟机磁盘转为qcow2格式</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_main.qcow2</span><br><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_boot.qcow2</span><br></pre></td></tr></table></figure><p>切换到虚拟化服务器web界面，创建新虚拟机</p><ol><li><p>操作系统类型：Linux kernel 2.4，不使用任何光盘介质<br> <img src="https://img.1949hacker.cn/20230224155828.png" alt="20230224155828"></p></li><li><p>创建IDE硬盘，硬盘大小无所谓<br> <img src="https://img.1949hacker.cn/20230224155929.png" alt="20230224155929"></p></li><li><p>配置CPU，内核数量根据自己需求而定，类型为host<br><img src="https://img.1949hacker.cn/20230224160025.png" alt="20230224160025"></p></li><li><p>修改网络模型，如果网卡不可用，尝试修改为其他模型<br> <img src="https://img.1949hacker.cn/20230224160056.png" alt="20230224160056"></p></li></ol><p>创建虚拟机的步骤完毕，现在连接到服务器的shell，可以使用web shell或另行连接</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入到虚拟机配置文件目录</span></span><br><span class="line">cd /etc/pve/qemu-server/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑刚刚创建的ID为125的虚拟机所属配置文件</span></span><br><span class="line">vim 125.conf</span><br></pre></td></tr></table></figure><p>原配置文件如下：</p><p><img src="https://img.1949hacker.cn/20230224160513.png" alt="20230224160513"></p><p>修改第6行ide0开头的内容如下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ide0: nfshare:125/x86_boot.qcow2</span><br><span class="line">ide1: nfshare:125/x86_main.qcow2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，ide0 ide1务必不要重复，以免冲突</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，nfshare为我虚拟化服务器所在的存储名称，实际名称以你为准！</span></span><br></pre></td></tr></table></figure><p>修改完毕后，将刚刚转化完毕的两个qcow2文件移动到虚拟机磁盘映像所在目录</p><p><strong>先删除现有的文件</strong></p><p><img src="https://img.1949hacker.cn/20230224160856.png" alt="20230224160856"></p><p>随后打开web界面，启动虚拟机即可！</p>]]></content>
+      
+      
       <categories>
-        <category>知识库</category>
+          
+          <category> 知识库 </category>
+          
       </categories>
-      <tags>
-        <tag>SAS线缆</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>重庆奕宸电源无法正常Reset问题</title>
-    <url>/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98.html</url>
-    <content><![CDATA[<h2 id="重庆奕宸电源无法正常Reset问题"><a href="#重庆奕宸电源无法正常Reset问题" class="headerlink" title="重庆奕宸电源无法正常Reset问题"></a>重庆奕宸电源无法正常Reset问题</h2><h2 id="问题详情"><a href="#问题详情" class="headerlink" title="问题详情"></a>问题详情</h2><p>时间：2022&#x2F;10&#x2F;17<br>故障：在TyanS7106主板上完成一次正常启动后按PowerSW5秒强制断电，再次启动时在进入BIOS之前，自检过程中按ResetSW后异常断电无法启动</p>
-<span id="more"></span>
-
-<h2 id="提出疑问"><a href="#提出疑问" class="headerlink" title="提出疑问"></a>提出疑问</h2><ol>
-<li>主板PowerSW和ResetSW给到电源的控制信号是否不同，是否可能存在Tyan给到电源的信号错误</li>
-<li>IPMI日志是否有报告与电源相关的日志</li>
-<li>电源的控制电路是否存在问题</li>
-</ol>
-<h2 id="寻找答案"><a href="#寻找答案" class="headerlink" title="寻找答案"></a>寻找答案</h2><ol>
-<li>向电源厂商了解到：主板Power&#x2F;Reset SW给到电源的控制信号是由电源控制芯片输出高低电平，从而触发电源的响应，实现对电源的控制</li>
-<li>IPMI日志报告PCH_P1V05&#x2F;PVNN&#x2F;P1V8，VCC3_AU 临界值过低，厂商回复该日志的意思是电压过低，属于正常现象，但经对比测试，其他电源无此现象。</li>
-<li>主板控制电源的信号通用、电源响应主板控制信号的方式通用、排除主板和电源程序上的故障，和厂商进一步探讨后，得知电源收到PS-ON信号后，开机通常延迟300ms后输出PWR-OK信号，关机则是100ms，但关机的100ms延迟参数来源于网上非权威渠道，同时提出疑问，主板Reset的逻辑是怎样的？<blockquote>
-<p>发出关机指令，等待电源回复PWR-OK后再次给出PS-ON完成开机？<br>还是发出PS-ON后，不等待电源返回PWR-OK，直接延迟一会儿后再次发出PS-ON进行开机？</p>
-</blockquote>
-</li>
-<li>等待Tyan回复的同时，和电源厂家沟通安排测试，将关机100ms的延迟在多个主板上进行复现，观察是否存在错误：<blockquote>
-<p>逐步递减100ms、80ms、60ms………<br>直接设置为最低值，无限接近0ms进行观测</p>
-</blockquote>
-</li>
-<li>根据测试结果，将电源关机时序调整为最优默认值</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在发现问题时，善用对比法、排除法进行思路梳理</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> Proxmox-VE </tag>
+            
+            <tag> SylixOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于Proxmox-VE系统创建UEFI虚拟机需要单独添加EFI磁盘的问题</title>
+      <link href="/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html"/>
+      <url>/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>在传统物理机上，如需使用UEFI引导，仅仅需要在硬盘上创建EFI分区即可，无论是Windows还是Linux均是如此，但在使用Proxmox-VE创建虚拟机时，却需要额外添加EFI磁盘，对此提出疑问并进行探讨。</p></blockquote><span id="more"></span><p>直接在网络上搜寻并无相关信息，查询<a href="https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines">官方wiki</a>得到如下解释：</p><p>BIOS 和 UEFI</p><p>为了正确模拟计算机，QEMU 需要使用固件。在通常称为 BIOS 或 (U)EFI 的普通 PC 上，它作为启动 VM 时的第一步执行。它负责进行基本的硬件初始化，并为操作系统提供固件和硬件接口。默认情况下，QEMU 为此使用SeaBIOS，这是一个开源的 x86 BIOS 实现。SeaBIOS 是大多数标准设置的不错选择。</p><p>某些操作系统（例如 Windows 11）可能需要使用 UEFI 兼容实现。在这种情况下，您必须使用OVMF，它是一种开源 UEFI 实现。</p><p>在其他情况下，SeaBIOS 可能不是理想的启动固件，例如，如果您想进行 VGA 直通。</p><p>如果要使用 OVMF，需要考虑以下几点：</p><p>为了保存引导顺序之类的东西，需要有一个 EFI 磁盘。该磁盘将包含在备份和快照中，并且只能有一个。</p><p>您可以使用以下命令创建这样的磁盘：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qm set &lt;vmid&gt; -efidisk0 &lt;storage&gt;:1,format=&lt;format&gt;,efitype=4m,pre-enrolled-keys=1</span><br></pre></td></tr></table></figure><p>其中<strong>storage</strong>是您希望拥有磁盘的存储，而<strong>format</strong>是存储支持的格式。或者，您可以通过VM 硬件部分中的添加 EFI 磁盘的 Web 界面创建这样的磁盘。</p><p>efitype选项指定应使用哪个版本的 OVMF 固件。对于新的 VM，这应该始终是4m，因为它支持安全启动并且分配了更多空间来支持未来的开发（这是 GUI 中的默认值）。</p><p>pre-enroll-keys指定 efidisk 是否应预加载特定于发行版和 Microsoft 标准安全启动密钥。它还默认启用安全启动（尽管它仍然可以在 VM 的 OVMF 菜单中禁用）。</p><p>笔记如果要在现有 VM（仍使用2m efidisk）中开始使用安全启动，则需要重新创建 efidisk。为此，删除旧的 ( <code>qm set &lt;vmid&gt; -delete efidisk0</code> ) 并添加一个新的，如上所述。这将重置您在 OVMF 菜单中所做的任何自定义配置！<br>当使用带有虚拟显示器的 OVMF（没有 VGA 直通）时，您需要在 OVMF 菜单中设置客户端分辨率（您可以在启动期间按 ESC 按钮到达），或者您必须选择 SPICE 作为显示类型.</p><hr><p>为了保存引导顺序？或许是类似于物理机上，启动菜单中除了UEFI的硬盘启动项外，还有一个额外的操作系统名称的启动项？如<code>Windows Boot Manager</code>或是<code>Debian</code></p><p>EFI磁盘 &#x3D; 操作系统引导项？</p>]]></content>
+      
+      
       <categories>
-        <category>知识库</category>
+          
+          <category> 知识库 </category>
+          
       </categories>
-      <tags>
-        <tag>电源</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Proxmox-VE 导入SylixOS VMware版</title>
-    <url>/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html</url>
-    <content><![CDATA[<p>将SylixOS传到服务器</p>
-<p>解压SylixOS VMware版，找到其中的</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">x86_boot.vmdk</span><br><span class="line">x86_main.vmdk</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>将这两个文件上传到服务器，使用qemu-img命令将vmdk虚拟机磁盘转为qcow2格式</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_main.qcow2</span><br><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_boot.qcow2</span><br></pre></td></tr></table></figure>
-
-<p>切换到虚拟化服务器web界面，创建新虚拟机</p>
-<ol>
-<li><p>操作系统类型：Linux kernel 2.4，不使用任何光盘介质<br> <img src="https://img.1949hacker.cn/20230224155828.png" alt="20230224155828"></p>
-</li>
-<li><p>创建IDE硬盘，硬盘大小无所谓<br> <img src="https://img.1949hacker.cn/20230224155929.png" alt="20230224155929"></p>
-</li>
-<li><p>配置CPU，内核数量根据自己需求而定，类型为host<br><img src="https://img.1949hacker.cn/20230224160025.png" alt="20230224160025"></p>
-</li>
-<li><p>修改网络模型，如果网卡不可用，尝试修改为其他模型<br> <img src="https://img.1949hacker.cn/20230224160056.png" alt="20230224160056"></p>
-</li>
-</ol>
-<p>创建虚拟机的步骤完毕，现在连接到服务器的shell，可以使用web shell或另行连接</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入到虚拟机配置文件目录</span></span><br><span class="line">cd /etc/pve/qemu-server/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑刚刚创建的ID为125的虚拟机所属配置文件</span></span><br><span class="line">vim 125.conf</span><br></pre></td></tr></table></figure>
-
-<p>原配置文件如下：</p>
-<p><img src="https://img.1949hacker.cn/20230224160513.png" alt="20230224160513"></p>
-<p>修改第6行ide0开头的内容如下</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ide0: nfshare:125/x86_boot.qcow2</span><br><span class="line">ide1: nfshare:125/x86_main.qcow2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，ide0 ide1务必不要重复，以免冲突</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，nfshare为我虚拟化服务器所在的存储名称，实际名称以你为准！</span></span><br></pre></td></tr></table></figure>
-
-<p>修改完毕后，将刚刚转化完毕的两个qcow2文件移动到虚拟机磁盘映像所在目录</p>
-<p><strong>先删除现有的文件</strong></p>
-<p><img src="https://img.1949hacker.cn/20230224160856.png" alt="20230224160856"></p>
-<p>随后打开web界面，启动虚拟机即可！</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> Proxmox-VE </tag>
+            
+            <tag> 虚拟机 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>51单片机的学习笔记</title>
+      <link href="/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html"/>
+      <url>/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="51单片机的学习及其关联知识"><a href="#51单片机的学习及其关联知识" class="headerlink" title="51单片机的学习及其关联知识"></a>51单片机的学习及其关联知识</h2><span id="more"></span><p><strong>开始前的一段话：</strong></p><p>求知欲是人类进步的源泉，每接触一项新的知识就像是一滴墨滴在了宣纸上，向着四周疯狂扩散，这种极度的求知欲深深地刺激着我，撕裂我的思维向四周辐射，贪婪地、疯狂地汲取着接触到的每一项知识，这种知识爆炸的感觉带给我成瘾的快感！</p><p>对于单片机的起步，始于我小时候的梦想，我想有高度智能的科技、机械围绕着我的生活，我想拥有一个高度智能的工厂，想要无数无数乃至我甚至不知如何形容的科技，我痴迷着这些技术，我疯狂的汲取各种知识，每一次突破一个新的知识面就像是进入一个未知的宇宙！偶然间，我发现我我的梦想可以从两个两个方面入手：</p><ol><li>软件层面的技术：编程，人工智能等</li><li>硬件层面的技术：机械，电路开发等</li></ol><p>于是我有了方向，向着我想要的极力冲刺！</p><p>我于2022.11.21日凌晨开始了51单片机的学习，从茫然无知，到那一滴墨滴在了宣纸上，围绕着单片机开始的知识爆炸让我无比亢奋！从一块小小的51单片机，知识开始爆炸开来，我从未接触过的领域，芯片，电路，逻辑……无数的知识冲刷着我的大脑，无法抑制的激动，发现未知的知识宇宙，我疯狂的汲取着无穷无尽的知识，感叹着人类智慧的结晶！</p><p>越是学习，越是发觉自己的无知，知识是无穷无尽的，我永远不可能学完，真的太多太多了！</p><p>人生的价值是集体利益，这些伟大的知识我无论学习多少，若不能将其贡献出来，则是对知识、对智慧、对人类乃至对我人生意义的亵渎！</p><p>我将尽可能的将我所学的一切，用通俗易懂的语言描述出来，为同样渴望知识、同样有着疯狂求知欲的人们尽一份绵薄之力！</p><p>如果你也有着相同的想法，同样渴望知识并为此痴迷，欢迎加入！</p><p>如开头所述，求知欲是人类进步的源泉，所以在此，请允许我以<strong>探索者</strong>尊称各位渴望知识的道友，并欢迎您加入到我们，您可以在本页底部找到我的联系方式，因某些原因，建议您使用Telegram进行交流。</p><hr><p><strong>注意：由于我是边学习边完善文章，所以文章可能存在大量错误，我个人的力量有限，恳请各位探索者开放交流、互换知识，以集体的力量弥补个人的缺陷</strong></p><hr><h2 id="我使用的单片机"><a href="#我使用的单片机" class="headerlink" title="我使用的单片机"></a>我使用的单片机</h2><p>品牌：普中(PRECHIN)<br>型号：普中51-实验版<br>官方教程：<a href="https://www.bilibili.com/video/BV1RB4y1i71i">https://www.bilibili.com/video/BV1RB4y1i71i</a></p><p>在官方教程中，介绍了该开发板的部分元器件：</p><table><thead><tr><th>名称</th><th>作用</th><th>备注</th></tr></thead><tbody><tr><td>4位一体数码管</td><td>数字显示</td><td>两个4位一体共阴数码管</td></tr><tr><td>LCD1602液晶屏</td><td>用于简单内容显示</td><td>开发板提供了LCD1602&#x2F;9648&#x2F;12864&#x2F;TFT接口</td></tr><tr><td>8*8LED矩阵</td><td>常应用于LED广告牌等</td><td>在矩阵旁边提供了编号J24的GND&#x2F;OE&#x2F;VCC三针引脚，跳线帽短接OE&#x2F;VCC可以关闭矩阵节省电源（OE我搜索出来的解释为<em>输出使能控制信号</em>，还请大佬科普补充一下，谢谢）</td></tr><tr><td>LED流水灯</td><td>可以用于心形流水灯表白（误）</td><td>该开发板提供了8个流水灯</td></tr><tr><td>74HC595A芯片</td><td>该芯片用于扩展开发板IO口，驱动8*8点阵</td><td>专业名称<em>高速 CMOS 8 位串行移位寄存器</em>其具体资料后续将专门设立电路知识栏目进行解释</td></tr><tr><td>4*4键盘</td><td>计算器啥的，挺实用</td><td>普普通通</td></tr><tr><td>红外接受</td><td>红外遥控嘛，套餐给了遥控器</td><td>NEC解码</td></tr><tr><td>DS18B20温度传感器</td><td>略</td><td>略</td></tr><tr><td>NRF24L01扩展接口</td><td>该扩展接口可以用于扩展2.4G无线通信模块</td><td>相当NICE的远程通信，几百米的遥控器？</td></tr><tr><td>ASM1117稳压芯片</td><td>提供3.3V稳定电压</td><td>如视频中所述，大部分传感器为3.3V，所以嘛…</td></tr><tr><td>CH340C芯片</td><td>用于USB转TTL通信，该芯片内置晶振</td><td>该板设计了4个引脚，分别是UTX-&gt;P30，RTX-&gt;P31，该设计十分优秀！在需要使用串口调试模块时，可以将U&#x2F;RTX针脚接到模块对应引脚，直接使用开发板MicroUSB进行调试，大赞！</td></tr></tbody></table><h2 id="晶振临时科普栏"><a href="#晶振临时科普栏" class="headerlink" title="晶振临时科普栏"></a>晶振临时科普栏</h2><p>因我在学习过程中，对晶振的求知难度较大，特此临时记录！<br>晶振，全称石英晶体振荡器，英文名（quartz oscillator）<br>石英晶振具有高精度高稳度的特性，十分适合用于数字电路的时钟，是数字电路的心脏！</p><p><strong>时钟这个概念比较抽象，我尝试将其描述的更加朴素一些：</strong></p><p>在计算机中，关和开分别可以代表0和1，在最最原始的逻辑电路中，还没有晶振时，可以通过人工控制开关实现逻辑电路的控制，比如<a href="https://baike.baidu.com/item/%E5%BC%82%E6%88%96%E9%97%A8/9036416">异或门</a></p><table><thead><tr><th>A开关</th><th>B开关</th><th>计算结果</th></tr></thead><tbody><tr><td>关</td><td>关</td><td>0</td></tr><tr><td>开</td><td>关</td><td>1</td></tr><tr><td>关</td><td>开</td><td>1</td></tr><tr><td>开</td><td>开</td><td>0</td></tr></tbody></table><p>于是我们可以通过这种简单逻辑的叠加，做出一些复杂的计算，如加法：x+y<br>设定，检测到<strong>A开B关</strong>一次设定x数值增加1，<strong>A关B开</strong>y数值增加1，那么我们要计算3+2，则需要进行一下操作：</p><table><thead><tr><th>给出X值</th><th>给出B值</th></tr></thead><tbody><tr><td>A开B关重复3次</td><td>A关B开重复2次</td></tr></tbody></table><p>由此可以看出，哪怕是及其简单的逻辑处理，也需要非常庞大的开关操作量。<br>因此，懒得一批的人类找到了晶振这玩意儿，<a href="https://zh.wikipedia.org/zh-cn/%E7%9F%B3%E8%8B%B1%E6%99%B6%E4%BD%93%E8%B0%90%E6%8C%AF%E5%99%A8">晶振的原理</a>解释起来有些许复杂，在此我们只需了解，晶振在电路板中工作的原理即可：<br>晶振可以在一定时间内以一定频率发出脉冲，脉冲一词仍有一些难以理解，而有些资料中对此的描述为高低电平的转换，对于一个初学者来说，最讨厌的无非就是看到这些难以理解的名词，在此我将其解释的更加直白一些，不过低电平并不等于0V，低电平只是一个相对较低的电压：<br>低电平：0V电压<br>高电平：5V电压<br>那么脉冲（高低电平转换）在电路中则是，打开开关：低电平（0V&#x3D;没电）转换为高电平（5V&#x3D;来电了），于是，就如我们上文所述，这就像是打开了A开关，利用晶振的这种脉冲，我们便可以在一定时间内实现一定次数的自动开关操作。<br>如果你仔细阅读并理解了，便会发现这真的是一个十分伟大的发明！从此让人类走上了废物(bushi)的道路，躺平~</p><p><strong>文章亦是我的笔记，先暂时记录到这里，仍在学习总结中</strong></p>]]></content>
+      
+      
       <categories>
-        <category>知识库</category>
+          
+          <category> 知识库 </category>
+          
       </categories>
-      <tags>
-        <tag>Proxmox-VE</tag>
-        <tag>SylixOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Debian基础知识【持续更新】</title>
-    <url>/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
-    <content><![CDATA[<h1 id="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"><a href="#本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我" class="headerlink" title="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"></a>本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我</h1><p><strong>根据红帽的公告，CentOS将不再适合作为生产环境的稳定系统使用，为此我个人建议您尝试著名且优秀的Debian系统</strong></p>
-<span id="more"></span>
-
-<blockquote>
-<p>2020年12月08日，CentOS官方宣布了停止维护CentOS Linux 8的计划，并推出了CentOS Stream项目。具体信息，请阅读CentOS官方公告。其具体规划如下：</p>
-<ul>
-<li>CentOS Linux 8作为RHEL 8的复刻版本，生命周期缩短，于2021年12月31日停止更新并停止维护（EOL）。</li>
-<li>基于以上官方变更计划，CentOS Linux 8用户将无法获得包括问题修复和功能更新在内的任何软件维护和支持。CentOS官方建议停止维护后：对于开发或测试环境，可以将环境迁移至CentOS Stream版本； 对于生产环境或部署关键业务的系统，建议使用稳定的Red Hat Enterprise Linux。对此，用户需评估以下问题：</li>
-<li>CentOS Stream是一个滚动发行的版本，仅为RHEL前置测试版，运用于生产环境时，可能存在一定风险。<br><a href="https://aws.amazon.com/cn/blogs/china/aws-choices-for-centos-after-stopping-maintenance/">亚马逊云科技上在CentOS在停止维护后的几种选择</a></li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="Debian-更换国内源"><a href="#Debian-更换国内源" class="headerlink" title="Debian 更换国内源"></a>Debian 更换国内源</h2><p>在使用过阿里云、网易163、清华、中科大源之后，我个人建议更换为中科大源，Debian更换源的方式非常简单，在此非常感谢<a href="https://github.com/snullp">sNullp先生</a>的<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>!</p>
-<p>在使用该配置生成器之前，你需要先确认你的Debian版本，使用<code>cat /etc/os-release</code>命令，在输出的结果中找到<code>VERSION_CODENAME=bullseye</code>，位于<code>=</code>后面的就是你的版本代号，如图：</p>
-<p><img src="https://img.1949hacker.cn/20230301160807.png" alt="20230301160807"></p>
-<p>然后打开<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>，找到Debian并选择你对应的版本号，如图：</p>
-<p><img src="https://img.1949hacker.cn/20230301161044.png" alt="20230301161044"></p>
-<p>其中，HTTPS&#x2F;HTTP不必赘述，就是字母意思，而IPv4也很好理解，就是选择IPv4或IPv6地址访问，默认HTTPS和IPv4即可</p>
-<p>复制红框中的内容后，回到你的Debian系统，使用<code>vim /etc/apt/sources.list</code>命令编辑apt源配置文件，如果提示<code>-bash: /usr/bin/vim: No such file or directory</code>则是因为你没有安装<code>vim</code>编辑器，我强烈建议你安装<code>vim</code>编辑器，如果暂时无法安装，也可使用<code>nano</code>编辑器，对应命令为<code>nano /etc/apt/sources.list</code>，使用编辑器打开<code>sources.list</code>文件后，如果你是<code>vim</code>编辑器，则可以将光标移到首行，然后按<code>d</code>再按<code>Shift+G</code>即可直接清空内容，然后粘贴你在源配置生成器复制的红框中内容即可，如图：</p>
-<p><img src="https://img.1949hacker.cn/20230301161642.png" alt="20230301161642"></p>
-<p><code>vim</code>编辑器在编辑完成后按<code>ESC</code>再输入<code>:wq</code>回车即可退出保存，编辑器的操作方式在此不过多赘述。</p>
-<p>完成源配置文件的编辑后，还需要使用<code>apt update</code>命令更新源，至此，Debian更换中科大源的教程结束。</p>
-<h2 id="Debian-iSCSI挂载卷"><a href="#Debian-iSCSI挂载卷" class="headerlink" title="Debian iSCSI挂载卷"></a>Debian iSCSI挂载卷</h2><p>首先，你需要安装<code>open-iscsi</code>，使用<code>apt install -y open-iscsi</code>进行安装，然后运行<code>iscsiadm -m discovery -t st -p 服务器地址</code>探测服务器发布的卷，如图：</p>
-<p><img src="https://img.1949hacker.cn/20230301162849.png" alt="20230301162849"></p>
-<p>随后使用<code>iscsiadm -m node -T iqn开头的对应地址 -p 服务器地址 -l</code>即可完成挂载，如图：</p>
-<p><img src="https://img.1949hacker.cn/20230301164715.png" alt="20230301164715"></p>
-<p>随后使用<code>lsblk</code>命令发现新的磁盘，如图：</p>
-<p><img src="https://img.1949hacker.cn/20230301164844.png" alt="20230301164844"></p>
-<p>扩展内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 --op update -n node.startup -v automatic</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 -u</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除所有连接</span></span><br><span class="line">iscsiadm -m node --logoutall=all</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有iscsi连接</span></span><br><span class="line">iscsiadm -m session</span><br></pre></td></tr></table></figure>
-
-<h2 id="Debian-格式化并挂载磁盘以及lvm逻辑卷的使用"><a href="#Debian-格式化并挂载磁盘以及lvm逻辑卷的使用" class="headerlink" title="Debian 格式化并挂载磁盘以及lvm逻辑卷的使用"></a>Debian 格式化并挂载磁盘以及lvm逻辑卷的使用</h2><p>紧跟上文，iscsi挂载后的卷无法直接使用，需要像磁盘一样进行分区及挂载到系统目录</p>
-<p>安装parted：<code>apt install -y parted</code></p>
-<p>使用<code>parted /dev/设备</code>命令进入磁盘分区管理，随后使用<code>mklable gpt</code>将磁盘设置为优秀的<code>GPT</code>分区表，然后使用<code>mkpart 名称 文件系统 起始扇区 结束地址</code>创建分区，如图：</p>
-<p><img src="https://img.1949hacker.cn/20230301165916.png" alt="20230301165916"></p>
-<p>其中，2048s是为了将扇区进行对齐，有利于提升性能，而100%则是指定结束地址为最后，100%可以替换为明确的扇区、容量，如9999s（扇区）或100G（容量），同理，起始地址也是如此，如果你需要创建多个分区，则之后的分区起始地址应紧随上一个分区的结束地址。</p>
-<p>分区创建完毕后，输入<code>q</code>回车即可退出parted，将分区格式化之后即可挂载使用</p>
-<p><strong>但，我在此强烈建议你使用lvm逻辑卷，因为lvm优点有便于容量调整、创建跨区卷等</strong></p>
-<p>lvm卷的使用步骤有创建物理卷，创建卷组，创建逻辑卷</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建物理卷</span></span><br><span class="line">pvcreate /dev/设备</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建卷组</span></span><br><span class="line">vgcreate 卷组名 物理卷</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建逻辑卷</span></span><br><span class="line">lvcreate -l +100%FREE -n 逻辑卷名 所属卷组名</span><br></pre></td></tr></table></figure>
-
-<p>示例如图：</p>
-<p><img src="https://img.1949hacker.cn/20230301170847.png" alt="20230301170847"></p>
-<p>lvm的逻辑卷地址位于<code>/dev/mapper/</code>下，命名格式为<code>卷组名-逻辑卷名</code>，将逻辑卷格式化后即可挂载使用，如图：</p>
-<p><img src="https://img.1949hacker.cn/20230301171003.png" alt="20230301171003"></p>
-<p>至此，Debian 磁盘分区及lvm逻辑卷教程完毕，如有疑问，欢迎咨询！</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 嵌入式开发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>重庆奕宸电源无法正常Reset问题</title>
+      <link href="/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98.html"/>
+      <url>/%E9%87%8D%E5%BA%86%E5%A5%95%E5%AE%B8%E7%94%B5%E6%BA%90%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8Reset%E9%97%AE%E9%A2%98.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="重庆奕宸电源无法正常Reset问题"><a href="#重庆奕宸电源无法正常Reset问题" class="headerlink" title="重庆奕宸电源无法正常Reset问题"></a>重庆奕宸电源无法正常Reset问题</h2><h2 id="问题详情"><a href="#问题详情" class="headerlink" title="问题详情"></a>问题详情</h2><p>时间：2022&#x2F;10&#x2F;17<br>故障：在TyanS7106主板上完成一次正常启动后按PowerSW5秒强制断电，再次启动时在进入BIOS之前，自检过程中按ResetSW后异常断电无法启动</p><span id="more"></span><h2 id="提出疑问"><a href="#提出疑问" class="headerlink" title="提出疑问"></a>提出疑问</h2><ol><li>主板PowerSW和ResetSW给到电源的控制信号是否不同，是否可能存在Tyan给到电源的信号错误</li><li>IPMI日志是否有报告与电源相关的日志</li><li>电源的控制电路是否存在问题</li></ol><h2 id="寻找答案"><a href="#寻找答案" class="headerlink" title="寻找答案"></a>寻找答案</h2><ol><li>向电源厂商了解到：主板Power&#x2F;Reset SW给到电源的控制信号是由电源控制芯片输出高低电平，从而触发电源的响应，实现对电源的控制</li><li>IPMI日志报告PCH_P1V05&#x2F;PVNN&#x2F;P1V8，VCC3_AU 临界值过低，厂商回复该日志的意思是电压过低，属于正常现象，但经对比测试，其他电源无此现象。</li><li>主板控制电源的信号通用、电源响应主板控制信号的方式通用、排除主板和电源程序上的故障，和厂商进一步探讨后，得知电源收到PS-ON信号后，开机通常延迟300ms后输出PWR-OK信号，关机则是100ms，但关机的100ms延迟参数来源于网上非权威渠道，同时提出疑问，主板Reset的逻辑是怎样的？<blockquote><p>发出关机指令，等待电源回复PWR-OK后再次给出PS-ON完成开机？<br>还是发出PS-ON后，不等待电源返回PWR-OK，直接延迟一会儿后再次发出PS-ON进行开机？</p></blockquote></li><li>等待Tyan回复的同时，和电源厂家沟通安排测试，将关机100ms的延迟在多个主板上进行复现，观察是否存在错误：<blockquote><p>逐步递减100ms、80ms、60ms………<br>直接设置为最低值，无限接近0ms进行观测</p></blockquote></li><li>根据测试结果，将电源关机时序调整为最优默认值</li></ol><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在发现问题时，善用对比法、排除法进行思路梳理</p>]]></content>
+      
+      
       <categories>
-        <category>知识库</category>
+          
+          <category> 知识库 </category>
+          
       </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Debian</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>成都凤起兰庭居民交流平台</title>
-    <url>/%E6%88%90%E9%83%BD%E5%87%A4%E8%B5%B7%E5%85%B0%E5%BA%AD%E5%B1%85%E6%B0%91%E4%BA%A4%E6%B5%81%E5%B9%B3%E5%8F%B0.html</url>
-    <content><![CDATA[<h1 id="本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！"><a href="#本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！" class="headerlink" title="本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！"></a>本文章用作凤起兰庭居民交流平台，可以使用上方搜索按钮搜索你想了解的内容！</h1><h2 id="成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁"><a href="#成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁" class="headerlink" title="成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁"></a>成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁</h2><p><strong>可以通过本页末尾的联系方式联系我，在本页末尾维权列表登记你的诉求</strong></p>
-<span id="more"></span>
-
-<hr>
-<blockquote>
-<p>前言：<br>城投未将门锁钥匙、管理权交由承租人，智能门锁管理密码<strong>疑似</strong>同一个，若管理密码不慎泄露，不法分子可以通过管理密码直接开门，因此严重威胁到住户的人身安全，为此！<strong>强烈建议你自行修改智能门锁的管理密码、用户密码、开锁指纹！</strong><br>同样的，因为机械钥匙城投拒绝交付给承租人，所以机械钥匙也存在可能丢失导致被不法分子利用的风险，虽然相较管理密码，被利用的风险较低，但不得不承认，其仍然存在风险！</p>
-<p>部分承租人提出一下疑问：</p>
-<ol>
-<li><p>修改密码后是否会被城投强制要求改回，或清退等？</p>
-<ul>
-<li>回复：我们是通过合法途径，合法租赁了此房屋，我们理应在承租期间享有房屋的使用权、管理权，城投无权拒绝交付钥匙，更无权禁止我们合理适当的使用房屋！<strong>邻居们应当团结一致，如若遇到城投侵犯我们的任何合法权益，务必一致抗议并相互帮助抵抗城投的非法侵犯！</strong></li>
-</ul>
-</li>
-<li><p>城投拒绝交付门锁完全管理权，我们如何维权？</p>
-<ul>
-<li>维权途径我个人建议如下：<ol>
-<li>凤起兰庭项目超过50%承租人联名签字抗议、申诉、上访，要求城投交出门锁完全管理权，以确保住户能将人身安全掌握在自己手里，而不是由<strong>城投的担保</strong>来保障，人身安全必须自己做主！</li>
-<li>如若城投拒绝我们的诉求，则集体向政府有关部门反映、上访！</li>
-<li>若此事连政府都不为我们做主，那我们则集体各自更换门锁，并确保一旦有城投因此对任何承租人进行清退等侵犯承租人权益的行为是，集体抵抗！</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<h3 id="以下是智能门锁操作教程"><a href="#以下是智能门锁操作教程" class="headerlink" title="以下是智能门锁操作教程"></a>以下是智能门锁操作教程</h3><h4 id="第一步：恢复出厂设置"><a href="#第一步：恢复出厂设置" class="headerlink" title="第一步：恢复出厂设置"></a>第一步：恢复出厂设置</h4><p>将门锁的后面板向上滑开，找到恢复出厂设置的按钮，如图所示：</p>
-<p><img src="https://img.1949hacker.cn/2a7bd93a17a564ef1d2598af3285741.jpg" alt="密码锁重置按钮"></p>
-<p><strong>按住</strong>红圈中的按钮不放，门锁会连续发出响声“滴滴滴”，<strong>响声结束后</strong>，<strong>等待几秒</strong>，随后会语音提示”初始化成功“</p>
-<p>来到前面板，触摸<strong>密码输入区</strong>，激活面板，然后按住<strong>#</strong>，直到出现较长的提示音”滴——！“，然后会听到菜单播报，菜单功能如下：</p>
-<h5 id="主菜单"><a href="#主菜单" class="headerlink" title="主菜单"></a>主菜单</h5><table>
-<thead>
-<tr>
-<th>按键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>管理员设置</td>
-</tr>
-<tr>
-<td>2</td>
-<td>用户设置</td>
-</tr>
-<tr>
-<td>其他</td>
-<td>略过，用不住，如有需要补充，联系我，后续抽空补全</td>
-</tr>
-</tbody></table>
-<h5 id="子菜单"><a href="#子菜单" class="headerlink" title="子菜单"></a>子菜单</h5><table>
-<thead>
-<tr>
-<th>主菜单</th>
-<th>按键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>管理员设置</td>
-<td>1</td>
-<td>添加管理员</td>
-</tr>
-<tr>
-<td></td>
-<td>2</td>
-<td>删除管理员</td>
-</tr>
-<tr>
-<td>用户设置</td>
-<td>1</td>
-<td>添加用户</td>
-</tr>
-<tr>
-<td></td>
-<td>2</td>
-<td>删除用户</td>
-</tr>
-</tbody></table>
-<h4 id="创建管理员"><a href="#创建管理员" class="headerlink" title="创建管理员"></a>创建管理员</h4><p>紧跟上一步操作，在初始化完成并进入菜单后，先按<strong>1</strong>听到播报“1、创建管理员，2、删除管理员”后，无需等待语音播报完成，只要听到有语音播报就可以继续操作了，接着按<strong>1</strong>，然后输入管理员密码，<strong>8位数字</strong>，输入后按<strong>#</strong>，这个就是确认键的功能，密码需要输入两次，随后会出现<strong>001</strong>的语音，这个是管理员序号，创建管理员时会依次自动从001到009编号。</p>
-<p>完成密码设置后，按<strong>*</strong>键返回上一层，是的，<strong>*</strong>是返回，<strong>#</strong>是确认。</p>
-<h4 id="创建用户密码、指纹"><a href="#创建用户密码、指纹" class="headerlink" title="创建用户密码、指纹"></a>创建用户密码、指纹</h4><p>在完成创建管理员后，按照上文的操作，此时你已来到主菜单，按<strong>2</strong>即可进入用户菜单，出现语音，继续操作，按<strong>1</strong>创建用户，此时，密码和指纹<strong>二选一</strong>，创建用户密码则如同创建管理员一样，直接输入<strong>8位密码</strong>，按<strong>#</strong>确认，重复一次，然后会播报用户序号（010开始）按<strong>*</strong>返回，创建第二个密码，你仍旧可以再次创建密码用户，当然，如果需要创建指纹用户，则直接用对应手指按指纹感应器，<strong>重复5次</strong>即可完成指纹用户创建。</p>
-<p><strong>至此，智能门锁操作教程结束！</strong></p>
-<h3 id="门锁功能介绍"><a href="#门锁功能介绍" class="headerlink" title="门锁功能介绍"></a>门锁功能介绍</h3><p><img src="https://img.1949hacker.cn//4f06eca22753f859ab07b11e131b155.png" alt="ON/OFF开关作用"></p>
-<p><img src="https://img.1949hacker.cn//20230317141458.png" alt="猫眼开锁"></p>
-<p><strong>将开关拨到OFF，按压把手也无法开锁，所以可以防止通过猫眼开锁入室盗窃。<br>我们没猫眼，没球鸡儿用，不管它，保持ON即可。</strong></p>
-<hr>
-<h2 id="维权清单"><a href="#维权清单" class="headerlink" title="维权清单"></a>维权清单</h2><table>
-<thead>
-<tr>
-<th>序号</th>
-<th>责任方</th>
-<th>简介</th>
-<th>详情</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>城投</td>
-<td>要求城投交出门锁完全管理权</td>
-<td>门锁目前已知有机械钥匙、密码开门、指纹开门，尚不确定是否有IC卡开门功能，为了承租人、住户，能将自己的人身安全把握在自己手里，在此要求城投交出门锁的所有钥匙及管理权！我们不能将自己的人身安全建立在城投的一句承诺上！机械钥匙虽然丢失、盗用的可能性较小，但依旧有可能！我们不能冒这个风险！管理密码泄露的风险则更加危险！也正因此，本文特此讲解了门锁的操作教程！<br>对于承租人、住户来说，万一出现城投工作人员工作失误，误以为该户发生火灾等紧急情况，进了门，碰巧此时出现很尴尬的情况，住户或许是在沐浴，亦或许是在家很放松，虽然人身安全没有威胁，但是住户个人隐私被工作人员意外看了个精光，这又如何能补救呢？<br>再或者，管理密码、机械钥匙泄露、丢失，被不法分子获取，因此对住户产生了不可挽回的损失，如人身侵犯，入室抢劫甚至是被杀害，城投能担得起责任吗？至少我个人认为，出现这样的事，什么补救措施都不会有用！<br>基于上述，我代表我个人建议，城投将门锁我完全管理权交由住户自行负责，这样住户能够安心，而且如果出现任何安全等问题，责任很明确，由住户承担即可！<br>望城投处理此诉求！</td>
-</tr>
-<tr>
-<td>2</td>
-<td>物业</td>
-<td>启用门禁人脸识别，IC写卡，NFC写卡</td>
-<td>小区住户很多，老年人也不在少数，以及需要更便捷门禁的<strong>时尚潮流人士</strong>，首先是人脸识别，启用后住户不再需要带手机或掏钥匙，非常方便，尤其是不方便操作手机的老年人，其次是IC写卡，现在有各种各样美观便携的IC卡，如手环IC卡，手机贴片IC卡，以及智能设备的NFC功能，这些对于住户来说是非常方便的选择，只需要一贴、一靠即可开门，尤其是<strong>时尚潮流人士们</strong>，可以通过独具个性的IC卡或NFC功能开门，是一个非常棒的选择！</td>
-</tr>
-<tr>
-<td>3</td>
-<td>物业</td>
-<td>顶楼门禁权限</td>
-<td>顶楼天台无论是对于住户的溜达放松还是紧急情况下用于救灾救援都是非常重要的！强烈要求物业对住户开放天台的进入权限！在相关法律中有说明，顶楼天台是属于该建筑内所有住户的公共区域，任何人、单位均无权私占！</td>
-</tr>
-<tr>
-<td>4</td>
-<td>城投</td>
-<td>楼栋信箱</td>
-<td>楼栋信箱对于用户来说也是一个非常便捷的设施，但城投并未将其钥匙交给住户，信箱可以用于快递投放重要的发票、文件等，直接投放到对应信箱，避免了重要快递丢失的风险。且平时信箱还可用于住户临时存放物品、备用钥匙等，非常方便，城投应当将信箱钥匙交给物业暂为保管，物业配合主动将信箱钥匙交给<strong>前来领取的住户</strong></td>
-</tr>
-</tbody></table>
-<h2 id="小区公告栏"><a href="#小区公告栏" class="headerlink" title="小区公告栏"></a>小区公告栏</h2><blockquote>
-<p>该板块用于登记小区内的各项公告</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th>公告所属</th>
-<th>标题</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2023.03.13</td>
-<td>物业</td>
-<td>质量问题反馈方式</td>
-<td><img src="https://img.1949hacker.cn/20230314113721.png" alt="物业公告"></td>
-</tr>
-<tr>
-<td>2023.03.15</td>
-<td>平台</td>
-<td>功能新增</td>
-<td>平台新增导航栏，点击页面左下角即可展开文章目录<br><img src="https://img.1949hacker.cn//20230315170352.png" alt="菜单按钮"><br><img src="https://img.1949hacker.cn//20230315170326.png" alt="文章目录"></td>
-</tr>
-<tr>
-<td>2023.03.16</td>
-<td>物业</td>
-<td>门禁、天台问题</td>
-<td>已致电物业028-81206699，等待回复中…<br>1、楼顶天台属于逃生通道、公告区域【是否属于消防通道尚未查到，无明确法律规定我不妄下结论】，要求物业开放天台，但是，如果我没记错的话，根据城市管理规定，楼顶不得违建，且晾衣服种菜那些是不会有法律保护的，好像物业是有权清退楼顶除建筑外的其他杂物的。<br>2、门禁IC卡、NFC写卡、人脸：反馈了老年人操作手机不便，要求启用人脸识别，IC卡NFC卡理由同上，额外说明了，外出健身跑步，是不会携带随身物品的，只会是带个运动手表，所以手机手表手环的NFC写卡也要启用。</td>
-</tr>
-<tr>
-<td>2023.03.21</td>
-<td>平台</td>
-<td>2栋楼顶天台问题</td>
-<td>已于3.19联系物业上天台，经实地考察，楼顶天台无女儿墙，远离边缘的中心区域用铁栏杆做了围挡，楼顶建筑设计确实符合不上人屋面规定，因此，建议各位邻居遵守此规定，避免发生意外坠楼！</td>
-</tr>
-<tr>
-<td>2023.03.21</td>
-<td>平台</td>
-<td>小区门禁IC、NFC、人脸识别问题</td>
-<td>物业回复不提供IC、NFC开门方式，人脸识别正在接入公安视频网，但我对此持怀疑态度，人脸识别只需要有比对图片和算法即可，所以人脸识别开门并没有需要接入公安视频网的需要</td>
-</tr>
-</tbody></table>
-<h2 id="交流栏"><a href="#交流栏" class="headerlink" title="交流栏"></a>交流栏</h2><blockquote>
-<p>该板块用于邻居们的交流，可以登记任何合法内容，无限制</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>标题</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>互帮互助</td>
-<td>邻居们应当都是在各行各业身怀绝技的卧龙凤雏，俗话说远亲不如近邻，建议邻居们平时多交流，多互帮互助，秀出各自的<strong>绝技</strong>！美食、IT、汽车、宠物、育儿等！</td>
-</tr>
-<tr>
-<td>光触媒除甲醛的简洁科普</td>
-<td>光触媒是作为催化剂（主要成分是纳米级二氧化钛），在<strong>紫外线</strong>下将空气中的水或氧气催化成具有强氧化能力的活性基团，这些活性基团可强效分解各种具有不稳定化学键的有机化合物和部分无机物，并可破坏细菌的细胞膜和凝固病毒的蛋白质载体，包括甲醛（与甲醛反应生成水、二氧化碳和其他无害物质）<br>光触媒属于前期分解后期封闭为主，这种方法在工业场景使用效果好，但是家庭效果差。因为实验表明，要达到良好去甲醛效果需要充足的紫外线强度及适合的室内化学污染物浓度（在安全标准浓度以上则效果不佳），实际家里的光线紫外线强度低，再假如室内污染浓度较低，效果可想而知！<br>而那些宣称可以用可见光除甲醛的光触媒，是在二氧化钛中加入了银、铜或铁等元素，能利用蓝光、甚至部分绿光来分解甲醛。但是，这种光触媒一般对蓝光的吸收率不到5%<br>在家庭实际效果中，它最初会部分分解已从板材等释放出的甲醛（前面提到这些甲醛通风很快散发），接着更多是成为一种保护膜，封住甲醛（作为催化剂它本身不反应，因此自身不会消耗），就跟家具制造过程的封边工艺作用差不多，然后随着材料老化脱落，甲醛继续它的3-15年缓慢释放，光触媒继续微弱地分解释放甲醛。<br>如果你确定要使用光触媒除甲醛，那么最关键的一点需要注意！如果你使用紫外线灯辅助催化，一定要注意！<strong>长期暴露在强紫外线下，会损失皮肤和视力！</strong></td>
-</tr>
-<tr>
-<td>集体维权建议</td>
-<td>首先，<strong>我们是物业的甲方</strong>，我们是物业服务的购买者，我们理应维护我们的正当权益！以及对于城投的问题，我们应当联合起来，<strong>整理维权清单</strong>，然后约定一个各位承租人方便的时间，一起找城投和物业共同协商。协商前上报社区，最好社区安排工作人员在场监督，以便调解，同时，现场人数会较多，为避免被别有用心的人利用，引起混乱、冲突，是很有必要让社区工作人员在场监督并由承租人代表现场声明文明协商后，再开始协商维权内容。至于为何是让社区到场而不是公安，我仅代表个人提出一个假设：“被公安要求解散”……</td>
-</tr>
-</tbody></table>
-<h2 id="居家知识导航"><a href="#居家知识导航" class="headerlink" title="居家知识导航"></a>居家知识导航</h2><p><a href="https://1949hacker.cn/2023/03/15/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%B6%E5%BA%AD%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%8E%BB%E9%99%A4%E7%94%B2%E9%86%9B%EF%BC%8C%E4%BB%A5%E5%8F%8A%E7%94%B2%E9%86%9B%E7%9A%84%E7%A7%91%E6%99%AE%E7%9F%A5%E8%AF%86/">居家环境除甲醛及甲醛的科普</a></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 电源 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux技巧【持续更新】</title>
+      <link href="/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html"/>
+      <url>/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>若您有任何技术问题，可以通过本站展示的联系方式咨询我</p></blockquote><span id="more"></span><h2 id="Linux查看硬盘SN"><a href="#Linux查看硬盘SN" class="headerlink" title="Linux查看硬盘SN"></a>Linux查看硬盘SN</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将<span class="comment">#替换为你对应的硬盘号 如sda</span></span></span><br><span class="line">lsblk --nodeps -no serial /dev/sd*</span><br></pre></td></tr></table></figure><h2 id="Linux解除文件、目录占用"><a href="#Linux解除文件、目录占用" class="headerlink" title="Linux解除文件、目录占用"></a>Linux解除文件、目录占用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用该命令查看占用文件、文件夹的程序<span class="built_in">id</span></span></span><br><span class="line">fuser -cu /你要查询的文件或目录</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例</span></span><br><span class="line">fuser -cu docker-application/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我的输出结果</span></span><br><span class="line">/mnt/TEST/docker-application: 16676m(root) 16702m(root)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中16676m(root)和16702m(root)便是表明该目录由<span class="built_in">id</span>为16676和16702的进程占用</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用<span class="built_in">kill</span> <span class="built_in">id</span>杀死进程后便可删除或使用mount -f强制卸载</span></span><br></pre></td></tr></table></figure><h2 id="Linux使用iostat查看磁盘io信息"><a href="#Linux使用iostat查看磁盘io信息" class="headerlink" title="Linux使用iostat查看磁盘io信息"></a>Linux使用iostat查看磁盘io信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用iostat可以查看简要的磁盘io信息</span></span><br><span class="line">iostat</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在此列出部分iostat参数:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-c 查看CPU信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-d 仅显示磁盘信息,默认是显示CPU和磁盘信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-x 显示详细信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-k或-m分别是以KB/MB为显示单位</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-p显示磁盘及其分区的信息</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">演示实例</span></span><br><span class="line">iostat -x -m 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">输出结果为每1秒刷新一次以MB为单位的详细信息,一直刷新</span></span><br><span class="line">avg-cpu:  %user   %nice %system %iowait  %steal   %idle</span><br><span class="line">           1.12    1.12   20.66    5.81    0.00   71.29</span><br><span class="line"></span><br><span class="line">Device            r/s     rMB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wMB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dMB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util</span><br><span class="line">dm-0             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-1             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-2             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-3             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">dm-4             0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md123            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md124            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md125            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md126            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">md127            0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">nvme0n1          7.00      0.02     0.00   0.00    6.14     3.43  120.00      1.32     0.00   0.00    1.31    11.30    0.00      0.00     0.00   0.00    0.00     0.00    2.00    2.50    0.21   9.20</span><br><span class="line">sda              2.00      0.00     0.00   0.00   38.00     0.00  920.00     32.91     2.00   0.22    0.52    36.63    0.00      0.00     0.00   0.00    0.00     0.00    2.00   38.50    0.63  63.60</span><br><span class="line">sdb              3.00      0.00     0.00   0.00   35.33     1.33  964.00     34.25     3.00   0.31    0.37    36.38    0.00      0.00     0.00   0.00    0.00     0.00    2.00   38.00    0.54  61.20</span><br><span class="line">sdc              2.00      0.00     0.00   0.00   42.00     0.00  883.00     34.25     3.00   0.34    0.82    39.72    0.00      0.00     0.00   0.00    0.00     0.00    2.00   42.00    0.89  71.20</span><br><span class="line">sdd              2.00      0.00     0.00   0.00   39.50     0.00  956.00     34.21     2.00   0.21    0.36    36.65    0.00      0.00     0.00   0.00    0.00     0.00    2.00   39.00    0.50  59.20</span><br><span class="line">sde              3.00      0.00     0.00   0.00   36.00     1.33  780.00     34.26     1.00   0.13    0.43    44.98    0.00      0.00     0.00   0.00    0.00     0.00    2.00   44.50    0.53  61.20</span><br><span class="line">sdf              2.00      0.00     0.00   0.00   29.50     0.00  772.00     34.21     2.00   0.26    0.44    45.37    0.00      0.00     0.00   0.00    0.00     0.00    2.00   30.00    0.46  58.80</span><br><span class="line">sdg              3.00      0.00     0.00   0.00   22.00     1.33  773.00     34.21     2.00   0.26    0.43    45.31    0.00      0.00     0.00   0.00    0.00     0.00    2.00   33.00    0.46  58.00</span><br><span class="line">sdh              2.00      0.00     0.00   0.00   49.50     0.00  738.00     33.76     3.00   0.40    0.66    46.85    0.00      0.00     0.00   0.00    0.00     0.00    2.00   49.50    0.68  64.80</span><br><span class="line">sdi              3.00      0.00     0.00   0.00   31.33     1.33  680.00     34.21     2.00   0.29    0.86    51.52    0.00      0.00     0.00   0.00    0.00     0.00    2.00   47.00    0.77  66.80</span><br><span class="line">sdj              2.00      0.00     0.00   0.00   44.50     0.00  801.00     34.25     1.00   0.12    0.43    43.79    0.00      0.00     0.00   0.00    0.00     0.00    2.00   44.00    0.52  61.20</span><br><span class="line">sdk              2.00      0.00     0.00   0.00   49.00     0.00  675.00     33.88     3.00   0.44    1.00    51.39    0.00      0.00     0.00   0.00    0.00     0.00    2.00   49.00    0.87  71.20</span><br><span class="line">sdl              2.00      0.00     0.00   0.00   38.50     0.00  697.00     34.62     1.00   0.14    1.20    50.87    0.00      0.00     0.00   0.00    0.00     0.00    2.00   38.50    0.99  76.40</span><br><span class="line">sdm              0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line">sr0              0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中1代表刷新频率,1秒,3代表次数,刷新3次,如果不填写3,则为一直刷新</span></span><br><span class="line">iostat -x -m 1 3</span><br></pre></td></tr></table></figure><h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><table><thead><tr><th>参数</th><th>释义</th></tr></thead><tbody><tr><td>-c</td><td>显示CPU利用率报告</td></tr><tr><td>–compact</td><td>不要将“设备利用率报告”拆分为子报告，以便所有指标都显示在一行中</td></tr><tr><td>-d</td><td>显示设备利用率报告</td></tr><tr><td>–dec&#x3D;{ 0 | 1 | 2 }</td><td>指定要使用的小数位数（0到2，默认值为2）</td></tr><tr><td>-f</td><td>官方对该参数的解释略微复杂,烦请查阅<a href="https://manpages.debian.org/testing/sysstat/iostat.1.en.html#f">官方文档</a></td></tr><tr><td>-g</td><td>将所有设备汇总显示,-g参数后面填group_name</td></tr><tr><td>-H</td><td>此选项必须与选项-g一起使用，并指示只显示组的全局统计信息，而不显示组中单个设备的统计信息</td></tr><tr><td>-h</td><td>该选项将输出结果分类显示,便于阅读</td></tr><tr><td>–human</td><td>以人类可读格式打印大小（例如1.0k、1.2M等）。使用此选项显示的单位将取代与度量相关的任何其他默认单位（例如千字节、扇区…）</td></tr><tr><td>-j</td><td>在参数后跟(ID&#x2F;LABEL&#x2F;PATH&#x2F;UUID)等,以替换原&#x2F;dev&#x2F;sd*的显示,<a href="https://manpages.debian.org/testing/sysstat/iostat.1.en.html#j">官方文档</a></td></tr><tr><td>-k</td><td>以KB为单位进行显示</td></tr><tr><td>-m</td><td>以MB为单位进行显示</td></tr><tr><td>-N</td><td>显示任何设备映射器设备的注册设备映射器名称。用于查看LVM2统计信息</td></tr><tr><td>-o JSON</td><td>以json格式输出结果</td></tr><tr><td>-p</td><td>显示磁盘及其分区信息,可以在后跟指定磁盘以显示单个磁盘的分区信息</td></tr><tr><td>–pretty</td><td>将报告以更易于阅读的方式显示,同–human</td></tr><tr><td>-s</td><td>显示报告的短（窄）版本，该版本应适合80个字符宽的屏幕</td></tr><tr><td>-t</td><td>打印显示的每个报告的时间。时间戳格式可能取决于S_TIME_format环境变量的值</td></tr><tr><td>-V</td><td>打印iostat版本号</td></tr><tr><td>-x</td><td>显示扩展统计信息</td></tr><tr><td>-y</td><td>如果在给定的时间间隔内显示多个记录，则省略系统启动后的第一个统计报告</td></tr><tr><td>-z</td><td>告诉iostat忽略在采样期间没有活动的任何设备的输出</td></tr></tbody></table><h3 id="输出结果参数解读"><a href="#输出结果参数解读" class="headerlink" title="输出结果参数解读"></a>输出结果参数解读</h3><table><thead><tr><th>参数</th><th>释义</th></tr></thead><tbody><tr><td>%user</td><td>显示在用户级别（应用程序）执行时发生的 CPU 使用率百分比</td></tr><tr><td>%nice</td><td>显示在具有良好优先级的用户级别执行时发生的 CPU 使用率百分比</td></tr><tr><td>%system</td><td>显示在系统级别（内核）执行时发生的 CPU 使用率百分比</td></tr><tr><td>%iowait</td><td>显示系统有未完成的磁盘 I&#x2F;O 请求期间 CPU 或 CPU 空闲的时间百分比</td></tr><tr><td>%steal</td><td>显示虚拟机管理程序为另一个虚拟处理器提供服务时虚拟 CPU 或 CPU 非自愿等待所花费的时间百分比</td></tr><tr><td>%idle</td><td>显示 CPU 或 CPU 空闲且系统没有未完成的磁盘 I&#x2F;O 请求的时间百分比</td></tr><tr><td>r&#x2F;s</td><td>设备每秒完成的读取请求数（合并后）</td></tr><tr><td>rMB&#x2F;s</td><td>每秒读字节数,单位随参数-k&#x2F;-m分别对应KB和MB</td></tr><tr><td>rrqm&#x2F;s</td><td>每秒合并到设备队列的读取请求数</td></tr><tr><td>%rrqm</td><td>在发送到设备之前合并在一起的读取请求的百分比</td></tr><tr><td>r_await</td><td>平均每次设备读I&#x2F;O操作的等待时间 (毫秒)</td></tr><tr><td>rareq-sz</td><td>向设备发出的读取请求的平均大小（以KB为单位）</td></tr><tr><td>w&#x2F;s</td><td>设备每秒完成的写入请求数（合并后）</td></tr><tr><td>wMB&#x2F;s</td><td>每秒写字节数,单位随参数-k&#x2F;-m分别对应KB和MB</td></tr><tr><td>wrqm&#x2F;s</td><td>每秒合并到设备队列的写入请求数</td></tr><tr><td>%wrqm</td><td>在发送到设备之前合并在一起的写入请求的百分比</td></tr><tr><td>w_await</td><td>平均每次设备写I&#x2F;O操作的等待时间 (毫秒)</td></tr><tr><td>wareq-sz</td><td>向设备发出的写入请求的平均大小（以KB为单位）</td></tr><tr><td>d&#x2F;s</td><td>设备每秒完成的丢弃请求数（合并后）</td></tr><tr><td>dMB&#x2F;s</td><td>每秒为设备丢弃的扇区数,单位随参数-k&#x2F;-m分别对应KB和MB</td></tr><tr><td>drqm&#x2F;s</td><td>每秒排队到设备的合并丢弃请求数</td></tr><tr><td>%drqm</td><td>在发送到设备之前合并在一起的丢弃请求的百分比</td></tr><tr><td>d_await</td><td>向要服务的设备发出的丢弃请求的平均时间（以毫秒为单位）。这包括队列中的请求所花费的时间以及为它们提供服务所花费的</td></tr><tr><td>dareq-sz</td><td>向设备发出的丢弃请求的平均大小（以KB为单位）</td></tr><tr><td>f&#x2F;s</td><td>设备每秒完成的刷新请求数（合并后）。这对磁盘执行的刷新请求进行计数。不跟踪分区的刷新请求。在合并之前，刷新操作算作写入操作</td></tr><tr><td>f_await</td><td>向要服务的设备发出刷新请求的平均时间（以毫秒为单位）。块层合并刷新请求并且一次最多执行一个。因此刷新操作可能是两倍长：等待当前刷新请求，然后执行它，然后等待下一个</td></tr><tr><td>aqu-sz</td><td>向设备发出的请求的平均队列长度,在以前的版本中,此字段称为 avgqu-sz</td></tr><tr><td>%util</td><td>向设备发出 I&#x2F;O 请求所用时间的百分比（设备的带宽利用率）。对于串行服务请求的设备，当此值接近 100% 时，就会发生设备饱和。但对于并行处理请求的设备，例如 RAID 阵列和现代 SSD，这个数字并不反映它们的性能限制</td></tr></tbody></table><blockquote><p>%iowait的值过高,表示硬盘存在I&#x2F;O瓶颈<br>%idle值高,表示CPU较空闲<br>%idle值高但系统响应慢时,有可能是CPU等待分配内存,此时应加大内存容量<br>%idle值如果持续低于10,那么系统的CPU处理能力相对较低,表明系统中最需要解决的资源是CPU<br>%util 接近 100%，说明产生的I&#x2F;O请求太多，I&#x2F;O系统已经满负荷，该磁盘可能存在瓶颈</p><p>该文章内容参考<a href="https://manpages.debian.org/testing/sysstat/iostat.1.en.html">iostat官方文档https://manpages.debian.org/testing/sysstat/iostat.1.en.html</a></p></blockquote><h2 id="fio测试工具详细教程"><a href="#fio测试工具详细教程" class="headerlink" title="fio测试工具详细教程"></a>fio测试工具详细教程</h2><blockquote><p>待完善,先临时记录一条</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fio -name=stress_disk -filename=/mnt/DATA/test/a -size=30T -runtime=240h -bs=1m -direct=1 -rw=randrw -ioengine=libaio -numjobs=12 -group_reporting -iodepth=8 -rwmixwrite=50</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中name是本次测试任务的名称</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">filename则为指定测试目录和文件名</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">size则为指定测试文件大小,此处为30T,无论运行多久,该测试文件a都不会超过30T</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">runtime为指定运行时间,240h则为240小时,单位可以为秒s分m时h</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">bs为块大小,顺序读写通常为1m,4k则填写4k即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">direct有0和1选项,0为使用文件系统缓存,1则为直接操作磁盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rw可选的参数有<span class="built_in">read</span>/write/rw/randread/randwrite/randrw,分别为读/写/读写/随机读/随机写/随机读写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ioengine IO测试引擎,在linux下选择libaio即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">numjobs线程数,一般设置为硬盘数量,根据实际需要自行调整</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">group_reporting合并报告,将性能测试结果合并汇报,显示所有硬盘性能测试的总结果</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">iodepth IO队列深度,指定IO队列深度,提高每次请求的IO数量</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rwmixwrite/rwmixread 这两个参数都可以指定,按百分比指定,如rwmixwrite=30则表示写占比30%,只需使用其中一个即可,无需同时指定两个参数</span></span><br></pre></td></tr></table></figure><h2 id="Linux-NFS挂载及使用systemctl自动挂载"><a href="#Linux-NFS挂载及使用systemctl自动挂载" class="headerlink" title="Linux NFS挂载及使用systemctl自动挂载"></a>Linux NFS挂载及使用systemctl自动挂载</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">NFS挂载基础命令及其作用</span></span><br><span class="line">mount -t nfs -o vers=3,rw,hard,sync 10.0.0.100:/mnt/TEST/nfs /mnt/100nfs</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mount linux挂载命令</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-t nfs 指定挂载协议为nfs -o也就是options，选项的意思</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">vers=3 指定NFS版本，NFSv3</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rw 读写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">hard硬链接</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">补充：soft为软连接，二者的特点是硬链接保障数据安全但需要持续等待服务器响应，软连接的特点是快速响应但如果服务器断开则可能导致数据损坏或丢失</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">简单来说，硬链接适合网络环境较差或数据安全要求严格的场景，软连接适合网络稳定需要快速响应的场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">【技术是严谨的，如果我的解释有误烦请立刻指正，十分感谢！】</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">sync</span>，同步写入，写入到磁盘，IO响应较慢但数据安全，async，异步写入，IO响应快，数据安全性低，类似RAID write back</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数指定完成后便是服务器路径和本地路径，格式为 服务器地址:路径 本地路径，如 example:/example /example</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用systemctl管理nfs挂载</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建nfs.service文件【我的环境为Debian 11.6，该文件放在/usr/lib/systemd/system/下】</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=auto mount nfs</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/mount -t nfs -o vers=3,rw,hard,sync 192.168.0.142:/mnt/data /data</span><br><span class="line">Restart=no</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">挂载nfs</span></span><br><span class="line">systemctl start nfs.service</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开机自动挂载</span></span><br><span class="line">systemctl enable nfs.service</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>生活常识</category>
+          
+          <category> 知识库 </category>
+          
       </categories>
-      <tags>
-        <tag>智能门锁</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何在家庭环境下去除甲醛，以及甲醛的科普知识</title>
-    <url>/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%B6%E5%BA%AD%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%8E%BB%E9%99%A4%E7%94%B2%E9%86%9B%EF%BC%8C%E4%BB%A5%E5%8F%8A%E7%94%B2%E9%86%9B%E7%9A%84%E7%A7%91%E6%99%AE%E7%9F%A5%E8%AF%86.html</url>
-    <content><![CDATA[<h1 id="结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷"><a href="#结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷" class="headerlink" title="结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷"></a>结论写在前面，先告诉你怎么去除甲醛最有效最省钱最快捷</h1><ol>
-<li>通风，是的，就是通风，甲醛是气体，通风，吹走了，这就搞定了啊，就是这么简单</li>
-<li>植物净化，除了通风之外，植物净化空气是最省心、省钱、省时的，推荐植物：波士顿蕨类植物【淘宝价格20以内，均价10元左右】</li>
-<li>活性炭净化，活性炭的净化能力不必再过多赘述，干燥低温情况下，活性炭吸附能力增加，气流速率低【无风】时，活性炭接触甲醛时间更长，吸附效果更好，活性炭粒径越小，相等重量下接触面积越大，以及孔洞越多的同样接触面越大，简而言之，小颗粒，多孔活性炭。</li>
-</ol>
-<p><strong>总结：</p>
-<ol>
-<li>打开门窗</li>
-<li>每个房间摆上适量的波蕨【美观即可，波蕨是持续净化空气（包括甲醛），是长期使用】</li>
-<li>将小颗粒多孔活性炭放置到空气不易流通的地方，且需要保持活性炭低温干燥。</strong></li>
-</ol>
-<blockquote>
-<p>最近太太太忙了，详情及科普内容空了补充…</p>
-</blockquote>
-<span id="more"></span>]]></content>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>常见SAS线缆</title>
+      <link href="/%E5%B8%B8%E8%A7%81SAS%E7%BA%BF%E7%BC%86.html"/>
+      <url>/%E5%B8%B8%E8%A7%81SAS%E7%BA%BF%E7%BC%86.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="常见的三种SAS线缆"><a href="#常见的三种SAS线缆" class="headerlink" title="常见的三种SAS线缆"></a>常见的三种SAS线缆</h2><span id="more"></span><h2 id="SFF-8643-amp-INI-SAS-HD"><a href="#SFF-8643-amp-INI-SAS-HD" class="headerlink" title="SFF-8643 &amp; INI SAS HD"></a>SFF-8643 &amp; INI SAS HD</h2><p><img src="https://img.1949hacker.cn/2022-10-25-10-45-40.png" alt="2022-10-25-10-45-40"></p><h2 id="SFF-8087-amp-MINI-SAS"><a href="#SFF-8087-amp-MINI-SAS" class="headerlink" title="SFF-8087 &amp; MINI SAS"></a>SFF-8087 &amp; MINI SAS</h2><p><img src="https://img.1949hacker.cn/2022-10-25-10-46-10.png" alt="2022-10-25-10-46-10"></p><h2 id="SFF-8654-amp-SLIM-SAS"><a href="#SFF-8654-amp-SLIM-SAS" class="headerlink" title="SFF-8654 &amp; SLIM SAS"></a>SFF-8654 &amp; SLIM SAS</h2><p><img src="https://img.1949hacker.cn/2022-10-25-10-44-50.png" alt="2022-10-25-10-44-50"></p>]]></content>
+      
+      
       <categories>
-        <category>生活常识</category>
+          
+          <category> 知识库 </category>
+          
       </categories>
-      <tags>
-        <tag>空气净化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>记录初学Python开发fio测试工具</title>
-    <url>/%E8%AE%B0%E5%BD%95%E5%88%9D%E5%AD%A6Python%E5%BC%80%E5%8F%91fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.html</url>
-    <content><![CDATA[<h1 id="使用Python自动测试IOPS性能并格式化输出"><a href="#使用Python自动测试IOPS性能并格式化输出" class="headerlink" title="使用Python自动测试IOPS性能并格式化输出"></a>使用Python自动测试IOPS性能并格式化输出</h1><blockquote>
-<p>代码过多,请点击<strong>阅读全文</strong>查看</p>
-</blockquote>
-<span id="more"></span>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="keyword">import</span> subprocess, re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机写</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randwrite</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机写进行中...&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="comment"># TODO 根据测试表自行修改cmd中参数</span></span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=5s&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-numjobs=12&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-filename=/data/<span class="subst">&#123;i&#125;</span>&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 将每次运行结果保存到列表</span></span><br><span class="line">            bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">            bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">            bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">            iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">            iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">            iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    bwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    bwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    bwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;随机写均值如下:\n带宽最小值:<span class="subst">&#123;bwMin&#125;</span>,最大值<span class="subst">&#123;bwMax&#125;</span>,均值<span class="subst">&#123;bwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;iopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;iopsMax&#125;</span>,均值<span class="subst">&#123;iopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建读文件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_readFile</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;初始化读测试环境,至少需要,等待...&quot;</span>)</span><br><span class="line">    cmd = [</span><br><span class="line">        <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-name=create_read&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;-size=32G&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;-bs=1M&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;-rw=write&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;-numjobs=12&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-filename=/data/read&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line">    create = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">    done = create.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机读</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randread</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机读进行中...&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="comment"># TODO 根据测试表自行修改cmd中参数</span></span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=5s&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-numjobs=12&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-filename=/data/read&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 将每次运行结果保存到列表</span></span><br><span class="line">            bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">            bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">            bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">            iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">            iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">            iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    bwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    bwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    bwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;随机读均值如下:\n带宽最小值:<span class="subst">&#123;bwMin&#125;</span>,最大值<span class="subst">&#123;bwMax&#125;</span>,均值<span class="subst">&#123;bwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;iopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;iopsMax&#125;</span>,均值<span class="subst">&#123;iopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机读写</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randrw</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机读写进行中...&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="comment"># TODO 根据测试表自行修改cmd中参数</span></span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=5s&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-numjobs=12&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-filename=/data/read&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rwmixwrite=30&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 将每次运行结果保存到列表</span></span><br><span class="line">            bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]  <span class="comment"># Rbw Min</span></span><br><span class="line">            bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]  <span class="comment"># Rbw Max</span></span><br><span class="line">            bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]  <span class="comment"># Rbw Avg</span></span><br><span class="line">            bw[<span class="number">3</span>] += iops_num[<span class="number">0</span>]  <span class="comment"># Riops Min</span></span><br><span class="line">            bw[<span class="number">4</span>] += iops_num[<span class="number">1</span>]  <span class="comment"># Riops Max</span></span><br><span class="line">            bw[<span class="number">5</span>] += iops_num[<span class="number">3</span>]  <span class="comment"># RiopsAvg</span></span><br><span class="line">            iops[<span class="number">0</span>] += bw_num[<span class="number">6</span>]  <span class="comment"># Wbw Min</span></span><br><span class="line">            iops[<span class="number">1</span>] += iops_num[<span class="number">7</span>]  <span class="comment"># Wbw Max</span></span><br><span class="line">            iops[<span class="number">2</span>] += iops_num[<span class="number">8</span>]  <span class="comment"># Wbw Avg</span></span><br><span class="line">            iops[<span class="number">3</span>] += iops_num[<span class="number">6</span>]  <span class="comment"># Wiops Min</span></span><br><span class="line">            iops[<span class="number">4</span>] += iops_num[<span class="number">7</span>]  <span class="comment"># Wiops Max</span></span><br><span class="line">            iops[<span class="number">5</span>] += iops_num[<span class="number">8</span>]  <span class="comment"># Wiops Avg</span></span><br><span class="line"></span><br><span class="line">    RbwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    RbwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    RbwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsMin = <span class="built_in">int</span>(iops[<span class="number">3</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsMax = <span class="built_in">int</span>(iops[<span class="number">4</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsAvg = <span class="built_in">int</span>(iops[<span class="number">5</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwMin = <span class="built_in">int</span>(bw[<span class="number">3</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwMax = <span class="built_in">int</span>(bw[<span class="number">4</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwAvg = <span class="built_in">int</span>(bw[<span class="number">5</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;随机读写均值如下:\n&quot;</span></span><br><span class="line">        <span class="string">f&quot;读:\n带宽最小值:<span class="subst">&#123;RbwMin&#125;</span>,最大值<span class="subst">&#123;RbwMax&#125;</span>,均值<span class="subst">&#123;RbwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;RiopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;RiopsMax&#125;</span>,均值<span class="subst">&#123;RiopsAvg&#125;</span>&quot;</span></span><br><span class="line">        <span class="string">&quot;\n&quot;</span></span><br><span class="line">        <span class="string">f&quot;写:\n带宽最小值:<span class="subst">&#123;WbwMin&#125;</span>,最大值<span class="subst">&#123;WbwMax&#125;</span>,均值<span class="subst">&#123;WbwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;WiopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;WiopsMax&#125;</span>,均值<span class="subst">&#123;WiopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rm_file</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请等待程序清除测试残留文件...&quot;</span>)</span><br><span class="line">    rm = subprocess.Popen(<span class="string">&quot;rm&quot;</span>, <span class="string">&quot;-rf&quot;</span>, <span class="string">&quot;/data/*&quot;</span>, shell=<span class="literal">False</span>)</span><br><span class="line">    rm_done = rm.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;清除完毕,程序结束!&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    create_readFile()</span><br><span class="line">    randwrite()</span><br><span class="line">    randread()</span><br><span class="line">    randrw()</span><br><span class="line">    rm_file()</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+        <tags>
+            
+            <tag> SAS线缆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vscode编写markdown的插件推荐</title>
+      <link href="/vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90.html"/>
+      <url>/vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="使用-VScode-编写-Markdown-的插件推荐及其技巧"><a href="#使用-VScode-编写-Markdown-的插件推荐及其技巧" class="headerlink" title="使用 VScode 编写 Markdown 的插件推荐及其技巧"></a>使用 VScode 编写 Markdown 的插件推荐及其技巧</h1><span id="more"></span><h2 id="Markdown-插件推荐"><a href="#Markdown-插件推荐" class="headerlink" title="Markdown 插件推荐"></a>Markdown 插件推荐</h2><ul><li>Markdown Preview Enhanced</li><li>Markdown PDF</li><li>LaTeX Workshop</li><li>Paste Image</li><li>Markdown All in One</li></ul><h2 id="Markdown-插件详细介绍"><a href="#Markdown-插件详细介绍" class="headerlink" title="Markdown 插件详细介绍"></a>Markdown 插件详细介绍</h2><h3 id="Markdown-Preview-Enhanced"><a href="#Markdown-Preview-Enhanced" class="headerlink" title="Markdown Preview Enhanced"></a>Markdown Preview Enhanced</h3><p>该插件可以对 Markdown 源码进行实时渲染预览，通过配置插件的</p><blockquote><p>Markdown-preview-enhanced: Automatically Show Preview Of Markdown Being Edited</p><ul><li><input checked="" disabled="" type="checkbox"> Automatically show preview of markdown being edited.</li></ul></blockquote><p>可以实现点击 md 文件编辑的同时自动打开实时渲染界面</p><p><img src="https://img.1949hacker.cn//2022-10-14-16-18-21.png" alt="2022-10-14-16-18-21"></p><h3 id="Markdown-PDF"><a href="#Markdown-PDF" class="headerlink" title="Markdown PDF"></a>Markdown PDF</h3><p>该插件可以将 md 文件转换为<strong>pdf、html、png、jpeg</strong>四种格式，配合 vscode 快捷键<code>Ctrl+Shift+P</code>并输入<code>&gt;export (pdf)</code>后回车即可将当前打开的 md 文件转换为 PDF 格式，替换<code>(pdf)</code>中的<code>pdf</code>为<code>html、png、jpeg</code>其中任意一种，即可导出对应的格式<br>使用<code>&gt;export (all: pdf,html,png,jpeg)</code>可以一次性导出为 4 种格式</p><h3 id="LaTeX-Workshop"><a href="#LaTeX-Workshop" class="headerlink" title="LaTeX Workshop"></a>LaTeX Workshop</h3><p>该插件可以使 vscode 支持 latex 数学公式代码<br>示例如下：</p><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line">M =</span><br><span class="line"><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1 <span class="built_in">&amp;</span> 0 <span class="keyword">\\</span></span><br><span class="line">0 <span class="built_in">&amp;</span> 1</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1 <span class="built_in">&amp;</span> 0 <span class="keyword">\\</span></span><br><span class="line">0 <span class="built_in">&amp;</span> 1</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure><p>LaTeX 语法可以自行搜索，此处给出一条参考链接：<a href="http://www.uinio.com/Math/LaTex/">LaTeX 语法</a></p><h3 id="Paste-Image"><a href="#Paste-Image" class="headerlink" title="Paste Image"></a>Paste Image</h3><p>使用 Paste Image 可以快速将粘贴板中的图片粘贴到 Markdown 源码中，快捷键是<code>Ctrl+Shift+V</code><br>示例：</p><p><img src="https://img.1949hacker.cn//2022-10-14-16-37-29.png" alt="2022-10-14-16-37-29"></p><p>Paste Image 默认会将图片复制到当前 md 文件所在目录，并根据<strong>年月日时分秒</strong>自动命名，可以在 vscode 设置中找到 paste image 的配置参数进行修改<br>图片自动复制的目录参数为：</p><p><img src="https://img.1949hacker.cn//2022-10-14-16-42-28.png" alt="2022-10-14-16-42-28"></p><p>其中<code>$&#123;currentFileDir&#125;</code>为当前 md 文件所在目录，可以修改为项目根目录<code>$&#123;projectRoot&#125;</code>，还可在二者后面跟上<code>\</code>，如<code>$&#123;currentFileDir&#125;/md_img</code>，则会将图片复制到当前 md 文件所在目录下的<strong>md_img</strong>目录，若没有<strong>md_img</strong>目录则自动创建</p><p><strong>修改图片保存路径后需要修改<code>Paste Image: Prefix</code>，以便路径可以正常匹配</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Paste Image: Prefix</span><br><span class="line">The string prepend to the resolved image path before paste.</span><br></pre></td></tr></table></figure><p>如上文示例，将图片目录自定义为当前目录中<code>/md_img</code>文件夹，那么此处需修改为：</p><p><img src="https://img.1949hacker.cn//20221027132513.png" alt="20221027132513"></p><p>当使用<code>Ctrl+Shift+V</code>粘贴后，图片路径会自动设定为<code>md_img/图片名称</code></p><p>图片自动命名的参数为：</p><p><img src="https://img.1949hacker.cn//2022-10-14-16-45-50.png" alt="2022-10-14-16-45-50"></p><p>其中<code>Y-MM-DD-HH-mm-ss</code>为<strong>年-月-日-时-分-秒</strong>，该参数采用的是<strong>Moment.js</strong><br><a href="https://momentjs.com/#/displaying/format">Moment.js 语法教程</a></p><h3 id="Markdown-All-in-One"><a href="#Markdown-All-in-One" class="headerlink" title="Markdown All in One"></a>Markdown All in One</h3><p>该插件可以使vscode自动补全markdown语法，如使用<code>- 无序列表</code>时，回车将在下一行自动补全<code>- </code><br>示例如图：</p><p><img src="https://img.1949hacker.cn//2022-10-14-16-55-11.png" alt="2022-10-14-16-55-11"></p><p>基于vscode的特点，按下<code>Ctrl+Shift+P</code>调出控制台后，可以使用<strong>maio</strong>的缩写快速筛出本插件的命令，如图：</p><p><img src="https://img.1949hacker.cn//2022-10-14-17-00-34.png" alt="2022-10-14-17-00-34"></p><p><a href="https://markdown-all-in-one.github.io/guide/#features">Markdown All in One官网详细介绍</a></p>]]></content>
+      
+      
       <categories>
-        <category>软件开发</category>
+          
+          <category> 知识库 </category>
+          
       </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> markdown </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
