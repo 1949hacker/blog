@@ -10,6 +10,7 @@ tags:
 # 使用Python自动测试IOPS性能并格式化输出
 
 >代码过多,请点击**阅读全文**查看
+
 <!-- more -->
 
 ```python
@@ -280,5 +281,6 @@ if __name__ == "__main__":
     randwrite()
     randread()
     randrw()
+    rm_file()
 
 ```
