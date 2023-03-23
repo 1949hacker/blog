@@ -113,3 +113,14 @@ lvm的逻辑卷地址位于`/dev/mapper/`下，命名格式为`卷组名-逻辑�
 ![20230301171003](https://img.1949hacker.cn/20230301171003.png)
 
 至此，Debian 磁盘分区及lvm逻辑卷教程完毕，如有疑问，欢迎咨询！
+
+## Debian访问SMB服务器
+
+```shell
+# 安装cifs-utils
+apt install cifs-utils
+# 使用mount进行挂载
+mount -t cifs -o username=$username //$address/$smbname /$mount_point/
+# 示例
+mount -t cifs -o username=user //10.1.1.1/test /smbTest/
+```
