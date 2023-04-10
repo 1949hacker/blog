@@ -23,7 +23,7 @@ TODO:
     注意自行根据盘位修改下列numjobs参数
 """
 
-import subprocess, re
+import subprocess, re, os
 
 
 # 随机写
@@ -45,7 +45,7 @@ def randwrite():
             "-direct=1",
             "-rw=randwrite",
             "-ioengine=libaio",
-            "-numjobs=12",
+            "-numjobs=8",
             "-group_reporting",
             "-iodepth=64",
             f"-filename=/iopsTest/{i}",
@@ -134,7 +134,7 @@ def create_readFile():
         "-direct=1",
         "-rw=write",
         "-ioengine=libaio",
-        "-numjobs=12",
+        "-numjobs=8",
         "-filename=/iopsTest/read",
     ]
     create = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=False)
@@ -160,7 +160,7 @@ def randread():
             "-direct=1",
             "-rw=randwrite",
             "-ioengine=libaio",
-            "-numjobs=12",
+            "-numjobs=8",
             "-group_reporting",
             "-iodepth=64",
             "-filename=/iopsTest/read",
@@ -253,7 +253,7 @@ def randrw():
             "-direct=1",
             "-rw=randrw",
             "-ioengine=libaio",
-            "-numjobs=12",
+            "-numjobs=8",
             "-group_reporting",
             "-iodepth=64",
             "-filename=/iopsTest/read",
@@ -367,17 +367,17 @@ def randrw():
 
 def rm_file():
     print("请等待程序清除测试残留文件...")
-    rm = subprocess.Popen(["rm", "-rf", "/iopsTest/*"], shell=False)
-    rm.wait()
+    rm = os.system("rm -rf /smbTest/*")
     print("清除完毕,程序结束!")
 
 
 if __name__ == "__main__":
     print("欢迎使用群晖测试工具\n本工具测试内容:\n路径挂载模式下IOPS性能测试")
+    rm_file()
     randwrite()
+    rm_file()
     create_readFile()
     randread()
     randrw()
     rm_file()
-
 ```
