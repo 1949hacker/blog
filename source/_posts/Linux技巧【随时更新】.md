@@ -205,3 +205,83 @@ systemctl start nfs.service
 # 开机自动挂载
 systemctl enable nfs.service
 ```
+
+## mdadm管理软RAID阵列
+
+mdadm全称Multiple Disk and Device Administration（多磁盘和设备管理），是一个Linux软件RAID管理工具，可以使用它来创建各种级别的RAID阵列，包括RAID 0、RAID 1、RAID 5、RAID 6等。
+
+### 使用mdadm创建RAID的一般步骤：
+
+1. 安装mdadm软件
+
+在大多数Linux发行版中，mdadm已经预装了，如果没有预装，则可以使用`sudo apt install mdadm`命令进行安装
+
+1. 准备好磁盘分区，推荐使用`parted`进行磁盘分区
+
+2. 创建RAID设备
+
+使用mdadm命令创建RAID设备。例如，以下命令将使用指定的磁盘分区创建一个RAID5设备
+
+```shell
+sudo mdadm --create /dev/md0 --level=5 --raid-devices=3 /dev/sda1 /dev/sdb1 /dev/sdc1
+```
+
+其中，/dev/md0是要创建的RAID设备的名称，自定义为md开头的设备即可，如`md233`等，--level=5指定RAID级别为5（RAID 5），--raid-devices=3指定有3个磁盘参与RAID，/dev/sda1、/dev/sdb1和/dev/sdc1是要组成RAID设备的分区。
+
+4. 格式化RAID设备
+
+创建RAID设备后，需要对其进行格式化，以便可以在其中存储数据。可以使用mkfs命令格式化RAID设备。例如，以下命令将对RAID设备进行ext4格式化：
+
+```shell
+sudo mkfs.ext4 /dev/md0
+```
+
+1. 挂载RAID设备
+
+格式化RAID设备后，需要将其挂载到文件系统中，以便可以访问其中的数据。可以使用mount命令将RAID设备挂载到指定的挂载点。例如，以下命令将RAID设备挂载到/mnt/raid5目录：
+
+```shell
+sudo mount /dev/md0 /mnt/raid5
+```
+
+### 使用mdadm删除RAID的一般步骤：
+
+1. 卸载RAID设备
+
+在删除RAID设备之前，需要先将其从文件系统中卸载。可以使用以下命令卸载挂载在/mnt/raid0目录的RAID设备：
+
+```shell
+sudo umount /mnt/raid5
+```
+
+2. 停用RAID设备
+
+在删除RAID设备之前，需要停用该设备。可以使用以下命令停用RAID设备：
+
+```shell
+sudo mdadm --stop /dev/md0
+```
+
+其中，/dev/md0是要停用的RAID设备的名称。
+
+3. 删除RAID设备
+
+在停用RAID设备之后，可以使用以下命令删除RAID设备：
+
+```shell
+sudo mdadm --remove /dev/md0
+```
+
+其中，/dev/md0是要删除的RAID设备的名称。
+
+4. 清除RAID设备元数据
+
+在删除RAID设备之后，需要清除RAID设备的元数据，以确保在以后不会误认为该设备是RAID设备。可以使用以下命令清除RAID设备的元数据：
+
+```shell
+sudo mdadm --zero-superblock /dev/sda1 /dev/sdb1 /dev/sdc1
+```
+
+其中，/dev/sda1、/dev/sdb1和/dev/sdc1是原始磁盘分区，是用来创建RAID设备的。使用该命令清除元数据可以确保将来使用这些分区时不会出现问题。
+
+以上就是删除mdadm创建的RAID设备的步骤。请注意，在删除RAID设备之前，务必备份其中的数据，以免误删除数据。
