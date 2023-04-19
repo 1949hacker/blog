@@ -124,3 +124,53 @@ mount -t cifs -o username=$username //$address/$smbname /$mount_point/
 # 示例
 mount -t cifs -o username=user //10.1.1.1/test /smbTest/
 ```
+
+## apt下载deb包及其依赖的办法
+
+使用apt install时加上`--download-only`参数即可实现仅下载而不安装的操作，但是下载的deb包默认是在`/var/cache/apt/archives`目录中，可以使用`-o Dir::Cache::archives="/<your dir>"`参数指定缓存路径。
+
+APT包管理器在执行操作时会使用lock文件来确保系统中只有一个进程在使用APT。partial目录则是APT在下载和安装软件包时使用的临时目录。所以你会发现在你指定的目录中有`lock`文件和`partial`目录，删除即可，并无影响。
+
+**鉴于你可能是个像我一样有什么大病的强迫症，所以为你提供了禁用lock和partial的办法**
+
+```shell
+-o APT::Get::Lock_Prohibit=1 # 禁用lock文件
+-o Acquire::Pdiffs::NoDownload=true -o Acquire::AllowDowngradeToInsecureRepositories=true -o Acquire::AllowInsecureRepositories=true -o Acquire::NoCDROM=true -o Acquire::NoVerify=true -o Acquire::Check-Valid-Until=false -o Dir::Etc::TrustedParts="/path/to/trusted/parts" -o Dir::Etc::Trusted=/path/to/trusted/dir # 禁用partial目录
+
+# 是的，看花眼了对吧？↓
+Acquire::Pdiffs::NoDownload=true # 禁用差分包下载
+Acquire::AllowDowngradeToInsecureRepositories=true # 允许使用不安全的APT源
+Acquire::AllowInsecureRepositories=true # 允许使用不安全的APT源
+Acquire::NoCDROM=true # 禁用CD-ROM镜像
+Acquire::NoVerify=true # 禁用APT源的GPG验证
+Acquire::Check-Valid-Until=false # 禁用APT源的有效期检查
+Dir::Etc::TrustedParts="/path/to/trusted/parts" # 设置APT的可信部件目录
+Dir::Etc::Trusted=/path/to/trusted/dir # 设置APT的可信源目录
+
+# 以上操作都是为了避免使用partial目录，这些命令可能会降低APT操作的安全性和可靠性
+# 所以，没什么大病别骚搞，就简单点，下载完了删掉lock和partial即可
+
+# 以下是我下载docker包的命令示范
+apt install -o Dir::Cache::archives="./" --download-only docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+---
+
+**重点！！！**
+
+---
+
+上面的办法其实有个很操蛋的地方，如果你的系统已经安装了这个软件包，那么apt并不会为你下载任何deb包，你需要使用下面的办法进行下载
+
+```shell
+# 将其中的<package-name>替换为你要下载的包，比如nmap
+# 注意！命令中有两处<package-name>
+apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances <package-name> | grep "^\w" | sort -u) <package-name>
+# 以下是我下载vim及其依赖的示例
+apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances vim | grep "^\w" | sort -u) vim
+
+# 其中apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances <package-name>
+# 这个命令将返回一个包含软件包及其所有依赖的列表，不包括推荐的软件包和建议的软件包，以及任何冲突、破坏、替换和增强关系
+# grep "^\w"是过滤掉空行和注释行
+# 然后使用 sort -u 命令去重
+```
