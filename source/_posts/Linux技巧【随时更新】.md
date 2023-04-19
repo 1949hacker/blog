@@ -285,3 +285,19 @@ sudo mdadm --zero-superblock /dev/sda1 /dev/sdb1 /dev/sdc1
 其中，/dev/sda1、/dev/sdb1和/dev/sdc1是原始磁盘分区，是用来创建RAID设备的。使用该命令清除元数据可以确保将来使用这些分区时不会出现问题。
 
 以上就是删除mdadm创建的RAID设备的步骤。请注意，在删除RAID设备之前，务必备份其中的数据，以免误删除数据。
+
+# fstab自动挂载失败导致无法开机的解决办法
+
+首先，fstab的挂载强烈建议使用UUID，可以通过`blkid`命令查询UUID，UUID是不会变的，但是你的sda可能变成sdb，尤其是在iscsi挂载时
+
+通常`fstab`的挂载命令中有一条`default`，改为`nofail`即可。
+```shell
+# 原挂载方式
+/dev/sdc1 /mnt/data xfs default 0 0
+# 修改为nofail，该命令的作用为在挂载时如果失败则不会阻止系统启动。使用UUID挂载
+UUID="4048c1b1-1bde-49ee-8d40-8d437ce32783" /mnt/data xfs nofail 0 0
+```
+
+**注意！修改fstab后强烈建议使用`mount -a`来测试挂载是否正常**
+
+**使用`blkid`查询UUID时，如果你的设备过多，可以指定某个设备或其分区查询，这样还可避免粗心错误挂载了设备本身，例如`blkid /dev/sdc1`这样查询的便是sdc设备的sdc1分区**
