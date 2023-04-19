@@ -439,7 +439,7 @@
 
 <p>其中，&#x2F;dev&#x2F;sda1、&#x2F;dev&#x2F;sdb1和&#x2F;dev&#x2F;sdc1是原始磁盘分区，是用来创建RAID设备的。使用该命令清除元数据可以确保将来使用这些分区时不会出现问题。</p>
 <p>以上就是删除mdadm创建的RAID设备的步骤。请注意，在删除RAID设备之前，务必备份其中的数据，以免误删除数据。</p>
-<h1 id="fstab自动挂载失败导致无法开机的解决办法"><a href="#fstab自动挂载失败导致无法开机的解决办法" class="headerlink" title="fstab自动挂载失败导致无法开机的解决办法"></a>fstab自动挂载失败导致无法开机的解决办法</h1><p>首先，fstab的挂载强烈建议使用UUID，可以通过<code>blkid</code>命令查询UUID，UUID是不会变的，但是你的sda可能变成sdb，尤其是在iscsi挂载时</p>
+<h2 id="fstab自动挂载失败导致无法开机的解决办法"><a href="#fstab自动挂载失败导致无法开机的解决办法" class="headerlink" title="fstab自动挂载失败导致无法开机的解决办法"></a>fstab自动挂载失败导致无法开机的解决办法</h2><p>首先，fstab的挂载强烈建议使用UUID，可以通过<code>blkid</code>命令查询UUID，UUID是不会变的，但是你的sda可能变成sdb，尤其是在iscsi挂载时</p>
 <p>通常<code>fstab</code>的挂载命令中有一条<code>default</code>，改为<code>nofail</code>即可。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">原挂载方式</span></span><br><span class="line">/dev/sdc1 /mnt/data xfs default 0 0</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改为nofail，该命令的作用为在挂载时如果失败则不会阻止系统启动。使用UUID挂载</span></span><br><span class="line">UUID=&quot;4048c1b1-1bde-49ee-8d40-8d437ce32783&quot; /mnt/data xfs nofail 0 0</span><br></pre></td></tr></table></figure>
 

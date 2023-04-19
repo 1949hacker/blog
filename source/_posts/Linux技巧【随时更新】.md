@@ -286,7 +286,7 @@ sudo mdadm --zero-superblock /dev/sda1 /dev/sdb1 /dev/sdc1
 
 以上就是删除mdadm创建的RAID设备的步骤。请注意，在删除RAID设备之前，务必备份其中的数据，以免误删除数据。
 
-# fstab自动挂载失败导致无法开机的解决办法
+## fstab自动挂载失败导致无法开机的解决办法
 
 首先，fstab的挂载强烈建议使用UUID，可以通过`blkid`命令查询UUID，UUID是不会变的，但是你的sda可能变成sdb，尤其是在iscsi挂载时
 
