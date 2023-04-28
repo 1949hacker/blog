@@ -301,3 +301,32 @@ UUID="4048c1b1-1bde-49ee-8d40-8d437ce32783" /mnt/data xfs nofail 0 0
 **注意！修改fstab后强烈建议使用`mount -a`来测试挂载是否正常**
 
 **使用`blkid`查询UUID时，如果你的设备过多，可以指定某个设备或其分区查询，这样还可避免粗心错误挂载了设备本身，例如`blkid /dev/sdc1`这样查询的便是sdc设备的sdc1分区**
+
+## Linux使用stress-ng让CPU始终维持在百分比占用的办法
+
+首先，你需要安装stress-ng，同时，也推荐你使用dstat观察CPU占用率
+这两个软件通过`apt install stress-ng dstat`即可安装
+
+```shell
+stress-ng --cpu <线程数> --cpu-method matrixprod --cpu-load <百分比数字> --matrix-size 400 --timeout 0 --metrics-brief
+# 参数解析
+# --cpu <线程数>是使用多少个线程
+# --cpu-load <百分比数字>是占用率维持在多少
+# 上面这个两个参数需要配合使用，假设你的CPU是4核8线程，想要达到整个CPU50%占用率
+# 则需要设置为--cpu 8 --cpu-load 50或者是--cpu 4 --cpu-load 100，总占用率=线程数*百分比
+# --cpu-method matrixprod 这个选项指定了要使用的 CPU 负载类型，这里设置为 matrixprod，表示使用矩阵乘法来进行负载测试
+# --matrix-size 400 这个选项指定了矩阵乘法中的矩阵大小，这里设置为 400x400，表示要进行 400x400 的矩阵乘法计算
+# --timeout 0表示一直运行，也可设置为秒s分m时h的自定义时间如120s，也可写为2m
+# --metrics-brief 这个选项指定了在结束测试后输出的统计信息，这里设置为 brief，表示只输出简要的统计信息 -- 如果只是单纯为了占用CPU，可以不用这个
+
+# 示例，56核112线程的CPU使其占用维持在64%
+# 可以采用两个方案，控制满载的线程，或者直接设定总负载率
+# 因为我需要其余线程用于测试，所以下面采用的是控制满载线程的方式，使剩余线程空闲
+stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --matrix-size 400 --timeout 0 --metrics-brief
+
+# 补充，因为stress-ng需要使用内存，考虑到你可能需要限制占用的内存量，可以使用以下方式实现
+# 指定--vm-bytes参数，该参数的作用是每个线程能使用的内存大小
+# --vm-bytes参数允许的范围是4KB-256TB，默认似乎是20MB
+# 我修改后的测试代码如下：
+stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --vm-bytes 4K --matrix-size 400 --timeout 0 --metrics-brief
+```
