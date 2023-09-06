@@ -330,3 +330,76 @@ stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --matrix-size 400 --ti
 # 我修改后的测试代码如下：
 stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --vm-bytes 4K --matrix-size 400 --timeout 0 --metrics-brief
 ```
+
+## Linux使用vsftp部署 FTP服务器的办法
+
+第一步，根据你的发行版使用`apt`或`yum`及其他命令，安装`vsftp`软件包
+
+![20230906162643](https://img.1949hacker.cn//20230906162643.png)
+
+第二步，编辑`vsftpd.conf`文件
+
+![20230906162829](https://img.1949hacker.cn//20230906162829.png)
+
+确认以下内容：
+
+|参数|用途|
+|---|---|
+|anonymous_enable=NO|禁止匿名访问|
+|local_enable=YES|允许本地用户登录|
+|write_enable=YES|允许用户上传文件|
+|chroot_local_user=YES|限制用户的根目录为其主目录|
+
+第三步，添加以下行以指定允许登录的用户列表，这里我们创建一个名为`test`的用户
+
+```shell
+userlist_enable=YES
+userlist_file=/etc/vsftpd.userlist
+userlist_deny=NO
+local_root=指定目录
+```
+
+编辑完成后保存退出
+
+![20230906171602](https://img.1949hacker.cn//20230906171602.png)
+
+第四步，创建指定用户，此处以`abc`用户作为演示
+
+使用`useradd abc`创建`abc`用户
+
+**各发行版创建过程并不一致，请以你的发行版为准！**
+
+![20230906171833](https://img.1949hacker.cn//20230906171833.png)
+
+使用`mkdir`命令，创建一个用于ftp的目录
+
+修改该目录所有者及所有组权限为`abc`，并赋予755权限
+
+```shell
+# 因vsftp安全策略原因，用户主目录，也就是/opt/ftp，将无法具备写权限，所以需要创建子目录用于ftp文件传输
+mkdir -p /opt/ftp/data
+#设置abc用户主目录为/opt/ftp/abc
+usermod -d /opt/ftp abc
+#移除abc用户主目录/opt/ftp的写权限，否则无法登录
+chmod a-w /opt/ftp
+#修改目录所有者及所有组
+chown -R abc:abc /opt/ftp/data
+#修改目录权限为755
+chmod -R 755 /opt/ftp/data
+
+#此处/opt/ftp则为上文中local_root=指定目录：local_root=/opt/ftp
+```
+
+根据上文的`userlist_file=/etc/vsftpd.userlist`，在`/etc`目录下创建`vsftpd.userlist`文件并编辑内容
+
+![20230906164114](https://img.1949hacker.cn//20230906164114.png)
+
+输入用户名`abc`退出保存即可，如需添加多个用户，每行一个即可
+
+![20230906171208](https://img.1949hacker.cn//20230906171208.png)
+
+第五步，重启`vsftp`服务
+
+`systemctl restart vsftpd`
+
+![20230906164916](https://img.1949hacker.cn//20230906164916.png)

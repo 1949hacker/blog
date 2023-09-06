@@ -28,11 +28,19 @@
 <meta property="og:site_name" content="1949hacker&#39;s Blog - 探索知识的宇宙">
 <meta property="og:description" content="若您有任何技术问题，可以通过本站展示的联系方式咨询我">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.1949hacker.cn//20230906162643.png">
+<meta property="og:image" content="https://img.1949hacker.cn//20230906162829.png">
+<meta property="og:image" content="https://img.1949hacker.cn//20230906171602.png">
+<meta property="og:image" content="https://img.1949hacker.cn//20230906171833.png">
+<meta property="og:image" content="https://img.1949hacker.cn//20230906164114.png">
+<meta property="og:image" content="https://img.1949hacker.cn//20230906171208.png">
+<meta property="og:image" content="https://img.1949hacker.cn//20230906164916.png">
 <meta property="article:published_time" content="2022-11-17T08:15:48.000Z">
-<meta property="article:modified_time" content="2023-04-23T09:22:02.877Z">
+<meta property="article:modified_time" content="2023-09-06T09:47:17.909Z">
 <meta property="article:author" content="1949hacker">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.1949hacker.cn//20230906162643.png">
 
 
 <link rel="canonical" href="https://1949hacker.cn/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html">
@@ -143,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E6%9F%A5%E7%9C%8B%E7%A1%AC%E7%9B%98SN"><span class="nav-number">1.</span> <span class="nav-text">Linux查看硬盘SN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E8%A7%A3%E9%99%A4%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%8D%A0%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Linux解除文件、目录占用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E4%BD%BF%E7%94%A8iostat%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98io%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">Linux使用iostat查看磁盘io信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.1.</span> <span class="nav-text">参数详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E5%8F%82%E6%95%B0%E8%A7%A3%E8%AF%BB"><span class="nav-number">3.2.</span> <span class="nav-text">输出结果参数解读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">fio测试工具详细教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-NFS%E6%8C%82%E8%BD%BD%E5%8F%8A%E4%BD%BF%E7%94%A8systemctl%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD"><span class="nav-number">5.</span> <span class="nav-text">Linux NFS挂载及使用systemctl自动挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mdadm%E7%AE%A1%E7%90%86%E8%BD%AFRAID%E9%98%B5%E5%88%97"><span class="nav-number">6.</span> <span class="nav-text">mdadm管理软RAID阵列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8mdadm%E5%88%9B%E5%BB%BARAID%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">使用mdadm创建RAID的一般步骤：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8mdadm%E5%88%A0%E9%99%A4RAID%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">6.2.</span> <span class="nav-text">使用mdadm删除RAID的一般步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fstab%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E5%BC%80%E6%9C%BA%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">fstab自动挂载失败导致无法开机的解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E4%BD%BF%E7%94%A8stress-ng%E8%AE%A9CPU%E5%A7%8B%E7%BB%88%E7%BB%B4%E6%8C%81%E5%9C%A8%E7%99%BE%E5%88%86%E6%AF%94%E5%8D%A0%E7%94%A8%E7%9A%84%E5%8A%9E%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">Linux使用stress-ng让CPU始终维持在百分比占用的办法</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E6%9F%A5%E7%9C%8B%E7%A1%AC%E7%9B%98SN"><span class="nav-number">1.</span> <span class="nav-text">Linux查看硬盘SN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E8%A7%A3%E9%99%A4%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E5%8D%A0%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Linux解除文件、目录占用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E4%BD%BF%E7%94%A8iostat%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98io%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">Linux使用iostat查看磁盘io信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.1.</span> <span class="nav-text">参数详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E5%8F%82%E6%95%B0%E8%A7%A3%E8%AF%BB"><span class="nav-number">3.2.</span> <span class="nav-text">输出结果参数解读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">fio测试工具详细教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-NFS%E6%8C%82%E8%BD%BD%E5%8F%8A%E4%BD%BF%E7%94%A8systemctl%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD"><span class="nav-number">5.</span> <span class="nav-text">Linux NFS挂载及使用systemctl自动挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mdadm%E7%AE%A1%E7%90%86%E8%BD%AFRAID%E9%98%B5%E5%88%97"><span class="nav-number">6.</span> <span class="nav-text">mdadm管理软RAID阵列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8mdadm%E5%88%9B%E5%BB%BARAID%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">使用mdadm创建RAID的一般步骤：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8mdadm%E5%88%A0%E9%99%A4RAID%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">6.2.</span> <span class="nav-text">使用mdadm删除RAID的一般步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fstab%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E5%BC%80%E6%9C%BA%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">fstab自动挂载失败导致无法开机的解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E4%BD%BF%E7%94%A8stress-ng%E8%AE%A9CPU%E5%A7%8B%E7%BB%88%E7%BB%B4%E6%8C%81%E5%9C%A8%E7%99%BE%E5%88%86%E6%AF%94%E5%8D%A0%E7%94%A8%E7%9A%84%E5%8A%9E%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">Linux使用stress-ng让CPU始终维持在百分比占用的办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E4%BD%BF%E7%94%A8vsftp%E9%83%A8%E7%BD%B2-FTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%8A%9E%E6%B3%95"><span class="nav-number">9.</span> <span class="nav-text">Linux使用vsftp部署 FTP服务器的办法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -232,7 +240,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-23 17:22:02" itemprop="dateModified" datetime="2023-04-23T17:22:02+08:00">2023-04-23</time>
+      <time title="修改时间：2023-09-06 17:47:17" itemprop="dateModified" datetime="2023-09-06T17:47:17+08:00">2023-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -569,6 +577,57 @@
 <p><strong>使用<code>blkid</code>查询UUID时，如果你的设备过多，可以指定某个设备或其分区查询，这样还可避免粗心错误挂载了设备本身，例如<code>blkid /dev/sdc1</code>这样查询的便是sdc设备的sdc1分区</strong></p>
 <h2 id="Linux使用stress-ng让CPU始终维持在百分比占用的办法"><a href="#Linux使用stress-ng让CPU始终维持在百分比占用的办法" class="headerlink" title="Linux使用stress-ng让CPU始终维持在百分比占用的办法"></a>Linux使用stress-ng让CPU始终维持在百分比占用的办法</h2><p>首先，你需要安装stress-ng，同时，也推荐你使用dstat观察CPU占用率<br>这两个软件通过<code>apt install stress-ng dstat</code>即可安装</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">stress-ng --cpu &lt;线程数&gt; --cpu-method matrixprod --cpu-load &lt;百分比数字&gt; --matrix-size 400 --timeout 0 --metrics-brief</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数解析</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--cpu &lt;线程数&gt;是使用多少个线程</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--cpu-load &lt;百分比数字&gt;是占用率维持在多少</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上面这个两个参数需要配合使用，假设你的CPU是4核8线程，想要达到整个CPU50%占用率</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">则需要设置为--cpu 8 --cpu-load 50或者是--cpu 4 --cpu-load 100，总占用率=线程数*百分比</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--cpu-method matrixprod 这个选项指定了要使用的 CPU 负载类型，这里设置为 matrixprod，表示使用矩阵乘法来进行负载测试</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--matrix-size 400 这个选项指定了矩阵乘法中的矩阵大小，这里设置为 400x400，表示要进行 400x400 的矩阵乘法计算</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--<span class="built_in">timeout</span> 0表示一直运行，也可设置为秒s分m时h的自定义时间如120s，也可写为2m</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--metrics-brief 这个选项指定了在结束测试后输出的统计信息，这里设置为 brief，表示只输出简要的统计信息 -- 如果只是单纯为了占用CPU，可以不用这个</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例，56核112线程的CPU使其占用维持在64%</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以采用两个方案，控制满载的线程，或者直接设定总负载率</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">因为我需要其余线程用于测试，所以下面采用的是控制满载线程的方式，使剩余线程空闲</span></span><br><span class="line">stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --matrix-size 400 --timeout 0 --metrics-brief</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">补充，因为stress-ng需要使用内存，考虑到你可能需要限制占用的内存量，可以使用以下方式实现</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定--vm-bytes参数，该参数的作用是每个线程能使用的内存大小</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--vm-bytes参数允许的范围是4KB-256TB，默认似乎是20MB</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我修改后的测试代码如下：</span></span><br><span class="line">stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --vm-bytes 4K --matrix-size 400 --timeout 0 --metrics-brief</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux使用vsftp部署-FTP服务器的办法"><a href="#Linux使用vsftp部署-FTP服务器的办法" class="headerlink" title="Linux使用vsftp部署 FTP服务器的办法"></a>Linux使用vsftp部署 FTP服务器的办法</h2><p>第一步，根据你的发行版使用<code>apt</code>或<code>yum</code>及其他命令，安装<code>vsftp</code>软件包</p>
+<p><img src="https://img.1949hacker.cn//20230906162643.png" alt="20230906162643"></p>
+<p>第二步，编辑<code>vsftpd.conf</code>文件</p>
+<p><img src="https://img.1949hacker.cn//20230906162829.png" alt="20230906162829"></p>
+<p>确认以下内容：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>anonymous_enable&#x3D;NO</td>
+<td>禁止匿名访问</td>
+</tr>
+<tr>
+<td>local_enable&#x3D;YES</td>
+<td>允许本地用户登录</td>
+</tr>
+<tr>
+<td>write_enable&#x3D;YES</td>
+<td>允许用户上传文件</td>
+</tr>
+<tr>
+<td>chroot_local_user&#x3D;YES</td>
+<td>限制用户的根目录为其主目录</td>
+</tr>
+</tbody></table>
+<p>第三步，添加以下行以指定允许登录的用户列表，这里我们创建一个名为<code>test</code>的用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">userlist_enable=YES</span><br><span class="line">userlist_file=/etc/vsftpd.userlist</span><br><span class="line">userlist_deny=NO</span><br><span class="line">local_root=指定目录</span><br></pre></td></tr></table></figure>
+
+<p>编辑完成后保存退出</p>
+<p><img src="https://img.1949hacker.cn//20230906171602.png" alt="20230906171602"></p>
+<p>第四步，创建指定用户，此处以<code>abc</code>用户作为演示</p>
+<p>使用<code>useradd abc</code>创建<code>abc</code>用户</p>
+<p><strong>各发行版创建过程并不一致，请以你的发行版为准！</strong></p>
+<p><img src="https://img.1949hacker.cn//20230906171833.png" alt="20230906171833"></p>
+<p>使用<code>mkdir</code>命令，创建一个用于ftp的目录</p>
+<p>修改该目录所有者及所有组权限为<code>abc</code>，并赋予755权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">因vsftp安全策略原因，用户主目录，也就是/opt/ftp，将无法具备写权限，所以需要创建子目录用于ftp文件传输</span></span><br><span class="line">mkdir -p /opt/ftp/data</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">设置abc用户主目录为/opt/ftp/abc</span></span><br><span class="line">usermod -d /opt/ftp abc</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">移除abc用户主目录/opt/ftp的写权限，否则无法登录</span></span><br><span class="line">chmod a-w /opt/ftp</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改目录所有者及所有组</span></span><br><span class="line">chown -R abc:abc /opt/ftp/data</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改目录权限为755</span></span><br><span class="line">chmod -R 755 /opt/ftp/data</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">此处/opt/ftp则为上文中local_root=指定目录：local_root=/opt/ftp</span></span><br></pre></td></tr></table></figure>
+
+<p>根据上文的<code>userlist_file=/etc/vsftpd.userlist</code>，在<code>/etc</code>目录下创建<code>vsftpd.userlist</code>文件并编辑内容</p>
+<p><img src="https://img.1949hacker.cn//20230906164114.png" alt="20230906164114"></p>
+<p>输入用户名<code>abc</code>退出保存即可，如需添加多个用户，每行一个即可</p>
+<p><img src="https://img.1949hacker.cn//20230906171208.png" alt="20230906171208"></p>
+<p>第五步，重启<code>vsftp</code>服务</p>
+<p><code>systemctl restart vsftpd</code></p>
+<p><img src="https://img.1949hacker.cn//20230906164916.png" alt="20230906164916"></p>
+
     </div>
 
     
