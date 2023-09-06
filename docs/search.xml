@@ -497,6 +497,12 @@
 <p>第五步，重启<code>vsftp</code>服务</p>
 <p><code>systemctl restart vsftpd</code></p>
 <p><img src="https://img.1949hacker.cn//20230906164916.png" alt="20230906164916"></p>
+<p>如果需要让该ftp用户<code>abc</code>无法登录到系统，仅访问ftp，则按照以下步骤设置</p>
+<p>首先，找到系统中的<code>/etc/base</code>或<code>/etc/shells</code>，通常系统中会同时存在这两个文件，需要分别查看这两个文件，选择有内容的那一个，如图，<code>/etc/bash</code>为空，则该文件无效</p>
+<p><img src="https://img.1949hacker.cn//20230906183203.png" alt="20230906183203"></p>
+<p>编辑有文件的<code>/etc/shells</code>，在文件末尾添加<code>/bin/false</code>后保存退出</p>
+<p><img src="https://img.1949hacker.cn//20230906183254.png" alt="20230906183254"></p>
+<p>随后使用<code>usermod -s /bin/false abc</code>即可使<code>abc</code>用户无法登录到系统，但可正常登录ftp，若ftp依旧无法登录，使用上文中的方式重启<code>vsftp</code>服务即可。</p>
 ]]></content>
       <categories>
         <category>知识库</category>

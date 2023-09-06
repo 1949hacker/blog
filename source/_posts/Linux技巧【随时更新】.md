@@ -403,3 +403,15 @@ chmod -R 755 /opt/ftp/data
 `systemctl restart vsftpd`
 
 ![20230906164916](https://img.1949hacker.cn//20230906164916.png)
+
+如果需要让该ftp用户`abc`无法登录到系统，仅访问ftp，则按照以下步骤设置
+
+首先，找到系统中的`/etc/base`或`/etc/shells`，通常系统中会同时存在这两个文件，需要分别查看这两个文件，选择有内容的那一个，如图，`/etc/bash`为空，则该文件无效
+
+![20230906183203](https://img.1949hacker.cn//20230906183203.png)
+
+编辑有文件的`/etc/shells`，在文件末尾添加`/bin/false`后保存退出
+
+![20230906183254](https://img.1949hacker.cn//20230906183254.png)
+
+随后使用`usermod -s /bin/false abc`即可使`abc`用户无法登录到系统，但可正常登录ftp，若ftp依旧无法登录，使用上文中的方式重启`vsftp`服务即可。
