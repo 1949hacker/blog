@@ -863,7 +863,10 @@
   <entry>
     <title>使用Docker部署vsftpd</title>
     <url>/%E4%BD%BF%E7%94%A8Docker%E9%83%A8%E7%BD%B2vsftpd.html</url>
-    <content><![CDATA[<p>第一步，拉取docker vsftpd映像</p>
+    <content><![CDATA[<p><strong>为避免不同 系统环境导致vsftpd的各种问题，在此强烈建议使用docker进行vsftpd部署！</strong></p>
+<span id="more"></span>
+
+<p>第一步，拉取docker vsftpd映像</p>
 <p><code>docker pull fauria/vsftpd</code></p>
 <p>如果你的环境为离线环境，则采用导入vsftpd映像方案</p>
 <p><a href="http://pan.1949hacker.cn:20080/s/7PHKDK6qdb4Q8Qn/download?path=/docker%20images&files=vsftpd.tar&downloadStartSecret=hzc48g1udq6">点此下载vsftpd映像</a></p>

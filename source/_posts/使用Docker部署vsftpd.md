@@ -7,6 +7,10 @@ tags:
     -   Docker
 ---
 
+**为避免不同 系统环境导致vsftpd的各种问题，在此强烈建议使用docker进行vsftpd部署！**
+
+<!-- more -->
+
 第一步，拉取docker vsftpd映像
 
 `docker pull fauria/vsftpd`
