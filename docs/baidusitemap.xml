@@ -4,7 +4,15 @@
     <loc>https://1949hacker.cn/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html</loc>
     
     <lastmod>
-      2023-09-06
+      2023-09-07
+    </lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url> <url>
+    <loc>https://1949hacker.cn/%E4%BD%BF%E7%94%A8Docker%E9%83%A8%E7%BD%B2vsftpd.html</loc>
+    
+    <lastmod>
+      2023-09-07
     </lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>

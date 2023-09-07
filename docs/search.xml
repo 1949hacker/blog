@@ -448,7 +448,8 @@
 <h2 id="Linux使用stress-ng让CPU始终维持在百分比占用的办法"><a href="#Linux使用stress-ng让CPU始终维持在百分比占用的办法" class="headerlink" title="Linux使用stress-ng让CPU始终维持在百分比占用的办法"></a>Linux使用stress-ng让CPU始终维持在百分比占用的办法</h2><p>首先，你需要安装stress-ng，同时，也推荐你使用dstat观察CPU占用率<br>这两个软件通过<code>apt install stress-ng dstat</code>即可安装</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">stress-ng --cpu &lt;线程数&gt; --cpu-method matrixprod --cpu-load &lt;百分比数字&gt; --matrix-size 400 --timeout 0 --metrics-brief</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数解析</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--cpu &lt;线程数&gt;是使用多少个线程</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--cpu-load &lt;百分比数字&gt;是占用率维持在多少</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上面这个两个参数需要配合使用，假设你的CPU是4核8线程，想要达到整个CPU50%占用率</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">则需要设置为--cpu 8 --cpu-load 50或者是--cpu 4 --cpu-load 100，总占用率=线程数*百分比</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--cpu-method matrixprod 这个选项指定了要使用的 CPU 负载类型，这里设置为 matrixprod，表示使用矩阵乘法来进行负载测试</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--matrix-size 400 这个选项指定了矩阵乘法中的矩阵大小，这里设置为 400x400，表示要进行 400x400 的矩阵乘法计算</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--<span class="built_in">timeout</span> 0表示一直运行，也可设置为秒s分m时h的自定义时间如120s，也可写为2m</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--metrics-brief 这个选项指定了在结束测试后输出的统计信息，这里设置为 brief，表示只输出简要的统计信息 -- 如果只是单纯为了占用CPU，可以不用这个</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例，56核112线程的CPU使其占用维持在64%</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以采用两个方案，控制满载的线程，或者直接设定总负载率</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">因为我需要其余线程用于测试，所以下面采用的是控制满载线程的方式，使剩余线程空闲</span></span><br><span class="line">stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --matrix-size 400 --timeout 0 --metrics-brief</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">补充，因为stress-ng需要使用内存，考虑到你可能需要限制占用的内存量，可以使用以下方式实现</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定--vm-bytes参数，该参数的作用是每个线程能使用的内存大小</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--vm-bytes参数允许的范围是4KB-256TB，默认似乎是20MB</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我修改后的测试代码如下：</span></span><br><span class="line">stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --vm-bytes 4K --matrix-size 400 --timeout 0 --metrics-brief</span><br></pre></td></tr></table></figure>
 
-<h2 id="Linux使用vsftp部署-FTP服务器的办法"><a href="#Linux使用vsftp部署-FTP服务器的办法" class="headerlink" title="Linux使用vsftp部署 FTP服务器的办法"></a>Linux使用vsftp部署 FTP服务器的办法</h2><p>第一步，根据你的发行版使用<code>apt</code>或<code>yum</code>及其他命令，安装<code>vsftp</code>软件包</p>
+<h2 id="Linux使用vsftp部署-FTP服务器的办法"><a href="#Linux使用vsftp部署-FTP服务器的办法" class="headerlink" title="Linux使用vsftp部署 FTP服务器的办法"></a>Linux使用vsftp部署 FTP服务器的办法</h2><hr>
+<h2 id="本站新发布了使用docker部署-vsftpd的方法，推荐使用docker部署，请查看文章《使用Docker部署vsftpd》"><a href="#本站新发布了使用docker部署-vsftpd的方法，推荐使用docker部署，请查看文章《使用Docker部署vsftpd》" class="headerlink" title="本站新发布了使用docker部署 vsftpd的方法，推荐使用docker部署，请查看文章《使用Docker部署vsftpd》"></a><strong>本站新发布了使用docker部署 vsftpd的方法，推荐使用docker部署，请查看文章《使用Docker部署vsftpd》</strong></h2><p>第一步，根据你的发行版使用<code>apt</code>或<code>yum</code>及其他命令，安装<code>vsftp</code>软件包</p>
 <p><img src="https://img.1949hacker.cn//20230906162643.png" alt="20230906162643"></p>
 <p>第二步，编辑<code>vsftpd.conf</code>文件</p>
 <p><img src="https://img.1949hacker.cn//20230906162829.png" alt="20230906162829"></p>
@@ -857,6 +858,27 @@
       <tags>
         <tag>周报生成器</tag>
         <tag>OpenAI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Docker部署vsftpd</title>
+    <url>/%E4%BD%BF%E7%94%A8Docker%E9%83%A8%E7%BD%B2vsftpd.html</url>
+    <content><![CDATA[<p>第一步，拉取docker vsftpd映像</p>
+<p><code>docker pull fauria/vsftpd</code></p>
+<p>如果你的环境为离线环境，则采用导入vsftpd映像方案</p>
+<p><a href="http://pan.1949hacker.cn:20080/s/7PHKDK6qdb4Q8Qn/download?path=/docker%20images&files=vsftpd.tar&downloadStartSecret=hzc48g1udq6">点此下载vsftpd映像</a></p>
+<p>其他资料可访问：<a href="http://pan.1949hacker.cn:20080/s/7PHKDK6qdb4Q8Qn">http://pan.1949hacker.cn:20080/s/7PHKDK6qdb4Q8Qn</a></p>
+<p>将下载的<code>vsftpd.tar</code>导入到你的系统中，使用<code>docker load -i vsftpd.tar</code>将该映像导入</p>
+<p>第二步，使用该映像启动容器</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">首先，创建一个路径用于存放ftp文件</span></span><br><span class="line">mkdir -p 路径</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例</span></span><br><span class="line">mkdir -p /opt/ftp</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">请用你的参数替代&#123;参数&#125;内容</span></span><br><span class="line">docker run -d --name &#123;容器名&#125; -p &#123;主机端口:容器端口&#125; -p &#123;主机端口:容器端口&#125; -p &#123;主机端口:容器端口&#125; -e FTP_USER=&#123;ftp用户名&#125; -e FTP_PASS=&#123;ftp密码&#125; -e PASV_ADDRESS=&#123;服务器地址&#125; -v &#123;主机路径&#125;:/home/vsftpd/&#123;ftp用户名&#125; --restart=always fauria/vsftpd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若无特别需求，仅更改“容器名、ftp用户名、密码、服务器地址”即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例如下</span></span><br><span class="line">docker run -d --name vsftpd-server -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -e FTP_USER=ftptest -e FTP_PASS=123456 -e PASV_ADDRESS=192.168.0.178 -v /opt/ftp:/home/vsftpd/ftptest --restart=always 9bfb39139661</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注：离线环境导入images需要将命令中的fauria/vsftpd替换为images ID 9bfb39139661，如上方示例</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.1949hacker.cn//20230907174353.png" alt="20230907174353"></p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
       </tags>
   </entry>
 </search>
