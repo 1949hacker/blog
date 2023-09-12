@@ -41,4 +41,6 @@ docker run -d --name vsftpd-server -p 20:20 -p 21:21 -p 4559-4564:4559-4564 -e F
 # 注：离线环境导入images需要将命令中的fauria/vsftpd替换为images ID 9bfb39139661，如上方示例
 ```
 
+**docker开机自动运行命令：`systemctl enable docker`**
+
 ![20230907174353](https://img.1949hacker.cn//20230907174353.png)
