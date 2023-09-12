@@ -1,7 +1,7 @@
 ---
 title: 飞腾arm平台使用docker部署vsftpd教程
 categories: [知识库]
-date: 2023-09-07 17:12:38
+date: 2023-09-12 20:50:38
 keywords: vsftpd
 tags:
     -   Docker
@@ -40,7 +40,7 @@ docker run -d --name {容器名} -p 20:20 -p 21:21 -p 4559-4564:4559-4564 -e FTP
 # 示例如下
 docker run -d --name vsftpd-server -p 20:20 -p 21:21 -p 4559-4564:4559-4564 -e FTP_USER=ftptest -e FTP_PASSWORD=123456 -e PASV_ADDRESS=192.168.0.115 -e FTP_REPOSITORY=/opt/ftp -v /opt/ftp:/opt/ftp --restart=always f8044caf3727
 
-# 注：离线环境导入images需要将命令中的fauria/vsftpd替换为images ID 9bfb39139661，如上方示例
+# 注：离线环境导入images需要将命令中的fauria/vsftpd替换为images ID f8044caf3727，如上方示例
 ```
 
 **docker开机自动运行命令：`systemctl enable docker`**
