@@ -13,7 +13,7 @@ tags:
 
 第一步，拉取docker vsftpd映像
 
-`docker pull fauria/vsftpd`
+`docker pull oscarenzo/vsftpd`
 
 如果你的环境为离线环境，则采用导入vsftpd映像方案
 
@@ -32,11 +32,11 @@ mkdir -p 路径
 mkdir -p /opt/ftp
 
 # 请用你的参数替代{参数}内容
-docker run -d --name {容器名} -p {主机端口:容器端口} -p {主机端口:容器端口} -p {主机端口:容器端口} -e FTP_USER={ftp用户名} -e FTP_PASS={ftp密码} -e PASV_ADDRESS={服务器地址} -v {主机路径}:/home/vsftpd/{ftp用户名} --restart=always fauria/vsftpd
+docker run -d --name {容器名} -p 20:20 -p 21:21 -p 4559-4564:4559-4564 -e FTP_USER={ftp用户名} -e FTP_PASSWORD={ftp密码} -e PASV_ADDRESS={服务器地址}  -e FTP_REPOSITORY=/opt/ftp -v {主机FTP目录}:/opt/ftp --restart=always oscarenzo/vsftpd
 
 # 若无特别需求，仅更改“容器名、ftp用户名、密码、服务器地址”即可
 # 示例如下
-docker run -d --name vsftpd-server -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -e FTP_USER=ftptest -e FTP_PASS=123456 -e PASV_ADDRESS=192.168.0.178 -v /opt/ftp:/home/vsftpd/ftptest --restart=always 9bfb39139661
+docker run -d --name vsftpd-server -p 20:20 -p 21:21 -p 4559-4564:4559-4564 -e FTP_USER=ftptest -e FTP_PASSWORD=123456 -e PASV_ADDRESS=192.168.0.115 -e FTP_REPOSITORY=/opt/ftp -v /opt/ftp:/opt/ftp --restart=always d8e46f0dec88
 
 # 注：离线环境导入images需要将命令中的fauria/vsftpd替换为images ID 9bfb39139661，如上方示例
 ```
