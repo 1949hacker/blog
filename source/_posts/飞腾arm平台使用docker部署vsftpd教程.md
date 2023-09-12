@@ -38,9 +38,19 @@ docker run -d --name {容器名} -p 20:20 -p 21:21 -p 4559-4564:4559-4564 -e FTP
 
 # 若无特别需求，仅更改“容器名、ftp用户名、密码、服务器地址”即可
 # 示例如下
-docker run -d --name vsftpd-server -p 20:20 -p 21:21 -p 4559-4564:4559-4564 -e FTP_USER=ftptest -e FTP_PASSWORD=123456 -e PASV_ADDRESS=192.168.0.115 -e FTP_REPOSITORY=/opt/ftp -v /opt/ftp:/opt/ftp --restart=always f8044caf3727
+docker run -d --name vsftpd-server -p 20:20 -p 21:21 -p 4559-4564:4559-4564 -e FTP_USER=ftptest -e FTP_PASSWORD=123456 -e PASV_ADDRESS=192.168.2.254 -e FTP_REPOSITORY=/opt/ftp -v /opt/ftp:/opt/ftp --restart=always f8044caf3727
 
 # 注：离线环境导入images需要将命令中的fauria/vsftpd替换为images ID f8044caf3727，如上方示例
+
+# 上述命令执行后可以使用docker ps查看容器是否运行成功
+# 容器运行成功后修改本机FTP目录权限为777，示例
+
+chmod -R 777 /opt/ftp
+
+# docker开机自动运行命令
+systemctl enable docker
 ```
 
-**docker开机自动运行命令：`systemctl enable docker`**
+完整过程如下图所示，若有任何问题可以通过文末联系方式咨询
+
+![20230912213003](https://img.1949hacker.cn//20230912213003.png)

@@ -334,7 +334,7 @@ stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --vm-bytes 4K --matrix
 ## Linux使用vsftp部署 FTP服务器的办法
 
 ---
-**本站新发布了使用docker部署 vsftpd的方法，推荐使用docker部署，请查看文章《使用Docker部署vsftpd》**
+本站新发布了使用docker部署 vsftpd的方法，推荐使用docker部署，请查看文章《使用Docker部署vsftpd》
 ---
 
 第一步，根据你的发行版使用`apt`或`yum`及其他命令，安装`vsftp`软件包

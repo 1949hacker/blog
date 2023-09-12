@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://1949hacker.cn/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%9E%84%E5%BB%BAarmv8%E5%B9%B3%E5%8F%B0vsftpd-Docker%E9%95%9C%E5%83%8F%E7%9A%84%E8%BF%87%E7%A8%8B.html</loc>
+    
+    <lastmod>2023-09-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://1949hacker.cn/%E9%A3%9E%E8%85%BEarm%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8docker%E9%83%A8%E7%BD%B2vsftpd%E6%95%99%E7%A8%8B.html</loc>
     
     <lastmod>2023-09-12</lastmod>
@@ -13,7 +22,7 @@
   <url>
     <loc>https://1949hacker.cn/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html</loc>
     
-    <lastmod>2023-09-07</lastmod>
+    <lastmod>2023-09-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -211,6 +220,20 @@
   
   <url>
     <loc>https://1949hacker.cn/tags/Docker/</loc>
+    <lastmod>2023-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://1949hacker.cn/tags/armv8/</loc>
+    <lastmod>2023-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://1949hacker.cn/tags/vsftpd/</loc>
     <lastmod>2023-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
