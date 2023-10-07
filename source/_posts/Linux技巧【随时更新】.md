@@ -154,7 +154,7 @@ iostat -x -m 1 3
 > 待完善,先临时记录一条
 
 ```shell
-fio -name=stress_disk -filename=/mnt/DATA/test/a -size=30T -runtime=240h -bs=1m -direct=1 -rw=randrw -ioengine=libaio -numjobs=12 -group_reporting -iodepth=8 -rwmixwrite=50
+fio -name=stress_disk -filename=/mnt/DATA/test/a -size=30T -runtime=240h -bs=1m -direct=1 -rw=randrw -ioengine=libaio -numjobs=12 -group_reporting -iodepth=8 -rwmixwrite=50 -time_based -ramp_time=60s
 
 # 其中name是本次测试任务的名称
 # filename则为指定测试目录和文件名
@@ -168,6 +168,8 @@ fio -name=stress_disk -filename=/mnt/DATA/test/a -size=30T -runtime=240h -bs=1m 
 # group_reporting合并报告,将性能测试结果合并汇报,显示所有硬盘性能测试的总结果
 # iodepth IO队列深度,指定IO队列深度,提高每次请求的IO数量
 # rwmixwrite/rwmixread 这两个参数都可以指定,按百分比指定,如rwmixwrite=30则表示写占比30%,只需使用其中一个即可,无需同时指定两个参数
+# time_based 设置即便fio写完了指定的size依旧不结束，直至runtime的时间
+# ramp_time=60s 设置fio执行任务时的预热时间，可以使性能测试结果更加精确可靠
 ```
 
 ## Linux NFS挂载及使用systemctl自动挂载
