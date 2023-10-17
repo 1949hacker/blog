@@ -19,7 +19,7 @@ tags:
 进入项目目录`cd aptdownloader-1.0.0`，使用`dh_make --createorig`命令创建项目文件，并根据提示选择包类型`single, indep, library, python`，示例中创建的是`single`类型，所以按`s`，紧接着确认项目信息，确认按y，退出按q，项目信息如下：
 
 |名称|翻译|类型|
-|---|---|
+|---|---|---|
 |Maintainer Name|维护人员名称|根据系统`DEBFULLNAME`自动获取|
 |Email-Address|电子邮件地址（邮箱）|根据系统`DEBEMAIL`自动获取|
 |Date|日期|自动生成|

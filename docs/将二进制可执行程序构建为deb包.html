@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://img.1949hacker.cn//20231017163920.png">
 <meta property="og:image" content="https://img.1949hacker.cn//20231017171756.png">
 <meta property="article:published_time" content="2023-10-17T07:42:12.000Z">
-<meta property="article:modified_time" content="2023-10-17T09:18:04.849Z">
+<meta property="article:modified_time" content="2023-10-17T09:20:05.019Z">
 <meta property="article:author" content="1949hacker">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Debian">
@@ -236,7 +236,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-10-17 15:42:12 / 修改时间：17:18:04" itemprop="dateCreated datePublished" datetime="2023-10-17T15:42:12+08:00">2023-10-17</time>
+      <time title="创建时间：2023-10-17 15:42:12 / 修改时间：17:20:05" itemprop="dateCreated datePublished" datetime="2023-10-17T15:42:12+08:00">2023-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -277,7 +277,50 @@
 
 <p>第一步，创建项目目录，项目目录名称格式应为<code>包名-版本号</code>如<code>aptdownloader-1.0.0</code></p>
 <p>进入项目目录<code>cd aptdownloader-1.0.0</code>，使用<code>dh_make --createorig</code>命令创建项目文件，并根据提示选择包类型<code>single, indep, library, python</code>，示例中创建的是<code>single</code>类型，所以按<code>s</code>，紧接着确认项目信息，确认按y，退出按q，项目信息如下：</p>
-<p>|名称|翻译|类型|<br>|—|—|<br>|Maintainer Name|维护人员名称|根据系统<code>DEBFULLNAME</code>自动获取|<br>|Email-Address|电子邮件地址（邮箱）|根据系统<code>DEBEMAIL</code>自动获取|<br>|Date|日期|自动生成|<br>|Package Name|包名称|根据当前项目目录名称生成<code>aptdownloader</code>|<br>|Version|版本|根据当前项目目录名称生成<code>-1.0.0</code>|<br>|License|许可证|自动生成|<br>|Package Type|包类型|根据s&#x2F;i&#x2F;l&#x2F;p选择生成|</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>翻译</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Maintainer Name</td>
+<td>维护人员名称</td>
+<td>根据系统<code>DEBFULLNAME</code>自动获取</td>
+</tr>
+<tr>
+<td>Email-Address</td>
+<td>电子邮件地址（邮箱）</td>
+<td>根据系统<code>DEBEMAIL</code>自动获取</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>日期</td>
+<td>自动生成</td>
+</tr>
+<tr>
+<td>Package Name</td>
+<td>包名称</td>
+<td>根据当前项目目录名称生成<code>aptdownloader</code></td>
+</tr>
+<tr>
+<td>Version</td>
+<td>版本</td>
+<td>根据当前项目目录名称生成<code>-1.0.0</code></td>
+</tr>
+<tr>
+<td>License</td>
+<td>许可证</td>
+<td>自动生成</td>
+</tr>
+<tr>
+<td>Package Type</td>
+<td>包类型</td>
+<td>根据s&#x2F;i&#x2F;l&#x2F;p选择生成</td>
+</tr>
+</tbody></table>
 <p>维护人员名称修改方式：<code>export DEBFULLNAME=&quot;Your Name&quot;</code><br>电子邮件地址修改方式：<code>export DEBEMAIL=&quot;your.email@example.com&quot;</code></p>
 <p>修改后再运行<code>dh_make --createorig</code>便可看到修改后的信息。</p>
 <p><strong>注：项目目录名称必须严格按照<code>包名-版本号</code>命名，否则dh_make会报错</strong></p>
