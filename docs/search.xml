@@ -948,4 +948,65 @@
         <tag>嵌入式开发</tag>
       </tags>
   </entry>
+  <entry>
+    <title>将二进制可执行程序构建为deb包</title>
+    <url>/%E5%B0%86%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E6%9E%84%E5%BB%BA%E4%B8%BAdeb%E5%8C%85.html</url>
+    <content><![CDATA[<p>构建deb包所需依赖：<br><code>apt install dh-make</code></p>
+<span id="more"></span>
+
+<p>第一步，创建项目目录，项目目录名称格式应为<code>包名-版本号</code>如<code>aptdownloader-1.0.0</code></p>
+<p>进入项目目录<code>cd aptdownloader-1.0.0</code>，使用<code>dh_make --createorig</code>命令创建项目文件，并根据提示选择包类型<code>single, indep, library, python</code>，示例中创建的是<code>single</code>类型，所以按<code>s</code>，紧接着确认项目信息，确认按y，退出按q，项目信息如下：</p>
+<p>|名称|翻译|类型|<br>|—|—|<br>|Maintainer Name|维护人员名称|根据系统<code>DEBFULLNAME</code>自动获取|<br>|Email-Address|电子邮件地址（邮箱）|根据系统<code>DEBEMAIL</code>自动获取|<br>|Date|日期|自动生成|<br>|Package Name|包名称|根据当前项目目录名称生成<code>aptdownloader</code>|<br>|Version|版本|根据当前项目目录名称生成<code>-1.0.0</code>|<br>|License|许可证|自动生成|<br>|Package Type|包类型|根据s&#x2F;i&#x2F;l&#x2F;p选择生成|</p>
+<p>维护人员名称修改方式：<code>export DEBFULLNAME=&quot;Your Name&quot;</code><br>电子邮件地址修改方式：<code>export DEBEMAIL=&quot;your.email@example.com&quot;</code></p>
+<p>修改后再运行<code>dh_make --createorig</code>便可看到修改后的信息。</p>
+<p><strong>注：项目目录名称必须严格按照<code>包名-版本号</code>命名，否则dh_make会报错</strong></p>
+<p><img src="https://img.1949hacker.cn//20231017163920.png" alt="20231017163920"></p>
+<p>上述命令执行完毕后会生成<code>debian</code>目录，其中需要修改的是<code>control</code>和<code>rules</code>，以及创建<code>install</code>文件</p>
+<p><strong>本文因只需要将二进制可执行程序打包为deb，所以采用默认<code>rules</code>即可，故不对rules进行讲解</strong></p>
+<p><code>control</code>文件内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Source: test</span><br><span class="line">Section: unknown</span><br><span class="line">Priority: optional</span><br><span class="line">Maintainer: root &lt;root@localhost.localdomain&gt;</span><br><span class="line">Rules-Requires-Root: no</span><br><span class="line">Build-Depends:</span><br><span class="line"> debhelper-compat (= 13),</span><br><span class="line">Standards-Version: 4.6.2</span><br><span class="line">Homepage: &lt;insert the upstream URL, if relevant&gt;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Vcs-Browser: https://salsa.debian.org/debian/test</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Vcs-Git: https://salsa.debian.org/debian/test.git</span></span><br><span class="line"></span><br><span class="line">Package: test</span><br><span class="line">Architecture: any</span><br><span class="line">Depends:</span><br><span class="line"><span class="meta prompt_"> $</span><span class="language-bash">&#123;shlibs:Depends&#125;,</span></span><br><span class="line"><span class="meta prompt_"> $</span><span class="language-bash">&#123;misc:Depends&#125;,</span></span><br><span class="line">Description: &lt;insert up to 60 chars description&gt;</span><br><span class="line"> &lt;Insert long description, indented with spaces.&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里直接给出我的修改结果：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Source: aptdownloader</span><br><span class="line">Section: utils</span><br><span class="line">Priority: optional</span><br><span class="line">Maintainer: Vladimir Yang &lt;scepter@1949hacker.cn&gt;</span><br><span class="line">Build-Depends: debhelper-compat (= 13)</span><br><span class="line">Standards-Version: 4.5.1</span><br><span class="line">Homepage: https://1949hacker.cn</span><br><span class="line"></span><br><span class="line">Rules-Requires-Root: no</span><br><span class="line"></span><br><span class="line">Package: aptdownloader</span><br><span class="line">Architecture: any</span><br><span class="line">Depends: $&#123;shlibs:Depends&#125;, $&#123;misc:Depends&#125;, apt-rdepends (&gt;= 1.0)</span><br><span class="line">Description: A tool for downloading apt packages and their dependencies.</span><br><span class="line"> Use &#x27;aptdownloader &lt;package name&gt;&#x27; to download the software package and its dependencies to the current directory.</span><br><span class="line"> example:</span><br><span class="line">    aptdownloader docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<p>其中手动修改的内容有：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>修改为</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Maintainer</td>
+<td>姓名 电子邮箱</td>
+</tr>
+<tr>
+<td>Homepage</td>
+<td>建议修改为该项目的介绍网页</td>
+</tr>
+<tr>
+<td>Depends</td>
+<td>该项较为关键，除初始的<code>$&#123;shlibs:Depends&#125;, $&#123;misc:Depends&#125;</code>外，如果你的项目依赖额外的deb包，则需要在此注明，以逗号分隔</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>冒号后面写不超过60个字符的简介，然后换行缩进1个空格再写完整描述</td>
+</tr>
+</tbody></table>
+<p><code>install</code>文件决定了你的程序放到哪个目录，本文的示例将<code>aptdownloader</code>文件放到<code>/usr/bin</code>目录，则<code>install</code>文件内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">aptdownloader usr/bin</span><br></pre></td></tr></table></figure>
+
+<p>将你的程序放到项目的根目录，例如我的项目名为<code>aptdownloader-1.0.0</code>则我的二进制可执行程序<code>aptdownloader</code>路径为<code>aptdownloader-1.0.0/aptdownloader</code>，随后在项目根目录运行命令<code>dpkg-buildpackage -us -uc -nc</code>，随后便会在项目目录的上级目录中生成<code>.buildinfo</code>、<code>.changes</code>、<code>.deb</code>三个文件，如图所示</p>
+<p><img src="https://img.1949hacker.cn//20231017171756.png" alt="20231017171756"></p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Debian</tag>
+        <tag>deb</tag>
+      </tags>
+  </entry>
 </search>
