@@ -923,7 +923,7 @@ images: images
 # Waline
 # For more information: https://waline.js.org, https://github.com/walinejs/waline
 waline:
-  enable: true #是否开启
+  enable: false #是否开启
   serverURL: waline.1949hacker.cn # Waline #服务端地址，我们这里就是上面部署的 Vercel 地址
   placeholder: 请文明评论！ # #评论框的默认文字
   avatar: mm # 头像风格
