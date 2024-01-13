@@ -192,13 +192,15 @@ mount -t nfs -o vers=3,rw,hard,sync 10.0.0.100:/mnt/TEST/nfs /mnt/100nfs
 
 # 使用systemctl管理nfs挂载
 # 创建nfs.service文件【我的环境为Debian 11.6，该文件放在/usr/lib/systemd/system/下】
+# 2024/1/13更新，因实际使用过程中遇到过网络并未第一时间连通导致的挂载失败，所以在mount操作前增加ping操作
+# 原命令为：ExecStart=/usr/bin/mount -t nfs -o vers=3,rw,hard,sync 10.0.0.100:/mnt/data /data
 [Unit]
 Description=auto mount nfs
 After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/mount -t nfs -o vers=3,rw,hard,sync 192.168.0.142:/mnt/data /data
+ExecStart=/bin/bash -c 'until ping -c1 10.0.0.100 &>/dev/null; do sleep 5; done && /usr/bin/mount -t nfs -o vers=4,rw,hard,sync 10.0.0.100:/mnt/data/storage /mnt/nfs'
 Restart=no
 
 [Install]
