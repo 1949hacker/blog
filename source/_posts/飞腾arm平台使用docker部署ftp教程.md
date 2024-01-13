@@ -1,5 +1,5 @@
 ---
-title: 飞腾arm平台使用docker部署vsftpd教程
+title: 飞腾arm平台使用docker部署ftp教程
 categories: [知识库]
 date: 2023-09-12 20:50:38
 keywords: vsftpd
