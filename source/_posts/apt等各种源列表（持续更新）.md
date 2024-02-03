@@ -37,7 +37,7 @@ vim /etc/docker/daemon.json
 
 # 添加以下内容
 {
-  "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]
+  "registry-mirrors": ["https://docker.mirrors.tuna.tsinghua.edu.cn/"]
 }
 
 # 用root用户或具有sudo权限的用户加sudo后运行
