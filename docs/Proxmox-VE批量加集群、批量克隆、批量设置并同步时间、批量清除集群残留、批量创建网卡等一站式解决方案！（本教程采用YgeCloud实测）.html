@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- vercel统计 -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"1949hacker.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！以下命令中10.0.1.$i是因为本次批量部署节点均在10.0.1.0&#x2F;24段，需自行修改为你节点所在网段，如192.168.100.$i 批量创建网卡适用于如本次部署一样的情况，如外网网线统一连接到enp6s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proxmox-VE批量加集群、批量克隆、批量设置并同步时间、批量清除集群残留、批量创建网卡等一站式解决方案！（本教程采用YgeCloud实测）">
+<meta property="og:url" content="https://1949hacker.cn/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.html">
+<meta property="og:site_name" content="1949hacker&#39;s Blog - 探索知识的宇宙">
+<meta property="og:description" content="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！以下命令中10.0.1.$i是因为本次批量部署节点均在10.0.1.0&#x2F;24段，需自行修改为你节点所在网段，如192.168.100.$i 批量创建网卡适用于如本次部署一样的情况，如外网网线统一连接到enp6s">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-05T21:32:15.000Z">
+<meta property="article:modified_time" content="2024-02-05T21:35:56.875Z">
+<meta property="article:author" content="1949hacker">
+<meta property="article:tag" content="Proxmox-VE">
+<meta property="article:tag" content="YgeCloud">
+<meta property="article:tag" content="昱格">
+<meta property="article:tag" content="批量">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://1949hacker.cn/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://1949hacker.cn/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.html","path":"Proxmox-VE批量加集群、批量克隆、批量设置并同步时间、批量清除集群残留、批量创建网卡等一站式解决方案！（本教程采用YgeCloud实测）.html","title":"Proxmox-VE批量加集群、批量克隆、批量设置并同步时间、批量清除集群残留、批量创建网卡等一站式解决方案！（本教程采用YgeCloud实测）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Proxmox-VE批量加集群、批量克隆、批量设置并同步时间、批量清除集群残留、批量创建网卡等一站式解决方案！（本教程采用YgeCloud实测） | 1949hacker's Blog - 探索知识的宇宙</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENLG4193WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ENLG4193WB","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;5eb3e0169ac749219c5fa4aeb27aa7b8&quot;}'></script>
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">1949hacker's Blog - 探索知识的宇宙</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">1949hacker's Blog - 探索知识的宇宙</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%AB%A0%E6%89%80%E6%9C%89%E5%91%BD%E4%BB%A4%E5%9D%87%E5%9C%A8YgeCloud%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%B5%8B%E5%B9%B6%E5%88%97%E5%87%BA%E4%BA%86%E5%90%84%E7%A7%8DBUG%EF%BC%8C%E6%9C%AC%E6%96%87%E6%B6%89%E5%8F%8A%E7%9A%84%E5%91%BD%E4%BB%A4%E5%9D%87%E4%B8%BALinux-KVM-QEMU%E8%99%9A%E6%8B%9F%E5%8C%96%E9%80%9A%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%A6%82%E5%91%BD%E4%BB%A4%E6%9C%89%E4%B8%8D%E5%85%BC%E5%AE%B9%E5%8D%81%E5%88%86%E6%8B%9C%E6%89%98%E6%82%A8%E5%8A%A1%E5%BF%85%E8%81%94%E7%B3%BB%E6%88%91%E4%BF%AE%E6%AD%A3%E6%96%87%E7%AB%A0%EF%BC%81%E5%8D%81%E5%88%86%E6%84%9F%E8%B0%A2%EF%BC%81"><span class="nav-number">1.</span> <span class="nav-text">本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4"><span class="nav-number">2.</span> <span class="nav-text">批量加集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E4%BB%8E%E6%A8%A1%E6%9D%BF%E6%81%A2%E5%A4%8D%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%8C%E6%AF%94%E5%85%8B%E9%9A%86%E6%9B%B4%E9%AA%9A%E7%9A%84%E5%8A%9E%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">批量从模板恢复虚拟机，比克隆更骚的办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E9%94%99%E9%9B%86%E7%BE%A4%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">加错集群处理办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%8A%82%E7%82%B9%E6%89%B9%E9%87%8F%E7%A7%BB%E9%99%A4%E5%A4%B1%E6%95%88%E8%8A%82%E7%82%B9"><span class="nav-number">4.1.</span> <span class="nav-text">主节点批量移除失效节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E4%B8%BB%E8%8A%82%E7%82%B9%E5%88%A0%E9%99%A4%E5%90%8E%E5%AD%90%E8%8A%82%E7%82%B9%E4%BC%9A%E6%AE%8B%E7%95%99%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E6%97%A0%E6%B3%95%E5%8A%A0%E5%85%A5%EF%BC%8C%E9%9C%80%E6%B8%85%E9%99%A4%E6%AE%8B%E7%95%99%E4%BF%A1%E6%81%AF"><span class="nav-number">4.2.</span> <span class="nav-text">在主节点删除后子节点会残留集群信息无法加入，需清除残留信息</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">1949hacker</p>
+  <div class="site-description" itemprop="description">1949hacker's Blog - 探索知识的宇宙</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1949hacker.cn/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="1949hacker">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="1949hacker's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="1949hacker's Blog - 探索知识的宇宙">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Proxmox-VE批量加集群、批量克隆、批量设置并同步时间、批量清除集群残留、批量创建网卡等一站式解决方案！（本教程采用YgeCloud实测） | 1949hacker's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Proxmox-VE批量加集群、批量克隆、批量设置并同步时间、批量清除集群残留、批量创建网卡等一站式解决方案！（本教程采用YgeCloud实测）<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-02-06 05:32:15 / 修改时间：05:35:56" itemprop="dateCreated datePublished" datetime="2024-02-06T05:32:15+08:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BC%9F%E5%A4%A7%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">伟大的知识库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h2 id="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"><a href="#本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！" class="headerlink" title="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"></a><strong>本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容<em>十分拜托您务必联系我修正文章！十分感谢！</em></strong></h2><p><strong>以下命令中<code>10.0.1.$i</code>是因为本次批量部署节点均在10.0.1.0&#x2F;24段，需自行修改为你节点所在网段，如<code>192.168.100.$i</code></strong></p>
+<p><strong>批量创建网卡适用于如本次部署一样的情况，如外网网线统一连接到enp6s0网口，然后桥接到vmbr1给虚拟机连接使用，请根据你的情况自行修改</strong></p>
+<h2 id="批量加集群"><a href="#批量加集群" class="headerlink" title="批量加集群"></a>批量加集群</h2><span id="more"></span>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从创建集群的主节点批量远程自动加集群</span></span><br><span class="line">for i in &#123;开始节点如104..结束节点如150&#125;; do ssh -t root@10.0.1.$i &quot;echo -e \&quot;Yge123456\\nyes\&quot; | pvecm add 主节点完整IP如10.0.1.101 &amp;&amp; while true; do if pvecm status | grep -q $i; then echo -e \&quot;successfully\&quot;; break; else echo -e \&quot;Please wait a moment.\&quot;; sleep 5; fi; done&quot;; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动加集群示例</span></span><br><span class="line">for i in &#123;126..150&#125;; do ssh -t root@10.0.1.$i &quot;echo -e \&quot;Yge123456\\nyes\&quot; | pvecm add 10.0.1.125 &amp;&amp; while true; do if pvecm status | grep -q $i; then echo -e \&quot;successfully\&quot;; break; else echo -e \&quot;Please wait a moment.\&quot;; sleep 5; fi; done&quot;; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量自动创建vmbr1网卡</span></span><br><span class="line">for i in &#123;127..150&#125;; do ssh -t root@10.0.1.$i &#x27;echo -e &quot;auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0&quot; &gt;&gt; /etc/network/interfaces &amp;&amp; systemctl restart networking&#x27;; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从开始节点循环执行到结束节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动移除yge-data</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩容yge-root</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">刷新yge-root分区容量</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改时间服务器为10.0.1.110节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启chrony.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">强制同步时间</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动加入集群</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">搜索当前ip比对pvecm status输出结果</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">未输出当前节点ip则持续提示等待</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">输出当前节点ip则表示加入集群成功，输出successfully</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">间隔5秒执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量创建vmbr1网卡，桥接enp6s0</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-- 命令为单行命令，严禁换行，”一条龙命令“ --</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">因YgeCloud无sshpass工具，且新节点与主节点无免密登陆</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">所以该命令需要手动输入ssh密码</span></span><br><span class="line"></span><br><span class="line">for i in &#123;开始节点如104..结束节点如150&#125;; do ssh -t root@10.0.1.$i &quot;lvremove -f /dev/yge/data &amp;&amp; lvextend -l +100%FREE /dev/yge/root &amp;&amp; resize2fs /dev/yge/root &amp;&amp; sed -i &#x27;s/pool 2.debian.pool.ntp.org/server 10.0.1.110/&#x27; /etc/chrony/chrony.conf &amp;&amp; systemctl restart chrony &amp;&amp; chronyc makestep &amp;&amp; date &amp;&amp; echo -e \&quot;Yge123456\\nyes\&quot; | pvecm add 主节点完整IP如10.0.1.101 &amp;&amp; while true; do if pvecm status | grep -q $i; then echo -e \&quot;successfully\&quot;; break; else echo -e \&quot;Please wait a moment.\&quot;; sleep 5; fi; done &amp;&amp; echo -e \&quot;auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0\&quot; &gt;&gt; /etc/network/interfaces &amp;&amp; systemctl restart networking&quot;; done</span><br></pre></td></tr></table></figure>
+
+<h2 id="批量从模板恢复虚拟机，比克隆更骚的办法"><a href="#批量从模板恢复虚拟机，比克隆更骚的办法" class="headerlink" title="批量从模板恢复虚拟机，比克隆更骚的办法"></a>批量从模板恢复虚拟机，比克隆更骚的办法</h2><p><strong>vzdump生成的备份恢复时是根据名称匹配的，如果修改了命名会导致恢复失败，使用qmrestore恢复前一定要还原名称</strong></p>
+<p><strong>如需临时命名以便区分备份文件，强烈建议添加前缀，不要修改原本的文件名！</strong></p>
+<p><strong>-storage指向的目标存储不能为共享！否则会出现cfs无法锁定报错（local在集群中错误的设置为了共享发现的）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加了集群之后可以免密了！！！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ssh连接到对应的子节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行qmrestore命令</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/mnt/pve/backup/dump是YGENAS发布的NFS在集群存储添加为NFS挂载的位置</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从 [你的备份文件名称] 备份文件批量恢复虚拟机并将虚拟机ID设置为当前节点ID，避免ID重复</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--store 指定恢复到<span class="built_in">local</span>存储</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--uniaue使恢复的虚拟机重设网卡MAC以防MAC冲突</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">恢复完成后使用qm <span class="built_in">set</span> VMID --name string命令重设虚拟机名为对应当前节点IP</span></span><br><span class="line">for i in &#123;125..150&#125;; do ssh -t root@10.0.1.$i &quot;qmrestore /mnt/pve/backup/dump/vzdump-qemu-2002-2024_02_04-16_44.vma.lzo $i -storage local -unique &amp;&amp; qm set $i --name g$i&quot;;done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">并发恢复，将输出重定向到对应的<span class="variable">$i</span>.<span class="built_in">log</span>，避免ssh -t等待</span></span><br><span class="line">for i in &#123;125..150&#125;; do nohup ssh -t root@10.0.1.$i &quot;qmrestore /mnt/pve/backup/dump/vzdump-qemu-2002-2024_02_04-16_44.vma.lzo $i -storage local -unique &amp;&amp; qm set $i --name g$i&quot; &gt; $i.log 2&gt;&amp;1 &amp; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">间隔1秒持续显示恢复进度</span></span><br><span class="line">while true; do bash -c &#x27;clear;for i in &#123;125..150&#125;; do echo $i ; tail -n 1 &quot;$i.log&quot;; done&#x27;; sleep 1; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">排除rescan volumes...从而筛选出恢复失败的节点</span></span><br><span class="line">while true; do clear; for i in &#123;125..150&#125;; do tail -n 1 &quot;$i.log&quot; | grep -q &quot;update&quot; || &#123; echo &quot;$i error&quot;; &#125;; done; sleep 1; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量删除克隆错误的虚拟机</span></span><br><span class="line">for i in &#123;125..150&#125;;do nohup ssh -t root@10.0.1.$i &quot;qm destroy $i&quot; &gt; del$i.log 2&gt;&amp;1 &amp; done</span><br></pre></td></tr></table></figure>
+
+<h2 id="加错集群处理办法"><a href="#加错集群处理办法" class="headerlink" title="加错集群处理办法"></a>加错集群处理办法</h2><h3 id="主节点批量移除失效节点"><a href="#主节点批量移除失效节点" class="headerlink" title="主节点批量移除失效节点"></a>主节点批量移除失效节点</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除[104到124]的所有节点，yge是因为我的节点名前缀为yge，可以根据你的hostname来</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我的hostname输出为yge104</span></span><br><span class="line">for i in &#123;104..124&#125;; do pvecm delnode yge$i; done</span><br></pre></td></tr></table></figure>
+
+<h3 id="在主节点删除后子节点会残留集群信息无法加入，需清除残留信息"><a href="#在主节点删除后子节点会残留集群信息无法加入，需清除残留信息" class="headerlink" title="在主节点删除后子节点会残留集群信息无法加入，需清除残留信息"></a>在主节点删除后子节点会残留集群信息无法加入，需清除残留信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">一条龙清理</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从127开始清理到150，需在主节点执行，误加集群后主节点可以免密登陆子节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">先在主节点创建cleanup.sh脚本并<span class="built_in">chmod</span> +x cleanup.sh赋予可执行权限</span></span><br><span class="line">for i in &#123;127..150&#125;; do scp cleanup.sh root@10.0.1.$i:/tmp/ &amp;&amp; ssh -t root@10.0.1.$i &quot;bash /tmp/cleanup.sh&quot; &amp;&amp; ssh -t root@10.0.1.$i &quot;rm /tmp/cleanup.sh&quot;; done</span><br></pre></td></tr></table></figure>
+
+<p><strong>因ssh -t无法处理!，所以迫不得已使用脚本执行</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">systemctl stop pve-cluster</span><br><span class="line">systemctl stop corosync</span><br><span class="line">pmxcfs -l</span><br><span class="line">rm /etc/pve/corosync.conf</span><br><span class="line">rm -rf /etc/corosync/*</span><br><span class="line">rm -rf /etc/pve/nodes/!(hostname)</span><br><span class="line">killall pmxcfs</span><br><span class="line">systemctl start pve-cluster</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我喝冰阔落~</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="1949hacker 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="1949hacker 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/okx.jpg" alt="1949hacker 欧易OKC网络多币种兼容（BTC、ETH、USDT、USDC等）">
+        <span>欧易OKC网络多币种兼容（BTC、ETH、USDT、USDC等）</span>
+      </div>
+      <div>
+        <img src="/images/xmr.jpg" alt="1949hacker XMR，充币网络XMR-Monero">
+        <span>XMR，充币网络XMR-Monero</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/hacker1949">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="mailto:scepter@1949hacker.cn">
+            <span class="icon">
+              <i class="fab fa-envelope"></i>
+            </span>
+
+            <span class="label">e-mail</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Proxmox-VE/" rel="tag"># Proxmox-VE</a>
+              <a href="/tags/YgeCloud/" rel="tag"># YgeCloud</a>
+              <a href="/tags/%E6%98%B1%E6%A0%BC/" rel="tag"># 昱格</a>
+              <a href="/tags/%E6%89%B9%E9%87%8F/" rel="tag"># 批量</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/apt%E7%AD%89%E5%90%84%E7%A7%8D%E6%BA%90%E5%88%97%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.html" rel="prev" title="apt等各种源列表（持续更新）">
+                  <i class="fa fa-chevron-left"></i> apt等各种源列表（持续更新）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">1949hacker</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>
