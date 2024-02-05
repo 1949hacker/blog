@@ -24,6 +24,8 @@ deb https://mirrors.tuna.tsinghua.edu.cn/debian-security/ bookworm-security main
 deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security/ bookworm-security main contrib non-free non-free-firmware
 ```
 
+<!-- more -->
+
 ## 清华大学docker ce源（安装docker的源，一键自动安装）
 
 ```shell
