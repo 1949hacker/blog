@@ -25,12 +25,25 @@ tags:
 
 <!-- more -->
 
+*更新：利用expect实现初次连接自动登陆或自动上传ssh key*
+
+```shell
+# 初次连接自动登陆
+expect -c 'spawn ssh -o StrictHostKeyChecking=no root@10.0.1.$i; expect "(yes/no)" { send "yes\n"; exp_continue } "assword:" { send "密码\n" }; interact'
+
+# 初次连接自动上传ssh key，便于后续免密连接批量执行命令
+expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no root@10.0.1.$i; expect "(yes/no)" { send "yes\n"; exp_continue } "assword:" { send "密码\n" }; interact'
+
+# 批量做免密连接
+for i in {开始节点如104..结束节点如150}; do expect -c "spawn ssh-copy-id -o StrictHostKeyChecking=no root@10.0.1.$i; expect \"(yes/no)\" { send \"yes\n\"; exp_continue } \"assword:\" { send \"密码\n\" }; interact" ; sleep 1 ; done
+```
+
 ```shell
 # 从创建集群的主节点批量远程自动加集群
-for i in {开始节点如104..结束节点如150}; do ssh -t root@10.0.1.$i "echo -e \"Yge123456\\nyes\" | pvecm add 主节点完整IP如10.0.1.101 && while true; do if pvecm status | grep -q $i; then echo -e \"successfully\"; break; else echo -e \"Please wait a moment.\"; sleep 5; fi; done"; done
+for i in {开始节点如104..结束节点如150}; do ssh -t root@10.0.1.$i "echo -e \"密码\\nyes\" | pvecm add 主节点完整IP如10.0.1.101 && while true; do if pvecm status | grep -q $i; then echo -e \"successfully\"; break; else echo -e \"Please wait a moment.\"; sleep 5; fi; done"; done
 
 # 自动加集群示例
-for i in {126..150}; do ssh -t root@10.0.1.$i "echo -e \"Yge123456\\nyes\" | pvecm add 10.0.1.125 && while true; do if pvecm status | grep -q $i; then echo -e \"successfully\"; break; else echo -e \"Please wait a moment.\"; sleep 5; fi; done"; done
+for i in {126..150}; do ssh -t root@10.0.1.$i "echo -e \"密码\\nyes\" | pvecm add 10.0.1.125 && while true; do if pvecm status | grep -q $i; then echo -e \"successfully\"; break; else echo -e \"Please wait a moment.\"; sleep 5; fi; done"; done
 
 # 批量自动创建vmbr1网卡
 for i in {127..150}; do ssh -t root@10.0.1.$i 'echo -e "auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0" >> /etc/network/interfaces && systemctl restart networking'; done
@@ -52,7 +65,7 @@ for i in {127..150}; do ssh -t root@10.0.1.$i 'echo -e "auto vmbr1\niface vmbr1 
 # 因YgeCloud无sshpass工具，且新节点与主节点无免密登陆
 # 所以该命令需要手动输入ssh密码
 
-for i in {开始节点如104..结束节点如150}; do ssh -t root@10.0.1.$i "lvremove -f /dev/yge/data && lvextend -l +100%FREE /dev/yge/root && resize2fs /dev/yge/root && sed -i 's/pool 2.debian.pool.ntp.org/server 10.0.1.110/' /etc/chrony/chrony.conf && systemctl restart chrony && chronyc makestep && date && echo -e \"Yge123456\\nyes\" | pvecm add 主节点完整IP如10.0.1.101 && while true; do if pvecm status | grep -q $i; then echo -e \"successfully\"; break; else echo -e \"Please wait a moment.\"; sleep 5; fi; done && echo -e \"auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0\" >> /etc/network/interfaces && systemctl restart networking"; done
+for i in {开始节点如104..结束节点如150}; do ssh -t root@10.0.1.$i "lvremove -f /dev/yge/data && lvextend -l +100%FREE /dev/yge/root && resize2fs /dev/yge/root && sed -i 's/pool 2.debian.pool.ntp.org/server 10.0.1.110/' /etc/chrony/chrony.conf && systemctl restart chrony && chronyc makestep && date && echo -e \"密码\\nyes\" | pvecm add 主节点完整IP如10.0.1.101 && while true; do if pvecm status | grep -q $i; then echo -e \"successfully\"; break; else echo -e \"Please wait a moment.\"; sleep 5; fi; done && echo -e \"auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0\" >> /etc/network/interfaces && systemctl restart networking"; done
 ```
 
 ## 批量从模板恢复虚拟机，比克隆更骚的办法
