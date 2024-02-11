@@ -65,7 +65,7 @@ for i in {127..150}; do ssh -t root@10.0.1.$i 'echo -e "auto vmbr1\niface vmbr1 
 # 因YgeCloud无sshpass工具，且新节点与主节点无免密登陆
 # 所以该命令需要手动输入ssh密码
 
-for i in {开始节点如104..结束节点如150}; do ssh -t root@10.0.1.$i "lvremove -f /dev/yge/data && lvextend -l +100%FREE /dev/yge/root && resize2fs /dev/yge/root && sed -i 's/pool 2.debian.pool.ntp.org/server 10.0.1.110/' /etc/chrony/chrony.conf && systemctl restart chrony && chronyc makestep && date && echo -e \"密码\\nyes\" | pvecm add 主节点完整IP如10.0.1.101 && while true; do if pvecm status | grep -q $i; then echo -e \"successfully\"; break; else echo -e \"Please wait a moment.\"; sleep 5; fi; done && echo -e \"auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0\" >> /etc/network/interfaces && systemctl restart networking"; done
+for i in {开始节点如104..结束节点如150}; do ssh -t root@10.0.1.$i "lvremove -f /dev/yge/data && lvextend -l +100%FREE /dev/yge/root && resize2fs /dev/yge/root && sed -i 's/pool 2.debian.pool.ntp.org/server 10.0.1.110/' /etc/chrony/chrony.conf && systemctl restart chrony && chronyc makestep && sleep 3 && date && echo -e \"密码\\nyes\" | pvecm add 主节点完整IP如10.0.1.101 && while true; do if pvecm status | grep -q $i; then echo -e \"successfully\"; break; else echo -e \"Please wait a moment.\"; sleep 5; fi; done && echo -e \"auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0\" >> /etc/network/interfaces && systemctl restart networking"; done
 ```
 
 ## 批量从模板恢复虚拟机，比克隆更骚的办法
