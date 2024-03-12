@@ -8,6 +8,12 @@ tags:
     - docker源
 ---
 
+# 操作系统源
+
+**使用源时务必注意版本**
+
+若你的系统不是最新版，可以使用*snullp*大佬开发的[配置生成器](https://mirrors.ustc.edu.cn/repogen/)
+
 ## 中科大debian apt源（最新debian12 bookworm版）
 
 **我个人觉得中科大源更好些，且在中科大下载iso也比清华快些，如需使用清华源，将ustc替换为tuna.tsinghua即可，其他配置同理**
@@ -28,11 +34,33 @@ deb-src https://mirrors.ustc.edu.cn/debian-security/ bookworm-security main cont
 
 <!-- more -->
 
+## 中科大ubuntu apt源（最新ubuntu24.04 noble源）
+
+```shell
+deb https://mirrors.ustc.edu.cn/ubuntu/ noble main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ noble main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ noble-security main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ noble-security main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ noble-updates main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ noble-updates main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ noble-backports main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ noble-backports main restricted universe multiverse
+
+## Not recommended
+# deb https://mirrors.ustc.edu.cn/ubuntu/ noble-proposed main restricted universe multiverse
+# deb-src https://mirrors.ustc.edu.cn/ubuntu/ noble-proposed main restricted universe multiverse
+```
+
 ## 中科大docker ce源（安装docker的源，一键自动安装）
 
 ```shell
 curl -fsSL https://get.docker.com -o get-docker.sh && sudo DOWNLOAD_URL=https://mirrors.ustc.edu.cn/docker-ce sh get-docker.sh
 ```
+
+# 软件源
 
 ## 中科大docker hub源
 
