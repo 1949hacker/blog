@@ -35,6 +35,8 @@ journalctl _COMM=sshd | grep "Failed" | awk '{print $(NF-3)}' | sort -u
 journalctl _COMM=sshd | grep -E "Accepted" | awk '{match($0, /([0-9]+\.){3}[0-9]+/); print substr($0, RSTART, RLENGTH)}' | sort -u
 ```
 
+<!-- more -->
+
 ## 加强ssh安全的办法
 
 1. 禁用root密码登陆
