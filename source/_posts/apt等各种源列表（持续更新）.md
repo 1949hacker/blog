@@ -87,18 +87,18 @@ registry=https://npmreg.proxy.ustclug.org/
 npm --registry https://npmreg.proxy.ustclug.org/ install 包名
 ```
 
-## 清华大学PyPI源
+## ~~清华大学PyPI源~~阿里云PyPI源
 
 中科大PyPI源公告：
 由于 PyPI 源日益增长的空间与 mirror 磁盘空间非常有限的矛盾和用户报告的 PyPI 源的诸多问题，以及考虑到 PyPI 源的资源占用对其他镜像服务质量的影响，我们暂时移除了对 PyPI 的本地镜像。即日起至新的 PyPI 源镜像方案实施前，本站 PyPI 源的 HTTP 协议访问将重定向到 TUNA PyPI 源；PyPI 源的 RSYNC 同步方式停止提供。
 
 ```shell
 # 临时使用
-pip install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple package
+pip install -i https://mirrors.aliyun.com/pypi/simple/ package
 
 # 使用清华镜像站来升级 pip
-pip install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple pip -U
-pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+pip install -i https://mirrors.aliyun.com/pypi/simple/ pip -U
+pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
 ```
 
 ## 中科大Qt镜像
