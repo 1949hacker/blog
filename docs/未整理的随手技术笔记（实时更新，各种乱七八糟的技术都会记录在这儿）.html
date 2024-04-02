@@ -35,7 +35,7 @@
 <meta property="og:description" content="以下是乱七八糟的各种没时间整理的随手技术笔记，你可以通过页面搜索关键词查询可能是你用得上的东西，也可以通过底部联系方式询问我点击阅读全文查看">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-02T08:34:01.000Z">
-<meta property="article:modified_time" content="2024-04-02T08:58:48.760Z">
+<meta property="article:modified_time" content="2024-04-02T16:40:54.455Z">
 <meta property="article:author" content="1949hacker">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="NAS">
@@ -238,9 +238,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-04-02 16:34:01 / 修改时间：16:58:48" itemprop="dateCreated datePublished" datetime="2024-04-02T16:34:01+08:00">2024-04-02</time>
+      <time title="创建时间：2024-04-02 16:34:01" itemprop="dateCreated datePublished" datetime="2024-04-02T16:34:01+08:00">2024-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-03 00:40:54" itemprop="dateModified" datetime="2024-04-03T00:40:54+08:00">2024-04-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,7 +271,7 @@
         <h2 id="以下是乱七八糟的各种没时间整理的随手技术笔记，你可以通过页面搜索关键词查询可能是你用得上的东西，也可以通过底部联系方式询问我"><a href="#以下是乱七八糟的各种没时间整理的随手技术笔记，你可以通过页面搜索关键词查询可能是你用得上的东西，也可以通过底部联系方式询问我" class="headerlink" title="以下是乱七八糟的各种没时间整理的随手技术笔记，你可以通过页面搜索关键词查询可能是你用得上的东西，也可以通过底部联系方式询问我"></a>以下是乱七八糟的各种没时间整理的随手技术笔记，你可以通过页面搜索关键词查询可能是你用得上的东西，也可以通过底部联系方式询问我</h2><p>点击阅读全文查看</p>
 <span id="more"></span>
 
-<h3 id="CentOS-7批量给eth0网卡添加IP"><a href="#CentOS-7批量给eth0网卡添加IP" class="headerlink" title="CentOS 7批量给eth0网卡添加IP"></a>CentOS 7批量给eth0网卡添加IP</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过变量d实现改一个192使所有D段地址同步修改</span></span><br><span class="line">d=192 &amp;&amp; ip addr add 43.225.58.$d/27 dev eth0 &amp;&amp; ip addr add 69.165.77.$d/27 dev eth0 &amp;&amp; ip addr add 103.42.29.$d/27 dev eth0 &amp;&amp; ip addr add 220.158.194.$d/27 dev eth0 &amp;&amp; ip addr add 220.158.195.$d/27 dev eth0 &amp;&amp; ip addr add 107.151.236.$d/27 dev eth0 &amp;&amp; ip addr add 107.151.237.$d/27 dev eth0 &amp;&amp; ip addr add 198.44.163.$d/27 dev eth0</span><br></pre></td></tr></table></figure>
+<h3 id="CentOS-7批量给eth0网卡添加IP"><a href="#CentOS-7批量给eth0网卡添加IP" class="headerlink" title="CentOS 7批量给eth0网卡添加IP"></a>CentOS 7批量给eth0网卡添加IP</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过变量d实现改一个128使所有D段地址同步修改</span></span><br><span class="line">d=128 &amp;&amp; echo -e &quot;IPADDR2=43.225.58.$d\nPREFIX2=27\nIPADDR3=69.165.77.$d\nPREFIX3=27\nIPADDR4=103.42.29.$d \nPREFIX4=27\nIPADDR5=220.158.194.$d \nPREFIX5=27\nIPADDR6=220.158.195.$d \nPREFIX6=27\nIPADDR7=107.151.236.$d \nPREFIX7=27\nIPADDR8=107.151.237.$d \nPREFIX8=27\nIPADDR9=198.44.163.$d \nPREFIX9=27\n&quot; &gt;&gt; /etc/sysconfig/network-scripts/ifcfg-eth0 &amp;&amp; systemctl restart network</span><br></pre></td></tr></table></figure>
     </div>
 
     
