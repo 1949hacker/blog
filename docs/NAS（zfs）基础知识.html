@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- vercel统计 -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"1949hacker.cn","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="NAS是什么？NAS，全称Network Attached Storage，翻译成中文就是网络附加存储。简单来说，它就是一个连接到网络上的存储设备，可以让多台电脑、智能手机、平板电脑等设备通过网络访问和共享存储空间。 NAS和传统的外接硬盘不同，它更像是一个小型的服务器，拥有自己的操作系统和处理器。你可以把NAS想象成一个能够存储大量文件的智能盒子，放在家里或者办公室的网络中，让你随时随地通过网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NAS（zfs）基础知识">
+<meta property="og:url" content="https://1949hacker.cn/NAS%EF%BC%88zfs%EF%BC%89%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">
+<meta property="og:site_name" content="1949hacker&#39;s Blog - 探索知识的宇宙">
+<meta property="og:description" content="NAS是什么？NAS，全称Network Attached Storage，翻译成中文就是网络附加存储。简单来说，它就是一个连接到网络上的存储设备，可以让多台电脑、智能手机、平板电脑等设备通过网络访问和共享存储空间。 NAS和传统的外接硬盘不同，它更像是一个小型的服务器，拥有自己的操作系统和处理器。你可以把NAS想象成一个能够存储大量文件的智能盒子，放在家里或者办公室的网络中，让你随时随地通过网络">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-02T05:01:57.000Z">
+<meta property="article:modified_time" content="2024-04-02T08:41:19.709Z">
+<meta property="article:author" content="1949hacker">
+<meta property="article:tag" content="NAS">
+<meta property="article:tag" content="ZFS">
+<meta property="article:tag" content="RAID">
+<meta property="article:tag" content="存储">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://1949hacker.cn/NAS%EF%BC%88zfs%EF%BC%89%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://1949hacker.cn/NAS%EF%BC%88zfs%EF%BC%89%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html","path":"NAS（zfs）基础知识.html","title":"NAS（zfs）基础知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NAS（zfs）基础知识 | 1949hacker's Blog - 探索知识的宇宙</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENLG4193WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ENLG4193WB","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;5eb3e0169ac749219c5fa4aeb27aa7b8&quot;}'></script>
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">1949hacker's Blog - 探索知识的宇宙</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">1949hacker's Blog - 探索知识的宇宙</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">NAS是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS%E7%9B%B8%E5%AF%B9%E4%BC%A0%E7%BB%9F%E5%AD%98%E5%82%A8%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">NAS相对传统存储的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-RAIDZ%E7%9F%A5%E8%AF%86"><span class="nav-number">3.</span> <span class="nav-text">NAS RAIDZ知识</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">1949hacker</p>
+  <div class="site-description" itemprop="description">1949hacker's Blog - 探索知识的宇宙</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1949hacker.cn/NAS%EF%BC%88zfs%EF%BC%89%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="1949hacker">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="1949hacker's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="1949hacker's Blog - 探索知识的宇宙">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NAS（zfs）基础知识 | 1949hacker's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NAS（zfs）基础知识<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/NAS%EF%BC%88zfs%EF%BC%89%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-02 13:01:57 / 修改时间：16:41:19" itemprop="dateCreated datePublished" datetime="2024-04-02T13:01:57+08:00">2024-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="NAS是什么？"><a href="#NAS是什么？" class="headerlink" title="NAS是什么？"></a>NAS是什么？</h2><p>NAS，全称Network Attached Storage，翻译成中文就是网络附加存储。简单来说，它就是一个连接到网络上的存储设备，可以让多台电脑、智能手机、平板电脑等设备通过网络访问和共享存储空间。</p>
+<p>NAS和传统的外接硬盘不同，它更像是一个小型的服务器，拥有自己的操作系统和处理器。你可以把NAS想象成一个能够存储大量文件的智能盒子，放在家里或者办公室的网络中，让你随时随地通过网络访问自己的文件。</p>
+<p>使用NAS有很多好处。首先，它可以作为一个集中式的存储解决方案，让你不再需要把文件分散存储在各种设备上。其次，NAS通常具有数据备份和共享功能，可以保护你的文件免受丢失或损坏，并且可以让家人或团队成员轻松地共享文件。另外，NAS通常还提供了许多额外的功能，比如可以安装各种应用程序来扩展其功能，比如媒体服务器、下载站点等等。</p>
+<p>总的来说，NAS就是一个连接到网络上的智能存储设备，可以让你方便地存储、备份和共享文件，是家庭和办公室网络存储的理想选择。</p>
+<h2 id="NAS相对传统存储的优缺点"><a href="#NAS相对传统存储的优缺点" class="headerlink" title="NAS相对传统存储的优缺点"></a>NAS相对传统存储的优缺点</h2><table>
+<thead>
+<tr>
+<th>优缺点</th>
+<th>NAS</th>
+<th>传统存储</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>容量</td>
+<td>可以轻松扩展容量</td>
+<td>通常受限于单个设备的容量</td>
+</tr>
+<tr>
+<td>可访问性</td>
+<td>可通过网络从任何地方访问文件</td>
+<td>需要直接连接到设备才能访问文件</td>
+</tr>
+<tr>
+<td>共享功能</td>
+<td>能够方便地与多个用户共享文件</td>
+<td>通常只能由一个用户使用</td>
+</tr>
+<tr>
+<td>备份</td>
+<td>提供自动备份和恢复功能</td>
+<td>需要手动进行备份和恢复</td>
+</tr>
+<tr>
+<td>数据保护</td>
+<td>提供数据冗余和RAID功能，增强数据保护</td>
+<td>数据保护功能通常有限</td>
+</tr>
+<tr>
+<td>扩展性</td>
+<td>可以安装各种应用程序扩展功能</td>
+<td>功能受限于设备自身的硬件和软件功能</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>初始成本较高，但长期使用成本较低</td>
+<td>初始成本较低，但随着存储需求增长成本可能增加</td>
+</tr>
+<tr>
+<td>管理复杂性</td>
+<td>需要一定的网络和技术知识来配置和管理</td>
+<td>简单易用，不需要复杂的配置和管理</td>
+</tr>
+</tbody></table>
+<h2 id="NAS-RAIDZ知识"><a href="#NAS-RAIDZ知识" class="headerlink" title="NAS RAIDZ知识"></a>NAS RAIDZ知识</h2><p>YGENAS采用zfs文件系统，可以创建RAIDZ软磁盘阵列，对比传统磁盘阵列如下</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>zfs软RAID</th>
+<th>传统RAID</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>条带</td>
+<td>Striping</td>
+<td>RAID0</td>
+<td>盘越多速度越快，安全性为0，掉盘则数据丢失</td>
+</tr>
+<tr>
+<td>镜像</td>
+<td>mirror</td>
+<td>RAID1</td>
+<td>安全性最高，传统RAID支持2个盘做镜像，一份数据存到2个盘上，软RAID则可以手动指定更多盘做镜像（通常没必要）</td>
+</tr>
+<tr>
+<td>单重校验</td>
+<td>RAID-Z1</td>
+<td>RAID5</td>
+<td>速度和安全性相对均衡，拥有1块校验盘所以可以允许单块盘故障</td>
+</tr>
+<tr>
+<td>双重校验</td>
+<td>RAID-Z2</td>
+<td>RAID6</td>
+<td>更偏向安全性，速度比单重校验略低，拥有3块校验盘所以可以允许2块盘故障</td>
+</tr>
+<tr>
+<td>三重校验</td>
+<td>RAID-Z3</td>
+<td>无</td>
+<td>软RAID特有，更安全但速度也低，拥有3块校验盘所以可以允许3块盘故障</td>
+</tr>
+<tr>
+<td>组合RAID</td>
+<td>可以将RAID1&#x2F;5&#x2F;6(RAID-Z3)，按条带方式组合，每个小RAID看作一块磁盘，如36盘分3组，每组12个盘做RAID5，最终组成RAID50，将12个为一组的RAID5看作一个大盘，这3个大盘做成一个RAID0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>热备盘</td>
+<td>无论是软RAID还是传统RAID，都可以添加热备盘，热备盘用于替换故障盘，在新YGENAS系统中热备盘会在掉盘时自动替换。实际应用中可以给客户解释：当RAID5出现故障盘时，若存在热备盘，则会自动第一时间替换掉故障盘，因为人工介入处理故障需要一定时间，热备盘的自动替换可以防止在人工换盘之前又出现故障盘，若RAID5同时故障两块盘则会丢失数据</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我喝冰阔落~</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="1949hacker 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="1949hacker 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/binance.jpg" alt="1949hacker binance">
+        <span>binance</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/hacker1949">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="mailto:scepter@1949hacker.cn">
+            <span class="icon">
+              <i class="fab fa-envelope"></i>
+            </span>
+
+            <span class="label">e-mail</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/NAS/" rel="tag"># NAS</a>
+              <a href="/tags/ZFS/" rel="tag"># ZFS</a>
+              <a href="/tags/RAID/" rel="tag"># RAID</a>
+              <a href="/tags/%E5%AD%98%E5%82%A8/" rel="tag"># 存储</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Linux%E6%9F%A5%E8%AF%A2ssh%E6%97%A5%E5%BF%97%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E8%A2%AB%E5%85%A5%E4%BE%B5%E5%8F%8A%E5%8A%A0%E5%BC%BAssh%E5%AE%89%E5%85%A8%E7%9A%84%E5%8A%9E%E6%B3%95.html" rel="prev" title="Linux查询ssh日志判断是否被入侵及加强ssh安全的办法">
+                  <i class="fa fa-chevron-left"></i> Linux查询ssh日志判断是否被入侵及加强ssh安全的办法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E6%9C%AA%E6%95%B4%E7%90%86%E7%9A%84%E9%9A%8F%E6%89%8B%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0%EF%BC%88%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0%EF%BC%8C%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E7%9A%84%E6%8A%80%E6%9C%AF%E9%83%BD%E4%BC%9A%E8%AE%B0%E5%BD%95%E5%9C%A8%E8%BF%99%E5%84%BF%EF%BC%89.html" rel="next" title="未整理的随手技术笔记（实时更新，各种乱七八糟的技术都会记录在这儿）">
+                  未整理的随手技术笔记（实时更新，各种乱七八糟的技术都会记录在这儿） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">1949hacker</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>
