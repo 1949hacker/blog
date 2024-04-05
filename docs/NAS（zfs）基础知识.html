@@ -34,14 +34,18 @@
 <meta property="og:site_name" content="1949hacker&#39;s Blog - 探索知识的宇宙">
 <meta property="og:description" content="NAS是什么？NAS，全称Network Attached Storage，翻译成中文就是网络附加存储。简单来说，它就是一个连接到网络上的存储设备，可以让多台电脑、智能手机、平板电脑等设备通过网络访问和共享存储空间。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.1949hacker.cn//ad900b1ecf2520cd6c46787268124ed.png">
+<meta property="og:image" content="https://img.1949hacker.cn//20240405190455.png">
+<meta property="og:image" content="https://img.1949hacker.cn//20240405191501.png">
 <meta property="article:published_time" content="2024-04-02T05:01:57.000Z">
-<meta property="article:modified_time" content="2024-04-02T10:24:47.533Z">
+<meta property="article:modified_time" content="2024-04-05T13:17:56.735Z">
 <meta property="article:author" content="1949hacker">
 <meta property="article:tag" content="NAS">
 <meta property="article:tag" content="ZFS">
 <meta property="article:tag" content="RAID">
 <meta property="article:tag" content="存储">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.1949hacker.cn//ad900b1ecf2520cd6c46787268124ed.png">
 
 
 <link rel="canonical" href="https://1949hacker.cn/NAS%EF%BC%88zfs%EF%BC%89%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">
@@ -152,7 +156,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">NAS是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS%E7%9B%B8%E5%AF%B9%E4%BC%A0%E7%BB%9F%E5%AD%98%E5%82%A8%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">NAS相对传统存储的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-RAIDZ%E7%9F%A5%E8%AF%86"><span class="nav-number">3.</span> <span class="nav-text">NAS RAIDZ知识</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">NAS是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS%E7%9B%B8%E5%AF%B9%E4%BC%A0%E7%BB%9F%E5%AD%98%E5%82%A8%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">NAS相对传统存储的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-RAIDZ%E7%9F%A5%E8%AF%86"><span class="nav-number">3.</span> <span class="nav-text">NAS RAIDZ知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-RAIDZ%E5%AE%B9%E9%87%8F%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">NAS RAIDZ容量计算方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID-Z1-x2F-2-x2F-3%E9%80%9F%E5%BA%A6%E4%BC%B0%E7%AE%97"><span class="nav-number">5.</span> <span class="nav-text">RAID-Z1&#x2F;2&#x2F;3速度估算</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -174,7 +178,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -233,9 +237,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-04-02 13:01:57 / 修改时间：18:24:47" itemprop="dateCreated datePublished" datetime="2024-04-02T13:01:57+08:00">2024-04-02</time>
+      <time title="创建时间：2024-04-02 13:01:57" itemprop="dateCreated datePublished" datetime="2024-04-02T13:01:57+08:00">2024-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-05 21:17:56" itemprop="dateModified" datetime="2024-04-05T21:17:56+08:00">2024-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -365,6 +375,122 @@
 <td></td>
 </tr>
 </tbody></table>
+<h2 id="NAS-RAIDZ容量计算方法"><a href="#NAS-RAIDZ容量计算方法" class="headerlink" title="NAS RAIDZ容量计算方法"></a>NAS RAIDZ容量计算方法</h2><p><a target="_blank" rel="noopener" href="https://wintelguy.com/zfs-calc.pl">ZFS &#x2F; RAIDZ容量估算</a></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RAID type</td>
+<td>RAID类型，对应上面介绍的RAID-Z1&#x2F;2&#x2F;3等</td>
+</tr>
+<tr>
+<td>Drive capacity(GB)</td>
+<td>单个磁盘容量，单位为GB，1TB&#x3D;1000GB</td>
+</tr>
+<tr>
+<td>Number of drives per RAID group</td>
+<td>每组RAID中磁盘的数量，单组RAID-Z1&#x2F;2&#x2F;3均不建议超过12块盘，否则故障时重建时间过长可能存在风险</td>
+</tr>
+<tr>
+<td>Number of RAID groups</td>
+<td>多重RAID的数量，比如RAID50&#x2F;60，该项则是对应多少组RAID5&#x2F;6组成RAID50&#x2F;60，比如36盘位通常由3组12盘的RAID-Z1组成一组RAID-Z1条带，也就是RAID50</td>
+</tr>
+<tr>
+<td>20% free space limit</td>
+<td>该参数是因为NAS在占用空间超过80%后性能会下降，所以会有一个20%空闲空间限制，但是该项默认是不勾选的，忽略即可</td>
+</tr>
+<tr>
+<td>Practical usable storage capacity</td>
+<td>实际可用存储容量，单位分别有TiB和TB，通常俗称的容量一般为TB，TiB是操作系统以1024GiB&#x3D;1TiB为进制计算的空间</td>
+</tr>
+<tr>
+<td>Single drive cost</td>
+<td>单块硬盘价格，如果需要计算每TiB存储空间的成本，可以填写该项用于计算</td>
+</tr>
+<tr>
+<td>Cost per TiB usable</td>
+<td>每TiB存储空间成本</td>
+</tr>
+<tr>
+<td>其他项在常见情况下也忽略即可</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>以下是YGENAS-RH12按12个16TB硬盘做RAID-Z1的容量计算和成本计算（硬盘价格1600乱填的）：</p>
+<p><img src="https://img.1949hacker.cn//ad900b1ecf2520cd6c46787268124ed.png" alt="ad900b1ecf2520cd6c46787268124ed"></p>
+<p><img src="https://img.1949hacker.cn//20240405190455.png" alt="20240405190455"></p>
+<h2 id="RAID-Z1-x2F-2-x2F-3速度估算"><a href="#RAID-Z1-x2F-2-x2F-3速度估算" class="headerlink" title="RAID-Z1&#x2F;2&#x2F;3速度估算"></a>RAID-Z1&#x2F;2&#x2F;3速度估算</h2><p>首先需要知道硬盘的官方数据用于参考，以公司常见的西数16TB WUH721816ALE6L4型号硬盘为例，在bing.com搜索到<a target="_blank" rel="noopener" href="https://www.westerndigital.com/zh-cn/products/internal-drives/data-center-drives/ultrastar-dc-hc550-hdd?sku=0F38462">西数官方数据</a></p>
+<p><img src="https://img.1949hacker.cn//20240405191501.png" alt="20240405191501"></p>
+<p>这里采用官方的理论速度做为参考（<strong>仅做为参考，实际速度没有任何人能准确计算，绝不可以此做为承诺</strong>）</p>
+<hr>
+<p><strong>注意，因为存储系统的复杂性，在此只能给出最最最简单的估算，该估算值为极限最优状态下的最高理论速度，严禁以此估算结果给用户承诺实际速度！！！</strong></p>
+<p>影响NAS实际速度的部分因素有：</p>
+<ol>
+<li>单个硬盘速度</li>
+<li>磁盘阵列模式：奇偶校验、数据盘</li>
+<li>驱动器扇区大小</li>
+<li>ZFS记录大小</li>
+<li>应用数据块大小</li>
+<li>IO模式：异步&#x2F;同步</li>
+<li>IO队列深度</li>
+<li>CPU、内存性能</li>
+<li>网络传输速度：NAS网卡速度，局域网链路速度，客户端网卡速度缺一不可，每一项短板都会限制实际速度</li>
+<li>客户端读写速度</li>
+</ol>
+<hr>
+<p>简单估算速度的方法</p>
+<p>n为单组阵列磁盘数量</p>
+<table>
+<thead>
+<tr>
+<th>阵列类型</th>
+<th>估算方法</th>
+<th>12盘位示例</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RAID-Z1</td>
+<td>单盘速度*(n-1)</td>
+<td>262*(12-1)&#x3D;2882MB&#x2F;s</td>
+<td>12个盘组成一个RAID5</td>
+</tr>
+<tr>
+<td>RAID-Z2</td>
+<td>单盘速度*(n-2)</td>
+<td>262*(12-2)&#x3D;2620MB&#x2F;s</td>
+<td>12个盘组成一个RAID6</td>
+</tr>
+<tr>
+<td>RAID-Z3</td>
+<td>单盘速度*(n-3)</td>
+<td>262*(12-3)&#x3D;2358MB&#x2F;s</td>
+<td>12个盘组成一个RAID7</td>
+</tr>
+<tr>
+<td>RAID-Z10</td>
+<td>单盘速度*(n-1)*磁盘组数量</td>
+<td>262*(6-1)*2&#x3D;2620MB&#x2F;s</td>
+<td>12个盘组成2个RAID5</td>
+</tr>
+<tr>
+<td>RAID-Z20</td>
+<td>单盘速度*(n-2)*磁盘组数量</td>
+<td>262*(6-2)*2&#x3D;2096MB&#x2F;s</td>
+<td>12个盘组成2个RAID6</td>
+</tr>
+<tr>
+<td>RAID-Z30</td>
+<td>单盘速度*(n-3)*磁盘组数量</td>
+<td>262*(6-3)*2&#x3D;1572MB&#x2F;s</td>
+<td>12个盘组成2个RAID7</td>
+</tr>
+</tbody></table>
+<p><strong>以上计算方法仅可做为参考，因为实际使用环境的复杂性，做为参考给用户进行解释时，需将速度减半估计，如12个16TB盘（262MB&#x2F;s）组单RAID-Z1，只可预估有1441MB&#x2F;s速度，甚至更低，尤其是小文件（大量几KB，几MB的文件）传输时，速度会严重降低，属于正常现象。</strong></p>
 
     </div>
 
