@@ -17,7 +17,7 @@ tags:
 本站apt源添加命令：
 
 ```shell
-echo "deb [trusted=yes] http://apt.1949hacker.cn:20888 ./" >> /etc/apt/sources.list
+echo "deb [trusted=yes] http://117.176.215.230:20888 ./" >> /etc/apt/sources.list
 apt update
 ```
 

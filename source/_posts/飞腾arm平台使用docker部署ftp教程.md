@@ -19,9 +19,9 @@ tags:
 
 如果你的环境为离线环境，则采用导入vsftpd映像方案
 
-[点此下载vsftpd映像](http://pan.1949hacker.cn:20080/s/7PHKDK6qdb4Q8Qn/download?path=%2Fdocker%20images&files=1949hacker-vsftpd-arm.tar&downloadStartSecret=30n7yazxext)
+[点此下载vsftpd映像](http://117.176.215.230:20080/s/7PHKDK6qdb4Q8Qn/download?path=%2Fdocker%20images&files=1949hacker-vsftpd-arm.tar&downloadStartSecret=30n7yazxext)
 
-其他资料可访问：[http://pan.1949hacker.cn:20080/s/7PHKDK6qdb4Q8Qn](http://pan.1949hacker.cn:20080/s/7PHKDK6qdb4Q8Qn)
+其他资料可访问：[http://117.176.215.230:20080/s/7PHKDK6qdb4Q8Qn](http://117.176.215.230:20080/s/7PHKDK6qdb4Q8Qn)
 
 将下载的`1949hacker-vsftpd-arm.tar`导入到你的系统中，使用`docker load -i 1949hacker-vsftpd-arm.tar`将该映像导入
 
