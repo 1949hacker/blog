@@ -18,7 +18,7 @@ Dockerfile代码如下
 ```Dockerfile
 FROM arm64v8/debian
 
-LABEL maintainer="scepter@1949hacker.cn"
+LABEL maintainer="0@hackerbs.com"
 
 RUN rm /etc/apt/sources.list.d/debian.sources -f
 

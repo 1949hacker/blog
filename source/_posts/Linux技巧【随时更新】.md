@@ -347,11 +347,11 @@ stress-ng --cpu 72 --cpu-method matrixprod --cpu-load 100 --vm-bytes 4K --matrix
 
 第一步，根据你的发行版使用`apt`或`yum`及其他命令，安装`vsftp`软件包
 
-![20230906162643](https://img.1949hacker.cn//20230906162643.png)
+![20230906162643](https://img.hackerbs.com//20230906162643.png)
 
 第二步，编辑`vsftpd.conf`文件
 
-![20230906162829](https://img.1949hacker.cn//20230906162829.png)
+![20230906162829](https://img.hackerbs.com//20230906162829.png)
 
 确认以下内容：
 
@@ -373,7 +373,7 @@ local_root=指定目录
 
 编辑完成后保存退出
 
-![20230906171602](https://img.1949hacker.cn//20230906171602.png)
+![20230906171602](https://img.hackerbs.com//20230906171602.png)
 
 第四步，创建指定用户，此处以`abc`用户作为演示
 
@@ -381,7 +381,7 @@ local_root=指定目录
 
 **各发行版创建过程并不一致，请以你的发行版为准！**
 
-![20230906171833](https://img.1949hacker.cn//20230906171833.png)
+![20230906171833](https://img.hackerbs.com//20230906171833.png)
 
 使用`mkdir`命令，创建一个用于ftp的目录
 
@@ -404,26 +404,26 @@ chmod -R 755 /opt/ftp/data
 
 根据上文的`userlist_file=/etc/vsftpd.userlist`，在`/etc`目录下创建`vsftpd.userlist`文件并编辑内容
 
-![20230906164114](https://img.1949hacker.cn//20230906164114.png)
+![20230906164114](https://img.hackerbs.com//20230906164114.png)
 
 输入用户名`abc`退出保存即可，如需添加多个用户，每行一个即可
 
-![20230906171208](https://img.1949hacker.cn//20230906171208.png)
+![20230906171208](https://img.hackerbs.com//20230906171208.png)
 
 第五步，重启`vsftp`服务
 
 `systemctl restart vsftpd`
 
-![20230906164916](https://img.1949hacker.cn//20230906164916.png)
+![20230906164916](https://img.hackerbs.com//20230906164916.png)
 
 如果需要让该ftp用户`abc`无法登录到系统，仅访问ftp，则按照以下步骤设置
 
 首先，找到系统中的`/etc/base`或`/etc/shells`，通常系统中会同时存在这两个文件，需要分别查看这两个文件，选择有内容的那一个，如图，`/etc/bash`为空，则该文件无效
 
-![20230906183203](https://img.1949hacker.cn//20230906183203.png)
+![20230906183203](https://img.hackerbs.com//20230906183203.png)
 
 编辑有文件的`/etc/shells`，在文件末尾添加`/bin/false`后保存退出
 
-![20230906183254](https://img.1949hacker.cn//20230906183254.png)
+![20230906183254](https://img.hackerbs.com//20230906183254.png)
 
 随后使用`usermod -s /bin/false abc`即可使`abc`用户无法登录到系统，但可正常登录ftp，若ftp依旧无法登录，使用上文中的方式重启`vsftp`服务即可。

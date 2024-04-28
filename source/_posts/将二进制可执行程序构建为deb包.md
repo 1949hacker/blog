@@ -35,7 +35,7 @@ tags:
 
 **注：项目目录名称必须严格按照`包名-版本号`命名，否则dh_make会报错**
 
-![20231017163920](https://img.1949hacker.cn//20231017163920.png)
+![20231017163920](https://img.hackerbs.com//20231017163920.png)
 
 上述命令执行完毕后会生成`debian`目录，其中需要修改的是`control`和`rules`，以及创建`install`文件
 
@@ -71,10 +71,10 @@ Description: <insert up to 60 chars description>
 Source: aptdownloader
 Section: utils
 Priority: optional
-Maintainer: Vladimir Yang <scepter@1949hacker.cn>
+Maintainer: Vladimir Yang <0@hackerbs.com>
 Build-Depends: debhelper-compat (= 13)
 Standards-Version: 4.5.1
-Homepage: https://1949hacker.cn
+Homepage: https://hackerbs.com
 
 Rules-Requires-Root: no
 
@@ -104,4 +104,4 @@ aptdownloader usr/bin
 
 将你的程序放到项目的根目录，例如我的项目名为`aptdownloader-1.0.0`则我的二进制可执行程序`aptdownloader`路径为`aptdownloader-1.0.0/aptdownloader`，随后在项目根目录运行命令`dpkg-buildpackage -us -uc -nc`，随后便会在项目目录的上级目录中生成`.buildinfo`、`.changes`、`.deb`三个文件，如图所示
 
-![20231017171756](https://img.1949hacker.cn//20231017171756.png)
+![20231017171756](https://img.hackerbs.com//20231017171756.png)

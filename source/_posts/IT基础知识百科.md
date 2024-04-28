@@ -23,23 +23,23 @@ keywords:
 
 <!-- more -->
 
-![2022-10-25-10-45-40](https://img.1949hacker.cn/2022-10-25-10-45-40.png)
+![2022-10-25-10-45-40](https://img.hackerbs.com/2022-10-25-10-45-40.png)
 
 ### SFF-8087 & MINI SAS
 
-![2022-10-25-10-46-10](https://img.1949hacker.cn/2022-10-25-10-46-10.png)
+![2022-10-25-10-46-10](https://img.hackerbs.com/2022-10-25-10-46-10.png)
 
 ### SFF-8654 & SLIM SAS
 
 YGR-822平台便有大量SlimSAS用于PCIe扩展连接
 
-![2022-10-25-10-44-50](https://img.1949hacker.cn/2022-10-25-10-44-50.png)
+![2022-10-25-10-44-50](https://img.hackerbs.com/2022-10-25-10-44-50.png)
 
 ## 机房最常见的光纤及其模块和名称
 
 ### 最最最普遍的万兆光纤
 
-![20240405213514](https://img.1949hacker.cn//20240405213514.png)
+![20240405213514](https://img.hackerbs.com//20240405213514.png)
 
 外观上可以分辨的：两头都是LC接口
 
@@ -103,11 +103,11 @@ AMD部分Ryzen消费级CPU也支持ECC，以实际说明为准
 
 花里胡哨的家用金士顿屌炸天DDR5 8000MT/s内存
 
-![花里胡哨的家用金士顿屌炸天DDR5 8000MT/s内存](https://img.1949hacker.cn//20240405222648.png)
+![花里胡哨的家用金士顿屌炸天DDR5 8000MT/s内存](https://img.hackerbs.com//20240405222648.png)
 
 服务器RECC内存，中间那个大颗粒就是缓存寄存器
 
-![服务器RECC内存，中间那个大颗粒就是缓存寄存器](https://img.1949hacker.cn//20240405222930.png)
+![服务器RECC内存，中间那个大颗粒就是缓存寄存器](https://img.hackerbs.com//20240405222930.png)
 
 ## 硬盘类型
 
@@ -131,19 +131,19 @@ SSD：Solid State Drive，固态硬盘
 
 SATA接口的SSD，和SATA机械盘一样的接口
 
-![SATA接口的SSD，和SATA机械盘一样的接口](https://img.1949hacker.cn//20240405223803.png)
+![SATA接口的SSD，和SATA机械盘一样的接口](https://img.hackerbs.com//20240405223803.png)
 
 SAS接口的HDD
 
-![SAS接口的HDD](https://img.1949hacker.cn//20240405224330.png)
+![SAS接口的HDD](https://img.hackerbs.com//20240405224330.png)
 
 M.2接口的SSD
 
-![M.2接口的SSD](https://img.1949hacker.cn//20240405224108.png)
+![M.2接口的SSD](https://img.hackerbs.com//20240405224108.png)
 
 U.2接口的SSD
 
-![U.2接口的SSD](https://img.1949hacker.cn//20240405224240.png)
+![U.2接口的SSD](https://img.hackerbs.com//20240405224240.png)
 
 ## 主板常见接口
 
@@ -170,11 +170,11 @@ U.2接口的SSD
 
 SD大卡
 
-![SD大卡](https://img.1949hacker.cn//20240405231336.png)
+![SD大卡](https://img.hackerbs.com//20240405231336.png)
 
 TF小卡
 
-![TF小卡](https://img.1949hacker.cn//20240405231412.png)
+![TF小卡](https://img.hackerbs.com//20240405231412.png)
 
 ## GPU知识
 

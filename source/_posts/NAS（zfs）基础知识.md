@@ -70,15 +70,15 @@ YGENAS采用zfs文件系统，可以创建RAIDZ软磁盘阵列，对比传统磁
 
 以下是YGENAS-RH12按12个16TB硬盘做RAID-Z1的容量计算和成本计算（硬盘价格1600乱填的）：
 
-![ad900b1ecf2520cd6c46787268124ed](https://img.1949hacker.cn//ad900b1ecf2520cd6c46787268124ed.png)
+![ad900b1ecf2520cd6c46787268124ed](https://img.hackerbs.com//ad900b1ecf2520cd6c46787268124ed.png)
 
-![20240405190455](https://img.1949hacker.cn//20240405190455.png)
+![20240405190455](https://img.hackerbs.com//20240405190455.png)
 
 ## RAID-Z1/2/3速度估算
 
 首先需要知道硬盘的官方数据用于参考，以公司常见的西数16TB WUH721816ALE6L4型号硬盘为例，在bing.com搜索到[西数官方数据](https://www.westerndigital.com/zh-cn/products/internal-drives/data-center-drives/ultrastar-dc-hc550-hdd?sku=0F38462)
 
-![20240405191501](https://img.1949hacker.cn//20240405191501.png)
+![20240405191501](https://img.hackerbs.com//20240405191501.png)
 
 这里采用官方的理论速度做为参考（**仅做为参考，实际速度没有任何人能准确计算，绝不可以此做为承诺**）
 

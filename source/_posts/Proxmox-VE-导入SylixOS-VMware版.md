@@ -29,16 +29,16 @@ qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_boot.qcow2
 切换到虚拟化服务器web界面，创建新虚拟机
 
 1. 操作系统类型：Linux kernel 2.4，不使用任何光盘介质
-    ![20230224155828](https://img.1949hacker.cn/20230224155828.png)
+    ![20230224155828](https://img.hackerbs.com/20230224155828.png)
 
 2. 创建IDE硬盘，硬盘大小无所谓
-    ![20230224155929](https://img.1949hacker.cn/20230224155929.png)
+    ![20230224155929](https://img.hackerbs.com/20230224155929.png)
 
 3. 配置CPU，内核数量根据自己需求而定，类型为host
-   ![20230224160025](https://img.1949hacker.cn/20230224160025.png)
+   ![20230224160025](https://img.hackerbs.com/20230224160025.png)
 
 4. 修改网络模型，如果网卡不可用，尝试修改为其他模型
-    ![20230224160056](https://img.1949hacker.cn/20230224160056.png)
+    ![20230224160056](https://img.hackerbs.com/20230224160056.png)
 
 创建虚拟机的步骤完毕，现在连接到服务器的shell，可以使用web shell或另行连接
 
@@ -52,7 +52,7 @@ vim 125.conf
 
 原配置文件如下：
 
-![20230224160513](https://img.1949hacker.cn/20230224160513.png)
+![20230224160513](https://img.hackerbs.com/20230224160513.png)
 
 修改第6行ide0开头的内容如下
 
@@ -69,6 +69,6 @@ ide1: nfshare:125/x86_main.qcow2
 
 **先删除现有的文件**
 
-![20230224160856](https://img.1949hacker.cn/20230224160856.png)
+![20230224160856](https://img.hackerbs.com/20230224160856.png)
 
 随后打开web界面，启动虚拟机即可！

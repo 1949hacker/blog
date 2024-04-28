@@ -11,5 +11,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: https://1949hacker.cn/sitemap.xml
-Sitemap: https://1949hacker.cn/baidusitemap.xml
+Sitemap: https://hackerbs.com/sitemap.xml
+Sitemap: https://hackerbs.com/baidusitemap.xml

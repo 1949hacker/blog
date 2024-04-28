@@ -53,4 +53,4 @@ systemctl enable docker
 
 完整过程如下图所示，若有任何问题可以通过文末联系方式咨询
 
-![20230912213003](https://img.1949hacker.cn//20230912213003.png)
+![20230912213003](https://img.hackerbs.com//20230912213003.png)
