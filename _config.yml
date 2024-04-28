@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: "1949hacker's Blog - 探索知识的宇宙"
-subtitle: "1949hacker's Blog - 探索知识的宇宙"
-description: "1949hacker's Blog - 探索知识的宇宙"
-keywords: 1949hacker,1949,hacker,凤起兰庭,Linux,Debian
-author: 1949hacker
+title: "hackerbs's Blog - 探索知识的宇宙"
+subtitle: "hackerbs's Blog - 探索知识的宇宙"
+description: "hackerbs's Blog - 探索知识的宇宙"
+keywords: hackerbs,hacker,brainstorm,头脑风暴,Linux,Debian
+author: hackerbs.com
 language: zh-CN
 timezone: 'Asia/Chongqing'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://1949hacker.cn
+url: https://hackerbs.com
 permalink: :title.html
 permalink_defaults:
 pretty_urls:
