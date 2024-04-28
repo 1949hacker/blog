@@ -441,31 +441,6 @@
     
     
     <entry>
-      <title>成都凤起兰庭保租房密码锁设置教程</title>
-      <link href="/%E6%88%90%E9%83%BD%E5%87%A4%E8%B5%B7%E5%85%B0%E5%BA%AD%E4%BF%9D%E7%A7%9F%E6%88%BF%E5%AF%86%E7%A0%81%E9%94%81%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B.html"/>
-      <url>/%E6%88%90%E9%83%BD%E5%87%A4%E8%B5%B7%E5%85%B0%E5%BA%AD%E4%BF%9D%E7%A7%9F%E6%88%BF%E5%AF%86%E7%A0%81%E9%94%81%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁"><a href="#成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁" class="headerlink" title="成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁"></a>成都城投凤起兰庭保租房二期项目密码锁为《和乐门业》的，可以参照本教程尝试自行设置智能门锁</h1><span id="more"></span><h2 id="以下是智能门锁操作教程"><a href="#以下是智能门锁操作教程" class="headerlink" title="以下是智能门锁操作教程"></a>以下是智能门锁操作教程</h2><h3 id="第一步：恢复出厂设置"><a href="#第一步：恢复出厂设置" class="headerlink" title="第一步：恢复出厂设置"></a>第一步：恢复出厂设置</h3><p>将门锁的后面板向上滑开，找到恢复出厂设置的按钮，如图所示：</p><p><img src="https://img.hackerbs.com/2a7bd93a17a564ef1d2598af3285741.jpg" alt="密码锁重置按钮"></p><p><strong>按住</strong>红圈中的按钮不放，门锁会连续发出响声“滴滴滴”，<strong>响声结束后</strong>，<strong>等待几秒</strong>，随后会语音提示”初始化成功“</p><p>来到前面板，触摸<strong>密码输入区</strong>，激活面板，然后按住<strong>#</strong>，直到出现较长的提示音”滴——！“，然后会听到菜单播报，菜单功能如下：</p><h4 id="主菜单"><a href="#主菜单" class="headerlink" title="主菜单"></a>主菜单</h4><table><thead><tr><th>按键</th><th>功能</th></tr></thead><tbody><tr><td>1</td><td>管理员设置</td></tr><tr><td>2</td><td>用户设置</td></tr><tr><td>其他</td><td>略过，用不住，如有需要补充，联系我，后续抽空补全</td></tr></tbody></table><h4 id="子菜单"><a href="#子菜单" class="headerlink" title="子菜单"></a>子菜单</h4><table><thead><tr><th>主菜单</th><th>按键</th><th>功能</th></tr></thead><tbody><tr><td>管理员设置</td><td>1</td><td>添加管理员</td></tr><tr><td></td><td>2</td><td>删除管理员</td></tr><tr><td>用户设置</td><td>1</td><td>添加用户</td></tr><tr><td></td><td>2</td><td>删除用户</td></tr></tbody></table><h3 id="创建管理员"><a href="#创建管理员" class="headerlink" title="创建管理员"></a>创建管理员</h3><p>紧跟上一步操作，在初始化完成并进入菜单后，先按<strong>1</strong>听到播报“1、创建管理员，2、删除管理员”后，无需等待语音播报完成，只要听到有语音播报就可以继续操作了，接着按<strong>1</strong>，然后输入管理员密码，<strong>8位数字</strong>，输入后按<strong>#</strong>，这个就是确认键的功能，密码需要输入两次，随后会出现<strong>001</strong>的语音，这个是管理员序号，创建管理员时会依次自动从001到009编号。</p><p>完成密码设置后，按<strong>*</strong>键返回上一层，是的，<strong>*</strong>是返回，<strong>#</strong>是确认。</p><h3 id="创建用户密码、指纹"><a href="#创建用户密码、指纹" class="headerlink" title="创建用户密码、指纹"></a>创建用户密码、指纹</h3><p>在完成创建管理员后，按照上文的操作，此时你已来到主菜单，按<strong>2</strong>即可进入用户菜单，出现语音，继续操作，按<strong>1</strong>创建用户，此时，密码和指纹<strong>二选一</strong>，创建用户密码则如同创建管理员一样，直接输入<strong>8位密码</strong>，按<strong>#</strong>确认，重复一次，然后会播报用户序号（010开始）按<strong>*</strong>返回，创建第二个密码，你仍旧可以再次创建密码用户，当然，如果需要创建指纹用户，则直接用对应手指按指纹感应器，<strong>重复5次</strong>即可完成指纹用户创建。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 杂项 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 密码锁 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>记录初学Python开发fio测试工具</title>
       <link href="/%E8%AE%B0%E5%BD%95%E5%88%9D%E5%AD%A6Python%E5%BC%80%E5%8F%91fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.html"/>
       <url>/%E8%AE%B0%E5%BD%95%E5%88%9D%E5%AD%A6Python%E5%BC%80%E5%8F%91fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.html</url>
