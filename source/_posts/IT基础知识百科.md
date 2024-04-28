@@ -11,6 +11,7 @@ keywords:
   - 基础
   - IT知识
   - 百科
+comments: true
 ---
 
 ## 常见的SAS线缆
