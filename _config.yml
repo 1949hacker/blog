@@ -113,3 +113,26 @@ sitemap:
   path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
+
+waline:
+  enable: true
+  visitor: true
+  serverURL: https://waline.hackerbs.com
+  placeholder: "欢迎评论！"
+  pageSize: 10
+  lang: zh-cn
+  admin: false
+  requiredFields: []
+  theme: waline-theme-onepiece
+  emojiCDN: ''
+  emojiMaps: {}
+  emojiExt: '.png'
+  emojiSize: 32
+  CDN: ''
+  dark: false
+  # darkHeader: false
+  # locale: auto
+  # emojiPath: ''
+  # emojiCDN: ''
+  # highlight: false
+  # autoRefresh: false

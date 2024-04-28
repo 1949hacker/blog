@@ -27,7 +27,9 @@
     <div class="main-inner {% block class %}{% endblock %}">
       {%- include '_partials/header/sub-menu.njk' -%}
       {% block content %}{% endblock %}
-      {%- include '_partials/comments.njk' -%}
+      {% if page.comments !== false %}
+        {%- include '_partials/comments.njk' -%}
+      {% endif %}
     </div>
   </main>
 
