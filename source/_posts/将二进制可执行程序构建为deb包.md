@@ -1,6 +1,7 @@
 ---
 title: 将二进制可执行程序构建为deb包
 categories: [知识库]
+comments: true
 date: 2023-10-17 15:42:12
 keywords: 构建deb包
 tags:

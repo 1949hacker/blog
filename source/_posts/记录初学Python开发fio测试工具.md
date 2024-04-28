@@ -1,6 +1,7 @@
 ---
 title: 记录初学Python开发fio测试工具
 categories: [软件开发]
+comments: true
 date: 2023-03-20 18:19:44
 keywords: python,fio
 tags:

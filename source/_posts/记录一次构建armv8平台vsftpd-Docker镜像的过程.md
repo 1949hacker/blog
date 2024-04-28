@@ -1,6 +1,7 @@
 ---
 title: 记录一次构建armv8平台vsftpd Docker镜像的过程
 categories: [知识库]
+comments: true
 date: 2023-09-12 20:53:20
 keywords: armv8
 tags:

@@ -1,6 +1,7 @@
 ---
 title: 本站上线私有apt源仓库及自制实用deb包
 categories: [资源]
+comments: true
 date: 2023-10-18 09:50:41
 sticky: 10
 keywords:

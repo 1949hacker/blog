@@ -1,6 +1,7 @@
 ---
 title: Debian x86_64平台搭建arm docker环境
 categories: [知识库]
+comments: true
 date: 2023-09-12 21:51:36
 keywords: Docker
 tags:

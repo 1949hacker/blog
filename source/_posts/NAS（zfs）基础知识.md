@@ -1,6 +1,7 @@
 ---
 title: NAS（zfs）基础知识
 categories: [知识库]
+comments: true
 date: 2024-04-02 13:01:57
 keywords: 
     - NAS

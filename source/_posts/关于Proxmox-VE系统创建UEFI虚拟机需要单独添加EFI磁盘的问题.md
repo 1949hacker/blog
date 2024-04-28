@@ -5,6 +5,7 @@ categories: [知识库]
 tags:
   - Proxmox-VE
   - 虚拟机
+comments: true
 date: 2023-01-03 12:00:25
 ---
 

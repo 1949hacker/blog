@@ -3,6 +3,7 @@ title: Linux技巧【持续更新】
 categories: [知识库]
 tags:
   - Linux
+comments: true
 date: 2022-11-17 16:15:48
 keywords:
   - Linux

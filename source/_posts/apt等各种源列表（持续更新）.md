@@ -1,6 +1,7 @@
 ---
 title: apt等各种源列表（持续更新）
 categories: [知识库]
+comments: true
 date: 2024-01-28 19:12:01
 keywords: apt源
 tags:

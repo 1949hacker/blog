@@ -1,6 +1,7 @@
 ---
 title: 51单片机入门-点亮LED
 categories: [知识库]
+comments: true
 date: 2023-09-25 10:14:36
 keywords: 51单片机
 tags:

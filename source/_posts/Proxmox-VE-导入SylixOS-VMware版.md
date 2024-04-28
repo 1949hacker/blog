@@ -1,5 +1,6 @@
 ---
 title: Proxmox-VE 导入SylixOS VMware版
+comments: true
 date: 2023-02-28 16:31:43
 keywords: Proxmox-VE,SylixOS,VMware
 tags:
