@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- vercel统计 -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hackerbs.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文用于技术培训和让服务器装机人员了解应具备的专业知识、能力 内容大纲如下 [TOC]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="作为服务器装机技术人员应掌握的技术能力">
+<meta property="og:url" content="https://hackerbs.com/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html">
+<meta property="og:site_name" content="hackerbs&#39;s Blog - 探索知识的宇宙">
+<meta property="og:description" content="本文用于技术培训和让服务器装机人员了解应具备的专业知识、能力 内容大纲如下 [TOC]">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-29T08:32:03.000Z">
+<meta property="article:modified_time" content="2024-05-29T09:31:19.301Z">
+<meta property="article:author" content="hackerbs.com">
+<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="服务器装机">
+<meta property="article:tag" content="装机">
+<meta property="article:tag" content="装机技术">
+<meta property="article:tag" content="装机技术人员">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hackerbs.com/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hackerbs.com/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html","path":"作为服务器装机技术人员应掌握的技术能力.html","title":"作为服务器装机技术人员应掌握的技术能力"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>作为服务器装机技术人员应掌握的技术能力 | hackerbs's Blog - 探索知识的宇宙</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENLG4193WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ENLG4193WB","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;5eb3e0169ac749219c5fa4aeb27aa7b8&quot;}'></script>
+
+
+
+
+<link rel="dns-prefetch" href="https://waline.hackerbs.com">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">hackerbs's Blog - 探索知识的宇宙</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">hackerbs's Blog - 探索知识的宇宙</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">服务器硬件基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%A4%A7%E4%BB%B6%EF%BC%9A%E4%B8%BB%E6%9D%BF%E3%80%81CPU%E3%80%81%E5%86%85%E5%AD%98"><span class="nav-number">1.1.</span> <span class="nav-text">三大件：主板、CPU、内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%85%8D%E4%BB%B6%EF%BC%9A%E7%A1%AC%E7%9B%98%EF%BC%8CPCIe%EF%BC%8C%E7%94%B5%E6%BA%90"><span class="nav-number">1.2.</span> <span class="nav-text">其他配件：硬盘，PCIe，电源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BA%BF%E6%9D%90%EF%BC%9A%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E7%BA%BF%EF%BC%8C%E4%BE%9B%E7%94%B5%E7%BA%BF%EF%BC%8CPCIe%E7%BA%BF%E7%AD%89"><span class="nav-number">1.3.</span> <span class="nav-text">其他线材：硬盘数据线，供电线，PCIe线等</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">服务器操作系统基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">Windows操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.</span> <span class="nav-text">Linux操作系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">3.</span> <span class="nav-text">网络基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88"><span class="nav-number">3.1.</span> <span class="nav-text">链路聚合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VLAN"><span class="nav-number">3.2.</span> <span class="nav-text">VLAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E5%B8%B8%E8%AF%86"><span class="nav-number">4.</span> <span class="nav-text">其它常识</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hackerbs.com</p>
+  <div class="site-description" itemprop="description">hackerbs's Blog - 探索知识的宇宙</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hackerbs.com/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hackerbs.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hackerbs's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="hackerbs's Blog - 探索知识的宇宙">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="作为服务器装机技术人员应掌握的技术能力 | hackerbs's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          作为服务器装机技术人员应掌握的技术能力<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-29 16:32:03 / 修改时间：17:31:19" itemprop="dateCreated datePublished" datetime="2024-05-29T16:32:03+08:00">2024-05-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文用于技术培训和让服务器装机人员了解应具备的专业知识、能力</p>
+<p>内容大纲如下</p>
+<p>[TOC]</p>
+<span id="more"></span>
+
+<h2 id="服务器硬件基础知识"><a href="#服务器硬件基础知识" class="headerlink" title="服务器硬件基础知识"></a>服务器硬件基础知识</h2><h3 id="三大件：主板、CPU、内存"><a href="#三大件：主板、CPU、内存" class="headerlink" title="三大件：主板、CPU、内存"></a>三大件：主板、CPU、内存</h3><h3 id="其他配件：硬盘，PCIe，电源"><a href="#其他配件：硬盘，PCIe，电源" class="headerlink" title="其他配件：硬盘，PCIe，电源"></a>其他配件：硬盘，PCIe，电源</h3><h3 id="其他线材：硬盘数据线，供电线，PCIe线等"><a href="#其他线材：硬盘数据线，供电线，PCIe线等" class="headerlink" title="其他线材：硬盘数据线，供电线，PCIe线等"></a>其他线材：硬盘数据线，供电线，PCIe线等</h3><h2 id="服务器操作系统基础知识"><a href="#服务器操作系统基础知识" class="headerlink" title="服务器操作系统基础知识"></a>服务器操作系统基础知识</h2><h3 id="Windows操作系统"><a href="#Windows操作系统" class="headerlink" title="Windows操作系统"></a>Windows操作系统</h3><h3 id="Linux操作系统"><a href="#Linux操作系统" class="headerlink" title="Linux操作系统"></a>Linux操作系统</h3><h2 id="网络基础知识"><a href="#网络基础知识" class="headerlink" title="网络基础知识"></a>网络基础知识</h2><h3 id="链路聚合"><a href="#链路聚合" class="headerlink" title="链路聚合"></a>链路聚合</h3><h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><h2 id="其它常识"><a href="#其它常识" class="headerlink" title="其它常识"></a>其它常识</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我喝冰阔落~</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="hackerbs.com 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="hackerbs.com 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/binance.jpg" alt="hackerbs.com binance">
+        <span>binance</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/hacker1949">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="mailto:0@hackerbs.com">
+            <span class="icon">
+              <i class="fab fa-envelope"></i>
+            </span>
+
+            <span class="label">e-mail</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 服务器</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA/" rel="tag"># 服务器装机</a>
+              <a href="/tags/%E8%A3%85%E6%9C%BA/" rel="tag"># 装机</a>
+              <a href="/tags/%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF/" rel="tag"># 装机技术</a>
+              <a href="/tags/%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98/" rel="tag"># 装机技术人员</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/IT%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%99%BE%E7%A7%91.html" rel="prev" title="IT基础知识百科">
+                  <i class="fa fa-chevron-left"></i> IT基础知识百科
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hackerbs.com</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.hackerbs.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"欢迎评论！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","admin":false,"theme":"waline-theme-onepiece","emojiCDN":"","emojiMaps":{},"emojiExt":".png","emojiSize":32,"CDN":"","dark":false,"el":"#waline","comment":true,"path":"/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
