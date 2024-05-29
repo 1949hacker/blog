@@ -1697,11 +1697,29 @@
     <title>作为服务器装机技术人员应掌握的技术能力</title>
     <url>/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html</url>
     <content><![CDATA[<p>本文用于技术培训和让服务器装机人员了解应具备的专业知识、能力</p>
-<p>内容大纲如下</p>
-<p>[TOC]</p>
+<p>内容大纲见左侧目录</p>
 <span id="more"></span>
 
-<h2 id="服务器硬件基础知识"><a href="#服务器硬件基础知识" class="headerlink" title="服务器硬件基础知识"></a>服务器硬件基础知识</h2><h3 id="三大件：主板、CPU、内存"><a href="#三大件：主板、CPU、内存" class="headerlink" title="三大件：主板、CPU、内存"></a>三大件：主板、CPU、内存</h3><h3 id="其他配件：硬盘，PCIe，电源"><a href="#其他配件：硬盘，PCIe，电源" class="headerlink" title="其他配件：硬盘，PCIe，电源"></a>其他配件：硬盘，PCIe，电源</h3><h3 id="其他线材：硬盘数据线，供电线，PCIe线等"><a href="#其他线材：硬盘数据线，供电线，PCIe线等" class="headerlink" title="其他线材：硬盘数据线，供电线，PCIe线等"></a>其他线材：硬盘数据线，供电线，PCIe线等</h3><h2 id="服务器操作系统基础知识"><a href="#服务器操作系统基础知识" class="headerlink" title="服务器操作系统基础知识"></a>服务器操作系统基础知识</h2><h3 id="Windows操作系统"><a href="#Windows操作系统" class="headerlink" title="Windows操作系统"></a>Windows操作系统</h3><h3 id="Linux操作系统"><a href="#Linux操作系统" class="headerlink" title="Linux操作系统"></a>Linux操作系统</h3><h2 id="网络基础知识"><a href="#网络基础知识" class="headerlink" title="网络基础知识"></a>网络基础知识</h2><h3 id="链路聚合"><a href="#链路聚合" class="headerlink" title="链路聚合"></a>链路聚合</h3><h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><h2 id="其它常识"><a href="#其它常识" class="headerlink" title="其它常识"></a>其它常识</h2>]]></content>
+<h2 id="服务器硬件基础知识"><a href="#服务器硬件基础知识" class="headerlink" title="服务器硬件基础知识"></a>服务器硬件基础知识</h2><h3 id="三大件：主板、CPU、内存"><a href="#三大件：主板、CPU、内存" class="headerlink" title="三大件：主板、CPU、内存"></a>三大件：主板、CPU、内存</h3><h4 id="CPU基础知识"><a href="#CPU基础知识" class="headerlink" title="CPU基础知识"></a>CPU基础知识</h4><table>
+<thead>
+<tr>
+<th>品牌</th>
+<th>系列</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Intel</td>
+<td>Core</td>
+<td>消费级家用CPU,不支持ECC服务器内存,PCIe通道数少，主频高核数少</td>
+</tr>
+<tr>
+<td>Intel</td>
+<td>Xeon</td>
+<td>企业级服务器CPU,支持ECC服务器内存，PCIe通道数多，主频相对家用级低一些，主要是多核，稳定，处理大量运算</td>
+</tr>
+</tbody></table>
+<h3 id="其他配件：硬盘，PCIe，电源"><a href="#其他配件：硬盘，PCIe，电源" class="headerlink" title="其他配件：硬盘，PCIe，电源"></a>其他配件：硬盘，PCIe，电源</h3><h3 id="其他线材：硬盘数据线，供电线，PCIe线等"><a href="#其他线材：硬盘数据线，供电线，PCIe线等" class="headerlink" title="其他线材：硬盘数据线，供电线，PCIe线等"></a>其他线材：硬盘数据线，供电线，PCIe线等</h3><h2 id="服务器操作系统基础知识"><a href="#服务器操作系统基础知识" class="headerlink" title="服务器操作系统基础知识"></a>服务器操作系统基础知识</h2><h3 id="Windows操作系统"><a href="#Windows操作系统" class="headerlink" title="Windows操作系统"></a>Windows操作系统</h3><h3 id="Linux操作系统"><a href="#Linux操作系统" class="headerlink" title="Linux操作系统"></a>Linux操作系统</h3><h2 id="网络基础知识"><a href="#网络基础知识" class="headerlink" title="网络基础知识"></a>网络基础知识</h2><h3 id="链路聚合"><a href="#链路聚合" class="headerlink" title="链路聚合"></a>链路聚合</h3><h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><h2 id="其它常识"><a href="#其它常识" class="headerlink" title="其它常识"></a>其它常识</h2>]]></content>
       <categories>
         <category>知识库</category>
       </categories>
