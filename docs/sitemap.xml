@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hackerbs.com/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html</loc>
+    
+    <lastmod>2024-05-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/CentOS%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</loc>
+    
+    <lastmod>2024-05-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hackerbs.com/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</loc>
     
     <lastmod>2024-05-30</lastmod>
@@ -14,15 +32,6 @@
     <loc>https://hackerbs.com/%E9%A3%9E%E8%85%BEarm%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8docker%E9%83%A8%E7%BD%B2ftp%E6%95%99%E7%A8%8B.html</loc>
     
     <lastmod>2024-05-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A3%85%E6%9C%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%BA%94%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%BD%E5%8A%9B.html</loc>
-    
-    <lastmod>2024-05-29</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
