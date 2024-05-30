@@ -2148,4 +2148,167 @@
         <tag>Docker</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ubuntu安装教程</title>
+    <url>/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
+    <content><![CDATA[<h2 id="ubuntu-20-04-6-live-server-amd64安装教程"><a href="#ubuntu-20-04-6-live-server-amd64安装教程" class="headerlink" title="ubuntu-20.04.6-live-server-amd64安装教程"></a>ubuntu-20.04.6-live-server-amd64安装教程</h2><h3 id="进入安装程序"><a href="#进入安装程序" class="headerlink" title="进入安装程序"></a>进入安装程序</h3><p><strong>灰色&#x2F;绿色高亮就是选定状态，Enter就是确认</strong></p>
+<p>不动键盘的话，会自动选择第一个，手动回车进入第一个也可<code>Install Ubuntu Server</code></p>
+<p><img src="https://img.hackerbs.com//20240530120224.png" alt="20240530120224"></p>
+<span id="more"></span>
+
+<h3 id="选择安装语言"><a href="#选择安装语言" class="headerlink" title="选择安装语言"></a>选择安装语言</h3><p>通常来讲，选择<code>English</code>，因为命令行只支持英文，选择其他语言会导致命令行输出的中文无法显示，呈现方块状。</p>
+<p><img src="https://img.hackerbs.com//20240530120346.png" alt="20240530120346"></p>
+<h3 id="跳过更新直接安装"><a href="#跳过更新直接安装" class="headerlink" title="跳过更新直接安装"></a>跳过更新直接安装</h3><p>因为安装的是20.04.6，所以会在此处提示有更新的版本，选择默认的<code>Continue without updating</code>即可</p>
+<p><img src="https://img.hackerbs.com//20240530120638.png" alt="20240530120638"></p>
+<h3 id="选择键盘"><a href="#选择键盘" class="headerlink" title="选择键盘"></a>选择键盘</h3><p>直接使用默认的<code>English</code>，Enter下一步即可</p>
+<p><img src="https://img.hackerbs.com//20240530121043.png" alt="20240530121043"></p>
+<h3 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h3><p>如果是DHCP自动获取则直接<code>Done</code>下一步即可，否则参考配置静态IP</p>
+<p><img src="https://img.hackerbs.com//20240530121137.png" alt="20240530121137"></p>
+<h4 id="配置静态IP"><a href="#配置静态IP" class="headerlink" title="配置静态IP"></a>配置静态IP</h4><p>使用上箭头展开此处</p>
+<p><img src="https://img.hackerbs.com//20240530121210.png" alt="20240530121210"></p>
+<p>选择<code>Edit IPv4</code>并使用<code>Manual</code>手动配置网络</p>
+<p>Ubuntu的配置与其他Linux略有不同，如表所示</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Subnet</td>
+<td>IP段&#x2F;前缀</td>
+<td>这一项需要配置IP段如192.168.2.0段，并指定前缀，前缀可以用子网掩码转前缀工具计算，或者手算</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>IP地址</td>
+<td></td>
+</tr>
+<tr>
+<td>Gateway</td>
+<td>网关地址</td>
+<td></td>
+</tr>
+<tr>
+<td>Name Servers</td>
+<td>DNS地址</td>
+<td>用,做分隔符，一般填119.29.29.29,8.8.8.8就足够了</td>
+</tr>
+</tbody></table>
+<p><img src="https://img.hackerbs.com//20240530121329.png" alt="20240530121329"></p>
+<h3 id="配置代理（几乎不需要）"><a href="#配置代理（几乎不需要）" class="headerlink" title="配置代理（几乎不需要）"></a>配置代理（几乎不需要）</h3><p>配置网络后下一步会弹出配置代理，留空直接下一步即可</p>
+<p><img src="https://img.hackerbs.com//20240530123748.png" alt="20240530123748"></p>
+<h3 id="选择镜像站"><a href="#选择镜像站" class="headerlink" title="选择镜像站"></a>选择镜像站</h3><p>Ubuntu会默认选择国内镜像站，所以这一步也是直接回车即可</p>
+<p><img src="https://img.hackerbs.com//20240530123838.png" alt="20240530123838"></p>
+<h3 id="配置磁盘"><a href="#配置磁盘" class="headerlink" title="配置磁盘"></a>配置磁盘</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>翻译</th>
+<th>作用解析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Use an entire disk</td>
+<td>使用整个磁盘</td>
+<td></td>
+</tr>
+<tr>
+<td>Set up this disk as an LVM group</td>
+<td>将此磁盘设置为LVM组</td>
+<td>使用lvm逻辑卷可以在后期非常方便的扩容管理，<strong>安装系统必须使用lvm</strong></td>
+</tr>
+<tr>
+<td>Encrypt the LVM group with LUKS</td>
+<td>使用LUKS加密lvm组（磁盘加密，不需要）</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>如图所示这种，选择了磁盘后确保启用了lvm直接下一步即可</p>
+<p><img src="https://img.hackerbs.com//20240530123900.png" alt="20240530123900"></p>
+<p>这一步会显示磁盘的信息、分区等，直接回车下一步即可</p>
+<p><img src="https://img.hackerbs.com//20240530124408.png" alt="20240530124408"></p>
+<p>提示是否确认继续，直接确认继续即可，此处英文的意思就是继续安装将格式化磁盘，丢失磁盘上的数据</p>
+<p><img src="https://img.hackerbs.com//20240530124422.png" alt="20240530124422"></p>
+<h3 id="配置用户"><a href="#配置用户" class="headerlink" title="配置用户"></a>配置用户</h3><p>Ubuntu默认不会启用root用户，所以需要在此设置用户名密码</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>翻译</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Your name</td>
+<td>昵称</td>
+<td>就是个显示名称，随便填</td>
+</tr>
+<tr>
+<td>Your server’s name</td>
+<td>主机名</td>
+<td>就是hostname，主机名，计算机名</td>
+</tr>
+<tr>
+<td>Pick a username</td>
+<td>选择一个用户名</td>
+<td>就是登陆用的，账号</td>
+</tr>
+<tr>
+<td>Choose a password</td>
+<td>选择一个密码</td>
+<td>设密码</td>
+</tr>
+<tr>
+<td>Confirm your password</td>
+<td>确认你的密码</td>
+<td>二次输入再确认一遍</td>
+</tr>
+</tbody></table>
+<p><img src="https://img.hackerbs.com//20240530124629.png" alt="20240530124629"></p>
+<h3 id="安装SSH服务"><a href="#安装SSH服务" class="headerlink" title="安装SSH服务"></a>安装SSH服务</h3><p>勾选<code>Install OpenSSH server</code>，否则无法进行ssh连接，忽略<code>Import SSH identity</code>，不需要导入ssh key</p>
+<p><img src="https://img.hackerbs.com//20240530124958.png" alt="20240530124958"></p>
+<h3 id="跳过额外软件包安装"><a href="#跳过额外软件包安装" class="headerlink" title="跳过额外软件包安装"></a>跳过额外软件包安装</h3><p>没必要在这里安装额外软件包，除非用户指定，但更建议安装完毕后手动安装，因为官方的包通常会落后一些而且并不如手动安装的，比如docker等</p>
+<p>直接跳过，执行下一步</p>
+<p><img src="https://img.hackerbs.com//20240530125216.png" alt="20240530125216"></p>
+<h3 id="等待系统安装完毕"><a href="#等待系统安装完毕" class="headerlink" title="等待系统安装完毕"></a>等待系统安装完毕</h3><p>显示<code>Installing system</code></p>
+<p><img src="https://img.hackerbs.com//20240530125257.png" alt="20240530125257"></p>
+<p>当上面显示<code>Install complete</code>下面出现<code>Cancel update and reboot</code>时，直接选择下面的，意思是取消更新并重启</p>
+<p><img src="https://img.hackerbs.com//20240530125349.png" alt="20240530125349"></p>
+<p>等待重启后进入系统</p>
+<p><img src="https://img.hackerbs.com//20240530125451.png" alt="20240530125451"></p>
+<h4 id="移除安装介质失败"><a href="#移除安装介质失败" class="headerlink" title="移除安装介质失败"></a>移除安装介质失败</h4><p>大概率会出现如图所示的错误，无法移除安装介质，其实并不影响，直接拔了U盘重启即可</p>
+<p><img src="https://img.hackerbs.com//20240530125930.png" alt="20240530125930"></p>
+<h3 id="安装完毕，成功进入系统"><a href="#安装完毕，成功进入系统" class="headerlink" title="安装完毕，成功进入系统"></a>安装完毕，成功进入系统</h3><p><img src="https://img.hackerbs.com//20240530130045.png" alt="20240530130045"></p>
+<h4 id="删除安装过程中不得已创建的用户，并配置root登陆ssh"><a href="#删除安装过程中不得已创建的用户，并配置root登陆ssh" class="headerlink" title="删除安装过程中不得已创建的用户，并配置root登陆ssh"></a>删除安装过程中不得已创建的用户，并配置root登陆ssh</h4><p><strong>除非客户需要，否则不需要执行该步骤</strong></p>
+<p>登陆后先修改root用户密码</p>
+<p>第一遍输安装时创建的用户的密码，是用于授权sudo命令</p>
+<p>后面两步才是设置root密码</p>
+<p><img src="https://img.hackerbs.com//20240530130218.png" alt="20240530130218"></p>
+<p>退出使用root用户登陆</p>
+<p>然后使用<code>userdel -r 用户名</code>删除用户及其主目录</p>
+<p><img src="https://img.hackerbs.com//20240530130436.png" alt="20240530130436"></p>
+<p>编辑<code>/etc/ssh/sshd_config</code>文件，使root用户可以通过密码登陆ssh</p>
+<p><img src="https://img.hackerbs.com//20240530130601.png" alt="20240530130601"></p>
+<p>在原本的<code>#PermitRootLogin prohibit-password</code>下添加一行<code>PermitRootLogin yes</code>，作用是允许root用户使用密码登陆ssh，原本的<code>prohibit-password</code>作用是禁止密码登陆，会一直提示密码错误</p>
+<p>如果是用vim编辑的配置文件则需要使用vim的语法<code>:wq</code>以便保存退出，在默认的命令模式下按<code>i</code>是编辑模式，按<code>ESC</code>是返回命令模式，vim语法自行参考网上教程</p>
+<p><img src="https://img.hackerbs.com//20240530130722.png" alt="20240530130722"></p>
+<p>编辑完成保存退出后使用<code>systemctl restart ssh</code>重启ssh服务，使修改生效</p>
+<p><img src="https://img.hackerbs.com//20240530131100.png" alt="20240530131100"></p>
+<p>使用<code>ssh root@ip</code>测试连接，成功，至此Ubuntu安装教程完毕！</p>
+<p><img src="https://img.hackerbs.com//20240530131234.png" alt="20240530131234"></p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Ubuntu</tag>
+        <tag>Ubuntu安装</tag>
+        <tag>Linux安装</tag>
+        <tag>Ubuntu服务器</tag>
+      </tags>
+  </entry>
 </search>
