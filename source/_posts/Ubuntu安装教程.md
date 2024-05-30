@@ -16,6 +16,12 @@ tags:
 
 ## ubuntu-20.04.6-live-server-amd64安装教程
 
+该系统下载地址：
+
+[中科大镜像站下载](https://iso.mirrors.ustc.edu.cn/ubuntu-releases/20.04/ubuntu-20.04.6-live-server-amd64.iso)
+
+[网盘ISO文件夹中下载](http://117.176.215.230:20080/s/RpAtcoJcbpYtaoa)
+
 ### 进入安装程序
 
 **灰色/绿色高亮就是选定状态，Enter就是确认**
