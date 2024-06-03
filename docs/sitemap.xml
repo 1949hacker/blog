@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hackerbs.com/Debian%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</loc>
+    
+    <lastmod>2024-06-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hackerbs.com/IT%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%99%BE%E7%A7%91.html</loc>
     
     <lastmod>2024-06-03</lastmod>
@@ -603,6 +612,20 @@
   
   <url>
     <loc>https://hackerbs.com/tags/%E7%94%B5%E6%BA%90/</loc>
+    <lastmod>2024-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/Debian%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2024-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/Debian%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
     <lastmod>2024-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
