@@ -20,7 +20,7 @@ tags:
 
 [中科大镜像站下载](https://iso.mirrors.ustc.edu.cn/ubuntu-releases/20.04/ubuntu-20.04.6-live-server-amd64.iso)
 
-[网盘ISO文件夹中下载](http://117.176.215.230:20080/s/RpAtcoJcbpYtaoa)
+[网盘ISO文件夹中下载](https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa)
 
 ### 进入安装程序
 
