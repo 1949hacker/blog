@@ -4,7 +4,7 @@
 
 # Site
 title: "hackerbs's Blog - 探索知识的宇宙"
-subtitle: "hackerbs's Blog - 探索知识的宇宙"
+subtitle: "本站网盘地址：https://disk.ygeit.cn/"
 description: "hackerbs's Blog - 探索知识的宇宙"
 keywords: hackerbs,hacker,brainstorm,头脑风暴,Linux,Debian
 author: hackerbs.com
@@ -136,3 +136,11 @@ waline:
   # emojiCDN: ''
   # highlight: false
   # autoRefresh: false
+
+symbols_count_time:
+  #文章内是否显示
+  symbols: true
+  time: true
+  # 网页底部是否显示
+  total_symbols: true
+  total_time: true
