@@ -18,11 +18,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CentOS安装教程</title>
-    <url>/CentOS%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>Debian x86_64平台搭建arm docker环境</title>
     <url>/Debian-x86-64%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BAarm-docker%E7%8E%AF%E5%A2%83.html</url>
     <content><![CDATA[<p>在Debian x86_64平台搭建Docker arm环境的方法</p>
@@ -38,75 +33,6 @@
       <tags>
         <tag>Docker</tag>
         <tag>ARM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Debian基础知识【持续更新】</title>
-    <url>/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
-    <content><![CDATA[<h1 id="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"><a href="#本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我" class="headerlink" title="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"></a>本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我</h1><p><strong>根据红帽的公告，CentOS将不再适合作为生产环境的稳定系统使用，为此我个人建议您尝试著名且优秀的Debian系统</strong></p>
-<span id="more"></span>
-
-<blockquote>
-<p>2020年12月08日，CentOS官方宣布了停止维护CentOS Linux 8的计划，并推出了CentOS Stream项目。具体信息，请阅读CentOS官方公告。其具体规划如下：</p>
-<ul>
-<li>CentOS Linux 8作为RHEL 8的复刻版本，生命周期缩短，于2021年12月31日停止更新并停止维护（EOL）。</li>
-<li>基于以上官方变更计划，CentOS Linux 8用户将无法获得包括问题修复和功能更新在内的任何软件维护和支持。CentOS官方建议停止维护后：对于开发或测试环境，可以将环境迁移至CentOS Stream版本； 对于生产环境或部署关键业务的系统，建议使用稳定的Red Hat Enterprise Linux。对此，用户需评估以下问题：</li>
-<li>CentOS Stream是一个滚动发行的版本，仅为RHEL前置测试版，运用于生产环境时，可能存在一定风险。<br><a href="https://aws.amazon.com/cn/blogs/china/aws-choices-for-centos-after-stopping-maintenance/">亚马逊云科技上在CentOS在停止维护后的几种选择</a></li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="Debian-更换国内源"><a href="#Debian-更换国内源" class="headerlink" title="Debian 更换国内源"></a>Debian 更换国内源</h2><p>在使用过阿里云、网易163、清华、中科大源之后，我个人建议更换为中科大源，Debian更换源的方式非常简单，在此非常感谢<a href="https://github.com/snullp">sNullp先生</a>的<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>!</p>
-<p>在使用该配置生成器之前，你需要先确认你的Debian版本，使用<code>cat /etc/os-release</code>命令，在输出的结果中找到<code>VERSION_CODENAME=bullseye</code>，位于<code>=</code>后面的就是你的版本代号，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301160807.png" alt="20230301160807"></p>
-<p>然后打开<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>，找到Debian并选择你对应的版本号，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301161044.png" alt="20230301161044"></p>
-<p>其中，HTTPS&#x2F;HTTP不必赘述，就是字母意思，而IPv4也很好理解，就是选择IPv4或IPv6地址访问，默认HTTPS和IPv4即可</p>
-<p>复制红框中的内容后，回到你的Debian系统，使用<code>vim /etc/apt/sources.list</code>命令编辑apt源配置文件，如果提示<code>-bash: /usr/bin/vim: No such file or directory</code>则是因为你没有安装<code>vim</code>编辑器，我强烈建议你安装<code>vim</code>编辑器，如果暂时无法安装，也可使用<code>nano</code>编辑器，对应命令为<code>nano /etc/apt/sources.list</code>，使用编辑器打开<code>sources.list</code>文件后，如果你是<code>vim</code>编辑器，则可以将光标移到首行，然后按<code>d</code>再按<code>Shift+G</code>即可直接清空内容，然后粘贴你在源配置生成器复制的红框中内容即可，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301161642.png" alt="20230301161642"></p>
-<p><code>vim</code>编辑器在编辑完成后按<code>ESC</code>再输入<code>:wq</code>回车即可退出保存，编辑器的操作方式在此不过多赘述。</p>
-<p>完成源配置文件的编辑后，还需要使用<code>apt update</code>命令更新源，至此，Debian更换中科大源的教程结束。</p>
-<h2 id="Debian-iSCSI挂载卷"><a href="#Debian-iSCSI挂载卷" class="headerlink" title="Debian iSCSI挂载卷"></a>Debian iSCSI挂载卷</h2><p>首先，你需要安装<code>open-iscsi</code>，使用<code>apt install -y open-iscsi</code>进行安装，然后运行<code>iscsiadm -m discovery -t st -p 服务器地址</code>探测服务器发布的卷，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301162849.png" alt="20230301162849"></p>
-<p>随后使用<code>iscsiadm -m node -T iqn开头的对应地址 -p 服务器地址 -l</code>即可完成挂载，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301164715.png" alt="20230301164715"></p>
-<p>随后使用<code>lsblk</code>命令发现新的磁盘，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301164844.png" alt="20230301164844"></p>
-<p>扩展内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 --op update -n node.startup -v automatic</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 -u</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除所有连接</span></span><br><span class="line">iscsiadm -m node --logoutall=all</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有iscsi连接</span></span><br><span class="line">iscsiadm -m session</span><br></pre></td></tr></table></figure>
-
-<h2 id="Debian-格式化并挂载磁盘以及lvm逻辑卷的使用"><a href="#Debian-格式化并挂载磁盘以及lvm逻辑卷的使用" class="headerlink" title="Debian 格式化并挂载磁盘以及lvm逻辑卷的使用"></a>Debian 格式化并挂载磁盘以及lvm逻辑卷的使用</h2><p>紧跟上文，iscsi挂载后的卷无法直接使用，需要像磁盘一样进行分区及挂载到系统目录</p>
-<p>安装parted：<code>apt install -y parted</code></p>
-<p>使用<code>parted /dev/设备</code>命令进入磁盘分区管理，随后使用<code>mklable gpt</code>将磁盘设置为优秀的<code>GPT</code>分区表，然后使用<code>mkpart 名称 文件系统 起始扇区 结束地址</code>创建分区，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301165916.png" alt="20230301165916"></p>
-<p>其中，2048s是为了将扇区进行对齐，有利于提升性能，而100%则是指定结束地址为最后，100%可以替换为明确的扇区、容量，如9999s（扇区）或100G（容量），同理，起始地址也是如此，如果你需要创建多个分区，则之后的分区起始地址应紧随上一个分区的结束地址。</p>
-<p>分区创建完毕后，输入<code>q</code>回车即可退出parted，将分区格式化之后即可挂载使用</p>
-<p><strong>但，我在此强烈建议你使用lvm逻辑卷，因为lvm优点有便于容量调整、创建跨区卷等</strong></p>
-<p>lvm卷的使用步骤有创建物理卷，创建卷组，创建逻辑卷</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建物理卷</span></span><br><span class="line">pvcreate /dev/设备</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建卷组</span></span><br><span class="line">vgcreate 卷组名 物理卷</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建逻辑卷</span></span><br><span class="line">lvcreate -l +100%FREE -n 逻辑卷名 所属卷组名</span><br></pre></td></tr></table></figure>
-
-<p>示例如图：</p>
-<p><img src="https://img.hackerbs.com/20230301170847.png" alt="20230301170847"></p>
-<p>lvm的逻辑卷地址位于<code>/dev/mapper/</code>下，命名格式为<code>卷组名-逻辑卷名</code>，将逻辑卷格式化后即可挂载使用，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301171003.png" alt="20230301171003"></p>
-<p>至此，Debian 磁盘分区及lvm逻辑卷教程完毕，如有疑问，欢迎咨询！</p>
-<h2 id="Debian访问SMB服务器"><a href="#Debian访问SMB服务器" class="headerlink" title="Debian访问SMB服务器"></a>Debian访问SMB服务器</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装cifs-utils</span></span><br><span class="line">apt install cifs-utils</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用mount进行挂载</span></span><br><span class="line">mount -t cifs -o username=$username //$address/$smbname /$mount_point/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例</span></span><br><span class="line">mount -t cifs -o username=user //10.1.1.1/test /smbTest/</span><br></pre></td></tr></table></figure>
-
-<h2 id="apt下载deb包及其依赖的办法"><a href="#apt下载deb包及其依赖的办法" class="headerlink" title="apt下载deb包及其依赖的办法"></a>apt下载deb包及其依赖的办法</h2><p>使用apt install时加上<code>--download-only</code>参数即可实现仅下载而不安装的操作，但是下载的deb包默认是在<code>/var/cache/apt/archives</code>目录中，可以使用<code>-o Dir::Cache::archives=&quot;/&lt;your dir&gt;&quot;</code>参数指定缓存路径。</p>
-<p>APT包管理器在执行操作时会使用lock文件来确保系统中只有一个进程在使用APT。partial目录则是APT在下载和安装软件包时使用的临时目录。所以你会发现在你指定的目录中有<code>lock</code>文件和<code>partial</code>目录，删除即可，并无影响。</p>
-<p><strong>鉴于你可能是个像我一样有什么大病的强迫症，所以为你提供了禁用lock和partial的办法</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-o APT::Get::Lock_Prohibit=1 # 禁用lock文件</span><br><span class="line">-o Acquire::Pdiffs::NoDownload=true -o Acquire::AllowDowngradeToInsecureRepositories=true -o Acquire::AllowInsecureRepositories=true -o Acquire::NoCDROM=true -o Acquire::NoVerify=true -o Acquire::Check-Valid-Until=false -o Dir::Etc::TrustedParts=&quot;/path/to/trusted/parts&quot; -o Dir::Etc::Trusted=/path/to/trusted/dir # 禁用partial目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">是的，看花眼了对吧？↓</span></span><br><span class="line">Acquire::Pdiffs::NoDownload=true # 禁用差分包下载</span><br><span class="line">Acquire::AllowDowngradeToInsecureRepositories=true # 允许使用不安全的APT源</span><br><span class="line">Acquire::AllowInsecureRepositories=true # 允许使用不安全的APT源</span><br><span class="line">Acquire::NoCDROM=true # 禁用CD-ROM镜像</span><br><span class="line">Acquire::NoVerify=true # 禁用APT源的GPG验证</span><br><span class="line">Acquire::Check-Valid-Until=false # 禁用APT源的有效期检查</span><br><span class="line">Dir::Etc::TrustedParts=&quot;/path/to/trusted/parts&quot; # 设置APT的可信部件目录</span><br><span class="line">Dir::Etc::Trusted=/path/to/trusted/dir # 设置APT的可信源目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以上操作都是为了避免使用partial目录，这些命令可能会降低APT操作的安全性和可靠性</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">所以，没什么大病别骚搞，就简单点，下载完了删掉lock和partial即可</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以下是我下载docker包的命令示范</span></span><br><span class="line">apt install -o Dir::Cache::archives=&quot;./&quot; --download-only docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>重点！！！</strong></p>
-<hr>
-<p>上面的办法其实有个很操蛋的地方，如果你的系统已经安装了这个软件包，那么apt并不会为你下载任何deb包，你需要使用下面的办法进行下载</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将其中的&lt;package-name&gt;替换为你要下载的包，比如nmap</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意！命令中有两处&lt;package-name&gt;</span></span><br><span class="line">apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances &lt;package-name&gt; | grep &quot;^\w&quot; | sort -u) &lt;package-name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以下是我下载vim及其依赖的示例</span></span><br><span class="line">apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances vim | grep &quot;^\w&quot; | sort -u) vim</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances &lt;package-name&gt;</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个命令将返回一个包含软件包及其所有依赖的列表，不包括推荐的软件包和建议的软件包，以及任何冲突、破坏、替换和增强关系</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">grep <span class="string">&quot;^\w&quot;</span>是过滤掉空行和注释行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后使用 <span class="built_in">sort</span> -u 命令去重</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Debian</tag>
       </tags>
   </entry>
   <entry>
@@ -250,6 +176,80 @@
       </categories>
       <tags>
         <tag>嵌入式开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS安装教程</title>
+    <url>/CentOS%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Debian基础知识【持续更新】</title>
+    <url>/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
+    <content><![CDATA[<h1 id="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"><a href="#本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我" class="headerlink" title="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"></a>本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我</h1><p><strong>根据红帽的公告，CentOS将不再适合作为生产环境的稳定系统使用，为此我个人建议您尝试著名且优秀的Debian系统</strong></p>
+<span id="more"></span>
+
+<blockquote>
+<p>2020年12月08日，CentOS官方宣布了停止维护CentOS Linux 8的计划，并推出了CentOS Stream项目。具体信息，请阅读CentOS官方公告。其具体规划如下：</p>
+<ul>
+<li>CentOS Linux 8作为RHEL 8的复刻版本，生命周期缩短，于2021年12月31日停止更新并停止维护（EOL）。</li>
+<li>基于以上官方变更计划，CentOS Linux 8用户将无法获得包括问题修复和功能更新在内的任何软件维护和支持。CentOS官方建议停止维护后：对于开发或测试环境，可以将环境迁移至CentOS Stream版本； 对于生产环境或部署关键业务的系统，建议使用稳定的Red Hat Enterprise Linux。对此，用户需评估以下问题：</li>
+<li>CentOS Stream是一个滚动发行的版本，仅为RHEL前置测试版，运用于生产环境时，可能存在一定风险。<br><a href="https://aws.amazon.com/cn/blogs/china/aws-choices-for-centos-after-stopping-maintenance/">亚马逊云科技上在CentOS在停止维护后的几种选择</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="Debian-更换国内源"><a href="#Debian-更换国内源" class="headerlink" title="Debian 更换国内源"></a>Debian 更换国内源</h2><p>在使用过阿里云、网易163、清华、中科大源之后，我个人建议更换为中科大源，Debian更换源的方式非常简单，在此非常感谢<a href="https://github.com/snullp">sNullp先生</a>的<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>!</p>
+<p>在使用该配置生成器之前，你需要先确认你的Debian版本，使用<code>cat /etc/os-release</code>命令，在输出的结果中找到<code>VERSION_CODENAME=bullseye</code>，位于<code>=</code>后面的就是你的版本代号，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301160807.png" alt="20230301160807"></p>
+<p>然后打开<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>，找到Debian并选择你对应的版本号，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301161044.png" alt="20230301161044"></p>
+<p>其中，HTTPS&#x2F;HTTP不必赘述，就是字母意思，而IPv4也很好理解，就是选择IPv4或IPv6地址访问，默认HTTPS和IPv4即可</p>
+<p>复制红框中的内容后，回到你的Debian系统，使用<code>vim /etc/apt/sources.list</code>命令编辑apt源配置文件，如果提示<code>-bash: /usr/bin/vim: No such file or directory</code>则是因为你没有安装<code>vim</code>编辑器，我强烈建议你安装<code>vim</code>编辑器，如果暂时无法安装，也可使用<code>nano</code>编辑器，对应命令为<code>nano /etc/apt/sources.list</code>，使用编辑器打开<code>sources.list</code>文件后，如果你是<code>vim</code>编辑器，则可以将光标移到首行，然后按<code>d</code>再按<code>Shift+G</code>即可直接清空内容，然后粘贴你在源配置生成器复制的红框中内容即可，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301161642.png" alt="20230301161642"></p>
+<p><code>vim</code>编辑器在编辑完成后按<code>ESC</code>再输入<code>:wq</code>回车即可退出保存，编辑器的操作方式在此不过多赘述。</p>
+<p>完成源配置文件的编辑后，还需要使用<code>apt update</code>命令更新源，至此，Debian更换中科大源的教程结束。</p>
+<h2 id="Debian-iSCSI挂载卷"><a href="#Debian-iSCSI挂载卷" class="headerlink" title="Debian iSCSI挂载卷"></a>Debian iSCSI挂载卷</h2><p>首先，你需要安装<code>open-iscsi</code>，使用<code>apt install -y open-iscsi</code>进行安装，然后运行<code>iscsiadm -m discovery -t st -p 服务器地址</code>探测服务器发布的卷，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301162849.png" alt="20230301162849"></p>
+<p>随后使用<code>iscsiadm -m node -T iqn开头的对应地址 -p 服务器地址 -l</code>即可完成挂载，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301164715.png" alt="20230301164715"></p>
+<p>随后使用<code>lsblk</code>命令发现新的磁盘，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301164844.png" alt="20230301164844"></p>
+<p>扩展内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 --op update -n node.startup -v automatic</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 -u</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除所有连接</span></span><br><span class="line">iscsiadm -m node --logoutall=all</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有iscsi连接</span></span><br><span class="line">iscsiadm -m session</span><br></pre></td></tr></table></figure>
+
+<h2 id="Debian-格式化并挂载磁盘以及lvm逻辑卷的使用"><a href="#Debian-格式化并挂载磁盘以及lvm逻辑卷的使用" class="headerlink" title="Debian 格式化并挂载磁盘以及lvm逻辑卷的使用"></a>Debian 格式化并挂载磁盘以及lvm逻辑卷的使用</h2><p>紧跟上文，iscsi挂载后的卷无法直接使用，需要像磁盘一样进行分区及挂载到系统目录</p>
+<p>安装parted：<code>apt install -y parted</code></p>
+<p>使用<code>parted /dev/设备</code>命令进入磁盘分区管理，随后使用<code>mklable gpt</code>将磁盘设置为优秀的<code>GPT</code>分区表，然后使用<code>mkpart 名称 文件系统 起始扇区 结束地址</code>创建分区，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301165916.png" alt="20230301165916"></p>
+<p>其中，2048s是为了将扇区进行对齐，有利于提升性能，而100%则是指定结束地址为最后，100%可以替换为明确的扇区、容量，如9999s（扇区）或100G（容量），同理，起始地址也是如此，如果你需要创建多个分区，则之后的分区起始地址应紧随上一个分区的结束地址。</p>
+<p>分区创建完毕后，输入<code>q</code>回车即可退出parted，将分区格式化之后即可挂载使用</p>
+<p><strong>但，我在此强烈建议你使用lvm逻辑卷，因为lvm优点有便于容量调整、创建跨区卷等</strong></p>
+<p>lvm卷的使用步骤有创建物理卷，创建卷组，创建逻辑卷</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建物理卷</span></span><br><span class="line">pvcreate /dev/设备</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建卷组</span></span><br><span class="line">vgcreate 卷组名 物理卷</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建逻辑卷</span></span><br><span class="line">lvcreate -l +100%FREE -n 逻辑卷名 所属卷组名</span><br></pre></td></tr></table></figure>
+
+<p>示例如图：</p>
+<p><img src="https://img.hackerbs.com/20230301170847.png" alt="20230301170847"></p>
+<p>lvm的逻辑卷地址位于<code>/dev/mapper/</code>下，命名格式为<code>卷组名-逻辑卷名</code>，将逻辑卷格式化后即可挂载使用，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301171003.png" alt="20230301171003"></p>
+<p>至此，Debian 磁盘分区及lvm逻辑卷教程完毕，如有疑问，欢迎咨询！</p>
+<h2 id="Debian访问SMB服务器"><a href="#Debian访问SMB服务器" class="headerlink" title="Debian访问SMB服务器"></a>Debian访问SMB服务器</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装cifs-utils</span></span><br><span class="line">apt install cifs-utils</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用mount进行挂载</span></span><br><span class="line">mount -t cifs -o username=$username //$address/$smbname /$mount_point/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例</span></span><br><span class="line">mount -t cifs -o username=user //10.1.1.1/test /smbTest/</span><br></pre></td></tr></table></figure>
+
+<h2 id="apt下载deb包及其依赖的办法"><a href="#apt下载deb包及其依赖的办法" class="headerlink" title="apt下载deb包及其依赖的办法"></a>apt下载deb包及其依赖的办法</h2><p>使用apt install时加上<code>--download-only</code>参数即可实现仅下载而不安装的操作，但是下载的deb包默认是在<code>/var/cache/apt/archives</code>目录中，可以使用<code>-o Dir::Cache::archives=&quot;/&lt;your dir&gt;&quot;</code>参数指定缓存路径。</p>
+<p>APT包管理器在执行操作时会使用lock文件来确保系统中只有一个进程在使用APT。partial目录则是APT在下载和安装软件包时使用的临时目录。所以你会发现在你指定的目录中有<code>lock</code>文件和<code>partial</code>目录，删除即可，并无影响。</p>
+<p><strong>鉴于你可能是个像我一样有什么大病的强迫症，所以为你提供了禁用lock和partial的办法</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-o APT::Get::Lock_Prohibit=1 # 禁用lock文件</span><br><span class="line">-o Acquire::Pdiffs::NoDownload=true -o Acquire::AllowDowngradeToInsecureRepositories=true -o Acquire::AllowInsecureRepositories=true -o Acquire::NoCDROM=true -o Acquire::NoVerify=true -o Acquire::Check-Valid-Until=false -o Dir::Etc::TrustedParts=&quot;/path/to/trusted/parts&quot; -o Dir::Etc::Trusted=/path/to/trusted/dir # 禁用partial目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">是的，看花眼了对吧？↓</span></span><br><span class="line">Acquire::Pdiffs::NoDownload=true # 禁用差分包下载</span><br><span class="line">Acquire::AllowDowngradeToInsecureRepositories=true # 允许使用不安全的APT源</span><br><span class="line">Acquire::AllowInsecureRepositories=true # 允许使用不安全的APT源</span><br><span class="line">Acquire::NoCDROM=true # 禁用CD-ROM镜像</span><br><span class="line">Acquire::NoVerify=true # 禁用APT源的GPG验证</span><br><span class="line">Acquire::Check-Valid-Until=false # 禁用APT源的有效期检查</span><br><span class="line">Dir::Etc::TrustedParts=&quot;/path/to/trusted/parts&quot; # 设置APT的可信部件目录</span><br><span class="line">Dir::Etc::Trusted=/path/to/trusted/dir # 设置APT的可信源目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以上操作都是为了避免使用partial目录，这些命令可能会降低APT操作的安全性和可靠性</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">所以，没什么大病别骚搞，就简单点，下载完了删掉lock和partial即可</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以下是我下载docker包的命令示范</span></span><br><span class="line">apt install -o Dir::Cache::archives=&quot;./&quot; --download-only docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>重点！！！</strong></p>
+<hr>
+<p>上面的办法其实有个很操蛋的地方，如果你的系统已经安装了这个软件包，那么apt并不会为你下载任何deb包，你需要使用下面的办法进行下载</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将其中的&lt;package-name&gt;替换为你要下载的包，比如nmap</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意！命令中有两处&lt;package-name&gt;</span></span><br><span class="line">apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances &lt;package-name&gt; | grep &quot;^\w&quot; | sort -u) &lt;package-name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以下是我下载vim及其依赖的示例</span></span><br><span class="line">apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances vim | grep &quot;^\w&quot; | sort -u) vim</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances &lt;package-name&gt;</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个命令将返回一个包含软件包及其所有依赖的列表，不包括推荐的软件包和建议的软件包，以及任何冲突、破坏、替换和增强关系</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">grep <span class="string">&quot;^\w&quot;</span>是过滤掉空行和注释行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后使用 <span class="built_in">sort</span> -u 命令去重</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Debian</tag>
       </tags>
   </entry>
   <entry>
@@ -886,6 +886,208 @@
       </tags>
   </entry>
   <entry>
+    <title>Debian安装教程</title>
+    <url>/Debian%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
+    <content><![CDATA[<h2 id="debian-live-12-5-0-amd64-standard安装教程"><a href="#debian-live-12-5-0-amd64-standard安装教程" class="headerlink" title="debian-live-12.5.0-amd64-standard安装教程"></a>debian-live-12.5.0-amd64-standard安装教程</h2><p>该系统下载地址：</p>
+<p><a href="https://iso.mirrors.ustc.edu.cn/debian-cd/current-live/amd64/iso-hybrid/debian-live-12.5.0-amd64-standard.iso">中科大镜像站下载</a></p>
+<p><a href="https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa">网盘ISO文件夹中下载</a></p>
+<blockquote>
+<p>nano打开文件便可直接编辑，保存则需要先使用Ctrl+o保存然后使用Ctrl+x退出</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="进入安装程序"><a href="#进入安装程序" class="headerlink" title="进入安装程序"></a>进入安装程序</h3><p>选择<code>Start installer</code></p>
+<p><img src="https://img.hackerbs.com//20240603143147.png" alt="20240603143147"></p>
+<h3 id="选择语言"><a href="#选择语言" class="headerlink" title="选择语言"></a>选择语言</h3><p><strong>这一步切记，只选择English，不要选择其他，否则在命令行模式会导致无法正常显示字体，出现方块状乱码</strong></p>
+<p><img src="https://img.hackerbs.com//20240603143249.png" alt="20240603143249"></p>
+<h3 id="选择地区"><a href="#选择地区" class="headerlink" title="选择地区"></a>选择地区</h3><p>选择other -&gt; Asia -&gt; China</p>
+<p><img src="https://img.hackerbs.com//20240603143317.png" alt="20240603143317"></p>
+<p><img src="https://img.hackerbs.com//20240603143329.png" alt="20240603143329"></p>
+<p><img src="https://img.hackerbs.com//20240603143338.png" alt="20240603143338"></p>
+<h3 id="本地化配置"><a href="#本地化配置" class="headerlink" title="本地化配置"></a>本地化配置</h3><p>这一步和上一步都相当于Windows的地区&#x2F;语言，跟着教程选择默认的即可，除了English、en_UF.UTF-8之外的任何，除非你是老手，否则新手一律选择默认，避免字体显示错误</p>
+<p><img src="https://img.hackerbs.com//20240603143448.png" alt="20240603143448"></p>
+<h3 id="配置键盘"><a href="#配置键盘" class="headerlink" title="配置键盘"></a>配置键盘</h3><p>默认 American English</p>
+<p><img src="https://img.hackerbs.com//20240603143508.png" alt="20240603143508"></p>
+<h3 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h3><p>如果有DHCP，这一步会直接跳过，没有DHCP需要手动配置的参考下文手动配置IP</p>
+<p><img src="https://img.hackerbs.com//20240603143600.png" alt="20240603143600"></p>
+<h4 id="手动配置IP"><a href="#手动配置IP" class="headerlink" title="手动配置IP"></a>手动配置IP</h4><p>若没有DHCP或没有网线,这一步会提示网络连接失败</p>
+<p>图中提示的内容大概意思是<code>您的网络没有DHCP服务器或DHCP响应过慢</code></p>
+<p><img src="https://img.hackerbs.com//20240603143716.png" alt="20240603143716"></p>
+<p>选择<code>Continue</code>，选择<code>Configure network manually</code>手动配置网络</p>
+<p><img src="https://img.hackerbs.com//20240603143838.png" alt="20240603143838"></p>
+<p>填写IP地址和子网掩码前缀，在Linux建议更多是使用前缀，而不是输一堆255</p>
+<p>255.255.255.0 &#x3D; 11111111.11111111.11111111.0 &#x3D; 24 （前缀就是有多少个1就是多少，所以是24）</p>
+<p>255.255.252.0 &#x3D; 11111111.11111111.11111100.0 &#x3D; 22</p>
+<p><img src="https://img.hackerbs.com//20240603145231.png" alt="20240603145231"></p>
+<p>填写网关</p>
+<p><img src="https://img.hackerbs.com//20240603145247.png" alt="20240603145247"></p>
+<p>填写DNS</p>
+<p>国内腾讯<code>119.29.29.29</code>，境外谷歌<code>8.8.8.8</code>，这两个DNS足够解析全世界的域名并兼顾速度了</p>
+<p><img src="https://img.hackerbs.com//20240603154540.png" alt="20240603154540"></p>
+<h3 id="填写主机名"><a href="#填写主机名" class="headerlink" title="填写主机名"></a>填写主机名</h3><p>也就是hostname，没啥可说的，默认或者按需修改</p>
+<p><img src="https://img.hackerbs.com//20240603154644.png" alt="20240603154644"></p>
+<h3 id="填写域名"><a href="#填写域名" class="headerlink" title="填写域名"></a>填写域名</h3><p>留空或者按需填写</p>
+<p><img src="https://img.hackerbs.com//20240603154725.png" alt="20240603154725"></p>
+<h3 id="设置root用户密码"><a href="#设置root用户密码" class="headerlink" title="设置root用户密码"></a>设置root用户密码</h3><p>设强点，别老用弱密码</p>
+<p><img src="https://img.hackerbs.com//20240603154847.png" alt="20240603154847"></p>
+<h3 id="创建新用户"><a href="#创建新用户" class="headerlink" title="创建新用户"></a>创建新用户</h3><p>这一步无法跳过，如果没有特别需要，直接随便建，进了系统删了即可</p>
+<p>这一步<code>Full name for the new user:</code>是显示名称，和登陆无关，可以理解为QQ名</p>
+<p><img src="https://img.hackerbs.com//20240603154927.png" alt="20240603154927"></p>
+<p>这一步才是用户名，要遵循规范，可以理解为QQ号，是登陆系统的账号</p>
+<p><img src="https://img.hackerbs.com//20240603155108.png" alt="20240603155108"></p>
+<p>设密码</p>
+<p><img src="https://img.hackerbs.com//20240603155132.png" alt="20240603155132"></p>
+<h3 id="格式化磁盘"><a href="#格式化磁盘" class="headerlink" title="格式化磁盘"></a>格式化磁盘</h3><p>如果你玩不来（你都看我教程了肯定是玩不来），那就记住了，选<code>Guided - use entire disk and set up LVM</code>，<strong>必须必须必须使用LVM逻辑卷</strong>，不然后期调整磁盘你就整个傻住了（恕我直言，不用lvm逻辑卷的全是瓜娃子！）</p>
+<p><img src="https://img.hackerbs.com//20240603160221.png" alt="20240603160221"></p>
+<p>选择硬盘</p>
+<p><img src="https://img.hackerbs.com//20240603160247.png" alt="20240603160247"></p>
+<h3 id="选择分区方式"><a href="#选择分区方式" class="headerlink" title="选择分区方式"></a>选择分区方式</h3><p>新手，听我的，直接第一个<code>All files in  one partition</code>，将所有文件放到一个分区就行，别觉得分开分区有什么卵用，就算是生产环境都基本用不着</p>
+<p><img src="https://img.hackerbs.com//20240603160451.png" alt="20240603160451"></p>
+<h3 id="确认是否分区"><a href="#确认是否分区" class="headerlink" title="确认是否分区"></a>确认是否分区</h3><p>选Yes然后Enter就完事儿了</p>
+<p><img src="https://img.hackerbs.com//20240603160521.png" alt="20240603160521"></p>
+<p>默认会选择全部空间，或者你也可以输个max</p>
+<p><img src="https://img.hackerbs.com//20240603160550.png" alt="20240603160550"></p>
+<p>选择<code>Finish partitionging and write changes to disk</code>然后<code>Continue</code></p>
+<p><img src="https://img.hackerbs.com//20240603160627.png" alt="20240603160627"></p>
+<p>选择Yes然后Enter</p>
+<p><img src="https://img.hackerbs.com//20240603160645.png" alt="20240603160645"></p>
+<h3 id="等待系统安装"><a href="#等待系统安装" class="headerlink" title="等待系统安装"></a>等待系统安装</h3><p><img src="https://img.hackerbs.com//20240603160756.png" alt="20240603160756"></p>
+<h3 id="是否启用网络镜像"><a href="#是否启用网络镜像" class="headerlink" title="是否启用网络镜像"></a>是否启用网络镜像</h3><p>没网的直接NO，有网的Yes然后Enter</p>
+<p><img src="https://img.hackerbs.com//20240603160857.png" alt="20240603160857"></p>
+<p>选择China</p>
+<p><img src="https://img.hackerbs.com//20240603160918.png" alt="20240603160918"></p>
+<p>建议<code>mirrors.ustc.edu.cn</code>，中科大万岁</p>
+<p><img src="https://img.hackerbs.com//20240603160943.png" alt="20240603160943"></p>
+<p>不需要代理，直接Enter下一步</p>
+<p><img src="https://img.hackerbs.com//20240603161008.png" alt="20240603161008"></p>
+<p>开始配置apt，也就是网络镜像</p>
+<p><img src="https://img.hackerbs.com//20240603161318.png" alt="20240603161318"></p>
+<h4 id="提示镜像故障"><a href="#提示镜像故障" class="headerlink" title="提示镜像故障"></a>提示镜像故障</h4><p>这一步就是网络问题了，可以考虑直接先不用网络镜像</p>
+<p><img src="https://img.hackerbs.com//20240603161048.png" alt="20240603161048"></p>
+<h3 id="安装完毕"><a href="#安装完毕" class="headerlink" title="安装完毕"></a>安装完毕</h3><p>安装完毕，Continue重启</p>
+<p><img src="https://img.hackerbs.com//20240603161655.png" alt="20240603161655"></p>
+<h3 id="删除安装过程中不得不创建的用户"><a href="#删除安装过程中不得不创建的用户" class="headerlink" title="删除安装过程中不得不创建的用户"></a>删除安装过程中不得不创建的用户</h3><p>登陆</p>
+<p><img src="https://img.hackerbs.com//20240603161753.png" alt="20240603161753"></p>
+<p>使用<code>userdel -r 用户名</code>删除创建的用户</p>
+<p><img src="https://img.hackerbs.com//20240603161857.png" alt="20240603161857"></p>
+<h3 id="额外内容"><a href="#额外内容" class="headerlink" title="额外内容"></a>额外内容</h3><h4 id="手动配置网络"><a href="#手动配置网络" class="headerlink" title="手动配置网络"></a>手动配置网络</h4><p>使用<code>ip addr</code>查看网卡名称</p>
+<p>本次演示的只有一张网卡，是enp6s18，其中<code>state UP</code>表示该网卡已经插好网线</p>
+<p><img src="https://img.hackerbs.com//20240603162420.png" alt="20240603162420"></p>
+<p>使用<code>nano /etc/network/interfaces</code>编辑网络配置文件</p>
+<p>使用<code>nano /etc/resolv.conf</code>编辑DNS配置文件</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>作用</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auto enp6s18</td>
+<td>网卡开机自启</td>
+<td></td>
+</tr>
+<tr>
+<td>iface enp6s18 inet static</td>
+<td>指定配置哪张网卡</td>
+<td>static表示静态IP,dhcp则是动态</td>
+</tr>
+<tr>
+<td>address</td>
+<td>IP地址&#x2F;前缀</td>
+<td></td>
+</tr>
+<tr>
+<td>gateway</td>
+<td>网关地址</td>
+<td></td>
+</tr>
+<tr>
+<td>dns-search</td>
+<td>对应安装过程中的domain域名</td>
+<td></td>
+</tr>
+<tr>
+<td>nameserver</td>
+<td>DNS服务器</td>
+<td>一行一个，nameserver 119.29.29.29</td>
+</tr>
+</tbody></table>
+<p>网卡配置文件示例</p>
+<p><img src="https://img.hackerbs.com//20240603162336.png" alt="20240603162336"></p>
+<p>DNS配置文件示例</p>
+<p><img src="https://img.hackerbs.com//20240603163137.png" alt="20240603163137"></p>
+<p>编辑完成后使用<code>systemctl restart networking.service</code>重启网络</p>
+<p><img src="https://img.hackerbs.com//20240603163210.png" alt="20240603163210"></p>
+<h4 id="手动配置apt源"><a href="#手动配置apt源" class="headerlink" title="手动配置apt源"></a>手动配置apt源</h4><p><strong>如果安装的时候没有使用网络镜像，且需要配置apt源的话，进行该步骤，否则忽略</strong></p>
+<p>直接使用<code>rm -f /etc/apt/sources.list</code>删除源配置文件</p>
+<p>编辑<code>nano /etc/apt/sources.list</code>源配置文件，先手动添加第一行</p>
+<p><code>deb https://mirrors.ustc.edu.cn/debian/ bookworm main contrib non-free non-free-firmware</code></p>
+<p><img src="https://img.hackerbs.com//20240603163523.png" alt="20240603163523"></p>
+<p>编辑后使用<code>apt update</code>更新源</p>
+<p><img src="https://img.hackerbs.com//20240603163751.png" alt="20240603163751"></p>
+<h4 id="安装OpenSSH-server并配置root密码登陆"><a href="#安装OpenSSH-server并配置root密码登陆" class="headerlink" title="安装OpenSSH-server并配置root密码登陆"></a>安装OpenSSH-server并配置root密码登陆</h4><p>使用<code>apt install openssh-server -f</code>安装OpenSSH server</p>
+<p><img src="https://img.hackerbs.com//20240603163908.png" alt="20240603163908"></p>
+<p><code>nano /etc/ssh/sshd_config</code>编辑ssh配置文件，在原本的<code>#PermitRootLogin prohibit-password</code>下方添加<code>PermitRootLogin yes</code></p>
+<p>上方的<code>#Port 22</code>取消注释修改为其他端口即可实现修改ssh端口功能，如<code>Port 10022</code></p>
+<p><img src="https://img.hackerbs.com//20240603164013.png" alt="20240603164013"></p>
+<p>编辑后使用<code>systemctl restart ssh</code>重启ssh服务，之后便可使用ssh连接服务器了</p>
+<h4 id="配置完全apt国内镜像"><a href="#配置完全apt国内镜像" class="headerlink" title="配置完全apt国内镜像"></a>配置完全apt国内镜像</h4><p>继上文配置ssh后，便可使用ssh远程访问服务器，这样复制粘贴便方便多了</p>
+<p>在这里推荐snullp大佬开发的<a href="https://mirrors.ustc.edu.cn/repogen/">配置生成器</a>，注意根据你的Debian版本选择不同的内容，本教程使用的是bookworm，apt完全配置内容如下，其他配置内容可以查看本站的<a href="https://hackerbs.com/apt%E7%AD%89%E5%90%84%E7%A7%8D%E6%BA%90%E5%88%97%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.html">apt等各种源列表（持续更新）</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bookworm main contrib non-free non-free-firmware</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian/ bookworm main contrib non-free non-free-firmware</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian-security/ bookworm-security main contrib non-free non-free-firmware</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian-security/ bookworm-security main contrib non-free non-free-firmware</span><br></pre></td></tr></table></figure>
+
+<p>同样的，还是编辑<code>/etc/apt/sources.list</code></p>
+<p><img src="https://img.hackerbs.com//20240603164707.png" alt="20240603164707"></p>
+<p>编辑后还是使用<code>apt update</code>更新源即可</p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Debian</tag>
+        <tag>Debian安装</tag>
+        <tag>Linux安装</tag>
+        <tag>Debian服务器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux查询ssh日志判断是否被入侵及加强ssh安全的办法</title>
+    <url>/Linux%E6%9F%A5%E8%AF%A2ssh%E6%97%A5%E5%BF%97%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E8%A2%AB%E5%85%A5%E4%BE%B5%E5%8F%8A%E5%8A%A0%E5%BC%BAssh%E5%AE%89%E5%85%A8%E7%9A%84%E5%8A%9E%E6%B3%95.html</url>
+    <content><![CDATA[<h2 id="查询ssh登陆日志的办法"><a href="#查询ssh登陆日志的办法" class="headerlink" title="查询ssh登陆日志的办法"></a>查询ssh登陆日志的办法</h2><p><code>journalctl _COMM=sshd</code>可以查看sshd所有日志</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查询ssh登陆失败总次数</span></span><br><span class="line">journalctl _COMM=sshd | grep Failed |wc -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查询ssh登陆成功总次数</span></span><br><span class="line">journalctl _COMM=sshd | grep Accepted |wc -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查询被多少不同IP爆破了</span></span><br><span class="line">journalctl _COMM=sshd | grep &quot;Failed&quot; | awk &#x27;&#123;print $(NF-3)&#125;&#x27; | sort -u | wc -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">列出爆破你的IP</span></span><br><span class="line">journalctl _COMM=sshd | grep &quot;Failed&quot; | awk &#x27;&#123;print $(NF-3)&#125;&#x27; | sort -u</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">列出成功登陆的IP</span></span><br><span class="line">journalctl _COMM=sshd | grep -E &quot;Accepted&quot; | awk &#x27;&#123;match($0, /([0-9]+\.)&#123;3&#125;[0-9]+/); print substr($0, RSTART, RLENGTH)&#125;&#x27; | sort -u</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="加强ssh安全的办法"><a href="#加强ssh安全的办法" class="headerlink" title="加强ssh安全的办法"></a>加强ssh安全的办法</h2><ol>
+<li>禁用root密码登陆</li>
+</ol>
+<p>编辑<code>/etc/ssh/sshd_config</code>文件，默认会有<code>PermitRootLogin prohibit-password</code><br>保持默认的<code>prohibit-password</code>可使root用户密码登陆时一直提示密码错误，而不是直接提示禁止密码登陆，起到迷惑入侵者的作用</p>
+<p>还可配置<code>PasswordAuthentication no</code>使普通用户也无法通过密码登陆并提示需要publickey</p>
+<ol start="2">
+<li>修改ssh服务端口</li>
+</ol>
+<p>编辑<code>/etc/ssh/sshd_config</code>文件，将默认的<code># Port 22</code>修改为<code>Port 20022</code>或其他符合规定的端口<br>修改端口后ssh连接时需要使用<code>-p 20022</code>指定端口<br>使用scp上传文件时也需要在scp命令后紧跟着使用<code>-P 20022</code>指定端口</p>
+<ol start="3">
+<li>ssh连接时使用指定的key进行验证</li>
+</ol>
+<p>ssh客户端在连接服务器时可以使用<code>-i</code>参数使用指定的id_rsa私钥进行连接，需要注意，id_rsa私钥文件权限需为600，也就是仅所有者可读写<br>使用root指定私钥访问20022端口的服务器示例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -i ./myKeys/id_rsa -p 20022 root@192.168.2.254</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>sshd_config</code>文件后需要重启ssh服务，debian通常使用<code>systemctl restart ssh</code>即可</p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>ssh</tag>
+        <tag>网络安全</tag>
+        <tag>ssh爆破</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux技巧【持续更新】</title>
     <url>/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
     <content><![CDATA[<blockquote>
@@ -1255,85 +1457,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux查询ssh日志判断是否被入侵及加强ssh安全的办法</title>
-    <url>/Linux%E6%9F%A5%E8%AF%A2ssh%E6%97%A5%E5%BF%97%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E8%A2%AB%E5%85%A5%E4%BE%B5%E5%8F%8A%E5%8A%A0%E5%BC%BAssh%E5%AE%89%E5%85%A8%E7%9A%84%E5%8A%9E%E6%B3%95.html</url>
-    <content><![CDATA[<h2 id="查询ssh登陆日志的办法"><a href="#查询ssh登陆日志的办法" class="headerlink" title="查询ssh登陆日志的办法"></a>查询ssh登陆日志的办法</h2><p><code>journalctl _COMM=sshd</code>可以查看sshd所有日志</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查询ssh登陆失败总次数</span></span><br><span class="line">journalctl _COMM=sshd | grep Failed |wc -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查询ssh登陆成功总次数</span></span><br><span class="line">journalctl _COMM=sshd | grep Accepted |wc -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查询被多少不同IP爆破了</span></span><br><span class="line">journalctl _COMM=sshd | grep &quot;Failed&quot; | awk &#x27;&#123;print $(NF-3)&#125;&#x27; | sort -u | wc -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">列出爆破你的IP</span></span><br><span class="line">journalctl _COMM=sshd | grep &quot;Failed&quot; | awk &#x27;&#123;print $(NF-3)&#125;&#x27; | sort -u</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">列出成功登陆的IP</span></span><br><span class="line">journalctl _COMM=sshd | grep -E &quot;Accepted&quot; | awk &#x27;&#123;match($0, /([0-9]+\.)&#123;3&#125;[0-9]+/); print substr($0, RSTART, RLENGTH)&#125;&#x27; | sort -u</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="加强ssh安全的办法"><a href="#加强ssh安全的办法" class="headerlink" title="加强ssh安全的办法"></a>加强ssh安全的办法</h2><ol>
-<li>禁用root密码登陆</li>
-</ol>
-<p>编辑<code>/etc/ssh/sshd_config</code>文件，默认会有<code>PermitRootLogin prohibit-password</code><br>保持默认的<code>prohibit-password</code>可使root用户密码登陆时一直提示密码错误，而不是直接提示禁止密码登陆，起到迷惑入侵者的作用</p>
-<p>还可配置<code>PasswordAuthentication no</code>使普通用户也无法通过密码登陆并提示需要publickey</p>
-<ol start="2">
-<li>修改ssh服务端口</li>
-</ol>
-<p>编辑<code>/etc/ssh/sshd_config</code>文件，将默认的<code># Port 22</code>修改为<code>Port 20022</code>或其他符合规定的端口<br>修改端口后ssh连接时需要使用<code>-p 20022</code>指定端口<br>使用scp上传文件时也需要在scp命令后紧跟着使用<code>-P 20022</code>指定端口</p>
-<ol start="3">
-<li>ssh连接时使用指定的key进行验证</li>
-</ol>
-<p>ssh客户端在连接服务器时可以使用<code>-i</code>参数使用指定的id_rsa私钥进行连接，需要注意，id_rsa私钥文件权限需为600，也就是仅所有者可读写<br>使用root指定私钥访问20022端口的服务器示例：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -i ./myKeys/id_rsa -p 20022 root@192.168.2.254</span><br></pre></td></tr></table></figure>
-
-<p>修改<code>sshd_config</code>文件后需要重启ssh服务，debian通常使用<code>systemctl restart ssh</code>即可</p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>ssh</tag>
-        <tag>网络安全</tag>
-        <tag>ssh爆破</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Proxmox-VE 导入SylixOS VMware版</title>
-    <url>/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html</url>
-    <content><![CDATA[<p>将SylixOS传到服务器</p>
-<p>解压SylixOS VMware版，找到其中的</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">x86_boot.vmdk</span><br><span class="line">x86_main.vmdk</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>将这两个文件上传到服务器，使用qemu-img命令将vmdk虚拟机磁盘转为qcow2格式</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_main.qcow2</span><br><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_boot.qcow2</span><br></pre></td></tr></table></figure>
-
-<p>切换到虚拟化服务器web界面，创建新虚拟机</p>
-<ol>
-<li><p>操作系统类型：Linux kernel 2.4，不使用任何光盘介质<br> <img src="https://img.hackerbs.com/20230224155828.png" alt="20230224155828"></p>
-</li>
-<li><p>创建IDE硬盘，硬盘大小无所谓<br> <img src="https://img.hackerbs.com/20230224155929.png" alt="20230224155929"></p>
-</li>
-<li><p>配置CPU，内核数量根据自己需求而定，类型为host<br><img src="https://img.hackerbs.com/20230224160025.png" alt="20230224160025"></p>
-</li>
-<li><p>修改网络模型，如果网卡不可用，尝试修改为其他模型<br> <img src="https://img.hackerbs.com/20230224160056.png" alt="20230224160056"></p>
-</li>
-</ol>
-<p>创建虚拟机的步骤完毕，现在连接到服务器的shell，可以使用web shell或另行连接</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入到虚拟机配置文件目录</span></span><br><span class="line">cd /etc/pve/qemu-server/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑刚刚创建的ID为125的虚拟机所属配置文件</span></span><br><span class="line">vim 125.conf</span><br></pre></td></tr></table></figure>
-
-<p>原配置文件如下：</p>
-<p><img src="https://img.hackerbs.com/20230224160513.png" alt="20230224160513"></p>
-<p>修改第6行ide0开头的内容如下</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ide0: nfshare:125/x86_boot.qcow2</span><br><span class="line">ide1: nfshare:125/x86_main.qcow2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，ide0 ide1务必不要重复，以免冲突</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，nfshare为我虚拟化服务器所在的存储名称，实际名称以你为准！</span></span><br></pre></td></tr></table></figure>
-
-<p>修改完毕后，将刚刚转化完毕的两个qcow2文件移动到虚拟机磁盘映像所在目录</p>
-<p><strong>先删除现有的文件</strong></p>
-<p><img src="https://img.hackerbs.com/20230224160856.png" alt="20230224160856"></p>
-<p>随后打开web界面，启动虚拟机即可！</p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>Proxmox-VE</tag>
-        <tag>SylixOS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NAS（zfs）基础知识</title>
     <url>/NAS%EF%BC%88zfs%EF%BC%89%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html</url>
     <content><![CDATA[<h2 id="NAS是什么？"><a href="#NAS是什么？" class="headerlink" title="NAS是什么？"></a>NAS是什么？</h2><p>NAS，全称Network Attached Storage，翻译成中文就是网络附加存储。简单来说，它就是一个连接到网络上的存储设备，可以让多台电脑、智能手机、平板电脑等设备通过网络访问和共享存储空间。</p>
@@ -1606,6 +1729,50 @@
       </tags>
   </entry>
   <entry>
+    <title>Proxmox-VE 导入SylixOS VMware版</title>
+    <url>/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html</url>
+    <content><![CDATA[<p>将SylixOS传到服务器</p>
+<p>解压SylixOS VMware版，找到其中的</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">x86_boot.vmdk</span><br><span class="line">x86_main.vmdk</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>将这两个文件上传到服务器，使用qemu-img命令将vmdk虚拟机磁盘转为qcow2格式</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_main.qcow2</span><br><span class="line">qemu-img convert -f vmdk -O qcow2 x86_boot.vmdk x86_boot.qcow2</span><br></pre></td></tr></table></figure>
+
+<p>切换到虚拟化服务器web界面，创建新虚拟机</p>
+<ol>
+<li><p>操作系统类型：Linux kernel 2.4，不使用任何光盘介质<br> <img src="https://img.hackerbs.com/20230224155828.png" alt="20230224155828"></p>
+</li>
+<li><p>创建IDE硬盘，硬盘大小无所谓<br> <img src="https://img.hackerbs.com/20230224155929.png" alt="20230224155929"></p>
+</li>
+<li><p>配置CPU，内核数量根据自己需求而定，类型为host<br><img src="https://img.hackerbs.com/20230224160025.png" alt="20230224160025"></p>
+</li>
+<li><p>修改网络模型，如果网卡不可用，尝试修改为其他模型<br> <img src="https://img.hackerbs.com/20230224160056.png" alt="20230224160056"></p>
+</li>
+</ol>
+<p>创建虚拟机的步骤完毕，现在连接到服务器的shell，可以使用web shell或另行连接</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入到虚拟机配置文件目录</span></span><br><span class="line">cd /etc/pve/qemu-server/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑刚刚创建的ID为125的虚拟机所属配置文件</span></span><br><span class="line">vim 125.conf</span><br></pre></td></tr></table></figure>
+
+<p>原配置文件如下：</p>
+<p><img src="https://img.hackerbs.com/20230224160513.png" alt="20230224160513"></p>
+<p>修改第6行ide0开头的内容如下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ide0: nfshare:125/x86_boot.qcow2</span><br><span class="line">ide1: nfshare:125/x86_main.qcow2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，ide0 ide1务必不要重复，以免冲突</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中，nfshare为我虚拟化服务器所在的存储名称，实际名称以你为准！</span></span><br></pre></td></tr></table></figure>
+
+<p>修改完毕后，将刚刚转化完毕的两个qcow2文件移动到虚拟机磁盘映像所在目录</p>
+<p><strong>先删除现有的文件</strong></p>
+<p><img src="https://img.hackerbs.com/20230224160856.png" alt="20230224160856"></p>
+<p>随后打开web界面，启动虚拟机即可！</p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Proxmox-VE</tag>
+        <tag>SylixOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Ubuntu安装教程</title>
     <url>/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
     <content><![CDATA[<h2 id="ubuntu-20-04-6-live-server-amd64安装教程"><a href="#ubuntu-20-04-6-live-server-amd64安装教程" class="headerlink" title="ubuntu-20.04.6-live-server-amd64安装教程"></a>ubuntu-20.04.6-live-server-amd64安装教程</h2><p>该系统下载地址：</p>
@@ -1765,9 +1932,9 @@
       </categories>
       <tags>
         <tag>Linux</tag>
+        <tag>Linux安装</tag>
         <tag>Ubuntu</tag>
         <tag>Ubuntu安装</tag>
-        <tag>Linux安装</tag>
         <tag>Ubuntu服务器</tag>
       </tags>
   </entry>
@@ -1809,6 +1976,59 @@
       <tags>
         <tag>apt源</tag>
         <tag>docker源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vscode编写markdown的插件推荐</title>
+    <url>/vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90.html</url>
+    <content><![CDATA[<h1 id="使用-VScode-编写-Markdown-的插件推荐及其技巧"><a href="#使用-VScode-编写-Markdown-的插件推荐及其技巧" class="headerlink" title="使用 VScode 编写 Markdown 的插件推荐及其技巧"></a>使用 VScode 编写 Markdown 的插件推荐及其技巧</h1><span id="more"></span>
+
+<h2 id="Markdown-插件推荐"><a href="#Markdown-插件推荐" class="headerlink" title="Markdown 插件推荐"></a>Markdown 插件推荐</h2><ul>
+<li>Markdown Preview Enhanced</li>
+<li>Markdown PDF</li>
+<li>LaTeX Workshop</li>
+<li>Paste Image</li>
+<li>Markdown All in One</li>
+</ul>
+<h2 id="Markdown-插件详细介绍"><a href="#Markdown-插件详细介绍" class="headerlink" title="Markdown 插件详细介绍"></a>Markdown 插件详细介绍</h2><h3 id="Markdown-Preview-Enhanced"><a href="#Markdown-Preview-Enhanced" class="headerlink" title="Markdown Preview Enhanced"></a>Markdown Preview Enhanced</h3><p>该插件可以对 Markdown 源码进行实时渲染预览，通过配置插件的</p>
+<blockquote>
+<p>Markdown-preview-enhanced: Automatically Show Preview Of Markdown Being Edited</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Automatically show preview of markdown being edited.</li>
+</ul>
+</blockquote>
+<p>可以实现点击 md 文件编辑的同时自动打开实时渲染界面</p>
+<p><img src="https://img.hackerbs.com//2022-10-14-16-18-21.png" alt="2022-10-14-16-18-21"></p>
+<h3 id="Markdown-PDF"><a href="#Markdown-PDF" class="headerlink" title="Markdown PDF"></a>Markdown PDF</h3><p>该插件可以将 md 文件转换为<strong>pdf、html、png、jpeg</strong>四种格式，配合 vscode 快捷键<code>Ctrl+Shift+P</code>并输入<code>&gt;export (pdf)</code>后回车即可将当前打开的 md 文件转换为 PDF 格式，替换<code>(pdf)</code>中的<code>pdf</code>为<code>html、png、jpeg</code>其中任意一种，即可导出对应的格式<br>使用<code>&gt;export (all: pdf,html,png,jpeg)</code>可以一次性导出为 4 种格式</p>
+<h3 id="LaTeX-Workshop"><a href="#LaTeX-Workshop" class="headerlink" title="LaTeX Workshop"></a>LaTeX Workshop</h3><p>该插件可以使 vscode 支持 latex 数学公式代码<br>示例如下：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line">M =</span><br><span class="line"><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1 <span class="built_in">&amp;</span> 0 <span class="keyword">\\</span></span><br><span class="line">0 <span class="built_in">&amp;</span> 1</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1 <span class="built_in">&amp;</span> 0 <span class="keyword">\\</span></span><br><span class="line">0 <span class="built_in">&amp;</span> 1</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+<p>LaTeX 语法可以自行搜索，此处给出一条参考链接：<a href="http://www.uinio.com/Math/LaTex/">LaTeX 语法</a></p>
+<h3 id="Paste-Image"><a href="#Paste-Image" class="headerlink" title="Paste Image"></a>Paste Image</h3><p>使用 Paste Image 可以快速将粘贴板中的图片粘贴到 Markdown 源码中，快捷键是<code>Ctrl+Shift+V</code><br>示例：</p>
+<p><img src="https://img.hackerbs.com//2022-10-14-16-37-29.png" alt="2022-10-14-16-37-29"></p>
+<p>Paste Image 默认会将图片复制到当前 md 文件所在目录，并根据<strong>年月日时分秒</strong>自动命名，可以在 vscode 设置中找到 paste image 的配置参数进行修改<br>图片自动复制的目录参数为：</p>
+<p><img src="https://img.hackerbs.com//2022-10-14-16-42-28.png" alt="2022-10-14-16-42-28"></p>
+<p>其中<code>$&#123;currentFileDir&#125;</code>为当前 md 文件所在目录，可以修改为项目根目录<code>$&#123;projectRoot&#125;</code>，还可在二者后面跟上<code>\</code>，如<code>$&#123;currentFileDir&#125;/md_img</code>，则会将图片复制到当前 md 文件所在目录下的<strong>md_img</strong>目录，若没有<strong>md_img</strong>目录则自动创建</p>
+<p><strong>修改图片保存路径后需要修改<code>Paste Image: Prefix</code>，以便路径可以正常匹配</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Paste Image: Prefix</span><br><span class="line">The string prepend to the resolved image path before paste.</span><br></pre></td></tr></table></figure>
+
+<p>如上文示例，将图片目录自定义为当前目录中<code>/md_img</code>文件夹，那么此处需修改为：</p>
+<p><img src="https://img.hackerbs.com//20221027132513.png" alt="20221027132513"></p>
+<p>当使用<code>Ctrl+Shift+V</code>粘贴后，图片路径会自动设定为<code>md_img/图片名称</code></p>
+<p>图片自动命名的参数为：</p>
+<p><img src="https://img.hackerbs.com//2022-10-14-16-45-50.png" alt="2022-10-14-16-45-50"></p>
+<p>其中<code>Y-MM-DD-HH-mm-ss</code>为<strong>年-月-日-时-分-秒</strong>，该参数采用的是<strong>Moment.js</strong><br><a href="https://momentjs.com/#/displaying/format">Moment.js 语法教程</a></p>
+<h3 id="Markdown-All-in-One"><a href="#Markdown-All-in-One" class="headerlink" title="Markdown All in One"></a>Markdown All in One</h3><p>该插件可以使vscode自动补全markdown语法，如使用<code>- 无序列表</code>时，回车将在下一行自动补全<code>- </code><br>示例如图：</p>
+<p><img src="https://img.hackerbs.com//2022-10-14-16-55-11.png" alt="2022-10-14-16-55-11"></p>
+<p>基于vscode的特点，按下<code>Ctrl+Shift+P</code>调出控制台后，可以使用<strong>maio</strong>的缩写快速筛出本插件的命令，如图：</p>
+<p><img src="https://img.hackerbs.com//2022-10-14-17-00-34.png" alt="2022-10-14-17-00-34"></p>
+<p><a href="https://markdown-all-in-one.github.io/guide/#features">Markdown All in One官网详细介绍</a></p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -1881,59 +2101,6 @@
         <tag>装机</tag>
         <tag>装机技术</tag>
         <tag>装机技术人员</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vscode编写markdown的插件推荐</title>
-    <url>/vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90.html</url>
-    <content><![CDATA[<h1 id="使用-VScode-编写-Markdown-的插件推荐及其技巧"><a href="#使用-VScode-编写-Markdown-的插件推荐及其技巧" class="headerlink" title="使用 VScode 编写 Markdown 的插件推荐及其技巧"></a>使用 VScode 编写 Markdown 的插件推荐及其技巧</h1><span id="more"></span>
-
-<h2 id="Markdown-插件推荐"><a href="#Markdown-插件推荐" class="headerlink" title="Markdown 插件推荐"></a>Markdown 插件推荐</h2><ul>
-<li>Markdown Preview Enhanced</li>
-<li>Markdown PDF</li>
-<li>LaTeX Workshop</li>
-<li>Paste Image</li>
-<li>Markdown All in One</li>
-</ul>
-<h2 id="Markdown-插件详细介绍"><a href="#Markdown-插件详细介绍" class="headerlink" title="Markdown 插件详细介绍"></a>Markdown 插件详细介绍</h2><h3 id="Markdown-Preview-Enhanced"><a href="#Markdown-Preview-Enhanced" class="headerlink" title="Markdown Preview Enhanced"></a>Markdown Preview Enhanced</h3><p>该插件可以对 Markdown 源码进行实时渲染预览，通过配置插件的</p>
-<blockquote>
-<p>Markdown-preview-enhanced: Automatically Show Preview Of Markdown Being Edited</p>
-<ul>
-<li><input checked="" disabled="" type="checkbox"> Automatically show preview of markdown being edited.</li>
-</ul>
-</blockquote>
-<p>可以实现点击 md 文件编辑的同时自动打开实时渲染界面</p>
-<p><img src="https://img.hackerbs.com//2022-10-14-16-18-21.png" alt="2022-10-14-16-18-21"></p>
-<h3 id="Markdown-PDF"><a href="#Markdown-PDF" class="headerlink" title="Markdown PDF"></a>Markdown PDF</h3><p>该插件可以将 md 文件转换为<strong>pdf、html、png、jpeg</strong>四种格式，配合 vscode 快捷键<code>Ctrl+Shift+P</code>并输入<code>&gt;export (pdf)</code>后回车即可将当前打开的 md 文件转换为 PDF 格式，替换<code>(pdf)</code>中的<code>pdf</code>为<code>html、png、jpeg</code>其中任意一种，即可导出对应的格式<br>使用<code>&gt;export (all: pdf,html,png,jpeg)</code>可以一次性导出为 4 种格式</p>
-<h3 id="LaTeX-Workshop"><a href="#LaTeX-Workshop" class="headerlink" title="LaTeX Workshop"></a>LaTeX Workshop</h3><p>该插件可以使 vscode 支持 latex 数学公式代码<br>示例如下：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line">M =</span><br><span class="line"><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1 <span class="built_in">&amp;</span> 0 <span class="keyword">\\</span></span><br><span class="line">0 <span class="built_in">&amp;</span> 1</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1 <span class="built_in">&amp;</span> 0 <span class="keyword">\\</span></span><br><span class="line">0 <span class="built_in">&amp;</span> 1</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-
-<p>LaTeX 语法可以自行搜索，此处给出一条参考链接：<a href="http://www.uinio.com/Math/LaTex/">LaTeX 语法</a></p>
-<h3 id="Paste-Image"><a href="#Paste-Image" class="headerlink" title="Paste Image"></a>Paste Image</h3><p>使用 Paste Image 可以快速将粘贴板中的图片粘贴到 Markdown 源码中，快捷键是<code>Ctrl+Shift+V</code><br>示例：</p>
-<p><img src="https://img.hackerbs.com//2022-10-14-16-37-29.png" alt="2022-10-14-16-37-29"></p>
-<p>Paste Image 默认会将图片复制到当前 md 文件所在目录，并根据<strong>年月日时分秒</strong>自动命名，可以在 vscode 设置中找到 paste image 的配置参数进行修改<br>图片自动复制的目录参数为：</p>
-<p><img src="https://img.hackerbs.com//2022-10-14-16-42-28.png" alt="2022-10-14-16-42-28"></p>
-<p>其中<code>$&#123;currentFileDir&#125;</code>为当前 md 文件所在目录，可以修改为项目根目录<code>$&#123;projectRoot&#125;</code>，还可在二者后面跟上<code>\</code>，如<code>$&#123;currentFileDir&#125;/md_img</code>，则会将图片复制到当前 md 文件所在目录下的<strong>md_img</strong>目录，若没有<strong>md_img</strong>目录则自动创建</p>
-<p><strong>修改图片保存路径后需要修改<code>Paste Image: Prefix</code>，以便路径可以正常匹配</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Paste Image: Prefix</span><br><span class="line">The string prepend to the resolved image path before paste.</span><br></pre></td></tr></table></figure>
-
-<p>如上文示例，将图片目录自定义为当前目录中<code>/md_img</code>文件夹，那么此处需修改为：</p>
-<p><img src="https://img.hackerbs.com//20221027132513.png" alt="20221027132513"></p>
-<p>当使用<code>Ctrl+Shift+V</code>粘贴后，图片路径会自动设定为<code>md_img/图片名称</code></p>
-<p>图片自动命名的参数为：</p>
-<p><img src="https://img.hackerbs.com//2022-10-14-16-45-50.png" alt="2022-10-14-16-45-50"></p>
-<p>其中<code>Y-MM-DD-HH-mm-ss</code>为<strong>年-月-日-时-分-秒</strong>，该参数采用的是<strong>Moment.js</strong><br><a href="https://momentjs.com/#/displaying/format">Moment.js 语法教程</a></p>
-<h3 id="Markdown-All-in-One"><a href="#Markdown-All-in-One" class="headerlink" title="Markdown All in One"></a>Markdown All in One</h3><p>该插件可以使vscode自动补全markdown语法，如使用<code>- 无序列表</code>时，回车将在下一行自动补全<code>- </code><br>示例如图：</p>
-<p><img src="https://img.hackerbs.com//2022-10-14-16-55-11.png" alt="2022-10-14-16-55-11"></p>
-<p>基于vscode的特点，按下<code>Ctrl+Shift+P</code>调出控制台后，可以使用<strong>maio</strong>的缩写快速筛出本插件的命令，如图：</p>
-<p><img src="https://img.hackerbs.com//2022-10-14-17-00-34.png" alt="2022-10-14-17-00-34"></p>
-<p><a href="https://markdown-all-in-one.github.io/guide/#features">Markdown All in One官网详细介绍</a></p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -2075,6 +2242,20 @@
       </tags>
   </entry>
   <entry>
+    <title>本站上线周报生成器</title>
+    <url>/%E6%9C%AC%E7%AB%99%E4%B8%8A%E7%BA%BF%E5%91%A8%E6%8A%A5%E7%94%9F%E6%88%90%E5%99%A8.html</url>
+    <content><![CDATA[<p><a href="https://ai.hackerbs.com/zh">周报生成器地址：https://ai.hackerbs.com/zh</a></p>
+<p>该工具调用的是OpenAI GPT-3.5 API，速度慢是正常的，等等就好，点击生成后下滑页面就能看到内容了。</p>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+      <tags>
+        <tag>周报生成器</tag>
+        <tag>OpenAI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>未整理的随手技术笔记（实时更新，各种乱七八糟的技术都会记录在这儿）</title>
     <url>/%E6%9C%AA%E6%95%B4%E7%90%86%E7%9A%84%E9%9A%8F%E6%89%8B%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0%EF%BC%88%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0%EF%BC%8C%E5%90%84%E7%A7%8D%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E7%9A%84%E6%8A%80%E6%9C%AF%E9%83%BD%E4%BC%9A%E8%AE%B0%E5%BD%95%E5%9C%A8%E8%BF%99%E5%84%BF%EF%BC%89.html</url>
     <content><![CDATA[<h2 id="以下是乱七八糟的各种没时间整理的随手技术笔记，你可以通过页面搜索关键词查询可能是你用得上的东西，也可以通过底部联系方式询问我"><a href="#以下是乱七八糟的各种没时间整理的随手技术笔记，你可以通过页面搜索关键词查询可能是你用得上的东西，也可以通过底部联系方式询问我" class="headerlink" title="以下是乱七八糟的各种没时间整理的随手技术笔记，你可以通过页面搜索关键词查询可能是你用得上的东西，也可以通过底部联系方式询问我"></a>以下是乱七八糟的各种没时间整理的随手技术笔记，你可以通过页面搜索关键词查询可能是你用得上的东西，也可以通过底部联系方式询问我</h2><p>点击阅读全文查看</p>
@@ -2122,36 +2303,6 @@
         <tag>deb</tag>
         <tag>apt</tag>
         <tag>aptdownloader</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>相片硅脂片知识</title>
-    <url>/%E7%9B%B8%E7%89%87%E7%A1%85%E8%84%82%E7%89%87%E7%9F%A5%E8%AF%86.html</url>
-    <content><![CDATA[<h2 id="相变硅脂（相变）原理"><a href="#相变硅脂（相变）原理" class="headerlink" title="相变硅脂（相变）原理"></a>相变硅脂（相变）原理</h2><p>相变（Phase Change）是物质从一种物理状态转变为另一种状态的过程，通常涉及到固态、液态和气态之间的转变。相变过程发生时，物质的温度保持不变，而是在改变物质状态的同时吸收或释放潜热（latent heat）。潜热是单位质量物质在相变过程中吸收或释放的热量，它是相变过程中热量变化的主要来源。</p>
-<p>通俗解释：一杯水中放2块冰块，冰块完全融化前水温始终0度，形态未完全转化前，温度不变</p>
-<h2 id="相变硅脂特点"><a href="#相变硅脂特点" class="headerlink" title="相变硅脂特点"></a>相变硅脂特点</h2><p>相变特性使得相变硅脂片拥有更长的寿命，更优的散热稳定性，相变硅脂片高温相变时液化的表面可以排出空气使得硅脂更加贴合散热元件表面</p>
-<p>以霍尼韦尔PTM7950相变片为例，150℃的温度下不会完全相变液化，仅表面相变液化，增加贴合度的情况下不整体液化流动，温度稳定导热高效，官方参数导热率8.5W&#x2F;mk热阻0.04℃cm²&#x2F;W</p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>相变</tag>
-        <tag>相变硅脂</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>本站上线周报生成器</title>
-    <url>/%E6%9C%AC%E7%AB%99%E4%B8%8A%E7%BA%BF%E5%91%A8%E6%8A%A5%E7%94%9F%E6%88%90%E5%99%A8.html</url>
-    <content><![CDATA[<p><a href="https://ai.hackerbs.com/zh">周报生成器地址：https://ai.hackerbs.com/zh</a></p>
-<p>该工具调用的是OpenAI GPT-3.5 API，速度慢是正常的，等等就好，点击生成后下滑页面就能看到内容了。</p>
-]]></content>
-      <categories>
-        <category>实用工具</category>
-      </categories>
-      <tags>
-        <tag>周报生成器</tag>
-        <tag>OpenAI</tag>
       </tags>
   </entry>
   <entry>
@@ -2279,6 +2430,22 @@
       </tags>
   </entry>
   <entry>
+    <title>相片硅脂片知识</title>
+    <url>/%E7%9B%B8%E7%89%87%E7%A1%85%E8%84%82%E7%89%87%E7%9F%A5%E8%AF%86.html</url>
+    <content><![CDATA[<h2 id="相变硅脂（相变）原理"><a href="#相变硅脂（相变）原理" class="headerlink" title="相变硅脂（相变）原理"></a>相变硅脂（相变）原理</h2><p>相变（Phase Change）是物质从一种物理状态转变为另一种状态的过程，通常涉及到固态、液态和气态之间的转变。相变过程发生时，物质的温度保持不变，而是在改变物质状态的同时吸收或释放潜热（latent heat）。潜热是单位质量物质在相变过程中吸收或释放的热量，它是相变过程中热量变化的主要来源。</p>
+<p>通俗解释：一杯水中放2块冰块，冰块完全融化前水温始终0度，形态未完全转化前，温度不变</p>
+<h2 id="相变硅脂特点"><a href="#相变硅脂特点" class="headerlink" title="相变硅脂特点"></a>相变硅脂特点</h2><p>相变特性使得相变硅脂片拥有更长的寿命，更优的散热稳定性，相变硅脂片高温相变时液化的表面可以排出空气使得硅脂更加贴合散热元件表面</p>
+<p>以霍尼韦尔PTM7950相变片为例，150℃的温度下不会完全相变液化，仅表面相变液化，增加贴合度的情况下不整体液化流动，温度稳定导热高效，官方参数导热率8.5W&#x2F;mk热阻0.04℃cm²&#x2F;W</p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>相变</tag>
+        <tag>相变硅脂</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>记录初学Python开发fio测试工具</title>
     <url>/%E8%AE%B0%E5%BD%95%E5%88%9D%E5%AD%A6Python%E5%BC%80%E5%8F%91fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.html</url>
     <content><![CDATA[<h1 id="使用Python自动测试IOPS性能并格式化输出"><a href="#使用Python自动测试IOPS性能并格式化输出" class="headerlink" title="使用Python自动测试IOPS性能并格式化输出"></a>使用Python自动测试IOPS性能并格式化输出</h1><blockquote>
@@ -2351,173 +2518,6 @@
       </categories>
       <tags>
         <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Debian安装教程</title>
-    <url>/Debian%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
-    <content><![CDATA[<h2 id="debian-live-12-5-0-amd64-standard安装教程"><a href="#debian-live-12-5-0-amd64-standard安装教程" class="headerlink" title="debian-live-12.5.0-amd64-standard安装教程"></a>debian-live-12.5.0-amd64-standard安装教程</h2><p>该系统下载地址：</p>
-<p><a href="https://iso.mirrors.ustc.edu.cn/debian-cd/current-live/amd64/iso-hybrid/debian-live-12.5.0-amd64-standard.iso">中科大镜像站下载</a></p>
-<p><a href="https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa">网盘ISO文件夹中下载</a></p>
-<blockquote>
-<p>nano打开文件便可直接编辑，保存则需要先使用Ctrl+o保存然后使用Ctrl+x退出</p>
-</blockquote>
-<span id="more"></span>
-
-<h3 id="进入安装程序"><a href="#进入安装程序" class="headerlink" title="进入安装程序"></a>进入安装程序</h3><p>选择<code>Start installer</code></p>
-<p><img src="https://img.hackerbs.com//20240603143147.png" alt="20240603143147"></p>
-<h3 id="选择语言"><a href="#选择语言" class="headerlink" title="选择语言"></a>选择语言</h3><p><strong>这一步切记，只选择English，不要选择其他，否则在命令行模式会导致无法正常显示字体，出现方块状乱码</strong></p>
-<p><img src="https://img.hackerbs.com//20240603143249.png" alt="20240603143249"></p>
-<h3 id="选择地区"><a href="#选择地区" class="headerlink" title="选择地区"></a>选择地区</h3><p>选择other -&gt; Asia -&gt; China</p>
-<p><img src="https://img.hackerbs.com//20240603143317.png" alt="20240603143317"></p>
-<p><img src="https://img.hackerbs.com//20240603143329.png" alt="20240603143329"></p>
-<p><img src="https://img.hackerbs.com//20240603143338.png" alt="20240603143338"></p>
-<h3 id="本地化配置"><a href="#本地化配置" class="headerlink" title="本地化配置"></a>本地化配置</h3><p>这一步和上一步都相当于Windows的地区&#x2F;语言，跟着教程选择默认的即可，除了English、en_UF.UTF-8之外的任何，除非你是老手，否则新手一律选择默认，避免字体显示错误</p>
-<p><img src="https://img.hackerbs.com//20240603143448.png" alt="20240603143448"></p>
-<h3 id="配置键盘"><a href="#配置键盘" class="headerlink" title="配置键盘"></a>配置键盘</h3><p>默认 American English</p>
-<p><img src="https://img.hackerbs.com//20240603143508.png" alt="20240603143508"></p>
-<h3 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h3><p>如果有DHCP，这一步会直接跳过，没有DHCP需要手动配置的参考下文手动配置IP</p>
-<p><img src="https://img.hackerbs.com//20240603143600.png" alt="20240603143600"></p>
-<h4 id="手动配置IP"><a href="#手动配置IP" class="headerlink" title="手动配置IP"></a>手动配置IP</h4><p>若没有DHCP或没有网线,这一步会提示网络连接失败</p>
-<p>图中提示的内容大概意思是<code>您的网络没有DHCP服务器或DHCP响应过慢</code></p>
-<p><img src="https://img.hackerbs.com//20240603143716.png" alt="20240603143716"></p>
-<p>选择<code>Continue</code>，选择<code>Configure network manually</code>手动配置网络</p>
-<p><img src="https://img.hackerbs.com//20240603143838.png" alt="20240603143838"></p>
-<p>填写IP地址和子网掩码前缀，在Linux建议更多是使用前缀，而不是输一堆255</p>
-<p>255.255.255.0 &#x3D; 11111111.11111111.11111111.0 &#x3D; 24 （前缀就是有多少个1就是多少，所以是24）</p>
-<p>255.255.252.0 &#x3D; 11111111.11111111.11111100.0 &#x3D; 22</p>
-<p><img src="https://img.hackerbs.com//20240603145231.png" alt="20240603145231"></p>
-<p>填写网关</p>
-<p><img src="https://img.hackerbs.com//20240603145247.png" alt="20240603145247"></p>
-<p>填写DNS</p>
-<p>国内腾讯<code>119.29.29.29</code>，境外谷歌<code>8.8.8.8</code>，这两个DNS足够解析全世界的域名并兼顾速度了</p>
-<p><img src="https://img.hackerbs.com//20240603154540.png" alt="20240603154540"></p>
-<h3 id="填写主机名"><a href="#填写主机名" class="headerlink" title="填写主机名"></a>填写主机名</h3><p>也就是hostname，没啥可说的，默认或者按需修改</p>
-<p><img src="https://img.hackerbs.com//20240603154644.png" alt="20240603154644"></p>
-<h3 id="填写域名"><a href="#填写域名" class="headerlink" title="填写域名"></a>填写域名</h3><p>留空或者按需填写</p>
-<p><img src="https://img.hackerbs.com//20240603154725.png" alt="20240603154725"></p>
-<h3 id="设置root用户密码"><a href="#设置root用户密码" class="headerlink" title="设置root用户密码"></a>设置root用户密码</h3><p>设强点，别老用弱密码</p>
-<p><img src="https://img.hackerbs.com//20240603154847.png" alt="20240603154847"></p>
-<h3 id="创建新用户"><a href="#创建新用户" class="headerlink" title="创建新用户"></a>创建新用户</h3><p>这一步无法跳过，如果没有特别需要，直接随便建，进了系统删了即可</p>
-<p>这一步<code>Full name for the new user:</code>是显示名称，和登陆无关，可以理解为QQ名</p>
-<p><img src="https://img.hackerbs.com//20240603154927.png" alt="20240603154927"></p>
-<p>这一步才是用户名，要遵循规范，可以理解为QQ号，是登陆系统的账号</p>
-<p><img src="https://img.hackerbs.com//20240603155108.png" alt="20240603155108"></p>
-<p>设密码</p>
-<p><img src="https://img.hackerbs.com//20240603155132.png" alt="20240603155132"></p>
-<h3 id="格式化磁盘"><a href="#格式化磁盘" class="headerlink" title="格式化磁盘"></a>格式化磁盘</h3><p>如果你玩不来（你都看我教程了肯定是玩不来），那就记住了，选<code>Guided - use entire disk and set up LVM</code>，<strong>必须必须必须使用LVM逻辑卷</strong>，不然后期调整磁盘你就整个傻住了（恕我直言，不用lvm逻辑卷的全是瓜娃子！）</p>
-<p><img src="https://img.hackerbs.com//20240603160221.png" alt="20240603160221"></p>
-<p>选择硬盘</p>
-<p><img src="https://img.hackerbs.com//20240603160247.png" alt="20240603160247"></p>
-<h3 id="选择分区方式"><a href="#选择分区方式" class="headerlink" title="选择分区方式"></a>选择分区方式</h3><p>新手，听我的，直接第一个<code>All files in  one partition</code>，将所有文件放到一个分区就行，别觉得分开分区有什么卵用，就算是生产环境都基本用不着</p>
-<p><img src="https://img.hackerbs.com//20240603160451.png" alt="20240603160451"></p>
-<h3 id="确认是否分区"><a href="#确认是否分区" class="headerlink" title="确认是否分区"></a>确认是否分区</h3><p>选Yes然后Enter就完事儿了</p>
-<p><img src="https://img.hackerbs.com//20240603160521.png" alt="20240603160521"></p>
-<p>默认会选择全部空间，或者你也可以输个max</p>
-<p><img src="https://img.hackerbs.com//20240603160550.png" alt="20240603160550"></p>
-<p>选择<code>Finish partitionging and write changes to disk</code>然后<code>Continue</code></p>
-<p><img src="https://img.hackerbs.com//20240603160627.png" alt="20240603160627"></p>
-<p>选择Yes然后Enter</p>
-<p><img src="https://img.hackerbs.com//20240603160645.png" alt="20240603160645"></p>
-<h3 id="等待系统安装"><a href="#等待系统安装" class="headerlink" title="等待系统安装"></a>等待系统安装</h3><p><img src="https://img.hackerbs.com//20240603160756.png" alt="20240603160756"></p>
-<h3 id="是否启用网络镜像"><a href="#是否启用网络镜像" class="headerlink" title="是否启用网络镜像"></a>是否启用网络镜像</h3><p>没网的直接NO，有网的Yes然后Enter</p>
-<p><img src="https://img.hackerbs.com//20240603160857.png" alt="20240603160857"></p>
-<p>选择China</p>
-<p><img src="https://img.hackerbs.com//20240603160918.png" alt="20240603160918"></p>
-<p>建议<code>mirrors.ustc.edu.cn</code>，中科大万岁</p>
-<p><img src="https://img.hackerbs.com//20240603160943.png" alt="20240603160943"></p>
-<p>不需要代理，直接Enter下一步</p>
-<p><img src="https://img.hackerbs.com//20240603161008.png" alt="20240603161008"></p>
-<p>开始配置apt，也就是网络镜像</p>
-<p><img src="https://img.hackerbs.com//20240603161318.png" alt="20240603161318"></p>
-<h4 id="提示镜像故障"><a href="#提示镜像故障" class="headerlink" title="提示镜像故障"></a>提示镜像故障</h4><p>这一步就是网络问题了，可以考虑直接先不用网络镜像</p>
-<p><img src="https://img.hackerbs.com//20240603161048.png" alt="20240603161048"></p>
-<h3 id="安装完毕"><a href="#安装完毕" class="headerlink" title="安装完毕"></a>安装完毕</h3><p>安装完毕，Continue重启</p>
-<p><img src="https://img.hackerbs.com//20240603161655.png" alt="20240603161655"></p>
-<h3 id="删除安装过程中不得不创建的用户"><a href="#删除安装过程中不得不创建的用户" class="headerlink" title="删除安装过程中不得不创建的用户"></a>删除安装过程中不得不创建的用户</h3><p>登陆</p>
-<p><img src="https://img.hackerbs.com//20240603161753.png" alt="20240603161753"></p>
-<p>使用<code>userdel -r 用户名</code>删除创建的用户</p>
-<p><img src="https://img.hackerbs.com//20240603161857.png" alt="20240603161857"></p>
-<h3 id="额外内容"><a href="#额外内容" class="headerlink" title="额外内容"></a>额外内容</h3><h4 id="手动配置网络"><a href="#手动配置网络" class="headerlink" title="手动配置网络"></a>手动配置网络</h4><p>使用<code>ip addr</code>查看网卡名称</p>
-<p>本次演示的只有一张网卡，是enp6s18，其中<code>state UP</code>表示该网卡已经插好网线</p>
-<p><img src="https://img.hackerbs.com//20240603162420.png" alt="20240603162420"></p>
-<p>使用<code>nano /etc/network/interfaces</code>编辑网络配置文件</p>
-<p>使用<code>nano /etc/resolv.conf</code>编辑DNS配置文件</p>
-<table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>作用</th>
-<th>注意事项</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>auto enp6s18</td>
-<td>网卡开机自启</td>
-<td></td>
-</tr>
-<tr>
-<td>iface enp6s18 inet static</td>
-<td>指定配置哪张网卡</td>
-<td>static表示静态IP,dhcp则是动态</td>
-</tr>
-<tr>
-<td>address</td>
-<td>IP地址&#x2F;前缀</td>
-<td></td>
-</tr>
-<tr>
-<td>gateway</td>
-<td>网关地址</td>
-<td></td>
-</tr>
-<tr>
-<td>dns-search</td>
-<td>对应安装过程中的domain域名</td>
-<td></td>
-</tr>
-<tr>
-<td>nameserver</td>
-<td>DNS服务器</td>
-<td>一行一个，nameserver 119.29.29.29</td>
-</tr>
-</tbody></table>
-<p>网卡配置文件示例</p>
-<p><img src="https://img.hackerbs.com//20240603162336.png" alt="20240603162336"></p>
-<p>DNS配置文件示例</p>
-<p><img src="https://img.hackerbs.com//20240603163137.png" alt="20240603163137"></p>
-<p>编辑完成后使用<code>systemctl restart networking.service</code>重启网络</p>
-<p><img src="https://img.hackerbs.com//20240603163210.png" alt="20240603163210"></p>
-<h4 id="手动配置apt源"><a href="#手动配置apt源" class="headerlink" title="手动配置apt源"></a>手动配置apt源</h4><p><strong>如果安装的时候没有使用网络镜像，且需要配置apt源的话，进行该步骤，否则忽略</strong></p>
-<p>直接使用<code>rm -f /etc/apt/sources.list</code>删除源配置文件</p>
-<p>编辑<code>nano /etc/apt/sources.list</code>源配置文件，先手动添加第一行</p>
-<p><code>deb https://mirrors.ustc.edu.cn/debian/ bookworm main contrib non-free non-free-firmware</code></p>
-<p><img src="https://img.hackerbs.com//20240603163523.png" alt="20240603163523"></p>
-<p>编辑后使用<code>apt update</code>更新源</p>
-<p><img src="https://img.hackerbs.com//20240603163751.png" alt="20240603163751"></p>
-<h4 id="安装OpenSSH-server并配置root密码登陆"><a href="#安装OpenSSH-server并配置root密码登陆" class="headerlink" title="安装OpenSSH-server并配置root密码登陆"></a>安装OpenSSH-server并配置root密码登陆</h4><p>使用<code>apt install openssh-server -f</code>安装OpenSSH server</p>
-<p><img src="https://img.hackerbs.com//20240603163908.png" alt="20240603163908"></p>
-<p><code>nano /etc/ssh/sshd_config</code>编辑ssh配置文件，在原本的<code>#PermitRootLogin prohibit-password</code>下方添加<code>PermitRootLogin yes</code></p>
-<p>上方的<code>#Port 22</code>取消注释修改为其他端口即可实现修改ssh端口功能，如<code>Port 10022</code></p>
-<p><img src="https://img.hackerbs.com//20240603164013.png" alt="20240603164013"></p>
-<p>编辑后使用<code>systemctl restart ssh</code>重启ssh服务，之后便可使用ssh连接服务器了</p>
-<h4 id="配置完全apt国内镜像"><a href="#配置完全apt国内镜像" class="headerlink" title="配置完全apt国内镜像"></a>配置完全apt国内镜像</h4><p>继上文配置ssh后，便可使用ssh远程访问服务器，这样复制粘贴便方便多了</p>
-<p>在这里推荐snullp大佬开发的<a href="https://mirrors.ustc.edu.cn/repogen/">配置生成器</a>，注意根据你的Debian版本选择不同的内容，本教程使用的是bookworm，apt完全配置内容如下，其他配置内容可以查看本站的<a href="https://hackerbs.com/apt%E7%AD%89%E5%90%84%E7%A7%8D%E6%BA%90%E5%88%97%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.html">apt等各种源列表（持续更新）</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bookworm main contrib non-free non-free-firmware</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian/ bookworm main contrib non-free non-free-firmware</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian-security/ bookworm-security main contrib non-free non-free-firmware</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian-security/ bookworm-security main contrib non-free non-free-firmware</span><br></pre></td></tr></table></figure>
-
-<p>同样的，还是编辑<code>/etc/apt/sources.list</code></p>
-<p><img src="https://img.hackerbs.com//20240603164707.png" alt="20240603164707"></p>
-<p>编辑后还是使用<code>apt update</code>更新源即可</p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Debian</tag>
-        <tag>Linux安装</tag>
-        <tag>Debian安装</tag>
-        <tag>Debian服务器</tag>
       </tags>
   </entry>
 </search>

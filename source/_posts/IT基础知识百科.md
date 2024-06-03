@@ -1,6 +1,6 @@
 ---
 title: IT基础知识百科
-sticky: 100
+sticky:
 categories: [知识库]
 tags:
   - 基础
