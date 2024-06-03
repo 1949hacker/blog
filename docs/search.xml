@@ -18,6 +18,223 @@
       </tags>
   </entry>
   <entry>
+    <title>51单片机的学习笔记</title>
+    <url>/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</url>
+    <content><![CDATA[<h2 id="51单片机的学习及其关联知识"><a href="#51单片机的学习及其关联知识" class="headerlink" title="51单片机的学习及其关联知识"></a>51单片机的学习及其关联知识</h2><span id="more"></span>
+
+<p><strong>开始前的一段话：</strong></p>
+<p>求知欲是人类进步的源泉，每接触一项新的知识就像是一滴墨滴在了宣纸上，向着四周疯狂扩散，这种极度的求知欲深深地刺激着我，撕裂我的思维向四周辐射，贪婪地、疯狂地汲取着接触到的每一项知识，这种知识爆炸的感觉带给我成瘾的快感！</p>
+<p>对于单片机的起步，始于我小时候的梦想，我想有高度智能的科技、机械围绕着我的生活，我想拥有一个高度智能的工厂，想要无数无数乃至我甚至不知如何形容的科技，我痴迷着这些技术，我疯狂的汲取各种知识，每一次突破一个新的知识面就像是进入一个未知的宇宙！偶然间，我发现我我的梦想可以从两个两个方面入手：</p>
+<ol>
+<li>软件层面的技术：编程，人工智能等</li>
+<li>硬件层面的技术：机械，电路开发等</li>
+</ol>
+<p>于是我有了方向，向着我想要的极力冲刺！</p>
+<p>我于2022.11.21日凌晨开始了51单片机的学习，从茫然无知，到那一滴墨滴在了宣纸上，围绕着单片机开始的知识爆炸让我无比亢奋！从一块小小的51单片机，知识开始爆炸开来，我从未接触过的领域，芯片，电路，逻辑……无数的知识冲刷着我的大脑，无法抑制的激动，发现未知的知识宇宙，我疯狂的汲取着无穷无尽的知识，感叹着人类智慧的结晶！</p>
+<p>越是学习，越是发觉自己的无知，知识是无穷无尽的，我永远不可能学完，真的太多太多了！</p>
+<p>人生的价值是集体利益，这些伟大的知识我无论学习多少，若不能将其贡献出来，则是对知识、对智慧、对人类乃至对我人生意义的亵渎！</p>
+<p>我将尽可能的将我所学的一切，用通俗易懂的语言描述出来，为同样渴望知识、同样有着疯狂求知欲的人们尽一份绵薄之力！</p>
+<p>如果你也有着相同的想法，同样渴望知识并为此痴迷，欢迎加入！</p>
+<p>如开头所述，求知欲是人类进步的源泉，所以在此，请允许我以<strong>探索者</strong>尊称各位渴望知识的道友，并欢迎您加入到我们，您可以在本页底部找到我的联系方式，因某些原因，建议您使用Telegram进行交流。</p>
+<hr>
+<p><strong>注意：由于我是边学习边完善文章，所以文章可能存在大量错误，我个人的力量有限，恳请各位探索者开放交流、互换知识，以集体的力量弥补个人的缺陷</strong></p>
+<hr>
+<h2 id="我使用的单片机"><a href="#我使用的单片机" class="headerlink" title="我使用的单片机"></a>我使用的单片机</h2><p>品牌：普中(PRECHIN)<br>型号：普中51-实验版<br>官方教程：<a href="https://www.bilibili.com/video/BV1RB4y1i71i">https://www.bilibili.com/video/BV1RB4y1i71i</a></p>
+<p>在官方教程中，介绍了该开发板的部分元器件：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4位一体数码管</td>
+<td>数字显示</td>
+<td>两个4位一体共阴数码管</td>
+</tr>
+<tr>
+<td>LCD1602液晶屏</td>
+<td>用于简单内容显示</td>
+<td>开发板提供了LCD1602&#x2F;9648&#x2F;12864&#x2F;TFT接口</td>
+</tr>
+<tr>
+<td>8*8LED矩阵</td>
+<td>常应用于LED广告牌等</td>
+<td>在矩阵旁边提供了编号J24的GND&#x2F;OE&#x2F;VCC三针引脚，跳线帽短接OE&#x2F;VCC可以关闭矩阵节省电源（OE我搜索出来的解释为<em>输出使能控制信号</em>，还请大佬科普补充一下，谢谢）</td>
+</tr>
+<tr>
+<td>LED流水灯</td>
+<td>可以用于心形流水灯表白（误）</td>
+<td>该开发板提供了8个流水灯</td>
+</tr>
+<tr>
+<td>74HC595A芯片</td>
+<td>该芯片用于扩展开发板IO口，驱动8*8点阵</td>
+<td>专业名称<em>高速 CMOS 8 位串行移位寄存器</em>其具体资料后续将专门设立电路知识栏目进行解释</td>
+</tr>
+<tr>
+<td>4*4键盘</td>
+<td>计算器啥的，挺实用</td>
+<td>普普通通</td>
+</tr>
+<tr>
+<td>红外接受</td>
+<td>红外遥控嘛，套餐给了遥控器</td>
+<td>NEC解码</td>
+</tr>
+<tr>
+<td>DS18B20温度传感器</td>
+<td>略</td>
+<td>略</td>
+</tr>
+<tr>
+<td>NRF24L01扩展接口</td>
+<td>该扩展接口可以用于扩展2.4G无线通信模块</td>
+<td>相当NICE的远程通信，几百米的遥控器？</td>
+</tr>
+<tr>
+<td>ASM1117稳压芯片</td>
+<td>提供3.3V稳定电压</td>
+<td>如视频中所述，大部分传感器为3.3V，所以嘛…</td>
+</tr>
+<tr>
+<td>CH340C芯片</td>
+<td>用于USB转TTL通信，该芯片内置晶振</td>
+<td>该板设计了4个引脚，分别是UTX-&gt;P30，RTX-&gt;P31，该设计十分优秀！在需要使用串口调试模块时，可以将U&#x2F;RTX针脚接到模块对应引脚，直接使用开发板MicroUSB进行调试，大赞！</td>
+</tr>
+</tbody></table>
+<h2 id="晶振临时科普栏"><a href="#晶振临时科普栏" class="headerlink" title="晶振临时科普栏"></a>晶振临时科普栏</h2><p>因我在学习过程中，对晶振的求知难度较大，特此临时记录！<br>晶振，全称石英晶体振荡器，英文名（quartz oscillator）<br>石英晶振具有高精度高稳度的特性，十分适合用于数字电路的时钟，是数字电路的心脏！</p>
+<p><strong>时钟这个概念比较抽象，我尝试将其描述的更加朴素一些：</strong></p>
+<p>在计算机中，关和开分别可以代表0和1，在最最原始的逻辑电路中，还没有晶振时，可以通过人工控制开关实现逻辑电路的控制，比如<a href="https://baike.baidu.com/item/%E5%BC%82%E6%88%96%E9%97%A8/9036416">异或门</a></p>
+<table>
+<thead>
+<tr>
+<th>A开关</th>
+<th>B开关</th>
+<th>计算结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>关</td>
+<td>关</td>
+<td>0</td>
+</tr>
+<tr>
+<td>开</td>
+<td>关</td>
+<td>1</td>
+</tr>
+<tr>
+<td>关</td>
+<td>开</td>
+<td>1</td>
+</tr>
+<tr>
+<td>开</td>
+<td>开</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>于是我们可以通过这种简单逻辑的叠加，做出一些复杂的计算，如加法：x+y<br>设定，检测到<strong>A开B关</strong>一次设定x数值增加1，<strong>A关B开</strong>y数值增加1，那么我们要计算3+2，则需要进行一下操作：</p>
+<table>
+<thead>
+<tr>
+<th>给出X值</th>
+<th>给出B值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A开B关重复3次</td>
+<td>A关B开重复2次</td>
+</tr>
+</tbody></table>
+<p>由此可以看出，哪怕是及其简单的逻辑处理，也需要非常庞大的开关操作量。<br>因此，懒得一批的人类找到了晶振这玩意儿，<a href="https://zh.wikipedia.org/zh-cn/%E7%9F%B3%E8%8B%B1%E6%99%B6%E4%BD%93%E8%B0%90%E6%8C%AF%E5%99%A8">晶振的原理</a>解释起来有些许复杂，在此我们只需了解，晶振在电路板中工作的原理即可：<br>晶振可以在一定时间内以一定频率发出脉冲，脉冲一词仍有一些难以理解，而有些资料中对此的描述为高低电平的转换，对于一个初学者来说，最讨厌的无非就是看到这些难以理解的名词，在此我将其解释的更加直白一些，不过低电平并不等于0V，低电平只是一个相对较低的电压：<br>低电平：0V电压<br>高电平：5V电压<br>那么脉冲（高低电平转换）在电路中则是，打开开关：低电平（0V&#x3D;没电）转换为高电平（5V&#x3D;来电了），于是，就如我们上文所述，这就像是打开了A开关，利用晶振的这种脉冲，我们便可以在一定时间内实现一定次数的自动开关操作。<br>如果你仔细阅读并理解了，便会发现这真的是一个十分伟大的发明！从此让人类走上了废物(bushi)的道路，躺平~</p>
+<p><strong>文章亦是我的笔记，先暂时记录到这里，仍在学习总结中</strong></p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>嵌入式开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS安装教程</title>
+    <url>/CentOS%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Debian基础知识【持续更新】</title>
+    <url>/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
+    <content><![CDATA[<h1 id="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"><a href="#本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我" class="headerlink" title="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"></a>本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我</h1><p><strong>根据红帽的公告，CentOS将不再适合作为生产环境的稳定系统使用，为此我个人建议您尝试著名且优秀的Debian系统</strong></p>
+<span id="more"></span>
+
+<blockquote>
+<p>2020年12月08日，CentOS官方宣布了停止维护CentOS Linux 8的计划，并推出了CentOS Stream项目。具体信息，请阅读CentOS官方公告。其具体规划如下：</p>
+<ul>
+<li>CentOS Linux 8作为RHEL 8的复刻版本，生命周期缩短，于2021年12月31日停止更新并停止维护（EOL）。</li>
+<li>基于以上官方变更计划，CentOS Linux 8用户将无法获得包括问题修复和功能更新在内的任何软件维护和支持。CentOS官方建议停止维护后：对于开发或测试环境，可以将环境迁移至CentOS Stream版本； 对于生产环境或部署关键业务的系统，建议使用稳定的Red Hat Enterprise Linux。对此，用户需评估以下问题：</li>
+<li>CentOS Stream是一个滚动发行的版本，仅为RHEL前置测试版，运用于生产环境时，可能存在一定风险。<br><a href="https://aws.amazon.com/cn/blogs/china/aws-choices-for-centos-after-stopping-maintenance/">亚马逊云科技上在CentOS在停止维护后的几种选择</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="Debian-更换国内源"><a href="#Debian-更换国内源" class="headerlink" title="Debian 更换国内源"></a>Debian 更换国内源</h2><p>在使用过阿里云、网易163、清华、中科大源之后，我个人建议更换为中科大源，Debian更换源的方式非常简单，在此非常感谢<a href="https://github.com/snullp">sNullp先生</a>的<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>!</p>
+<p>在使用该配置生成器之前，你需要先确认你的Debian版本，使用<code>cat /etc/os-release</code>命令，在输出的结果中找到<code>VERSION_CODENAME=bullseye</code>，位于<code>=</code>后面的就是你的版本代号，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301160807.png" alt="20230301160807"></p>
+<p>然后打开<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>，找到Debian并选择你对应的版本号，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301161044.png" alt="20230301161044"></p>
+<p>其中，HTTPS&#x2F;HTTP不必赘述，就是字母意思，而IPv4也很好理解，就是选择IPv4或IPv6地址访问，默认HTTPS和IPv4即可</p>
+<p>复制红框中的内容后，回到你的Debian系统，使用<code>vim /etc/apt/sources.list</code>命令编辑apt源配置文件，如果提示<code>-bash: /usr/bin/vim: No such file or directory</code>则是因为你没有安装<code>vim</code>编辑器，我强烈建议你安装<code>vim</code>编辑器，如果暂时无法安装，也可使用<code>nano</code>编辑器，对应命令为<code>nano /etc/apt/sources.list</code>，使用编辑器打开<code>sources.list</code>文件后，如果你是<code>vim</code>编辑器，则可以将光标移到首行，然后按<code>d</code>再按<code>Shift+G</code>即可直接清空内容，然后粘贴你在源配置生成器复制的红框中内容即可，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301161642.png" alt="20230301161642"></p>
+<p><code>vim</code>编辑器在编辑完成后按<code>ESC</code>再输入<code>:wq</code>回车即可退出保存，编辑器的操作方式在此不过多赘述。</p>
+<p>完成源配置文件的编辑后，还需要使用<code>apt update</code>命令更新源，至此，Debian更换中科大源的教程结束。</p>
+<h2 id="Debian-iSCSI挂载卷"><a href="#Debian-iSCSI挂载卷" class="headerlink" title="Debian iSCSI挂载卷"></a>Debian iSCSI挂载卷</h2><p>首先，你需要安装<code>open-iscsi</code>，使用<code>apt install -y open-iscsi</code>进行安装，然后运行<code>iscsiadm -m discovery -t st -p 服务器地址</code>探测服务器发布的卷，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301162849.png" alt="20230301162849"></p>
+<p>随后使用<code>iscsiadm -m node -T iqn开头的对应地址 -p 服务器地址 -l</code>即可完成挂载，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301164715.png" alt="20230301164715"></p>
+<p>随后使用<code>lsblk</code>命令发现新的磁盘，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301164844.png" alt="20230301164844"></p>
+<p>扩展内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 --op update -n node.startup -v automatic</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 -u</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除所有连接</span></span><br><span class="line">iscsiadm -m node --logoutall=all</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有iscsi连接</span></span><br><span class="line">iscsiadm -m session</span><br></pre></td></tr></table></figure>
+
+<h2 id="Debian-格式化并挂载磁盘以及lvm逻辑卷的使用"><a href="#Debian-格式化并挂载磁盘以及lvm逻辑卷的使用" class="headerlink" title="Debian 格式化并挂载磁盘以及lvm逻辑卷的使用"></a>Debian 格式化并挂载磁盘以及lvm逻辑卷的使用</h2><p>紧跟上文，iscsi挂载后的卷无法直接使用，需要像磁盘一样进行分区及挂载到系统目录</p>
+<p>安装parted：<code>apt install -y parted</code></p>
+<p>使用<code>parted /dev/设备</code>命令进入磁盘分区管理，随后使用<code>mklable gpt</code>将磁盘设置为优秀的<code>GPT</code>分区表，然后使用<code>mkpart 名称 文件系统 起始扇区 结束地址</code>创建分区，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301165916.png" alt="20230301165916"></p>
+<p>其中，2048s是为了将扇区进行对齐，有利于提升性能，而100%则是指定结束地址为最后，100%可以替换为明确的扇区、容量，如9999s（扇区）或100G（容量），同理，起始地址也是如此，如果你需要创建多个分区，则之后的分区起始地址应紧随上一个分区的结束地址。</p>
+<p>分区创建完毕后，输入<code>q</code>回车即可退出parted，将分区格式化之后即可挂载使用</p>
+<p><strong>但，我在此强烈建议你使用lvm逻辑卷，因为lvm优点有便于容量调整、创建跨区卷等</strong></p>
+<p>lvm卷的使用步骤有创建物理卷，创建卷组，创建逻辑卷</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建物理卷</span></span><br><span class="line">pvcreate /dev/设备</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建卷组</span></span><br><span class="line">vgcreate 卷组名 物理卷</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建逻辑卷</span></span><br><span class="line">lvcreate -l +100%FREE -n 逻辑卷名 所属卷组名</span><br></pre></td></tr></table></figure>
+
+<p>示例如图：</p>
+<p><img src="https://img.hackerbs.com/20230301170847.png" alt="20230301170847"></p>
+<p>lvm的逻辑卷地址位于<code>/dev/mapper/</code>下，命名格式为<code>卷组名-逻辑卷名</code>，将逻辑卷格式化后即可挂载使用，如图：</p>
+<p><img src="https://img.hackerbs.com/20230301171003.png" alt="20230301171003"></p>
+<p>至此，Debian 磁盘分区及lvm逻辑卷教程完毕，如有疑问，欢迎咨询！</p>
+<h2 id="Debian访问SMB服务器"><a href="#Debian访问SMB服务器" class="headerlink" title="Debian访问SMB服务器"></a>Debian访问SMB服务器</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装cifs-utils</span></span><br><span class="line">apt install cifs-utils</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用mount进行挂载</span></span><br><span class="line">mount -t cifs -o username=$username //$address/$smbname /$mount_point/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例</span></span><br><span class="line">mount -t cifs -o username=user //10.1.1.1/test /smbTest/</span><br></pre></td></tr></table></figure>
+
+<h2 id="apt下载deb包及其依赖的办法"><a href="#apt下载deb包及其依赖的办法" class="headerlink" title="apt下载deb包及其依赖的办法"></a>apt下载deb包及其依赖的办法</h2><p>使用apt install时加上<code>--download-only</code>参数即可实现仅下载而不安装的操作，但是下载的deb包默认是在<code>/var/cache/apt/archives</code>目录中，可以使用<code>-o Dir::Cache::archives=&quot;/&lt;your dir&gt;&quot;</code>参数指定缓存路径。</p>
+<p>APT包管理器在执行操作时会使用lock文件来确保系统中只有一个进程在使用APT。partial目录则是APT在下载和安装软件包时使用的临时目录。所以你会发现在你指定的目录中有<code>lock</code>文件和<code>partial</code>目录，删除即可，并无影响。</p>
+<p><strong>鉴于你可能是个像我一样有什么大病的强迫症，所以为你提供了禁用lock和partial的办法</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-o APT::Get::Lock_Prohibit=1 # 禁用lock文件</span><br><span class="line">-o Acquire::Pdiffs::NoDownload=true -o Acquire::AllowDowngradeToInsecureRepositories=true -o Acquire::AllowInsecureRepositories=true -o Acquire::NoCDROM=true -o Acquire::NoVerify=true -o Acquire::Check-Valid-Until=false -o Dir::Etc::TrustedParts=&quot;/path/to/trusted/parts&quot; -o Dir::Etc::Trusted=/path/to/trusted/dir # 禁用partial目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">是的，看花眼了对吧？↓</span></span><br><span class="line">Acquire::Pdiffs::NoDownload=true # 禁用差分包下载</span><br><span class="line">Acquire::AllowDowngradeToInsecureRepositories=true # 允许使用不安全的APT源</span><br><span class="line">Acquire::AllowInsecureRepositories=true # 允许使用不安全的APT源</span><br><span class="line">Acquire::NoCDROM=true # 禁用CD-ROM镜像</span><br><span class="line">Acquire::NoVerify=true # 禁用APT源的GPG验证</span><br><span class="line">Acquire::Check-Valid-Until=false # 禁用APT源的有效期检查</span><br><span class="line">Dir::Etc::TrustedParts=&quot;/path/to/trusted/parts&quot; # 设置APT的可信部件目录</span><br><span class="line">Dir::Etc::Trusted=/path/to/trusted/dir # 设置APT的可信源目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以上操作都是为了避免使用partial目录，这些命令可能会降低APT操作的安全性和可靠性</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">所以，没什么大病别骚搞，就简单点，下载完了删掉lock和partial即可</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以下是我下载docker包的命令示范</span></span><br><span class="line">apt install -o Dir::Cache::archives=&quot;./&quot; --download-only docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>重点！！！</strong></p>
+<hr>
+<p>上面的办法其实有个很操蛋的地方，如果你的系统已经安装了这个软件包，那么apt并不会为你下载任何deb包，你需要使用下面的办法进行下载</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将其中的&lt;package-name&gt;替换为你要下载的包，比如nmap</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意！命令中有两处&lt;package-name&gt;</span></span><br><span class="line">apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances &lt;package-name&gt; | grep &quot;^\w&quot; | sort -u) &lt;package-name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以下是我下载vim及其依赖的示例</span></span><br><span class="line">apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances vim | grep &quot;^\w&quot; | sort -u) vim</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances &lt;package-name&gt;</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个命令将返回一个包含软件包及其所有依赖的列表，不包括推荐的软件包和建议的软件包，以及任何冲突、破坏、替换和增强关系</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">grep <span class="string">&quot;^\w&quot;</span>是过滤掉空行和注释行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后使用 <span class="built_in">sort</span> -u 命令去重</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Debian</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IT基础知识百科</title>
     <url>/IT%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%99%BE%E7%A7%91.html</url>
     <content><![CDATA[<h2 id="常见的SAS线缆"><a href="#常见的SAS线缆" class="headerlink" title="常见的SAS线缆"></a>常见的SAS线缆</h2><p><a href="https://cs-electronics.com/">一个非常优秀的、介绍各种线缆知识的网站</a></p>
@@ -669,218 +886,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Debian基础知识【持续更新】</title>
-    <url>/Debian%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
-    <content><![CDATA[<h1 id="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"><a href="#本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我" class="headerlink" title="本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我"></a>本文将持续更新Debian系统的各类基础知识，欢迎您持续关注，有任何问题可以在本页末尾评论或通过展示的联系方式联系我</h1><p><strong>根据红帽的公告，CentOS将不再适合作为生产环境的稳定系统使用，为此我个人建议您尝试著名且优秀的Debian系统</strong></p>
-<span id="more"></span>
-
-<blockquote>
-<p>2020年12月08日，CentOS官方宣布了停止维护CentOS Linux 8的计划，并推出了CentOS Stream项目。具体信息，请阅读CentOS官方公告。其具体规划如下：</p>
-<ul>
-<li>CentOS Linux 8作为RHEL 8的复刻版本，生命周期缩短，于2021年12月31日停止更新并停止维护（EOL）。</li>
-<li>基于以上官方变更计划，CentOS Linux 8用户将无法获得包括问题修复和功能更新在内的任何软件维护和支持。CentOS官方建议停止维护后：对于开发或测试环境，可以将环境迁移至CentOS Stream版本； 对于生产环境或部署关键业务的系统，建议使用稳定的Red Hat Enterprise Linux。对此，用户需评估以下问题：</li>
-<li>CentOS Stream是一个滚动发行的版本，仅为RHEL前置测试版，运用于生产环境时，可能存在一定风险。<br><a href="https://aws.amazon.com/cn/blogs/china/aws-choices-for-centos-after-stopping-maintenance/">亚马逊云科技上在CentOS在停止维护后的几种选择</a></li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="Debian-更换国内源"><a href="#Debian-更换国内源" class="headerlink" title="Debian 更换国内源"></a>Debian 更换国内源</h2><p>在使用过阿里云、网易163、清华、中科大源之后，我个人建议更换为中科大源，Debian更换源的方式非常简单，在此非常感谢<a href="https://github.com/snullp">sNullp先生</a>的<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>!</p>
-<p>在使用该配置生成器之前，你需要先确认你的Debian版本，使用<code>cat /etc/os-release</code>命令，在输出的结果中找到<code>VERSION_CODENAME=bullseye</code>，位于<code>=</code>后面的就是你的版本代号，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301160807.png" alt="20230301160807"></p>
-<p>然后打开<a href="https://mirrors.ustc.edu.cn/repogen/">源配置生成器</a>，找到Debian并选择你对应的版本号，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301161044.png" alt="20230301161044"></p>
-<p>其中，HTTPS&#x2F;HTTP不必赘述，就是字母意思，而IPv4也很好理解，就是选择IPv4或IPv6地址访问，默认HTTPS和IPv4即可</p>
-<p>复制红框中的内容后，回到你的Debian系统，使用<code>vim /etc/apt/sources.list</code>命令编辑apt源配置文件，如果提示<code>-bash: /usr/bin/vim: No such file or directory</code>则是因为你没有安装<code>vim</code>编辑器，我强烈建议你安装<code>vim</code>编辑器，如果暂时无法安装，也可使用<code>nano</code>编辑器，对应命令为<code>nano /etc/apt/sources.list</code>，使用编辑器打开<code>sources.list</code>文件后，如果你是<code>vim</code>编辑器，则可以将光标移到首行，然后按<code>d</code>再按<code>Shift+G</code>即可直接清空内容，然后粘贴你在源配置生成器复制的红框中内容即可，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301161642.png" alt="20230301161642"></p>
-<p><code>vim</code>编辑器在编辑完成后按<code>ESC</code>再输入<code>:wq</code>回车即可退出保存，编辑器的操作方式在此不过多赘述。</p>
-<p>完成源配置文件的编辑后，还需要使用<code>apt update</code>命令更新源，至此，Debian更换中科大源的教程结束。</p>
-<h2 id="Debian-iSCSI挂载卷"><a href="#Debian-iSCSI挂载卷" class="headerlink" title="Debian iSCSI挂载卷"></a>Debian iSCSI挂载卷</h2><p>首先，你需要安装<code>open-iscsi</code>，使用<code>apt install -y open-iscsi</code>进行安装，然后运行<code>iscsiadm -m discovery -t st -p 服务器地址</code>探测服务器发布的卷，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301162849.png" alt="20230301162849"></p>
-<p>随后使用<code>iscsiadm -m node -T iqn开头的对应地址 -p 服务器地址 -l</code>即可完成挂载，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301164715.png" alt="20230301164715"></p>
-<p>随后使用<code>lsblk</code>命令发现新的磁盘，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301164844.png" alt="20230301164844"></p>
-<p>扩展内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 --op update -n node.startup -v automatic</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除挂载</span></span><br><span class="line">iscsiadm -m node -T iqn地址:目标 -p 服务器地址:端口 -u</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解除所有连接</span></span><br><span class="line">iscsiadm -m node --logoutall=all</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有iscsi连接</span></span><br><span class="line">iscsiadm -m session</span><br></pre></td></tr></table></figure>
-
-<h2 id="Debian-格式化并挂载磁盘以及lvm逻辑卷的使用"><a href="#Debian-格式化并挂载磁盘以及lvm逻辑卷的使用" class="headerlink" title="Debian 格式化并挂载磁盘以及lvm逻辑卷的使用"></a>Debian 格式化并挂载磁盘以及lvm逻辑卷的使用</h2><p>紧跟上文，iscsi挂载后的卷无法直接使用，需要像磁盘一样进行分区及挂载到系统目录</p>
-<p>安装parted：<code>apt install -y parted</code></p>
-<p>使用<code>parted /dev/设备</code>命令进入磁盘分区管理，随后使用<code>mklable gpt</code>将磁盘设置为优秀的<code>GPT</code>分区表，然后使用<code>mkpart 名称 文件系统 起始扇区 结束地址</code>创建分区，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301165916.png" alt="20230301165916"></p>
-<p>其中，2048s是为了将扇区进行对齐，有利于提升性能，而100%则是指定结束地址为最后，100%可以替换为明确的扇区、容量，如9999s（扇区）或100G（容量），同理，起始地址也是如此，如果你需要创建多个分区，则之后的分区起始地址应紧随上一个分区的结束地址。</p>
-<p>分区创建完毕后，输入<code>q</code>回车即可退出parted，将分区格式化之后即可挂载使用</p>
-<p><strong>但，我在此强烈建议你使用lvm逻辑卷，因为lvm优点有便于容量调整、创建跨区卷等</strong></p>
-<p>lvm卷的使用步骤有创建物理卷，创建卷组，创建逻辑卷</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建物理卷</span></span><br><span class="line">pvcreate /dev/设备</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建卷组</span></span><br><span class="line">vgcreate 卷组名 物理卷</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建逻辑卷</span></span><br><span class="line">lvcreate -l +100%FREE -n 逻辑卷名 所属卷组名</span><br></pre></td></tr></table></figure>
-
-<p>示例如图：</p>
-<p><img src="https://img.hackerbs.com/20230301170847.png" alt="20230301170847"></p>
-<p>lvm的逻辑卷地址位于<code>/dev/mapper/</code>下，命名格式为<code>卷组名-逻辑卷名</code>，将逻辑卷格式化后即可挂载使用，如图：</p>
-<p><img src="https://img.hackerbs.com/20230301171003.png" alt="20230301171003"></p>
-<p>至此，Debian 磁盘分区及lvm逻辑卷教程完毕，如有疑问，欢迎咨询！</p>
-<h2 id="Debian访问SMB服务器"><a href="#Debian访问SMB服务器" class="headerlink" title="Debian访问SMB服务器"></a>Debian访问SMB服务器</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装cifs-utils</span></span><br><span class="line">apt install cifs-utils</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用mount进行挂载</span></span><br><span class="line">mount -t cifs -o username=$username //$address/$smbname /$mount_point/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例</span></span><br><span class="line">mount -t cifs -o username=user //10.1.1.1/test /smbTest/</span><br></pre></td></tr></table></figure>
-
-<h2 id="apt下载deb包及其依赖的办法"><a href="#apt下载deb包及其依赖的办法" class="headerlink" title="apt下载deb包及其依赖的办法"></a>apt下载deb包及其依赖的办法</h2><p>使用apt install时加上<code>--download-only</code>参数即可实现仅下载而不安装的操作，但是下载的deb包默认是在<code>/var/cache/apt/archives</code>目录中，可以使用<code>-o Dir::Cache::archives=&quot;/&lt;your dir&gt;&quot;</code>参数指定缓存路径。</p>
-<p>APT包管理器在执行操作时会使用lock文件来确保系统中只有一个进程在使用APT。partial目录则是APT在下载和安装软件包时使用的临时目录。所以你会发现在你指定的目录中有<code>lock</code>文件和<code>partial</code>目录，删除即可，并无影响。</p>
-<p><strong>鉴于你可能是个像我一样有什么大病的强迫症，所以为你提供了禁用lock和partial的办法</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-o APT::Get::Lock_Prohibit=1 # 禁用lock文件</span><br><span class="line">-o Acquire::Pdiffs::NoDownload=true -o Acquire::AllowDowngradeToInsecureRepositories=true -o Acquire::AllowInsecureRepositories=true -o Acquire::NoCDROM=true -o Acquire::NoVerify=true -o Acquire::Check-Valid-Until=false -o Dir::Etc::TrustedParts=&quot;/path/to/trusted/parts&quot; -o Dir::Etc::Trusted=/path/to/trusted/dir # 禁用partial目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">是的，看花眼了对吧？↓</span></span><br><span class="line">Acquire::Pdiffs::NoDownload=true # 禁用差分包下载</span><br><span class="line">Acquire::AllowDowngradeToInsecureRepositories=true # 允许使用不安全的APT源</span><br><span class="line">Acquire::AllowInsecureRepositories=true # 允许使用不安全的APT源</span><br><span class="line">Acquire::NoCDROM=true # 禁用CD-ROM镜像</span><br><span class="line">Acquire::NoVerify=true # 禁用APT源的GPG验证</span><br><span class="line">Acquire::Check-Valid-Until=false # 禁用APT源的有效期检查</span><br><span class="line">Dir::Etc::TrustedParts=&quot;/path/to/trusted/parts&quot; # 设置APT的可信部件目录</span><br><span class="line">Dir::Etc::Trusted=/path/to/trusted/dir # 设置APT的可信源目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以上操作都是为了避免使用partial目录，这些命令可能会降低APT操作的安全性和可靠性</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">所以，没什么大病别骚搞，就简单点，下载完了删掉lock和partial即可</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以下是我下载docker包的命令示范</span></span><br><span class="line">apt install -o Dir::Cache::archives=&quot;./&quot; --download-only docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>重点！！！</strong></p>
-<hr>
-<p>上面的办法其实有个很操蛋的地方，如果你的系统已经安装了这个软件包，那么apt并不会为你下载任何deb包，你需要使用下面的办法进行下载</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将其中的&lt;package-name&gt;替换为你要下载的包，比如nmap</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意！命令中有两处&lt;package-name&gt;</span></span><br><span class="line">apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances &lt;package-name&gt; | grep &quot;^\w&quot; | sort -u) &lt;package-name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以下是我下载vim及其依赖的示例</span></span><br><span class="line">apt download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances vim | grep &quot;^\w&quot; | sort -u) vim</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances &lt;package-name&gt;</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个命令将返回一个包含软件包及其所有依赖的列表，不包括推荐的软件包和建议的软件包，以及任何冲突、破坏、替换和增强关系</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">grep <span class="string">&quot;^\w&quot;</span>是过滤掉空行和注释行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后使用 <span class="built_in">sort</span> -u 命令去重</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Debian</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>51单片机的学习笔记</title>
-    <url>/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</url>
-    <content><![CDATA[<h2 id="51单片机的学习及其关联知识"><a href="#51单片机的学习及其关联知识" class="headerlink" title="51单片机的学习及其关联知识"></a>51单片机的学习及其关联知识</h2><span id="more"></span>
-
-<p><strong>开始前的一段话：</strong></p>
-<p>求知欲是人类进步的源泉，每接触一项新的知识就像是一滴墨滴在了宣纸上，向着四周疯狂扩散，这种极度的求知欲深深地刺激着我，撕裂我的思维向四周辐射，贪婪地、疯狂地汲取着接触到的每一项知识，这种知识爆炸的感觉带给我成瘾的快感！</p>
-<p>对于单片机的起步，始于我小时候的梦想，我想有高度智能的科技、机械围绕着我的生活，我想拥有一个高度智能的工厂，想要无数无数乃至我甚至不知如何形容的科技，我痴迷着这些技术，我疯狂的汲取各种知识，每一次突破一个新的知识面就像是进入一个未知的宇宙！偶然间，我发现我我的梦想可以从两个两个方面入手：</p>
-<ol>
-<li>软件层面的技术：编程，人工智能等</li>
-<li>硬件层面的技术：机械，电路开发等</li>
-</ol>
-<p>于是我有了方向，向着我想要的极力冲刺！</p>
-<p>我于2022.11.21日凌晨开始了51单片机的学习，从茫然无知，到那一滴墨滴在了宣纸上，围绕着单片机开始的知识爆炸让我无比亢奋！从一块小小的51单片机，知识开始爆炸开来，我从未接触过的领域，芯片，电路，逻辑……无数的知识冲刷着我的大脑，无法抑制的激动，发现未知的知识宇宙，我疯狂的汲取着无穷无尽的知识，感叹着人类智慧的结晶！</p>
-<p>越是学习，越是发觉自己的无知，知识是无穷无尽的，我永远不可能学完，真的太多太多了！</p>
-<p>人生的价值是集体利益，这些伟大的知识我无论学习多少，若不能将其贡献出来，则是对知识、对智慧、对人类乃至对我人生意义的亵渎！</p>
-<p>我将尽可能的将我所学的一切，用通俗易懂的语言描述出来，为同样渴望知识、同样有着疯狂求知欲的人们尽一份绵薄之力！</p>
-<p>如果你也有着相同的想法，同样渴望知识并为此痴迷，欢迎加入！</p>
-<p>如开头所述，求知欲是人类进步的源泉，所以在此，请允许我以<strong>探索者</strong>尊称各位渴望知识的道友，并欢迎您加入到我们，您可以在本页底部找到我的联系方式，因某些原因，建议您使用Telegram进行交流。</p>
-<hr>
-<p><strong>注意：由于我是边学习边完善文章，所以文章可能存在大量错误，我个人的力量有限，恳请各位探索者开放交流、互换知识，以集体的力量弥补个人的缺陷</strong></p>
-<hr>
-<h2 id="我使用的单片机"><a href="#我使用的单片机" class="headerlink" title="我使用的单片机"></a>我使用的单片机</h2><p>品牌：普中(PRECHIN)<br>型号：普中51-实验版<br>官方教程：<a href="https://www.bilibili.com/video/BV1RB4y1i71i">https://www.bilibili.com/video/BV1RB4y1i71i</a></p>
-<p>在官方教程中，介绍了该开发板的部分元器件：</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>作用</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>4位一体数码管</td>
-<td>数字显示</td>
-<td>两个4位一体共阴数码管</td>
-</tr>
-<tr>
-<td>LCD1602液晶屏</td>
-<td>用于简单内容显示</td>
-<td>开发板提供了LCD1602&#x2F;9648&#x2F;12864&#x2F;TFT接口</td>
-</tr>
-<tr>
-<td>8*8LED矩阵</td>
-<td>常应用于LED广告牌等</td>
-<td>在矩阵旁边提供了编号J24的GND&#x2F;OE&#x2F;VCC三针引脚，跳线帽短接OE&#x2F;VCC可以关闭矩阵节省电源（OE我搜索出来的解释为<em>输出使能控制信号</em>，还请大佬科普补充一下，谢谢）</td>
-</tr>
-<tr>
-<td>LED流水灯</td>
-<td>可以用于心形流水灯表白（误）</td>
-<td>该开发板提供了8个流水灯</td>
-</tr>
-<tr>
-<td>74HC595A芯片</td>
-<td>该芯片用于扩展开发板IO口，驱动8*8点阵</td>
-<td>专业名称<em>高速 CMOS 8 位串行移位寄存器</em>其具体资料后续将专门设立电路知识栏目进行解释</td>
-</tr>
-<tr>
-<td>4*4键盘</td>
-<td>计算器啥的，挺实用</td>
-<td>普普通通</td>
-</tr>
-<tr>
-<td>红外接受</td>
-<td>红外遥控嘛，套餐给了遥控器</td>
-<td>NEC解码</td>
-</tr>
-<tr>
-<td>DS18B20温度传感器</td>
-<td>略</td>
-<td>略</td>
-</tr>
-<tr>
-<td>NRF24L01扩展接口</td>
-<td>该扩展接口可以用于扩展2.4G无线通信模块</td>
-<td>相当NICE的远程通信，几百米的遥控器？</td>
-</tr>
-<tr>
-<td>ASM1117稳压芯片</td>
-<td>提供3.3V稳定电压</td>
-<td>如视频中所述，大部分传感器为3.3V，所以嘛…</td>
-</tr>
-<tr>
-<td>CH340C芯片</td>
-<td>用于USB转TTL通信，该芯片内置晶振</td>
-<td>该板设计了4个引脚，分别是UTX-&gt;P30，RTX-&gt;P31，该设计十分优秀！在需要使用串口调试模块时，可以将U&#x2F;RTX针脚接到模块对应引脚，直接使用开发板MicroUSB进行调试，大赞！</td>
-</tr>
-</tbody></table>
-<h2 id="晶振临时科普栏"><a href="#晶振临时科普栏" class="headerlink" title="晶振临时科普栏"></a>晶振临时科普栏</h2><p>因我在学习过程中，对晶振的求知难度较大，特此临时记录！<br>晶振，全称石英晶体振荡器，英文名（quartz oscillator）<br>石英晶振具有高精度高稳度的特性，十分适合用于数字电路的时钟，是数字电路的心脏！</p>
-<p><strong>时钟这个概念比较抽象，我尝试将其描述的更加朴素一些：</strong></p>
-<p>在计算机中，关和开分别可以代表0和1，在最最原始的逻辑电路中，还没有晶振时，可以通过人工控制开关实现逻辑电路的控制，比如<a href="https://baike.baidu.com/item/%E5%BC%82%E6%88%96%E9%97%A8/9036416">异或门</a></p>
-<table>
-<thead>
-<tr>
-<th>A开关</th>
-<th>B开关</th>
-<th>计算结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>关</td>
-<td>关</td>
-<td>0</td>
-</tr>
-<tr>
-<td>开</td>
-<td>关</td>
-<td>1</td>
-</tr>
-<tr>
-<td>关</td>
-<td>开</td>
-<td>1</td>
-</tr>
-<tr>
-<td>开</td>
-<td>开</td>
-<td>0</td>
-</tr>
-</tbody></table>
-<p>于是我们可以通过这种简单逻辑的叠加，做出一些复杂的计算，如加法：x+y<br>设定，检测到<strong>A开B关</strong>一次设定x数值增加1，<strong>A关B开</strong>y数值增加1，那么我们要计算3+2，则需要进行一下操作：</p>
-<table>
-<thead>
-<tr>
-<th>给出X值</th>
-<th>给出B值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A开B关重复3次</td>
-<td>A关B开重复2次</td>
-</tr>
-</tbody></table>
-<p>由此可以看出，哪怕是及其简单的逻辑处理，也需要非常庞大的开关操作量。<br>因此，懒得一批的人类找到了晶振这玩意儿，<a href="https://zh.wikipedia.org/zh-cn/%E7%9F%B3%E8%8B%B1%E6%99%B6%E4%BD%93%E8%B0%90%E6%8C%AF%E5%99%A8">晶振的原理</a>解释起来有些许复杂，在此我们只需了解，晶振在电路板中工作的原理即可：<br>晶振可以在一定时间内以一定频率发出脉冲，脉冲一词仍有一些难以理解，而有些资料中对此的描述为高低电平的转换，对于一个初学者来说，最讨厌的无非就是看到这些难以理解的名词，在此我将其解释的更加直白一些，不过低电平并不等于0V，低电平只是一个相对较低的电压：<br>低电平：0V电压<br>高电平：5V电压<br>那么脉冲（高低电平转换）在电路中则是，打开开关：低电平（0V&#x3D;没电）转换为高电平（5V&#x3D;来电了），于是，就如我们上文所述，这就像是打开了A开关，利用晶振的这种脉冲，我们便可以在一定时间内实现一定次数的自动开关操作。<br>如果你仔细阅读并理解了，便会发现这真的是一个十分伟大的发明！从此让人类走上了废物(bushi)的道路，躺平~</p>
-<p><strong>文章亦是我的笔记，先暂时记录到这里，仍在学习总结中</strong></p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>嵌入式开发</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux技巧【持续更新】</title>
     <url>/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html</url>
     <content><![CDATA[<blockquote>
@@ -1523,40 +1528,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Proxmox-VE批量加集群、批量克隆、批量设置并同步时间、批量清除集群残留、批量创建网卡等一站式解决方案！（本教程采用YgeCloud实测）</title>
-    <url>/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.html</url>
-    <content><![CDATA[<hr>
-<h2 id="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"><a href="#本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！" class="headerlink" title="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"></a><strong>本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容<em>十分拜托您务必联系我修正文章！十分感谢！</em></strong></h2><p><strong>以下命令中<code>10.0.1.$i</code>是因为本次批量部署节点均在10.0.1.0&#x2F;24段，需自行修改为你节点所在网段，如<code>192.168.100.$i</code></strong></p>
-<p><strong>批量创建网卡适用于如本次部署一样的情况，如外网网线统一连接到enp6s0网口，然后桥接到vmbr1给虚拟机连接使用，请根据你的情况自行修改</strong></p>
-<h2 id="批量加集群"><a href="#批量加集群" class="headerlink" title="批量加集群"></a>批量加集群</h2><span id="more"></span>
-
-<p><em>更新：利用expect实现初次连接自动登陆或自动上传ssh key</em></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初次连接自动登陆</span></span><br><span class="line">expect -c &#x27;spawn ssh -o StrictHostKeyChecking=no root@10.0.1.$i; expect &quot;(yes/no)&quot; &#123; send &quot;yes\n&quot;; exp_continue &#125; &quot;assword:&quot; &#123; send &quot;密码\n&quot; &#125;; interact&#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初次连接自动上传ssh key，便于后续免密连接批量执行命令</span></span><br><span class="line">expect -c &#x27;spawn ssh-copy-id -o StrictHostKeyChecking=no root@10.0.1.$i; expect &quot;(yes/no)&quot; &#123; send &quot;yes\n&quot;; exp_continue &#125; &quot;assword:&quot; &#123; send &quot;密码\n&quot; &#125;; interact&#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量做免密连接</span></span><br><span class="line">for i in &#123;开始节点如104..结束节点如150&#125;; do expect -c &quot;spawn ssh-copy-id -o StrictHostKeyChecking=no root@10.0.1.$i; expect \&quot;(yes/no)\&quot; &#123; send \&quot;yes\n\&quot;; exp_continue &#125; \&quot;assword:\&quot; &#123; send \&quot;密码\n\&quot; &#125;; interact&quot; ; sleep 1 ; done</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从创建集群的主节点批量远程自动加集群</span></span><br><span class="line">for i in &#123;开始节点如104..结束节点如150&#125;; do ssh -t root@10.0.1.$i &quot;echo -e \&quot;密码\\nyes\&quot; | pvecm add 主节点完整IP如10.0.1.101 &amp;&amp; while true; do if pvecm status | grep -q $i; then echo -e \&quot;successfully\&quot;; break; else echo -e \&quot;Please wait a moment.\&quot;; sleep 5; fi; done&quot;; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动加集群示例</span></span><br><span class="line">for i in &#123;126..150&#125;; do ssh -t root@10.0.1.$i &quot;echo -e \&quot;密码\\nyes\&quot; | pvecm add 10.0.1.125 &amp;&amp; while true; do if pvecm status | grep -q $i; then echo -e \&quot;successfully\&quot;; break; else echo -e \&quot;Please wait a moment.\&quot;; sleep 5; fi; done&quot;; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量自动创建vmbr1网卡</span></span><br><span class="line">for i in &#123;127..150&#125;; do ssh -t root@10.0.1.$i &#x27;echo -e &quot;auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0&quot; &gt;&gt; /etc/network/interfaces &amp;&amp; systemctl restart networking&#x27;; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从开始节点循环执行到结束节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动移除yge-data</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩容yge-root</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">刷新yge-root分区容量</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改时间服务器为10.0.1.110节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启chrony.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">强制同步时间</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动加入集群</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">搜索当前ip比对pvecm status输出结果</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">未输出当前节点ip则持续提示等待</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">输出当前节点ip则表示加入集群成功，输出successfully</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">间隔5秒执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量创建vmbr1网卡，桥接enp6s0</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-- 命令为单行命令，严禁换行，”一条龙命令“ --</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">因YgeCloud无sshpass工具，且新节点与主节点无免密登陆</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">所以该命令需要手动输入ssh密码</span></span><br><span class="line"></span><br><span class="line">for i in &#123;开始节点如104..结束节点如150&#125;; do ssh -t root@10.0.1.$i &quot;lvremove -f /dev/yge/data &amp;&amp; lvextend -l +100%FREE /dev/yge/root &amp;&amp; resize2fs /dev/yge/root &amp;&amp; sed -i &#x27;s/pool 2.debian.pool.ntp.org/server 10.0.1.110/&#x27; /etc/chrony/chrony.conf &amp;&amp; systemctl restart chrony &amp;&amp; chronyc makestep &amp;&amp; sleep 3 &amp;&amp; date &amp;&amp; echo -e \&quot;密码\\nyes\&quot; | pvecm add 主节点完整IP如10.0.1.101 &amp;&amp; while true; do if pvecm status | grep -q $i; then echo -e \&quot;successfully\&quot;; break; else echo -e \&quot;Please wait a moment.\&quot;; sleep 5; fi; done &amp;&amp; echo -e \&quot;auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0\&quot; &gt;&gt; /etc/network/interfaces &amp;&amp; systemctl restart networking&quot;; done</span><br></pre></td></tr></table></figure>
-
-<h2 id="批量从模板恢复虚拟机，比克隆更骚的办法"><a href="#批量从模板恢复虚拟机，比克隆更骚的办法" class="headerlink" title="批量从模板恢复虚拟机，比克隆更骚的办法"></a>批量从模板恢复虚拟机，比克隆更骚的办法</h2><p><strong>vzdump生成的备份恢复时是根据名称匹配的，如果修改了命名会导致恢复失败，使用qmrestore恢复前一定要还原名称</strong></p>
-<p><strong>如需临时命名以便区分备份文件，强烈建议添加前缀，不要修改原本的文件名！</strong></p>
-<p><strong>-storage指向的目标存储不能为共享！否则会出现cfs无法锁定报错（local在集群中错误的设置为了共享发现的）</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加了集群之后可以免密了！！！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ssh连接到对应的子节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行qmrestore命令</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/mnt/pve/backup/dump是YGENAS发布的NFS在集群存储添加为NFS挂载的位置</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从 [你的备份文件名称] 备份文件批量恢复虚拟机并将虚拟机ID设置为当前节点ID，避免ID重复</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--store 指定恢复到<span class="built_in">local</span>存储</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--uniaue使恢复的虚拟机重设网卡MAC以防MAC冲突</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">恢复完成后使用qm <span class="built_in">set</span> VMID --name string命令重设虚拟机名为对应当前节点IP</span></span><br><span class="line">for i in &#123;125..150&#125;; do ssh -t root@10.0.1.$i &quot;qmrestore /mnt/pve/backup/dump/vzdump-qemu-2002-2024_02_04-16_44.vma.lzo $i -storage local -unique &amp;&amp; qm set $i --name g$i&quot;;done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">并发恢复，将输出重定向到对应的<span class="variable">$i</span>.<span class="built_in">log</span>，避免ssh -t等待</span></span><br><span class="line">for i in &#123;125..150&#125;; do nohup ssh -t root@10.0.1.$i &quot;qmrestore /mnt/pve/backup/dump/vzdump-qemu-2002-2024_02_04-16_44.vma.lzo $i -storage local -unique &amp;&amp; qm set $i --name g$i&quot; &gt; $i.log 2&gt;&amp;1 &amp; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">间隔1秒持续显示恢复进度</span></span><br><span class="line">while true; do bash -c &#x27;clear;for i in &#123;125..150&#125;; do echo $i ; tail -n 1 &quot;$i.log&quot;; done&#x27;; sleep 1; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">排除rescan volumes...从而筛选出恢复失败的节点</span></span><br><span class="line">while true; do clear; for i in &#123;125..150&#125;; do tail -n 1 &quot;$i.log&quot; | grep -q &quot;update&quot; || &#123; echo &quot;$i error&quot;; &#125;; done; sleep 1; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量删除克隆错误的虚拟机</span></span><br><span class="line">for i in &#123;125..150&#125;;do nohup ssh -t root@10.0.1.$i &quot;qm destroy $i&quot; &gt; del$i.log 2&gt;&amp;1 &amp; done</span><br></pre></td></tr></table></figure>
-
-<h2 id="加错集群处理办法"><a href="#加错集群处理办法" class="headerlink" title="加错集群处理办法"></a>加错集群处理办法</h2><h3 id="主节点批量移除失效节点"><a href="#主节点批量移除失效节点" class="headerlink" title="主节点批量移除失效节点"></a>主节点批量移除失效节点</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除[104到124]的所有节点，yge是因为我的节点名前缀为yge，可以根据你的hostname来</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我的hostname输出为yge104</span></span><br><span class="line">for i in &#123;104..124&#125;; do pvecm delnode yge$i; done</span><br></pre></td></tr></table></figure>
-
-<h3 id="在主节点删除后子节点会残留集群信息无法加入，需清除残留信息"><a href="#在主节点删除后子节点会残留集群信息无法加入，需清除残留信息" class="headerlink" title="在主节点删除后子节点会残留集群信息无法加入，需清除残留信息"></a>在主节点删除后子节点会残留集群信息无法加入，需清除残留信息</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">一条龙清理</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从127开始清理到150，需在主节点执行，误加集群后主节点可以免密登陆子节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">先在主节点创建cleanup.sh脚本并<span class="built_in">chmod</span> +x cleanup.sh赋予可执行权限</span></span><br><span class="line">for i in &#123;127..150&#125;; do scp cleanup.sh root@10.0.1.$i:/tmp/ &amp;&amp; ssh -t root@10.0.1.$i &quot;bash /tmp/cleanup.sh&quot; &amp;&amp; ssh -t root@10.0.1.$i &quot;rm /tmp/cleanup.sh&quot;; done</span><br></pre></td></tr></table></figure>
-
-<p><strong>因ssh -t无法处理!，所以迫不得已使用脚本执行</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">systemctl stop pve-cluster</span><br><span class="line">systemctl stop corosync</span><br><span class="line">pmxcfs -l</span><br><span class="line">rm /etc/pve/corosync.conf</span><br><span class="line">rm -rf /etc/corosync/*</span><br><span class="line">rm -rf /etc/pve/nodes/!(hostname)</span><br><span class="line">killall pmxcfs</span><br><span class="line">systemctl start pve-cluster</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>伟大的知识库</category>
-      </categories>
-      <tags>
-        <tag>Proxmox-VE</tag>
-        <tag>YgeCloud</tag>
-        <tag>昱格</tag>
-        <tag>批量</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Proxmox-VE 导入SylixOS VMware版</title>
     <url>/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html</url>
     <content><![CDATA[<p>将SylixOS传到服务器</p>
@@ -1598,6 +1569,206 @@
       <tags>
         <tag>Proxmox-VE</tag>
         <tag>SylixOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Proxmox-VE批量加集群、批量克隆、批量设置并同步时间、批量清除集群残留、批量创建网卡等一站式解决方案！（本教程采用YgeCloud实测）</title>
+    <url>/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.html</url>
+    <content><![CDATA[<hr>
+<h2 id="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"><a href="#本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！" class="headerlink" title="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"></a><strong>本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容<em>十分拜托您务必联系我修正文章！十分感谢！</em></strong></h2><p><strong>以下命令中<code>10.0.1.$i</code>是因为本次批量部署节点均在10.0.1.0&#x2F;24段，需自行修改为你节点所在网段，如<code>192.168.100.$i</code></strong></p>
+<p><strong>批量创建网卡适用于如本次部署一样的情况，如外网网线统一连接到enp6s0网口，然后桥接到vmbr1给虚拟机连接使用，请根据你的情况自行修改</strong></p>
+<h2 id="批量加集群"><a href="#批量加集群" class="headerlink" title="批量加集群"></a>批量加集群</h2><span id="more"></span>
+
+<p><em>更新：利用expect实现初次连接自动登陆或自动上传ssh key</em></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初次连接自动登陆</span></span><br><span class="line">expect -c &#x27;spawn ssh -o StrictHostKeyChecking=no root@10.0.1.$i; expect &quot;(yes/no)&quot; &#123; send &quot;yes\n&quot;; exp_continue &#125; &quot;assword:&quot; &#123; send &quot;密码\n&quot; &#125;; interact&#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初次连接自动上传ssh key，便于后续免密连接批量执行命令</span></span><br><span class="line">expect -c &#x27;spawn ssh-copy-id -o StrictHostKeyChecking=no root@10.0.1.$i; expect &quot;(yes/no)&quot; &#123; send &quot;yes\n&quot;; exp_continue &#125; &quot;assword:&quot; &#123; send &quot;密码\n&quot; &#125;; interact&#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量做免密连接</span></span><br><span class="line">for i in &#123;开始节点如104..结束节点如150&#125;; do expect -c &quot;spawn ssh-copy-id -o StrictHostKeyChecking=no root@10.0.1.$i; expect \&quot;(yes/no)\&quot; &#123; send \&quot;yes\n\&quot;; exp_continue &#125; \&quot;assword:\&quot; &#123; send \&quot;密码\n\&quot; &#125;; interact&quot; ; sleep 1 ; done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从创建集群的主节点批量远程自动加集群</span></span><br><span class="line">for i in &#123;开始节点如104..结束节点如150&#125;; do ssh -t root@10.0.1.$i &quot;echo -e \&quot;密码\\nyes\&quot; | pvecm add 主节点完整IP如10.0.1.101 &amp;&amp; while true; do if pvecm status | grep -q $i; then echo -e \&quot;successfully\&quot;; break; else echo -e \&quot;Please wait a moment.\&quot;; sleep 5; fi; done&quot;; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动加集群示例</span></span><br><span class="line">for i in &#123;126..150&#125;; do ssh -t root@10.0.1.$i &quot;echo -e \&quot;密码\\nyes\&quot; | pvecm add 10.0.1.125 &amp;&amp; while true; do if pvecm status | grep -q $i; then echo -e \&quot;successfully\&quot;; break; else echo -e \&quot;Please wait a moment.\&quot;; sleep 5; fi; done&quot;; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量自动创建vmbr1网卡</span></span><br><span class="line">for i in &#123;127..150&#125;; do ssh -t root@10.0.1.$i &#x27;echo -e &quot;auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0&quot; &gt;&gt; /etc/network/interfaces &amp;&amp; systemctl restart networking&#x27;; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从开始节点循环执行到结束节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动移除yge-data</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩容yge-root</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">刷新yge-root分区容量</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改时间服务器为10.0.1.110节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启chrony.service</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">强制同步时间</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">自动加入集群</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">搜索当前ip比对pvecm status输出结果</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">未输出当前节点ip则持续提示等待</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">输出当前节点ip则表示加入集群成功，输出successfully</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">间隔5秒执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量创建vmbr1网卡，桥接enp6s0</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-- 命令为单行命令，严禁换行，”一条龙命令“ --</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">因YgeCloud无sshpass工具，且新节点与主节点无免密登陆</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">所以该命令需要手动输入ssh密码</span></span><br><span class="line"></span><br><span class="line">for i in &#123;开始节点如104..结束节点如150&#125;; do ssh -t root@10.0.1.$i &quot;lvremove -f /dev/yge/data &amp;&amp; lvextend -l +100%FREE /dev/yge/root &amp;&amp; resize2fs /dev/yge/root &amp;&amp; sed -i &#x27;s/pool 2.debian.pool.ntp.org/server 10.0.1.110/&#x27; /etc/chrony/chrony.conf &amp;&amp; systemctl restart chrony &amp;&amp; chronyc makestep &amp;&amp; sleep 3 &amp;&amp; date &amp;&amp; echo -e \&quot;密码\\nyes\&quot; | pvecm add 主节点完整IP如10.0.1.101 &amp;&amp; while true; do if pvecm status | grep -q $i; then echo -e \&quot;successfully\&quot;; break; else echo -e \&quot;Please wait a moment.\&quot;; sleep 5; fi; done &amp;&amp; echo -e \&quot;auto vmbr1\niface vmbr1 inet manual\n\tbridge-ports enp6s0\n\tbridge-stp off\n\tbridge-fd 0\&quot; &gt;&gt; /etc/network/interfaces &amp;&amp; systemctl restart networking&quot;; done</span><br></pre></td></tr></table></figure>
+
+<h2 id="批量从模板恢复虚拟机，比克隆更骚的办法"><a href="#批量从模板恢复虚拟机，比克隆更骚的办法" class="headerlink" title="批量从模板恢复虚拟机，比克隆更骚的办法"></a>批量从模板恢复虚拟机，比克隆更骚的办法</h2><p><strong>vzdump生成的备份恢复时是根据名称匹配的，如果修改了命名会导致恢复失败，使用qmrestore恢复前一定要还原名称</strong></p>
+<p><strong>如需临时命名以便区分备份文件，强烈建议添加前缀，不要修改原本的文件名！</strong></p>
+<p><strong>-storage指向的目标存储不能为共享！否则会出现cfs无法锁定报错（local在集群中错误的设置为了共享发现的）</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加了集群之后可以免密了！！！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ssh连接到对应的子节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行qmrestore命令</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/mnt/pve/backup/dump是YGENAS发布的NFS在集群存储添加为NFS挂载的位置</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从 [你的备份文件名称] 备份文件批量恢复虚拟机并将虚拟机ID设置为当前节点ID，避免ID重复</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--store 指定恢复到<span class="built_in">local</span>存储</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--uniaue使恢复的虚拟机重设网卡MAC以防MAC冲突</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">恢复完成后使用qm <span class="built_in">set</span> VMID --name string命令重设虚拟机名为对应当前节点IP</span></span><br><span class="line">for i in &#123;125..150&#125;; do ssh -t root@10.0.1.$i &quot;qmrestore /mnt/pve/backup/dump/vzdump-qemu-2002-2024_02_04-16_44.vma.lzo $i -storage local -unique &amp;&amp; qm set $i --name g$i&quot;;done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">并发恢复，将输出重定向到对应的<span class="variable">$i</span>.<span class="built_in">log</span>，避免ssh -t等待</span></span><br><span class="line">for i in &#123;125..150&#125;; do nohup ssh -t root@10.0.1.$i &quot;qmrestore /mnt/pve/backup/dump/vzdump-qemu-2002-2024_02_04-16_44.vma.lzo $i -storage local -unique &amp;&amp; qm set $i --name g$i&quot; &gt; $i.log 2&gt;&amp;1 &amp; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">间隔1秒持续显示恢复进度</span></span><br><span class="line">while true; do bash -c &#x27;clear;for i in &#123;125..150&#125;; do echo $i ; tail -n 1 &quot;$i.log&quot;; done&#x27;; sleep 1; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">排除rescan volumes...从而筛选出恢复失败的节点</span></span><br><span class="line">while true; do clear; for i in &#123;125..150&#125;; do tail -n 1 &quot;$i.log&quot; | grep -q &quot;update&quot; || &#123; echo &quot;$i error&quot;; &#125;; done; sleep 1; done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量删除克隆错误的虚拟机</span></span><br><span class="line">for i in &#123;125..150&#125;;do nohup ssh -t root@10.0.1.$i &quot;qm destroy $i&quot; &gt; del$i.log 2&gt;&amp;1 &amp; done</span><br></pre></td></tr></table></figure>
+
+<h2 id="加错集群处理办法"><a href="#加错集群处理办法" class="headerlink" title="加错集群处理办法"></a>加错集群处理办法</h2><h3 id="主节点批量移除失效节点"><a href="#主节点批量移除失效节点" class="headerlink" title="主节点批量移除失效节点"></a>主节点批量移除失效节点</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除[104到124]的所有节点，yge是因为我的节点名前缀为yge，可以根据你的hostname来</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我的hostname输出为yge104</span></span><br><span class="line">for i in &#123;104..124&#125;; do pvecm delnode yge$i; done</span><br></pre></td></tr></table></figure>
+
+<h3 id="在主节点删除后子节点会残留集群信息无法加入，需清除残留信息"><a href="#在主节点删除后子节点会残留集群信息无法加入，需清除残留信息" class="headerlink" title="在主节点删除后子节点会残留集群信息无法加入，需清除残留信息"></a>在主节点删除后子节点会残留集群信息无法加入，需清除残留信息</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">一条龙清理</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从127开始清理到150，需在主节点执行，误加集群后主节点可以免密登陆子节点</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">先在主节点创建cleanup.sh脚本并<span class="built_in">chmod</span> +x cleanup.sh赋予可执行权限</span></span><br><span class="line">for i in &#123;127..150&#125;; do scp cleanup.sh root@10.0.1.$i:/tmp/ &amp;&amp; ssh -t root@10.0.1.$i &quot;bash /tmp/cleanup.sh&quot; &amp;&amp; ssh -t root@10.0.1.$i &quot;rm /tmp/cleanup.sh&quot;; done</span><br></pre></td></tr></table></figure>
+
+<p><strong>因ssh -t无法处理!，所以迫不得已使用脚本执行</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">systemctl stop pve-cluster</span><br><span class="line">systemctl stop corosync</span><br><span class="line">pmxcfs -l</span><br><span class="line">rm /etc/pve/corosync.conf</span><br><span class="line">rm -rf /etc/corosync/*</span><br><span class="line">rm -rf /etc/pve/nodes/!(hostname)</span><br><span class="line">killall pmxcfs</span><br><span class="line">systemctl start pve-cluster</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>伟大的知识库</category>
+      </categories>
+      <tags>
+        <tag>Proxmox-VE</tag>
+        <tag>YgeCloud</tag>
+        <tag>昱格</tag>
+        <tag>批量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu安装教程</title>
+    <url>/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
+    <content><![CDATA[<h2 id="ubuntu-20-04-6-live-server-amd64安装教程"><a href="#ubuntu-20-04-6-live-server-amd64安装教程" class="headerlink" title="ubuntu-20.04.6-live-server-amd64安装教程"></a>ubuntu-20.04.6-live-server-amd64安装教程</h2><p>该系统下载地址：</p>
+<p><a href="https://iso.mirrors.ustc.edu.cn/ubuntu-releases/20.04/ubuntu-20.04.6-live-server-amd64.iso">中科大镜像站下载</a></p>
+<p><a href="https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa">网盘ISO文件夹中下载</a></p>
+<h3 id="进入安装程序"><a href="#进入安装程序" class="headerlink" title="进入安装程序"></a>进入安装程序</h3><p><strong>灰色&#x2F;绿色高亮就是选定状态，Enter就是确认</strong></p>
+<p>不动键盘的话，会自动选择第一个，手动回车进入第一个也可<code>Install Ubuntu Server</code></p>
+<p><img src="https://img.hackerbs.com//20240530120224.png" alt="20240530120224"></p>
+<span id="more"></span>
+
+<h3 id="选择安装语言"><a href="#选择安装语言" class="headerlink" title="选择安装语言"></a>选择安装语言</h3><p>通常来讲，选择<code>English</code>，因为命令行只支持英文，选择其他语言会导致命令行输出的中文无法显示，呈现方块状。</p>
+<p><img src="https://img.hackerbs.com//20240530120346.png" alt="20240530120346"></p>
+<h3 id="跳过更新直接安装"><a href="#跳过更新直接安装" class="headerlink" title="跳过更新直接安装"></a>跳过更新直接安装</h3><p>因为安装的是20.04.6，所以会在此处提示有更新的版本，选择默认的<code>Continue without updating</code>即可</p>
+<p><img src="https://img.hackerbs.com//20240530120638.png" alt="20240530120638"></p>
+<h3 id="选择键盘"><a href="#选择键盘" class="headerlink" title="选择键盘"></a>选择键盘</h3><p>直接使用默认的<code>English</code>，Enter下一步即可</p>
+<p><img src="https://img.hackerbs.com//20240530121043.png" alt="20240530121043"></p>
+<h3 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h3><p>如果是DHCP自动获取则直接<code>Done</code>下一步即可，否则参考配置静态IP</p>
+<p><img src="https://img.hackerbs.com//20240530121137.png" alt="20240530121137"></p>
+<h4 id="配置静态IP"><a href="#配置静态IP" class="headerlink" title="配置静态IP"></a>配置静态IP</h4><p>使用上箭头展开此处</p>
+<p><img src="https://img.hackerbs.com//20240530121210.png" alt="20240530121210"></p>
+<p>选择<code>Edit IPv4</code>并使用<code>Manual</code>手动配置网络</p>
+<p>Ubuntu的配置与其他Linux略有不同，如表所示</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Subnet</td>
+<td>IP段&#x2F;前缀</td>
+<td>这一项需要配置IP段如192.168.2.0段，并指定前缀，前缀可以用子网掩码转前缀工具计算，或者手算</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>IP地址</td>
+<td></td>
+</tr>
+<tr>
+<td>Gateway</td>
+<td>网关地址</td>
+<td></td>
+</tr>
+<tr>
+<td>Name Servers</td>
+<td>DNS地址</td>
+<td>用,做分隔符，一般填119.29.29.29,8.8.8.8就足够了</td>
+</tr>
+</tbody></table>
+<p><img src="https://img.hackerbs.com//20240530121329.png" alt="20240530121329"></p>
+<h3 id="配置代理（几乎不需要）"><a href="#配置代理（几乎不需要）" class="headerlink" title="配置代理（几乎不需要）"></a>配置代理（几乎不需要）</h3><p>配置网络后下一步会弹出配置代理，留空直接下一步即可</p>
+<p><img src="https://img.hackerbs.com//20240530123748.png" alt="20240530123748"></p>
+<h3 id="选择镜像站"><a href="#选择镜像站" class="headerlink" title="选择镜像站"></a>选择镜像站</h3><p>Ubuntu会默认选择国内镜像站，所以这一步也是直接回车即可</p>
+<p><img src="https://img.hackerbs.com//20240530123838.png" alt="20240530123838"></p>
+<h3 id="配置磁盘"><a href="#配置磁盘" class="headerlink" title="配置磁盘"></a>配置磁盘</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>翻译</th>
+<th>作用解析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Use an entire disk</td>
+<td>使用整个磁盘</td>
+<td></td>
+</tr>
+<tr>
+<td>Set up this disk as an LVM group</td>
+<td>将此磁盘设置为LVM组</td>
+<td>使用lvm逻辑卷可以在后期非常方便的扩容管理，<strong>安装系统必须使用lvm</strong></td>
+</tr>
+<tr>
+<td>Encrypt the LVM group with LUKS</td>
+<td>使用LUKS加密lvm组（磁盘加密，不需要）</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>如图所示这种，选择了磁盘后确保启用了lvm直接下一步即可</p>
+<p><img src="https://img.hackerbs.com//20240530123900.png" alt="20240530123900"></p>
+<p>这一步会显示磁盘的信息、分区等，直接回车下一步即可</p>
+<p><img src="https://img.hackerbs.com//20240530124408.png" alt="20240530124408"></p>
+<p>提示是否确认继续，直接确认继续即可，此处英文的意思就是继续安装将格式化磁盘，丢失磁盘上的数据</p>
+<p><img src="https://img.hackerbs.com//20240530124422.png" alt="20240530124422"></p>
+<h3 id="配置用户"><a href="#配置用户" class="headerlink" title="配置用户"></a>配置用户</h3><p>Ubuntu默认不会启用root用户，所以需要在此设置用户名密码</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>翻译</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Your name</td>
+<td>昵称</td>
+<td>就是个显示名称，随便填</td>
+</tr>
+<tr>
+<td>Your server’s name</td>
+<td>主机名</td>
+<td>就是hostname，主机名，计算机名</td>
+</tr>
+<tr>
+<td>Pick a username</td>
+<td>选择一个用户名</td>
+<td>就是登陆用的，账号</td>
+</tr>
+<tr>
+<td>Choose a password</td>
+<td>选择一个密码</td>
+<td>设密码</td>
+</tr>
+<tr>
+<td>Confirm your password</td>
+<td>确认你的密码</td>
+<td>二次输入再确认一遍</td>
+</tr>
+</tbody></table>
+<p><img src="https://img.hackerbs.com//20240530124629.png" alt="20240530124629"></p>
+<h3 id="安装SSH服务"><a href="#安装SSH服务" class="headerlink" title="安装SSH服务"></a>安装SSH服务</h3><p>勾选<code>Install OpenSSH server</code>，否则无法进行ssh连接，忽略<code>Import SSH identity</code>，不需要导入ssh key</p>
+<p><img src="https://img.hackerbs.com//20240530124958.png" alt="20240530124958"></p>
+<h3 id="跳过额外软件包安装"><a href="#跳过额外软件包安装" class="headerlink" title="跳过额外软件包安装"></a>跳过额外软件包安装</h3><p>没必要在这里安装额外软件包，除非用户指定，但更建议安装完毕后手动安装，因为官方的包通常会落后一些而且并不如手动安装的，比如docker等</p>
+<p>直接跳过，执行下一步</p>
+<p><img src="https://img.hackerbs.com//20240530125216.png" alt="20240530125216"></p>
+<h3 id="等待系统安装完毕"><a href="#等待系统安装完毕" class="headerlink" title="等待系统安装完毕"></a>等待系统安装完毕</h3><p>显示<code>Installing system</code></p>
+<p><img src="https://img.hackerbs.com//20240530125257.png" alt="20240530125257"></p>
+<p>当上面显示<code>Install complete</code>下面出现<code>Cancel update and reboot</code>时，直接选择下面的，意思是取消更新并重启</p>
+<p><img src="https://img.hackerbs.com//20240530125349.png" alt="20240530125349"></p>
+<p>等待重启后进入系统</p>
+<p><img src="https://img.hackerbs.com//20240530125451.png" alt="20240530125451"></p>
+<h4 id="移除安装介质失败"><a href="#移除安装介质失败" class="headerlink" title="移除安装介质失败"></a>移除安装介质失败</h4><p>大概率会出现如图所示的错误，无法移除安装介质，其实并不影响，直接拔了U盘重启即可</p>
+<p><img src="https://img.hackerbs.com//20240530125930.png" alt="20240530125930"></p>
+<h3 id="安装完毕，成功进入系统"><a href="#安装完毕，成功进入系统" class="headerlink" title="安装完毕，成功进入系统"></a>安装完毕，成功进入系统</h3><p><img src="https://img.hackerbs.com//20240530130045.png" alt="20240530130045"></p>
+<h4 id="删除安装过程中不得已创建的用户，并配置root登陆ssh"><a href="#删除安装过程中不得已创建的用户，并配置root登陆ssh" class="headerlink" title="删除安装过程中不得已创建的用户，并配置root登陆ssh"></a>删除安装过程中不得已创建的用户，并配置root登陆ssh</h4><p><strong>除非客户需要，否则不需要执行该步骤</strong></p>
+<p>登陆后先修改root用户密码</p>
+<p>第一遍输安装时创建的用户的密码，是用于授权sudo命令</p>
+<p>后面两步才是设置root密码</p>
+<p><img src="https://img.hackerbs.com//20240530130218.png" alt="20240530130218"></p>
+<p>退出使用root用户登陆</p>
+<p>然后使用<code>userdel -r 用户名</code>删除用户及其主目录</p>
+<p><img src="https://img.hackerbs.com//20240530130436.png" alt="20240530130436"></p>
+<p>编辑<code>/etc/ssh/sshd_config</code>文件，使root用户可以通过密码登陆ssh</p>
+<p><img src="https://img.hackerbs.com//20240530130601.png" alt="20240530130601"></p>
+<p>在原本的<code>#PermitRootLogin prohibit-password</code>下添加一行<code>PermitRootLogin yes</code>，作用是允许root用户使用密码登陆ssh，原本的<code>prohibit-password</code>作用是禁止密码登陆，会一直提示密码错误</p>
+<p>如果是用vim编辑的配置文件则需要使用vim的语法<code>:wq</code>以便保存退出，在默认的命令模式下按<code>i</code>是编辑模式，按<code>ESC</code>是返回命令模式，vim语法自行参考网上教程</p>
+<p><img src="https://img.hackerbs.com//20240530130722.png" alt="20240530130722"></p>
+<p>编辑完成保存退出后使用<code>systemctl restart ssh</code>重启ssh服务，使修改生效</p>
+<p><img src="https://img.hackerbs.com//20240530131100.png" alt="20240530131100"></p>
+<p>使用<code>ssh root@ip</code>测试连接，成功，至此Ubuntu安装教程完毕！</p>
+<p><img src="https://img.hackerbs.com//20240530131234.png" alt="20240530131234"></p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Ubuntu</tag>
+        <tag>Ubuntu安装</tag>
+        <tag>Linux安装</tag>
+        <tag>Ubuntu服务器</tag>
       </tags>
   </entry>
   <entry>
@@ -2181,176 +2352,5 @@
       <tags>
         <tag>Docker</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu安装教程</title>
-    <url>/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
-    <content><![CDATA[<h2 id="ubuntu-20-04-6-live-server-amd64安装教程"><a href="#ubuntu-20-04-6-live-server-amd64安装教程" class="headerlink" title="ubuntu-20.04.6-live-server-amd64安装教程"></a>ubuntu-20.04.6-live-server-amd64安装教程</h2><p>该系统下载地址：</p>
-<p><a href="https://iso.mirrors.ustc.edu.cn/ubuntu-releases/20.04/ubuntu-20.04.6-live-server-amd64.iso">中科大镜像站下载</a></p>
-<p><a href="https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa">网盘ISO文件夹中下载</a></p>
-<h3 id="进入安装程序"><a href="#进入安装程序" class="headerlink" title="进入安装程序"></a>进入安装程序</h3><p><strong>灰色&#x2F;绿色高亮就是选定状态，Enter就是确认</strong></p>
-<p>不动键盘的话，会自动选择第一个，手动回车进入第一个也可<code>Install Ubuntu Server</code></p>
-<p><img src="https://img.hackerbs.com//20240530120224.png" alt="20240530120224"></p>
-<span id="more"></span>
-
-<h3 id="选择安装语言"><a href="#选择安装语言" class="headerlink" title="选择安装语言"></a>选择安装语言</h3><p>通常来讲，选择<code>English</code>，因为命令行只支持英文，选择其他语言会导致命令行输出的中文无法显示，呈现方块状。</p>
-<p><img src="https://img.hackerbs.com//20240530120346.png" alt="20240530120346"></p>
-<h3 id="跳过更新直接安装"><a href="#跳过更新直接安装" class="headerlink" title="跳过更新直接安装"></a>跳过更新直接安装</h3><p>因为安装的是20.04.6，所以会在此处提示有更新的版本，选择默认的<code>Continue without updating</code>即可</p>
-<p><img src="https://img.hackerbs.com//20240530120638.png" alt="20240530120638"></p>
-<h3 id="选择键盘"><a href="#选择键盘" class="headerlink" title="选择键盘"></a>选择键盘</h3><p>直接使用默认的<code>English</code>，Enter下一步即可</p>
-<p><img src="https://img.hackerbs.com//20240530121043.png" alt="20240530121043"></p>
-<h3 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h3><p>如果是DHCP自动获取则直接<code>Done</code>下一步即可，否则参考配置静态IP</p>
-<p><img src="https://img.hackerbs.com//20240530121137.png" alt="20240530121137"></p>
-<h4 id="配置静态IP"><a href="#配置静态IP" class="headerlink" title="配置静态IP"></a>配置静态IP</h4><p>使用上箭头展开此处</p>
-<p><img src="https://img.hackerbs.com//20240530121210.png" alt="20240530121210"></p>
-<p>选择<code>Edit IPv4</code>并使用<code>Manual</code>手动配置网络</p>
-<p>Ubuntu的配置与其他Linux略有不同，如表所示</p>
-<table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>内容</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Subnet</td>
-<td>IP段&#x2F;前缀</td>
-<td>这一项需要配置IP段如192.168.2.0段，并指定前缀，前缀可以用子网掩码转前缀工具计算，或者手算</td>
-</tr>
-<tr>
-<td>Address</td>
-<td>IP地址</td>
-<td></td>
-</tr>
-<tr>
-<td>Gateway</td>
-<td>网关地址</td>
-<td></td>
-</tr>
-<tr>
-<td>Name Servers</td>
-<td>DNS地址</td>
-<td>用,做分隔符，一般填119.29.29.29,8.8.8.8就足够了</td>
-</tr>
-</tbody></table>
-<p><img src="https://img.hackerbs.com//20240530121329.png" alt="20240530121329"></p>
-<h3 id="配置代理（几乎不需要）"><a href="#配置代理（几乎不需要）" class="headerlink" title="配置代理（几乎不需要）"></a>配置代理（几乎不需要）</h3><p>配置网络后下一步会弹出配置代理，留空直接下一步即可</p>
-<p><img src="https://img.hackerbs.com//20240530123748.png" alt="20240530123748"></p>
-<h3 id="选择镜像站"><a href="#选择镜像站" class="headerlink" title="选择镜像站"></a>选择镜像站</h3><p>Ubuntu会默认选择国内镜像站，所以这一步也是直接回车即可</p>
-<p><img src="https://img.hackerbs.com//20240530123838.png" alt="20240530123838"></p>
-<h3 id="配置磁盘"><a href="#配置磁盘" class="headerlink" title="配置磁盘"></a>配置磁盘</h3><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>翻译</th>
-<th>作用解析</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Use an entire disk</td>
-<td>使用整个磁盘</td>
-<td></td>
-</tr>
-<tr>
-<td>Set up this disk as an LVM group</td>
-<td>将此磁盘设置为LVM组</td>
-<td>使用lvm逻辑卷可以在后期非常方便的扩容管理，<strong>安装系统必须使用lvm</strong></td>
-</tr>
-<tr>
-<td>Encrypt the LVM group with LUKS</td>
-<td>使用LUKS加密lvm组（磁盘加密，不需要）</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>如图所示这种，选择了磁盘后确保启用了lvm直接下一步即可</p>
-<p><img src="https://img.hackerbs.com//20240530123900.png" alt="20240530123900"></p>
-<p>这一步会显示磁盘的信息、分区等，直接回车下一步即可</p>
-<p><img src="https://img.hackerbs.com//20240530124408.png" alt="20240530124408"></p>
-<p>提示是否确认继续，直接确认继续即可，此处英文的意思就是继续安装将格式化磁盘，丢失磁盘上的数据</p>
-<p><img src="https://img.hackerbs.com//20240530124422.png" alt="20240530124422"></p>
-<h3 id="配置用户"><a href="#配置用户" class="headerlink" title="配置用户"></a>配置用户</h3><p>Ubuntu默认不会启用root用户，所以需要在此设置用户名密码</p>
-<table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>翻译</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Your name</td>
-<td>昵称</td>
-<td>就是个显示名称，随便填</td>
-</tr>
-<tr>
-<td>Your server’s name</td>
-<td>主机名</td>
-<td>就是hostname，主机名，计算机名</td>
-</tr>
-<tr>
-<td>Pick a username</td>
-<td>选择一个用户名</td>
-<td>就是登陆用的，账号</td>
-</tr>
-<tr>
-<td>Choose a password</td>
-<td>选择一个密码</td>
-<td>设密码</td>
-</tr>
-<tr>
-<td>Confirm your password</td>
-<td>确认你的密码</td>
-<td>二次输入再确认一遍</td>
-</tr>
-</tbody></table>
-<p><img src="https://img.hackerbs.com//20240530124629.png" alt="20240530124629"></p>
-<h3 id="安装SSH服务"><a href="#安装SSH服务" class="headerlink" title="安装SSH服务"></a>安装SSH服务</h3><p>勾选<code>Install OpenSSH server</code>，否则无法进行ssh连接，忽略<code>Import SSH identity</code>，不需要导入ssh key</p>
-<p><img src="https://img.hackerbs.com//20240530124958.png" alt="20240530124958"></p>
-<h3 id="跳过额外软件包安装"><a href="#跳过额外软件包安装" class="headerlink" title="跳过额外软件包安装"></a>跳过额外软件包安装</h3><p>没必要在这里安装额外软件包，除非用户指定，但更建议安装完毕后手动安装，因为官方的包通常会落后一些而且并不如手动安装的，比如docker等</p>
-<p>直接跳过，执行下一步</p>
-<p><img src="https://img.hackerbs.com//20240530125216.png" alt="20240530125216"></p>
-<h3 id="等待系统安装完毕"><a href="#等待系统安装完毕" class="headerlink" title="等待系统安装完毕"></a>等待系统安装完毕</h3><p>显示<code>Installing system</code></p>
-<p><img src="https://img.hackerbs.com//20240530125257.png" alt="20240530125257"></p>
-<p>当上面显示<code>Install complete</code>下面出现<code>Cancel update and reboot</code>时，直接选择下面的，意思是取消更新并重启</p>
-<p><img src="https://img.hackerbs.com//20240530125349.png" alt="20240530125349"></p>
-<p>等待重启后进入系统</p>
-<p><img src="https://img.hackerbs.com//20240530125451.png" alt="20240530125451"></p>
-<h4 id="移除安装介质失败"><a href="#移除安装介质失败" class="headerlink" title="移除安装介质失败"></a>移除安装介质失败</h4><p>大概率会出现如图所示的错误，无法移除安装介质，其实并不影响，直接拔了U盘重启即可</p>
-<p><img src="https://img.hackerbs.com//20240530125930.png" alt="20240530125930"></p>
-<h3 id="安装完毕，成功进入系统"><a href="#安装完毕，成功进入系统" class="headerlink" title="安装完毕，成功进入系统"></a>安装完毕，成功进入系统</h3><p><img src="https://img.hackerbs.com//20240530130045.png" alt="20240530130045"></p>
-<h4 id="删除安装过程中不得已创建的用户，并配置root登陆ssh"><a href="#删除安装过程中不得已创建的用户，并配置root登陆ssh" class="headerlink" title="删除安装过程中不得已创建的用户，并配置root登陆ssh"></a>删除安装过程中不得已创建的用户，并配置root登陆ssh</h4><p><strong>除非客户需要，否则不需要执行该步骤</strong></p>
-<p>登陆后先修改root用户密码</p>
-<p>第一遍输安装时创建的用户的密码，是用于授权sudo命令</p>
-<p>后面两步才是设置root密码</p>
-<p><img src="https://img.hackerbs.com//20240530130218.png" alt="20240530130218"></p>
-<p>退出使用root用户登陆</p>
-<p>然后使用<code>userdel -r 用户名</code>删除用户及其主目录</p>
-<p><img src="https://img.hackerbs.com//20240530130436.png" alt="20240530130436"></p>
-<p>编辑<code>/etc/ssh/sshd_config</code>文件，使root用户可以通过密码登陆ssh</p>
-<p><img src="https://img.hackerbs.com//20240530130601.png" alt="20240530130601"></p>
-<p>在原本的<code>#PermitRootLogin prohibit-password</code>下添加一行<code>PermitRootLogin yes</code>，作用是允许root用户使用密码登陆ssh，原本的<code>prohibit-password</code>作用是禁止密码登陆，会一直提示密码错误</p>
-<p>如果是用vim编辑的配置文件则需要使用vim的语法<code>:wq</code>以便保存退出，在默认的命令模式下按<code>i</code>是编辑模式，按<code>ESC</code>是返回命令模式，vim语法自行参考网上教程</p>
-<p><img src="https://img.hackerbs.com//20240530130722.png" alt="20240530130722"></p>
-<p>编辑完成保存退出后使用<code>systemctl restart ssh</code>重启ssh服务，使修改生效</p>
-<p><img src="https://img.hackerbs.com//20240530131100.png" alt="20240530131100"></p>
-<p>使用<code>ssh root@ip</code>测试连接，成功，至此Ubuntu安装教程完毕！</p>
-<p><img src="https://img.hackerbs.com//20240530131234.png" alt="20240530131234"></p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Ubuntu</tag>
-        <tag>Ubuntu安装</tag>
-        <tag>Linux安装</tag>
-        <tag>Ubuntu服务器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOS安装教程</title>
-    <url>/CentOS%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
-    <content><![CDATA[]]></content>
   </entry>
 </search>
