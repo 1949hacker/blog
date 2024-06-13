@@ -55,7 +55,7 @@ HEALTHCHECK --interval=5m --timeout=3s \
 
 CMD ["vsftpd"]
 
-# docker build -t 1949hacker/vsftpd:latest .
+# docker build -t hackerbs/vsftpd:latest .
 ```
 
 docker-entrypoint.sh代码如下
@@ -74,7 +74,7 @@ if [ "$1" = "vsftpd" ]; then
 	CSR_FILE="/etc/ssl/certs/vsftpd.csr"
 
 	if [ -z "$FTP_SERVER_NAME" ]; then
-		export FTP_SERVER_NAME="Welcome to My FTP service"
+		export FTP_SERVER_NAME="Welcome to [hackerbs's vsftpd for armv8] service"
 	fi
 
 	if [ -z "$FTP_REPOSITORY" ]; then
@@ -351,6 +351,6 @@ pasv_addr_resolve=NO
 pasv_enable=YES
 ```
 
-将以上三个文件放到同一目录中，使用`docker build -t 1949hacker/vsftpd:latest .`构建即可。
+将以上三个文件放到同一目录中，使用`docker build -t hackerbs/vsftpd:latest .`构建即可。
 
 git仓库地址：[https://github.com/1949hacker/vsftpd](https://github.com/1949hacker/vsftpd)

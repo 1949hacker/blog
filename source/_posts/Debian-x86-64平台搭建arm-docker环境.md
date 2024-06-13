@@ -15,7 +15,7 @@ tags:
 
 ```shell
 # 安装QEMU用户模式工具：QEMU将用于在x86_64主机上模拟ARMv8架构
-apt install qemu binfmt-support qemu-user-static
+apt install qemu-system binfmt-support qemu-user-static
 
 # 启用QEMU用户模式支持
 update-binfmts --enable qemu-arm

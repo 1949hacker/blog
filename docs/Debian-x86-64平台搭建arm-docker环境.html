@@ -35,7 +35,7 @@
 <meta property="og:description" content="在Debian x86_64平台搭建Docker arm环境的方法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-12T13:51:36.000Z">
-<meta property="article:modified_time" content="2024-05-23T09:43:18.045Z">
+<meta property="article:modified_time" content="2024-06-13T10:25:38.072Z">
 <meta property="article:author" content="hackerbs.com">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="ARM">
@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -171,7 +171,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -241,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-23 17:43:18" itemprop="dateModified" datetime="2024-05-23T17:43:18+08:00">2024-05-23</time>
+      <time title="修改时间：2024-06-13 18:25:38" itemprop="dateModified" datetime="2024-06-13T18:25:38+08:00">2024-06-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,7 +281,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>163</span>
+      <span>391</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -302,7 +302,7 @@
         <p>在Debian x86_64平台搭建Docker arm环境的方法</p>
 <span id="more"></span>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装QEMU用户模式工具：QEMU将用于在x86_64主机上模拟ARMv8架构</span></span><br><span class="line">apt install qemu binfmt-support qemu-user-static</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用QEMU用户模式支持</span></span><br><span class="line">update-binfmts --enable qemu-arm</span><br><span class="line">update-binfmts --enable qemu-aarch64</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装QEMU用户模式工具：QEMU将用于在x86_64主机上模拟ARMv8架构</span></span><br><span class="line">apt install qemu-system binfmt-support qemu-user-static</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用QEMU用户模式支持</span></span><br><span class="line">update-binfmts --enable qemu-arm</span><br><span class="line">update-binfmts --enable qemu-aarch64</span><br></pre></td></tr></table></figure>
 
 <p>使用以上命令便可搭建Docker的arm环境，再使用如下命令即可测试环境是否可以正常使用</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拉取debian armv8镜像</span></span><br><span class="line">docker pull arm64v8/debian</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行该镜像，使用了--<span class="built_in">rm</span>参数，会在退出时自动删除容器</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行成功便会自动进入容器shell，使用<span class="built_in">exit</span>即可退出</span></span><br><span class="line">docker run -it --rm arm64v8/debian /bin/bash</span><br></pre></td></tr></table></figure>
@@ -441,14 +441,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">34k</span>
+    <span title="站点总字数">80k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:02</span>
+    <span title="站点阅读时长">1:13</span>
   </span>
 </div>
 <div class="busuanzi-count">

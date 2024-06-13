@@ -16,15 +16,15 @@ tags:
 
 第一步，拉取docker vsftpd映像
 
-`docker pull 1949hacker/vsftpd`
+*因docker hub已被墙，拉去docker images请参考[国内docker hub无法使用的解决办法](https://hackerbs.com/%E5%9B%BD%E5%86%85docker-hub%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html)，或者使用下面手动导入的方式*
+
+`docker pull hackerbs/vsftpd`
 
 如果你的环境为离线环境，则采用导入vsftpd映像方案
 
-[点此下载vsftpd映像（网盘故障，数据恢复中）](https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa)
+docker离线镜像位于[网盘](https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa)docker_images文件夹中，名为`hackerbs-vsftpd-arm.tar`
 
-其他资料可访问：[https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa（网盘故障，数据恢复中）](https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa)
-
-将下载的`1949hacker-vsftpd-arm.tar`导入到你的系统中，使用`docker load -i 1949hacker-vsftpd-arm.tar`将该映像导入
+将下载的`hackerbs-vsftpd-arm.tar`导入到你的系统中，使用`docker load -i hackerbs-vsftpd-arm.tar`将该映像导入
 
 第二步，使用该映像启动容器
 
