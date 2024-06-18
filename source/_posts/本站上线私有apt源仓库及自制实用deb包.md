@@ -3,7 +3,7 @@ title: 本站上线私有apt源仓库及自制实用deb包
 categories: [资源]
 comments: true
 date: 2023-10-18 09:50:41
-sticky:
+sticky: 100
 keywords:
     - aptdownloader
     - yumdownloader
@@ -15,10 +15,13 @@ tags:
     - apt源
 ---
 
+*站点尚未恢复*
+
 本站apt源添加命令：
 
 ```shell
-echo "deb [trusted=yes] http://disk.ygeit.cn:20888 ./" >> /etc/apt/sources.list
+wget -O - https://apt.ygeit.cn/public.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/ygeit.gpg
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/ygeit.gpg] https://apt.ygeit.cn bookworm main" >> /etc/apt/sources.list
 apt update
 ```
 
