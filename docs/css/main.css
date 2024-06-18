@@ -1032,7 +1032,7 @@ pre code {
 }
 .headband {
   background: var(--theme-color);
-  height: 3px;
+  height: auto;
 }
 @media (max-width: 991px) {
   .headband {
