@@ -134,3 +134,9 @@ rm -rf /etc/pve/nodes/!(hostname)
 killall pmxcfs
 systemctl start pve-cluster
 ```
+
+## 基于免密后批量配置crontab
+
+```shell
+for i in {101..103};do ssh root@10.0.1.$i -t "crontab -e";done
+```
