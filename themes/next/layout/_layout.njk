@@ -27,12 +27,28 @@
       padding: 0;
       line-height: 1rem;
     }
+
+    .notice {
+      width: auto;
+      background-color: #fff;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    .notice p, .notice a {
+      margin: 0;
+      border: 0;
+      padding: 0;
+      line-height: 1rem;
+    }
   </style>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage"{% if theme.motion.enable %} class="use-motion"{% endif %}>
   <div class="headband"></div>
 
+  {# 右上角广告 #}
   <div class="ad">
     <p>本站由</p>
     <a href="https://www.ygeit.com/"><img alt="昱格，科技智能服务商" src="images/ygeit.png" width="25" height="17" /></a>
@@ -40,6 +56,12 @@
 作，自动安装游戏服务端，专为服主精心打
 造，让您轻松创建和管理游戏服务器。" src="images/lizigo.png" width="25" height="25" /></a>
     <p>提供支持</p>
+  </div>
+
+  {# 置顶居中公告 #}
+  <div class="notice">
+    <p>点击图标直达本站网盘-></p>
+    <a href="https://disk.ygeit.cn/s/RpAtcoJcbpYtaoa"><img alt="hackerbs's netdisk" src="images/favicon-16x16-next.png" width="16" height="16" /></a>
   </div>
 
   <main class="main">
