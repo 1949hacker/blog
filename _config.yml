@@ -129,7 +129,7 @@ waline:
   emojiExt: '.png'
   emojiSize: 32
   CDN: ''
-  dark: false
+  dark: true
   # darkHeader: false
   # locale: auto
   # emojiPath: ''
