@@ -14,14 +14,11 @@ tags:
     - aptdownloader
     - apt源
 ---
-
-*站点尚未恢复*
-
-本站apt源添加命令：
+# 本站apt源添加命令：
 
 ```shell
-wget -O - https://apt.ygeit.cn/public.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/ygeit.gpg
-echo "deb [signed-by=/etc/apt/trusted.gpg.d/ygeit.gpg] https://apt.ygeit.cn bookworm main" >> /etc/apt/sources.list
+curl -o hackerbs.asc https://apt.ygeit.cn/hackerbs.asc && mv hackerbs.asc /etc/apt/trusted.gpg.d/
+echo "deb https://apt.ygeit.cn bookworm main" >> /etc/apt/sources.list
 apt update
 ```
 
@@ -33,7 +30,7 @@ apt update
 
 如果你用过yumdownloader从yum源下载rpm包，那么看到名字你应该就知道这是一个什么工具了
 
-[github仓库地址:https://github.com/1949hacker/aptdownloader](https://github.com/1949hacker/aptdownloader)
+[github仓库地址:https://github.com/1949hacker/deb](https://github.com/1949hacker/deb)
 
 ### 使用说明
 
