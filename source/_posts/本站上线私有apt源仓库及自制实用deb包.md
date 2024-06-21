@@ -22,6 +22,12 @@ echo "deb https://apt.ygeit.cn bookworm main" >> /etc/apt/sources.list
 apt update
 ```
 
+对于支持apt-key的系统，可以使用以下命令添加本站gpg key
+
+```shell
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 630D583FFE07EDA9B9531E029CA58840D67352EE
+```
+
 以下是工具介绍
 
 <!-- more -->
