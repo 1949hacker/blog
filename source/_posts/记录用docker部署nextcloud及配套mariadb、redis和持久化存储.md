@@ -23,7 +23,9 @@ tags:
 
 新的docker已经自带`docker compose`命令了，所以不需要再安装`docker-compose`，且需注意是`docker空格compose`而不是以前的`-`
 
-docker compose基础命令如下：
+## docker compose基础命令如下：
+
+<!-- more -->
 
 ```shell
 # 指定配置文件并后台启动
@@ -33,7 +35,7 @@ docker compose -f 指定配置文件.yaml up -d
 docker compose -f 指定配置文件.yaml down
 ```
 
-nextcloud.yaml配置文件如下
+## nextcloud.yaml配置文件如下
 
 ```yaml
 services:
@@ -73,8 +75,14 @@ services:
     depends_on:
       - db
       - redis
+```
 
-volumes:
-  db_data:
-  nextcloud_data:
+## crontab自动执行
+
+```shell
+# 每5分钟执行一次cron
+*/5  *  *  *  * docker exec -u www-data nextcloud-app php -f /var/www/html/cron.php
+
+# 每天0点down掉容器然后拉取nextcloud的更新，再启动，然后执行命令行更新
+0 0 * * * docker compose -f /mnt/docker-compose.yaml down && docker pull nextcloud && docker compose -f /mnt/docker-compose.yaml up -d && docker exec -it -u 33 nextcloud-app php occ upgrade
 ```
