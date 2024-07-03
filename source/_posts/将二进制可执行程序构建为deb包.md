@@ -57,8 +57,7 @@ source pip/bin/activate
 # --distpath bin表示将生成的可执行程序输出到当前目录的bin文件夹中
 # --workpath temp_build和--specpath temp_spec都是指定一个临时构建目录temp_build和一个临时spec配置文件目录temp_spec
 # 使用&&链接符确保执行成功后分别rm删除两个临时目录
-pyinstaller -F aptdownloader/aptdownloader.py -i 64pxlogo.ico --distpath bin --
-workpath temp_build --specpath temp_spec && rm temp_build -rf && rm temp_spec -rf
+pyinstaller -F aptdownloader/aptdownloader.py -i 64pxlogo.ico --distpath bin --workpath temp_build --specpath temp_spec && rm temp_build -rf && rm temp_spec -rf
 
 # 最终会将生成的程序输出到当前目录的bin文件夹
 deb/python-source
