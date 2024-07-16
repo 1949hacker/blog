@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: "hackerbs's Blog - 探索知识的宇宙"
+title: "hackerbs's Blog - 探索知识的宇宙<br>hacker brainstorm - 黑客头脑风暴"
 subtitle: '人生价值的体现从来就不是个体利益，人生的价值是集体利益<br>人生的价值取决于你能为全人类带来什么<br>而知识，就是全人类的瑰宝'
-description: "hackerbs's Blog - 探索知识的宇宙"
+description: "hackerbs's Blog - 探索知识的宇宙 - hacker brainstorm - 黑客头脑风暴"
 keywords: hackerbs,hacker,brainstorm,头脑风暴,Linux,Debian
 author: hackerbs.com
 language: zh-CN
