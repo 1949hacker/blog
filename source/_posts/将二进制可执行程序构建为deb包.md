@@ -142,7 +142,7 @@ Description: A tool for downloading apt packages and their dependencies.
  example:
     aptdownloader docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-# 编辑deb/install文件（需新建），告诉dpkg我的aptdownloader可执行程序应该放到/usr/bin下
+# 编辑debian/install文件（需新建），告诉dpkg我的aptdownloader可执行程序应该放到/usr/bin下
 # 格式为：包名 安装目录
 # 我的install内容：
 aptdownloader usr/bin
