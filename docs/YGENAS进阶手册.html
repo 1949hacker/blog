@@ -27,12 +27,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hackerbs.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac","show_result":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="本文为昱格NAS（YGENAS）产品进阶版使用手册本文主要讲解昱格NAS的高级配置项，如公网端口映射、DDNS配置（配套的阿里云域名购买和子账户Access Key配置）、视频分享、filestaion配置、昱格云盘、移动设备图片智能归档等 如您需要技术支持，可联系对应的销售，或拨打400-028-0061并告知来自本站">
+    <meta name="description" content="本文为昱格NAS（YGENAS）产品应用场景手册本文将列出常见应用场景，并根据应用场景给出配置教程 如您需要技术支持，可联系对应的销售，或拨打400-028-0061并告知来自本站    名称 常见应用场景 所需条件 涉及配置项    配置公网访问 在公司以外的地方通过公网IP访问NAS WEB界面 具有公网IP且可以映射端口 配置NAS WEB端口、光猫、路由器端口转发   配置文件管理查看NA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="YGENAS进阶手册">
+<meta property="og:title" content="YGENAS应用场景手册">
 <meta property="og:url" content="https://hackerbs.com/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.html">
 <meta property="og:site_name" content="hackerbs&#39;s Blog - 探索知识的宇宙">
-<meta property="og:description" content="本文为昱格NAS（YGENAS）产品进阶版使用手册本文主要讲解昱格NAS的高级配置项，如公网端口映射、DDNS配置（配套的阿里云域名购买和子账户Access Key配置）、视频分享、filestaion配置、昱格云盘、移动设备图片智能归档等 如您需要技术支持，可联系对应的销售，或拨打400-028-0061并告知来自本站">
+<meta property="og:description" content="本文为昱格NAS（YGENAS）产品应用场景手册本文将列出常见应用场景，并根据应用场景给出配置教程 如您需要技术支持，可联系对应的销售，或拨打400-028-0061并告知来自本站    名称 常见应用场景 所需条件 涉及配置项    配置公网访问 在公司以外的地方通过公网IP访问NAS WEB界面 具有公网IP且可以映射端口 配置NAS WEB端口、光猫、路由器端口转发   配置文件管理查看NA">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.hackerbs.com//20240718103250.png">
 <meta property="og:image" content="https://img.hackerbs.com//20240718104403.png">
@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://img.hackerbs.com//20240719143303.png">
 <meta property="og:image" content="https://img.hackerbs.com//20240719143516.png">
 <meta property="article:published_time" content="2024-07-16T02:27:36.000Z">
-<meta property="article:modified_time" content="2024-07-19T06:38:33.092Z">
+<meta property="article:modified_time" content="2024-08-02T03:39:03.552Z">
 <meta property="article:author" content="hackerbs.com">
 <meta property="article:tag" content="NAS">
 <meta property="article:tag" content="RAID">
@@ -65,10 +65,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hackerbs.com/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.html","path":"YGENAS进阶手册.html","title":"YGENAS进阶手册"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hackerbs.com/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.html","path":"YGENAS进阶手册.html","title":"YGENAS应用场景手册"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>YGENAS进阶手册 | hackerbs's Blog - 探索知识的宇宙</title>
+<title>YGENAS应用场景手册 | hackerbs's Blog - 探索知识的宇宙</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENLG4193WB"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ENLG4193WB","only_pageview":false}</script>
@@ -217,7 +217,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E4%B8%BA%E6%98%B1%E6%A0%BCNAS%EF%BC%88YGENAS%EF%BC%89%E4%BA%A7%E5%93%81%E8%BF%9B%E9%98%B6%E7%89%88%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="nav-number">1.</span> <span class="nav-text">本文为昱格NAS（YGENAS）产品进阶版使用手册</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#YGENAS%E9%85%8D%E7%BD%AE%E5%85%AC%E7%BD%91%E8%AE%BF%E9%97%AE"><span class="nav-number">1.1.</span> <span class="nav-text">YGENAS配置公网访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E7%A1%AE%E8%AE%A4%E6%98%AF%E5%90%A6%E6%9C%89%E5%85%AC%E7%BD%91IP"><span class="nav-number">1.1.1.</span> <span class="nav-text">需确认是否有公网IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%B2%E6%9C%89%E5%85%AC%E7%BD%91IP"><span class="nav-number">1.1.2.</span> <span class="nav-text">已有公网IP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E5%9F%9F%E5%90%8D"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">没有域名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%B2%E6%9C%89%E5%9F%9F%E5%90%8D"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">已有域名</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91%E5%AD%90%E8%B4%A6%E6%88%B7Access-Key%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">阿里云子账户Access Key配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#YGENAS%E5%AE%89%E8%A3%85%E5%8A%A8%E6%80%81%E5%9F%9F%E5%90%8D%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">YGENAS安装动态域名管理</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E4%B8%BA%E6%98%B1%E6%A0%BCNAS%EF%BC%88YGENAS%EF%BC%89%E4%BA%A7%E5%93%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E6%89%8B%E5%86%8C"><span class="nav-number">1.</span> <span class="nav-text">本文为昱格NAS（YGENAS）产品应用场景手册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#YGENAS%E9%85%8D%E7%BD%AE%E5%85%AC%E7%BD%91%E8%AE%BF%E9%97%AE"><span class="nav-number">1.1.</span> <span class="nav-text">YGENAS配置公网访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E7%A1%AE%E8%AE%A4%E6%98%AF%E5%90%A6%E6%9C%89%E5%85%AC%E7%BD%91IP"><span class="nav-number">1.1.1.</span> <span class="nav-text">需确认是否有公网IP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%B2%E6%9C%89%E5%85%AC%E7%BD%91IP"><span class="nav-number">1.1.2.</span> <span class="nav-text">已有公网IP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E5%9F%9F%E5%90%8D"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">没有域名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%B2%E6%9C%89%E5%9F%9F%E5%90%8D"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">已有域名</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91%E5%AD%90%E8%B4%A6%E6%88%B7Access-Key%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">阿里云子账户Access Key配置</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#YGENAS%E5%AE%89%E8%A3%85%E5%8A%A8%E6%80%81%E5%9F%9F%E5%90%8D%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">YGENAS安装动态域名管理</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -230,7 +230,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -286,12 +286,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="YGENAS进阶手册 | hackerbs's Blog - 探索知识的宇宙">
+      <meta itemprop="name" content="YGENAS应用场景手册 | hackerbs's Blog - 探索知识的宇宙">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          YGENAS进阶手册<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          YGENAS应用场景手册<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -309,7 +309,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-19 14:38:33" itemprop="dateModified" datetime="2024-07-19T14:38:33+08:00">2024-07-19</time>
+      <time title="修改时间：2024-08-02 11:39:03" itemprop="dateModified" datetime="2024-08-02T11:39:03+08:00">2024-08-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -349,7 +349,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -367,20 +367,43 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="本文为昱格NAS（YGENAS）产品进阶版使用手册"><a href="#本文为昱格NAS（YGENAS）产品进阶版使用手册" class="headerlink" title="本文为昱格NAS（YGENAS）产品进阶版使用手册"></a>本文为昱格NAS（YGENAS）产品进阶版使用手册</h1><p>本文主要讲解昱格NAS的高级配置项，如公网端口映射、DDNS配置（配套的阿里云域名购买和子账户Access Key配置）、视频分享、filestaion配置、昱格云盘、移动设备图片智能归档等</p>
+        <h2 id="本文为昱格NAS（YGENAS）产品应用场景手册"><a href="#本文为昱格NAS（YGENAS）产品应用场景手册" class="headerlink" title="本文为昱格NAS（YGENAS）产品应用场景手册"></a>本文为昱格NAS（YGENAS）产品应用场景手册</h2><p>本文将列出常见应用场景，并根据应用场景给出配置教程</p>
 <p>如您需要技术支持，可联系对应的销售，或拨打400-028-0061并告知来自本站</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>常见应用场景</th>
+<th>所需条件</th>
+<th>涉及配置项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>配置公网访问</td>
+<td>在公司以外的地方通过公网IP访问NAS WEB界面</td>
+<td>具有公网IP且可以映射端口</td>
+<td>配置NAS WEB端口、光猫、路由器端口转发</td>
+</tr>
+<tr>
+<td>配置文件管理查看NAS文件及分享</td>
+<td>通过NAS的文件管理应用浏览NAS上的文件，以及通过分享功能将文件分享给用户查看，或是给用户提供分享的文件夹以便用户可以查看大量文件和允许用户上传文件到NAS</td>
+<td>如需公网启用该功能，则前置条件：配置公网访问</td>
+<td>配置应用市场</td>
+</tr>
+</tbody></table>
 <span id="more"></span>
 
-<h2 id="YGENAS配置公网访问"><a href="#YGENAS配置公网访问" class="headerlink" title="YGENAS配置公网访问"></a>YGENAS配置公网访问</h2><h3 id="需确认是否有公网IP"><a href="#需确认是否有公网IP" class="headerlink" title="需确认是否有公网IP"></a>需确认是否有公网IP</h3><p>若您需要在公网环境访问NAS（指办公室之外的网络，比如出差时访问公司NAS），首先需要您的宽带具有公网IP，可以通过光猫查看，在光猫WAN中会显示IP地址，在<a target="_blank" rel="noopener" href="https://ipinfo.io/">https://ipinfo.io</a>中输入IP地址即可看到该地址的信息，若为非公网地址则会提示<code>Error: The IP address is a bogon IP. No data for this IP address.</code>，此时则需要您联系运营商，告知需要转公网模式，建议转为<code>公网桥接</code>模式，也叫<code>公网拨号</code>模式，该操作实测在成都电信无需任何额外费用，拨打10000号客服直接操作后重启光猫即可，随后在路由器进行拨号上网，切换公网拨号并在路由器配置拨号连接需要熟悉网络配置的人员操作，断网状态下无法提供远程技术支持，所以建议联系宽带师傅处理。</p>
+<h3 id="YGENAS配置公网访问"><a href="#YGENAS配置公网访问" class="headerlink" title="YGENAS配置公网访问"></a>YGENAS配置公网访问</h3><h4 id="需确认是否有公网IP"><a href="#需确认是否有公网IP" class="headerlink" title="需确认是否有公网IP"></a>需确认是否有公网IP</h4><p>若您需要在公网环境访问NAS（指办公室之外的网络，比如出差时访问公司NAS），首先需要您的宽带具有公网IP，可以通过光猫查看，在光猫WAN中会显示IP地址，在<a target="_blank" rel="noopener" href="https://ipinfo.io/">https://ipinfo.io</a>中输入IP地址即可看到该地址的信息，若为非公网地址则会提示<code>Error: The IP address is a bogon IP. No data for this IP address.</code>，此时则需要您联系运营商，告知需要转公网模式，建议转为<code>公网桥接</code>模式，也叫<code>公网拨号</code>模式，该操作实测在成都电信无需任何额外费用，拨打10000号客服直接操作后重启光猫即可，随后在路由器进行拨号上网，切换公网拨号并在路由器配置拨号连接需要熟悉网络配置的人员操作，断网状态下无法提供远程技术支持，所以建议联系宽带师傅处理。</p>
 <p>若您光猫WAN口的IP查询结果如图所示，则您不具备公网IP</p>
 <p><img src="https://img.hackerbs.com//20240718103250.png" alt="20240718103250"></p>
 <hr>
-<h3 id="已有公网IP"><a href="#已有公网IP" class="headerlink" title="已有公网IP"></a>已有公网IP</h3><p>现在，假设您有公网IP，那么我们还需要一个域名，若您已有域名，请直接跳转到已有域名一栏</p>
-<h4 id="没有域名"><a href="#没有域名" class="headerlink" title="没有域名"></a>没有域名</h4><p>打开<a target="_blank" rel="noopener" href="https://aliyun.com/">阿里云</a>购买一个域名，购买域名的方法网上有很多，此处不再赘述。</p>
+<h4 id="已有公网IP"><a href="#已有公网IP" class="headerlink" title="已有公网IP"></a>已有公网IP</h4><p>现在，假设您有公网IP，如果您的IP是固定IP,则略过以下(动态IP)</p>
+<p>那么我们还需要一个域名，若您已有域名，请直接跳转到已有域名一栏</p>
+<h5 id="没有域名"><a href="#没有域名" class="headerlink" title="没有域名"></a>没有域名</h5><p>打开<a target="_blank" rel="noopener" href="https://aliyun.com/">阿里云</a>购买一个域名，购买域名的方法网上有很多，此处不再赘述。</p>
 <p>因为阿里云配置DDNS是以https方式传输，所以推荐选择阿里云，腾讯云是非加密传输，不建议使用</p>
 <p>购买域名后需要完成域名的实名认证，备案则不必，因为通常情况下几乎备不了，如果您的域名能备案，也不会需要查看本教程此部分，域名备案是专业互联网公司才会涉及到的内容，我们只需要完成域名的实名认证，认证后便可正常进行域名的DNS解析</p>
-<h4 id="已有域名"><a href="#已有域名" class="headerlink" title="已有域名"></a>已有域名</h4><p>假设您现在已经有了可以正常DNS解析的阿里云域名</p>
-<h5 id="阿里云子账户Access-Key配置"><a href="#阿里云子账户Access-Key配置" class="headerlink" title="阿里云子账户Access Key配置"></a>阿里云子账户Access Key配置</h5><p>登陆<a target="_blank" rel="noopener" href="https://aliyun.com/">阿里云</a>，在左上角点击头像选择<code>Access Key</code></p>
+<h5 id="已有域名"><a href="#已有域名" class="headerlink" title="已有域名"></a>已有域名</h5><p>假设您现在已经有了可以正常DNS解析的阿里云域名</p>
+<h6 id="阿里云子账户Access-Key配置"><a href="#阿里云子账户Access-Key配置" class="headerlink" title="阿里云子账户Access Key配置"></a>阿里云子账户Access Key配置</h6><p>登陆<a target="_blank" rel="noopener" href="https://aliyun.com/">阿里云</a>，在左上角点击头像选择<code>Access Key</code></p>
 <p><img src="https://img.hackerbs.com//20240718104403.png" alt="20240718104403"></p>
 <p>跳转后通常会弹出提示，无论有没有提示，我们都选择使用<code>子账户AccessKey</code></p>
 <p><img src="https://img.hackerbs.com//20240718104459.png" alt="20240718104459"></p>
@@ -398,7 +421,7 @@
 <p><img src="https://img.hackerbs.com//20240718105017.png" alt="20240718105017"></p>
 <p>此时会弹出窗口，可以看到<code>AccessKey ID</code>和<code>AccessKey Secret</code>，复制下来，在NAS配置DDNS时要用到，这两条信息严禁外泄，否则别人可以通过该Key和Secret获得控制你阿里云DNS的权限</p>
 <p><img src="https://img.hackerbs.com//20240718105238.png" alt="20240718105238"></p>
-<h4 id="YGENAS安装动态域名管理"><a href="#YGENAS安装动态域名管理" class="headerlink" title="YGENAS安装动态域名管理"></a>YGENAS安装动态域名管理</h4><p>打开NAS的网页，访问应用市场，在所有套件中找到动态域名管理，安装套件</p>
+<h5 id="YGENAS安装动态域名管理"><a href="#YGENAS安装动态域名管理" class="headerlink" title="YGENAS安装动态域名管理"></a>YGENAS安装动态域名管理</h5><p>打开NAS的网页，访问应用市场，在所有套件中找到动态域名管理，安装套件</p>
 <p><img src="https://img.hackerbs.com//20240719142901.png" alt="20240719142901"></p>
 <p>回到NAS网页桌面，打开动态域名管理</p>
 <p><img src="https://img.hackerbs.com//20240719142935.png" alt="20240719142935"></p>
@@ -448,7 +471,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://hackerbs.com/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.html" title="YGENAS进阶手册">https://hackerbs.com/YGENAS进阶手册.html</a>
+      <a href="https://hackerbs.com/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.html" title="YGENAS应用场景手册">https://hackerbs.com/YGENAS进阶手册.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -515,9 +538,6 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/YGENAS%E5%9F%BA%E7%A1%80%E6%89%8B%E5%86%8C.html" rel="next" title="YGENAS基础手册">
-                  YGENAS基础手册 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -551,14 +571,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">38k</span>
+    <span title="站点总字数">37k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:19</span>
+    <span title="站点阅读时长">2:13</span>
   </span>
 </div>
 <div class="busuanzi-count">
