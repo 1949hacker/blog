@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset> 
    <url>
+    <loc>https://hackerbs.com/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html</loc>
+    
+    <lastmod>
+      2024-09-12
+    </lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url> <url>
     <loc>https://hackerbs.com/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.html</loc>
     
     <lastmod>
-      2024-08-02
+      2024-08-21
     </lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>

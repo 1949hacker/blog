@@ -27,26 +27,35 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hackerbs.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac","show_result":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="hackerbs&#39;s Blog - 探索知识的宇宙">
-<meta property="og:type" content="website">
-<meta property="og:title" content="hackerbs&#39;s Blog - 探索知识的宇宙">
-<meta property="og:url" content="https://hackerbs.com/tags/SylixOS/index.html">
+    <meta name="description" content="12345# 依次关机i&#x3D;$(qm list)&amp;&amp;vmid&#x3D;$(echo &quot;$i&quot; | awk &amp;#x27;&amp;#123;if (NR&gt;1) &amp;#123;print $1&amp;#125;&amp;#125;&amp;#x27;)&amp;&amp;for i in $vmid;do qm shutdown $i;done#依次开机，间隔一分钟i&#x3D;$(qm list)&amp;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="直接编写crontab使用一行命令完成Proxmox-VE所有虚拟机的安全关机和依次开机">
+<meta property="og:url" content="https://hackerbs.com/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html">
 <meta property="og:site_name" content="hackerbs&#39;s Blog - 探索知识的宇宙">
-<meta property="og:description" content="hackerbs&#39;s Blog - 探索知识的宇宙">
+<meta property="og:description" content="12345# 依次关机i&#x3D;$(qm list)&amp;&amp;vmid&#x3D;$(echo &quot;$i&quot; | awk &amp;#x27;&amp;#123;if (NR&gt;1) &amp;#123;print $1&amp;#125;&amp;#125;&amp;#x27;)&amp;&amp;for i in $vmid;do qm shutdown $i;done#依次开机，间隔一分钟i&#x3D;$(qm list)&amp;&amp;">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-12T09:14:48.000Z">
+<meta property="article:modified_time" content="2024-09-12T09:59:01.685Z">
 <meta property="article:author" content="hackerbs.com">
-<meta property="article:tag" content="hackerbs,hacker,brainstorm,头脑风暴,Linux,Debian">
+<meta property="article:tag" content="NAS">
+<meta property="article:tag" content="RAID">
+<meta property="article:tag" content="存储">
+<meta property="article:tag" content="YGENAS">
+<meta property="article:tag" content="昱格NAS">
+<meta property="article:tag" content="DDNS">
+<meta property="article:tag" content="zfs">
+<meta property="article:tag" content="磁盘阵列">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://hackerbs.com/tags/SylixOS/">
+<link rel="canonical" href="https://hackerbs.com/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/SylixOS/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hackerbs.com/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html","path":"直接编写crontab使用一行命令完成Proxmox-VE所有虚拟机的安全关机.html","title":"直接编写crontab使用一行命令完成Proxmox-VE所有虚拟机的安全关机和依次开机"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: SylixOS | hackerbs's Blog - 探索知识的宇宙</title>
+<title>直接编写crontab使用一行命令完成Proxmox-VE所有虚拟机的安全关机和依次开机 | hackerbs's Blog - 探索知识的宇宙</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENLG4193WB"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ENLG4193WB","only_pageview":false}</script>
@@ -239,51 +248,224 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">SylixOS
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hackerbs.com/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hackerbs.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hackerbs's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="hackerbs's Blog - 探索知识的宇宙">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="直接编写crontab使用一行命令完成Proxmox-VE所有虚拟机的安全关机和依次开机 | hackerbs's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          直接编写crontab使用一行命令完成Proxmox-VE所有虚拟机的安全关机和依次开机<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2024-09-12 17:14:48 / 修改时间：17:59:01" itemprop="dateCreated datePublished" datetime="2024-09-12T17:14:48+08:00">2024-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>328</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">依次关机</span></span><br><span class="line">i=$(qm list)&amp;&amp;vmid=$(echo &quot;$i&quot; | awk &#x27;&#123;if (NR&gt;1) &#123;print $1&#125;&#125;&#x27;)&amp;&amp;for i in $vmid;do qm shutdown $i;done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">依次开机，间隔一分钟</span></span><br><span class="line">i=$(qm list)&amp;&amp;vmid=$(echo &quot;$i&quot; | awk &#x27;&#123;if (NR&gt;1) &#123;print $1&#125;&#125;&#x27;)&amp;&amp;for i in $vmid;do qm start $i&amp;&amp;sleep 60s;done</span><br></pre></td></tr></table></figure>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-02-28T16:31:43+08:00"
-              content="2023-02-28">
-          02-28
-        </time>
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我喝冰阔落~</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="hackerbs.com 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="hackerbs.com 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/binance.jpg" alt="hackerbs.com binance">
+        <span>binance</span>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html" itemprop="url">
-            <span itemprop="name">Proxmox-VE 导入SylixOS VMware版</span>
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>hackerbs.com
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://hackerbs.com/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html" title="直接编写crontab使用一行命令完成Proxmox-VE所有虚拟机的安全关机和依次开机">https://hackerbs.com/直接编写crontab使用一行命令完成Proxmox-VE所有虚拟机的安全关机.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/hacker1949">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
           </a>
       </div>
 
-      
-    </header>
-  </article>
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="mailto:0@hackerbs.com">
+            <span class="icon">
+              <i class="fab fa-envelope"></i>
+            </span>
 
-    </div>
+            <span class="label">e-mail</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
   </div>
-  
-  
-  
+</div>
 
+          <div class="post-tags">
+              <a href="/tags/NAS/" rel="tag"># NAS</a>
+              <a href="/tags/RAID/" rel="tag"># RAID</a>
+              <a href="/tags/%E5%AD%98%E5%82%A8/" rel="tag"># 存储</a>
+              <a href="/tags/YGENAS/" rel="tag"># YGENAS</a>
+              <a href="/tags/%E6%98%B1%E6%A0%BCNAS/" rel="tag"># 昱格NAS</a>
+              <a href="/tags/DDNS/" rel="tag"># DDNS</a>
+              <a href="/tags/zfs/" rel="tag"># zfs</a>
+              <a href="/tags/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97/" rel="tag"># 磁盘阵列</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.html" rel="prev" title="YGENAS应用场景手册">
+                  <i class="fa fa-chevron-left"></i> YGENAS应用场景手册
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
 </div>
   </main>
 
@@ -374,7 +556,7 @@
 
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.hackerbs.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"欢迎评论！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","admin":false,"theme":"waline-theme-onepiece","emojiCDN":"","emojiMaps":{},"emojiExt":".png","emojiSize":32,"CDN":"","dark":true,"el":"#waline","comment":true,"path":"/tags/SylixOS/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.hackerbs.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"欢迎评论！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","admin":false,"theme":"waline-theme-onepiece","emojiCDN":"","emojiMaps":{},"emojiExt":".png","emojiSize":32,"CDN":"","dark":true,"el":"#waline","comment":true,"path":"/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {
