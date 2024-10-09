@@ -50,6 +50,6 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 630D583FFE07EDA9B9531E0
 
 ### 工具原理
 
-原命令`apt download $(apt-rdepends -p <package name> | grep -v "^ " | sed "s/debcconf-2.0/debonf/g")`
+原命令`apt download $(apt-rdepends -p <package name> | grep -v "^ " | sed "s/debcconf-2.0/debconf/g")`
 
 使用python sys传参，subprocess执行命令，简化了原命令的操作方式

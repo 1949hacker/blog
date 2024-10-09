@@ -55,11 +55,11 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ noble-backports main restricted univ
 # deb-src https://mirrors.ustc.edu.cn/ubuntu/ noble-proposed main restricted universe multiverse
 ```
 
-## 中科大docker ce源加速手动安装docker
+## 清华docker ce源加速手动安装docker
 
 **因为`docker.com`已经上不去了，所以之前写的用脚本自动安装的方式作废**
 
-直接参照官方安装文档，只需要将官方文档中的`download.docker.com`替换成`mirrors.ustc.edu.cn/docker-ce`即可
+直接参照官方安装文档，只需要将官方文档中的`download.docker.com`替换成`mirrors.tuna.tsinghua.edu.cn/docker-ce`即可
 
 *补(tu)充(cao)：整个`*.docker.com`都被墙了，我真服了，这里只写一下在`debian`手动安装docker的教程，别问我为啥不用centos，centos早废了，debian万岁，debian天下第一，linux老祖宗，YYDS*
 
@@ -73,10 +73,10 @@ sudo apt update
 # 设置GPG key
 sudo apt install -f ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo curl -fsSL https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 # 将仓库添加到apt源
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt update
 
 # 安装docker
@@ -94,7 +94,7 @@ vim /etc/docker/daemon.json
 
 # 添加以下内容
 {
-  "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]
+  "registry-mirrors": ["https://docker.mirrors.tuna.tsinghua.edu.cn/"]
 }
 
 # 用root用户或具有sudo权限的用户加sudo后运行
