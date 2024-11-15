@@ -1,5 +1,5 @@
 ---
-title: C++编写fio测试工具 | C++写脚本，我是傻逼
+title: C++编写fio测试工具 | C++写脚本，我在发疯
 comments: true
 categories: [知识库]
 date: 2024-11-15 14:05:38
@@ -15,7 +15,7 @@ tags:
     - 脚本
 ---
 
-## 我有病，拿C++写测试工具...
+## 我有病，拿C++写测试工具
 
 main.cpp
 
@@ -23,8 +23,8 @@ main.cpp
 
 <!-- more -->
 
-```c++
-#include "fio.h"
+```cpp
+#include "fio.hpp"
 #include <ctime>
 #include <fstream>
 #include <iostream>
@@ -164,11 +164,12 @@ int main() {
 
   return 0;
 }
+
 ```
 
 fio.cpp
 
-```c++
+```cpp
 #include <array>
 #include <cstdlib>
 #include <fstream>
@@ -717,12 +718,12 @@ void fio_randrw() {
 // --- 随机写和读结束 ---
 ```
 
-fio.h
+fio.hpp
 
-```c++
-// fio.h
-#ifndef FIO
-#define FIO
+```cpp
+// fio.hpp
+#ifndef FIO_HPP
+#define FIO_HPP
 
 // 设置测试参数
 void setConfig();
@@ -742,5 +743,5 @@ void rm_file();
 // 输出结果
 void runReport();
 
-#endif // FIO
+#endif // FIO_HPP
 ```
