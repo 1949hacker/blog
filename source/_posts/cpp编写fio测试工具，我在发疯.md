@@ -524,11 +524,11 @@ void fio_seq_write() {
   bw_int.clear();
   iops_int.clear();
   // 文件
-  cout << "\033[36;1m顺序写测试，共计50项，每项3次，每次" + runtime +
-              "秒，共计" + to_string((stoi(runtime) + 5) * 50 * 3) + "秒，约" +
-              to_string((stoi(runtime) + 5) * 50 * 3 / 60 / 60) +
-              "小时\n进行中...\033[0m"
-       << endl;
+  cout << "\033[31;1m顺序写测试，共计50项，每项3次，每次 " << runtime
+       << " 秒，共计 " << to_string((stoi(runtime) + 5) * 50 * 3) << " 秒，约 "
+       << setprecision(2) << fixed
+       << (double)(stoi(runtime) + 5) * 50 * 3 / 60 / 60
+       << " 小时\n进行中...\033[0m" << endl;
 
   // 文件/文件夹
   string DorF[] = {"filename", "directory"};
@@ -621,11 +621,12 @@ void fio_seq_write() {
 void fio_seq_read() {
 
   // 文件
-  cout << "\033[36;1m顺序读测试，共计50项，每项3次，每次预热5秒，每次测试" +
+  cout << "\033[31;1m顺序读测试，共计50项，每项3次，每次预热5秒，每次测试" +
               runtime + "秒，共计" + to_string((stoi(runtime) + 5) * 50 * 3) +
-              "秒，约" + to_string((stoi(runtime) + 5) * 50 * 3 / 60 / 60) +
-              "小时\n进行中...\033[0m"
-       << endl;
+              "秒，约 "
+       << setprecision(2) << fixed
+       << (double)(stoi(runtime) + 5) * 50 * 3 / 60 / 60
+       << "小时\n进行中...\033[0m" << endl;
 
   // 文件/文件夹
   string DorF[] = {"filename", "directory"};
@@ -718,11 +719,12 @@ void fio_seq_read() {
 // --- 随机读start ---
 void fio_rand_read() {
   // 文件
-  cout << "\033[36;1m随机读测试，共计15项，每项3次，每次预热5秒，每次测试" +
+  cout << "\033[31;1m随机读测试，共计15项，每项3次，每次预热5秒，每次测试" +
               runtime + "秒，共计" + to_string((stoi(runtime) + 5) * 15 * 3) +
-              "秒，约" + to_string((stoi(runtime) + 5) * 15 * 3 / 60 / 60) +
-              "小时\n进行中...\033[0m"
-       << endl;
+              "秒，约 "
+       << setprecision(2) << fixed
+       << (double)(stoi(runtime) + 5) * 15 * 3 / 60 / 60
+       << "小时\n进行中...\033[0m" << endl;
   // 文件/文件夹
   string DorF[] = {"filename", "directory"};
   for (string dorf : DorF) {
@@ -813,11 +815,12 @@ void fio_rand_read() {
 
 // --- 随机写开始 ---
 void fio_rand_write() {
-  cout << "\033[36;1m随机写测试，共计15项，每项3次，每次预热5秒，每次测试" +
+  cout << "\033[31;1m随机写测试，共计15项，每项3次，每次预热5秒，每次测试" +
               runtime + "秒，共计" + to_string((stoi(runtime) + 5) * 15 * 3) +
-              "秒，约" + to_string((stoi(runtime) + 5) * 15 * 3 / 60 / 60) +
-              "小时\n进行中...\033[0m"
-       << endl;
+              "秒，约 "
+       << setprecision(2) << fixed
+       << (double)(stoi(runtime) + 5) * 15 * 3 / 60 / 60
+       << "小时\n进行中...\033[0m" << endl;
   // 文件/文件夹
   string DorF[] = {"filename", "directory"};
   for (string dorf : DorF) {
@@ -909,11 +912,11 @@ void fio_rand_write() {
 void fio_randrw() {
 
   // 文件
-  cout << "\033[36;1m50%随机读写测试，共计15项，每项3次，每次" + runtime +
-              "秒，共计" + to_string((stoi(runtime) + 5) * 15 * 3) + "秒，约" +
-              to_string((stoi(runtime) + 5) * 15 * 3 / 60 / 60) +
-              "小时\n进行中...\033[0m"
-       << endl;
+  cout << "\033[31;1m50%随机读写测试，共计15项，每项3次，每次" + runtime +
+              "秒，共计" + to_string((stoi(runtime) + 5) * 15 * 3) + "秒，约"
+       << setprecision(2) << fixed
+       << (double)(stoi(runtime) + 5) * 15 * 3 / 60 / 60
+       << "小时\n进行中...\033[0m" << endl;
   // 文件/文件夹
   string DorF[] = {"filename", "directory"};
   for (string dorf : DorF) {
