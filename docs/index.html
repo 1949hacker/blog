@@ -207,7 +207,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -216,7 +216,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">78</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -608,6 +608,116 @@
             </div>
           <!--/noindex-->
         
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hackerbs.com/%E5%85%B3%E4%BA%8E%E7%A3%81%E7%9B%98%E6%AE%8B%E7%95%99lvm%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hackerbs.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hackerbs's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="hackerbs's Blog - 探索知识的宇宙">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | hackerbs's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E5%85%B3%E4%BA%8E%E7%A3%81%E7%9B%98%E6%AE%8B%E7%95%99lvm%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html" class="post-title-link" itemprop="url">关于磁盘残留lvm的解决办法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-11-28 10:28:48 / 修改时间：11:02:55" itemprop="dateCreated datePublished" datetime="2024-11-28T10:28:48+08:00">2024-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/%E5%85%B3%E4%BA%8E%E7%A3%81%E7%9B%98%E6%AE%8B%E7%95%99lvm%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/%E5%85%B3%E4%BA%8E%E7%A3%81%E7%9B%98%E6%AE%8B%E7%95%99lvm%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>143</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>很多时候从其他机器拿过来的盘通常是没有经过格式化的，这样就会出现一些残留的lvm信息，导致无法正常使用。</p>
+<p>出现该残留lvm的原因是因为设备映射器device mapper正在管理该磁盘，所以wipefs -a -f和dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;&#x2F;dev&#x2F;disk命令无法清除该lvm</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">lsblk显示如下</span></span><br><span class="line">nvme0n1					disk</span><br><span class="line">└storage-data			lvm</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">ls</span> -l /dev/mapper查询device mapper管理的磁盘信息</span></span><br><span class="line">lrwxrwxrwx 1 root root 		7 Nov 28 18:04 storage-data -&gt;../dm-0</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">dmsetup remove删除</span></span><br><span class="line">dmsetup remove /dev/mapper/storage-data</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -1353,129 +1463,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E5%85%B7%E6%9C%89GPGkey%E9%AA%8C%E8%AF%81%E7%9A%84%E5%8F%AF%E4%BF%A1%E4%BB%BBapt%E6%BA%90.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hackerbs.com/%E8%AE%B0%E5%BD%95%E7%94%A8docker%E9%83%A8%E7%BD%B2nextcloud%E5%8F%8A%E9%85%8D%E5%A5%97mariadb%E3%80%81redis%E5%92%8C%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hackerbs.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hackerbs's Blog - 探索知识的宇宙">
-      <meta itemprop="description" content="hackerbs's Blog - 探索知识的宇宙">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | hackerbs's Blog - 探索知识的宇宙">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E8%AE%B0%E5%BD%95%E7%94%A8docker%E9%83%A8%E7%BD%B2nextcloud%E5%8F%8A%E9%85%8D%E5%A5%97mariadb%E3%80%81redis%E5%92%8C%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8.html" class="post-title-link" itemprop="url">记录用docker部署nextcloud及配套mariadb、redis和持久化存储</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-06-13 16:45:32" itemprop="dateCreated datePublished" datetime="2024-06-13T16:45:32+08:00">2024-06-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-18 19:44:41" itemprop="dateModified" datetime="2024-11-18T19:44:41+08:00">2024-11-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/%E8%AE%B0%E5%BD%95%E7%94%A8docker%E9%83%A8%E7%BD%B2nextcloud%E5%8F%8A%E9%85%8D%E5%A5%97mariadb%E3%80%81redis%E5%92%8C%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/%E8%AE%B0%E5%BD%95%E7%94%A8docker%E9%83%A8%E7%BD%B2nextcloud%E5%8F%8A%E9%85%8D%E5%A5%97mariadb%E3%80%81redis%E5%92%8C%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>461</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="使用docker-compose便捷的部署nextcloud及其配套的mariadb和redis并实现数据持久存储在本地的办法"><a href="#使用docker-compose便捷的部署nextcloud及其配套的mariadb和redis并实现数据持久存储在本地的办法" class="headerlink" title="使用docker compose便捷的部署nextcloud及其配套的mariadb和redis并实现数据持久存储在本地的办法"></a>使用docker compose便捷的部署nextcloud及其配套的mariadb和redis并实现数据持久存储在本地的办法</h1><p><strong>安装docker的教程在<a href="https://hackerbs.com/apt%E7%AD%89%E5%90%84%E7%A7%8D%E6%BA%90%E5%88%97%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.html">apt等各种源列表（持续更新）</a>，docker hub被禁，处理的办法在<a href="https://hackerbs.com/%E5%9B%BD%E5%86%85docker-hub%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html">国内docker hub无法使用的解决办法</a></strong></p>
-<p>新的docker已经自带<code>docker compose</code>命令了，所以不需要再安装<code>docker-compose</code>，且需注意是<code>docker空格compose</code>而不是以前的<code>-</code></p>
-<h2 id="docker-compose基础命令如下："><a href="#docker-compose基础命令如下：" class="headerlink" title="docker compose基础命令如下："></a>docker compose基础命令如下：</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/%E8%AE%B0%E5%BD%95%E7%94%A8docker%E9%83%A8%E7%BD%B2nextcloud%E5%8F%8A%E9%85%8D%E5%A5%97mariadb%E3%80%81redis%E5%92%8C%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
