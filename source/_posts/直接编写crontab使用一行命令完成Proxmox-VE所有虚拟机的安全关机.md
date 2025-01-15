@@ -4,8 +4,6 @@ comments: true
 categories: [知识库]
 date: 2024-09-12 17:14:48
 keywords:
-    - YGENAS
-    - 昱格NAS
     - NAS
     - DDNS
     - 存储
@@ -13,8 +11,6 @@ keywords:
     - RAID
     - 磁盘阵列
 tags:
-    - YGENAS
-    - 昱格NAS
     - NAS
     - DDNS
     - 存储

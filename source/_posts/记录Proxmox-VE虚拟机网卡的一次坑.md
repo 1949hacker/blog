@@ -8,12 +8,10 @@ keywords:
     - qemu
     - 虚拟机
     - 虚拟网卡
-    - YgeCloud
 tags:
     - Proxmox-VE
     - 虚拟机
     - 虚拟网卡
-    - YgeCloud
     - qemu
 ---
 

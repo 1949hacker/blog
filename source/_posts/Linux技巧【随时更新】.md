@@ -196,7 +196,7 @@ mount -t nfs -o vers=3,rw,hard,sync 10.0.0.100:/mnt/TEST/nfs /mnt/100nfs
 # 2024/1/13更新，因实际使用过程中遇到过网络并未第一时间连通导致的挂载失败，所以在mount操作前增加ping操作
 # 原命令为：ExecStart=/usr/bin/mount -t nfs -o vers=3,rw,hard,sync 10.0.0.100:/mnt/data /data
 # 下列代码中10.0.0.100为我的nfs服务器地址，需要替换为你自己的，包括服务器的路径:/mnt/data/storage和挂载路径/mnt/nfs都需要替换为你自己的
-# 如有问题可以通过文末的联系方式咨询我，或致电昱格400-028-0061
+# 如有问题可以通过文末的联系方式咨询我
 [Unit]
 Description=auto mount nfs
 After=network.target

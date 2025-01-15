@@ -1448,7 +1448,7 @@
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fio -name=stress_disk -filename=/mnt/DATA/test/a -size=30T -runtime=240h -bs=1m -direct=1 -rw=randrw -ioengine=libaio -numjobs=12 -group_reporting -iodepth=8 -rwmixwrite=50 -time_based -ramp_time=60s</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中name是本次测试任务的名称</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">filename则为指定测试目录和文件名</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">size则为指定测试文件大小,此处为30T,无论运行多久,该测试文件a都不会超过30T</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">runtime为指定运行时间,240h则为240小时,单位可以为秒s分m时h</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">bs为块大小,顺序读写通常为1m,4k则填写4k即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">direct有0和1选项,0为使用文件系统缓存,1则为直接操作磁盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rw可选的参数有<span class="built_in">read</span>/write/rw/randread/randwrite/randrw,分别为读/写/读写/随机读/随机写/随机读写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ioengine IO测试引擎,在linux下选择libaio即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">numjobs线程数,一般设置为硬盘数量,根据实际需要自行调整</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">group_reporting合并报告,将性能测试结果合并汇报,显示所有硬盘性能测试的总结果</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">iodepth IO队列深度,指定IO队列深度,提高每次请求的IO数量</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rwmixwrite/rwmixread 这两个参数都可以指定,按百分比指定,如rwmixwrite=30则表示写占比30%,只需使用其中一个即可,无需同时指定两个参数</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">time_based 设置即便fio写完了指定的size依旧不结束，直至runtime的时间</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ramp_time=60s 设置fio执行任务时的预热时间，可以使性能测试结果更加精确可靠</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Linux-NFS挂载及使用systemctl自动挂载"><a href="#Linux-NFS挂载及使用systemctl自动挂载" class="headerlink" title="Linux NFS挂载及使用systemctl自动挂载"></a>Linux NFS挂载及使用systemctl自动挂载</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">NFS挂载基础命令及其作用</span></span><br><span class="line">mount -t nfs -o vers=3,rw,hard,sync 10.0.0.100:/mnt/TEST/nfs /mnt/100nfs</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mount linux挂载命令</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-t nfs 指定挂载协议为nfs -o也就是options，选项的意思</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">vers=3 指定NFS版本，NFSv3</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rw 读写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">hard硬链接</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">补充：soft为软连接，二者的特点是硬链接保障数据安全但需要持续等待服务器响应，软连接的特点是快速响应但如果服务器断开则可能导致数据损坏或丢失</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">简单来说，硬链接适合网络环境较差或数据安全要求严格的场景，软连接适合网络稳定需要快速响应的场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">【技术是严谨的，如果我的解释有误烦请立刻指正，十分感谢！】</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">sync</span>，同步写入，写入到磁盘，IO响应较慢但数据安全，async，异步写入，IO响应快，数据安全性低，类似RAID write back</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数指定完成后便是服务器路径和本地路径，格式为 服务器地址:路径 本地路径，如 example:/example /example</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用systemctl管理nfs挂载</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建nfs.service文件【我的环境为Debian 11.6，该文件放在/usr/lib/systemd/system/下】</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2024/1/13更新，因实际使用过程中遇到过网络并未第一时间连通导致的挂载失败，所以在mount操作前增加ping操作</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">原命令为：ExecStart=/usr/bin/mount -t nfs -o vers=3,rw,hard,<span class="built_in">sync</span> 10.0.0.100:/mnt/data /data</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下列代码中10.0.0.100为我的nfs服务器地址，需要替换为你自己的，包括服务器的路径:/mnt/data/storage和挂载路径/mnt/nfs都需要替换为你自己的</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如有问题可以通过文末的联系方式咨询我，或致电昱格400-028-0061</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=auto mount nfs</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/bin/bash -c &#x27;until ping -c1 10.0.0.100 &amp;&gt;/dev/null; do sleep 5; done &amp;&amp; /usr/bin/mount -t nfs -o vers=4,rw,hard,sync 10.0.0.100:/mnt/data/storage /mnt/nfs&#x27;</span><br><span class="line">Restart=no</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">挂载nfs</span></span><br><span class="line">systemctl start nfs.service</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开机自动挂载</span></span><br><span class="line">systemctl enable nfs.service</span><br></pre></td></tr></table></figure>
+<h2 id="Linux-NFS挂载及使用systemctl自动挂载"><a href="#Linux-NFS挂载及使用systemctl自动挂载" class="headerlink" title="Linux NFS挂载及使用systemctl自动挂载"></a>Linux NFS挂载及使用systemctl自动挂载</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">NFS挂载基础命令及其作用</span></span><br><span class="line">mount -t nfs -o vers=3,rw,hard,sync 10.0.0.100:/mnt/TEST/nfs /mnt/100nfs</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mount linux挂载命令</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-t nfs 指定挂载协议为nfs -o也就是options，选项的意思</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">vers=3 指定NFS版本，NFSv3</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rw 读写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">hard硬链接</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">补充：soft为软连接，二者的特点是硬链接保障数据安全但需要持续等待服务器响应，软连接的特点是快速响应但如果服务器断开则可能导致数据损坏或丢失</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">简单来说，硬链接适合网络环境较差或数据安全要求严格的场景，软连接适合网络稳定需要快速响应的场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">【技术是严谨的，如果我的解释有误烦请立刻指正，十分感谢！】</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">sync</span>，同步写入，写入到磁盘，IO响应较慢但数据安全，async，异步写入，IO响应快，数据安全性低，类似RAID write back</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数指定完成后便是服务器路径和本地路径，格式为 服务器地址:路径 本地路径，如 example:/example /example</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用systemctl管理nfs挂载</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建nfs.service文件【我的环境为Debian 11.6，该文件放在/usr/lib/systemd/system/下】</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2024/1/13更新，因实际使用过程中遇到过网络并未第一时间连通导致的挂载失败，所以在mount操作前增加ping操作</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">原命令为：ExecStart=/usr/bin/mount -t nfs -o vers=3,rw,hard,<span class="built_in">sync</span> 10.0.0.100:/mnt/data /data</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下列代码中10.0.0.100为我的nfs服务器地址，需要替换为你自己的，包括服务器的路径:/mnt/data/storage和挂载路径/mnt/nfs都需要替换为你自己的</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如有问题可以通过文末的联系方式咨询我</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=auto mount nfs</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/bin/bash -c &#x27;until ping -c1 10.0.0.100 &amp;&gt;/dev/null; do sleep 5; done &amp;&amp; /usr/bin/mount -t nfs -o vers=4,rw,hard,sync 10.0.0.100:/mnt/data/storage /mnt/nfs&#x27;</span><br><span class="line">Restart=no</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">挂载nfs</span></span><br><span class="line">systemctl start nfs.service</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开机自动挂载</span></span><br><span class="line">systemctl enable nfs.service</span><br></pre></td></tr></table></figure>
 
 <h2 id="mdadm管理软RAID阵列"><a href="#mdadm管理软RAID阵列" class="headerlink" title="mdadm管理软RAID阵列"></a>mdadm管理软RAID阵列</h2><p>mdadm全称Multiple Disk and Device Administration（多磁盘和设备管理），是一个Linux软件RAID管理工具，可以使用它来创建各种级别的RAID阵列，包括RAID 0、RAID 1、RAID 5、RAID 6等。</p>
 <h3 id="使用mdadm创建RAID的一般步骤："><a href="#使用mdadm创建RAID的一般步骤：" class="headerlink" title="使用mdadm创建RAID的一般步骤："></a>使用mdadm创建RAID的一般步骤：</h3><ol>
@@ -1614,192 +1614,6 @@
       </tags>
   </entry>
   <entry>
-    <title>NAS（zfs）基础知识</title>
-    <url>/NAS%EF%BC%88zfs%EF%BC%89%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html</url>
-    <content><![CDATA[<h2 id="NAS是什么？"><a href="#NAS是什么？" class="headerlink" title="NAS是什么？"></a>NAS是什么？</h2><p>NAS，全称Network Attached Storage，翻译成中文就是网络附加存储。简单来说，它就是一个连接到网络上的存储设备，可以让多台电脑、智能手机、平板电脑等设备通过网络访问和共享存储空间。</p>
-<span id="more"></span>
-
-<p>NAS和传统的外接硬盘不同，它更像是一个小型的服务器，拥有自己的操作系统和处理器。你可以把NAS想象成一个能够存储大量文件的智能盒子，放在家里或者办公室的网络中，让你随时随地通过网络访问自己的文件。</p>
-<p>使用NAS有很多好处。首先，它可以作为一个集中式的存储解决方案，让你不再需要把文件分散存储在各种设备上。其次，NAS通常具有数据备份和共享功能，可以保护你的文件免受丢失或损坏，并且可以让家人或团队成员轻松地共享文件。另外，NAS通常还提供了许多额外的功能，比如可以安装各种应用程序来扩展其功能，比如媒体服务器、下载站点等等。</p>
-<p>总的来说，NAS就是一个连接到网络上的智能存储设备，可以让你方便地存储、备份和共享文件，是家庭和办公室网络存储的理想选择。</p>
-<h2 id="NAS相对传统存储的优缺点"><a href="#NAS相对传统存储的优缺点" class="headerlink" title="NAS相对传统存储的优缺点"></a>NAS相对传统存储的优缺点</h2><table>
-<thead>
-<tr>
-<th>优缺点</th>
-<th>NAS</th>
-<th>传统存储</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>容量</td>
-<td>可以轻松扩展容量</td>
-<td>通常受限于单个设备的容量</td>
-</tr>
-<tr>
-<td>可访问性</td>
-<td>可通过网络从任何地方访问文件</td>
-<td>需要直接连接到设备才能访问文件</td>
-</tr>
-<tr>
-<td>共享功能</td>
-<td>能够方便地与多个用户共享文件</td>
-<td>通常只能由一个用户使用</td>
-</tr>
-<tr>
-<td>备份</td>
-<td>提供自动备份和恢复功能</td>
-<td>需要手动进行备份和恢复</td>
-</tr>
-<tr>
-<td>数据保护</td>
-<td>提供数据冗余和RAID功能，增强数据保护</td>
-<td>数据保护功能通常有限</td>
-</tr>
-<tr>
-<td>扩展性</td>
-<td>可以安装各种应用程序扩展功能</td>
-<td>功能受限于设备自身的硬件和软件功能</td>
-</tr>
-<tr>
-<td>成本</td>
-<td>初始成本较高，但长期使用成本较低</td>
-<td>初始成本较低，但随着存储需求增长成本可能增加</td>
-</tr>
-<tr>
-<td>管理复杂性</td>
-<td>需要一定的网络和技术知识来配置和管理</td>
-<td>简单易用，不需要复杂的配置和管理</td>
-</tr>
-</tbody></table>
-<h2 id="NAS-RAIDZ知识"><a href="#NAS-RAIDZ知识" class="headerlink" title="NAS RAIDZ知识"></a>NAS RAIDZ知识</h2><p>YGENAS采用zfs文件系统，可以创建RAIDZ软磁盘阵列，对比传统磁盘阵列如下</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>zfs软RAID</th>
-<th>传统RAID</th>
-<th>特性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>条带</td>
-<td>Striping</td>
-<td>RAID0</td>
-<td>盘越多速度越快，安全性为0，掉盘则数据丢失</td>
-</tr>
-<tr>
-<td>镜像</td>
-<td>mirror</td>
-<td>RAID1</td>
-<td>安全性最高，传统RAID支持2个盘做镜像，一份数据存到2个盘上，软RAID则可以手动指定更多盘做镜像（通常没必要）</td>
-</tr>
-<tr>
-<td>单重校验</td>
-<td>RAID-Z1</td>
-<td>RAID5</td>
-<td>速度和安全性相对均衡，拥有1块校验盘所以可以允许单块盘故障</td>
-</tr>
-<tr>
-<td>双重校验</td>
-<td>RAID-Z2</td>
-<td>RAID6</td>
-<td>更偏向安全性，速度比单重校验略低，拥有3块校验盘所以可以允许2块盘故障</td>
-</tr>
-<tr>
-<td>三重校验</td>
-<td>RAID-Z3</td>
-<td>无</td>
-<td>软RAID特有，更安全但速度也低，拥有3块校验盘所以可以允许3块盘故障</td>
-</tr>
-<tr>
-<td>组合RAID</td>
-<td>可以将RAID1&#x2F;5&#x2F;6(RAID-Z3)，按条带方式组合，每个小RAID看作一块磁盘，如36盘分3组，每组12个盘做RAID5，最终组成RAID50，将12个为一组的RAID5看作一个大盘，这3个大盘做成一个RAID0</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>热备盘</td>
-<td>无论是软RAID还是传统RAID，都可以添加热备盘，热备盘用于替换故障盘，在新YGENAS系统中热备盘会在掉盘时自动替换。实际应用中可以给客户解释：当RAID5出现故障盘时，若存在热备盘，则会自动第一时间替换掉故障盘，因为人工介入处理故障需要一定时间，热备盘的自动替换可以防止在人工换盘之前又出现故障盘，若RAID5同时故障两块盘则会丢失数据</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="NAS-RAIDZ容量计算方法"><a href="#NAS-RAIDZ容量计算方法" class="headerlink" title="NAS RAIDZ容量计算方法"></a>NAS RAIDZ容量计算方法</h2><p><a href="https://wintelguy.com/zfs-calc.pl">ZFS &#x2F; RAIDZ容量估算</a></p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>RAID type</td>
-<td>RAID类型，对应上面介绍的RAID-Z1&#x2F;2&#x2F;3等</td>
-</tr>
-<tr>
-<td>Drive capacity(GB)</td>
-<td>单个磁盘容量，单位为GB，1TB&#x3D;1000GB</td>
-</tr>
-<tr>
-<td>Number of drives per RAID group</td>
-<td>每组RAID中磁盘的数量，单组RAID-Z1&#x2F;2&#x2F;3均不建议超过12块盘，否则故障时重建时间过长可能存在风险</td>
-</tr>
-<tr>
-<td>Number of RAID groups</td>
-<td>多重RAID的数量，比如RAID50&#x2F;60，该项则是对应多少组RAID5&#x2F;6组成RAID50&#x2F;60，比如36盘位通常由3组12盘的RAID-Z1组成一组RAID-Z1条带，也就是RAID50</td>
-</tr>
-<tr>
-<td>20% free space limit</td>
-<td>该参数是因为NAS在占用空间超过80%后性能会下降，所以会有一个20%空闲空间限制，但是该项默认是不勾选的，忽略即可</td>
-</tr>
-<tr>
-<td>Practical usable storage capacity</td>
-<td>实际可用存储容量，单位分别有TiB和TB，通常俗称的容量一般为TB，TiB是操作系统以1024GiB&#x3D;1TiB为进制计算的空间</td>
-</tr>
-<tr>
-<td>Single drive cost</td>
-<td>单块硬盘价格，如果需要计算每TiB存储空间的成本，可以填写该项用于计算</td>
-</tr>
-<tr>
-<td>Cost per TiB usable</td>
-<td>每TiB存储空间成本</td>
-</tr>
-<tr>
-<td>其他项在常见情况下也忽略即可</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>以下是YGENAS-RH12按12个16TB硬盘做RAID-Z1的容量计算和成本计算（硬盘价格1600乱填的）：</p>
-<p><img src="https://img.hackerbs.com//ad900b1ecf2520cd6c46787268124ed.png" alt="ad900b1ecf2520cd6c46787268124ed"></p>
-<p><img src="https://img.hackerbs.com//20240405190455.png" alt="20240405190455"></p>
-<h2 id="RAID-Z1-x2F-2-x2F-3速度估算"><a href="#RAID-Z1-x2F-2-x2F-3速度估算" class="headerlink" title="RAID-Z1&#x2F;2&#x2F;3速度估算"></a>RAID-Z1&#x2F;2&#x2F;3速度估算</h2><blockquote>
-<p>在此修正以前的错误内容：阵列速度无法估算，因为涉及到校验、磁盘、服务器性能等多方面因素</p>
-</blockquote>
-<p>影响NAS实际速度的部分因素有：</p>
-<ol>
-<li>单个硬盘速度</li>
-<li>磁盘阵列模式：奇偶校验、数据盘</li>
-<li>驱动器扇区大小</li>
-<li>ZFS记录大小</li>
-<li>应用数据块大小</li>
-<li>IO模式：异步&#x2F;同步</li>
-<li>IO队列深度</li>
-<li>CPU、内存性能</li>
-<li>网络传输速度：NAS网卡速度，局域网链路速度，客户端网卡速度缺一不可，每一项短板都会限制实际速度</li>
-<li>客户端读写速度</li>
-</ol>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>NAS</tag>
-        <tag>ZFS</tag>
-        <tag>RAID</tag>
-        <tag>存储</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Proxmox-VE 导入SylixOS VMware版</title>
     <url>/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html</url>
     <content><![CDATA[<p>将SylixOS传到服务器</p>
@@ -1847,7 +1661,7 @@
     <title>Proxmox-VE批量加集群、批量克隆、批量设置并同步时间、批量清除集群残留、批量创建网卡等一站式解决方案！（本教程采用YgeCloud实测）</title>
     <url>/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.html</url>
     <content><![CDATA[<hr>
-<h2 id="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"><a href="#本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！" class="headerlink" title="本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"></a><strong>本文章所有命令均在YgeCloud进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容<em>十分拜托您务必联系我修正文章！十分感谢！</em></strong></h2><p><strong>以下命令中<code>10.0.1.$i</code>是因为本次批量部署节点均在10.0.1.0&#x2F;24段，需自行修改为你节点所在网段，如<code>192.168.100.$i</code></strong></p>
+<h2 id="本文章所有命令均在Proxmox-VE进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"><a href="#本文章所有命令均在Proxmox-VE进行实测并列出了各种BUG，本文涉及的命令均为Linux-KVM-QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！" class="headerlink" title="本文章所有命令均在Proxmox-VE进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容十分拜托您务必联系我修正文章！十分感谢！"></a><strong>本文章所有命令均在Proxmox-VE进行实测并列出了各种BUG，本文涉及的命令均为Linux KVM QEMU虚拟化通用命令，如命令有不兼容<em>十分拜托您务必联系我修正文章！十分感谢！</em></strong></h2><p><strong>以下命令中<code>10.0.1.$i</code>是因为本次批量部署节点均在10.0.1.0&#x2F;24段，需自行修改为你节点所在网段，如<code>192.168.100.$i</code></strong></p>
 <p><strong>批量创建网卡适用于如本次部署一样的情况，如外网网线统一连接到enp6s0网口，然后桥接到vmbr1给虚拟机连接使用，请根据你的情况自行修改</strong></p>
 <h2 id="批量加集群"><a href="#批量加集群" class="headerlink" title="批量加集群"></a>批量加集群</h2><span id="more"></span>
 
@@ -1874,8 +1688,6 @@
       </categories>
       <tags>
         <tag>Proxmox-VE</tag>
-        <tag>YgeCloud</tag>
-        <tag>昱格</tag>
         <tag>批量</tag>
       </tags>
   </entry>
@@ -2043,175 +1855,6 @@
         <tag>Ubuntu</tag>
         <tag>Ubuntu安装</tag>
         <tag>Ubuntu服务器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>YGENAS应用场景手册</title>
-    <url>/YGENAS%E8%BF%9B%E9%98%B6%E6%89%8B%E5%86%8C.html</url>
-    <content><![CDATA[<h2 id="本文为昱格NAS（YGENAS）产品应用场景手册"><a href="#本文为昱格NAS（YGENAS）产品应用场景手册" class="headerlink" title="本文为昱格NAS（YGENAS）产品应用场景手册"></a>本文为昱格NAS（YGENAS）产品应用场景手册</h2><p>本文将列出常见应用场景，并根据应用场景给出配置教程</p>
-<p>如您需要技术支持，可联系对应的销售，或拨打400-028-0061并告知来自本站</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>常见应用场景</th>
-<th>所需条件</th>
-<th>涉及配置项</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>配置公网访问</td>
-<td>在公司以外的地方通过公网IP访问NAS WEB界面</td>
-<td>具有公网IP且可以映射端口</td>
-<td>配置NAS WEB端口、光猫、路由器端口转发</td>
-</tr>
-<tr>
-<td>配置文件管理查看NAS文件及分享</td>
-<td>通过NAS的文件管理应用浏览NAS上的文件，以及通过分享功能将文件分享给用户查看，或是给用户提供分享的文件夹以便用户可以查看大量文件和允许用户上传文件到NAS</td>
-<td>如需公网启用该功能，则前置条件：配置公网访问</td>
-<td>配置应用市场</td>
-</tr>
-</tbody></table>
-<span id="more"></span>
-
-<h3 id="YGENAS配置公网访问"><a href="#YGENAS配置公网访问" class="headerlink" title="YGENAS配置公网访问"></a>YGENAS配置公网访问</h3><h4 id="需确认是否有公网IP"><a href="#需确认是否有公网IP" class="headerlink" title="需确认是否有公网IP"></a>需确认是否有公网IP</h4><p>若您需要在公网环境访问NAS（指办公室之外的网络，比如出差时访问公司NAS），首先需要您的宽带具有公网IP，可以通过光猫查看，在光猫WAN中会显示IP地址，在<a href="https://ipinfo.io/">https://ipinfo.io</a>中输入IP地址即可看到该地址的信息，若为非公网地址则会提示<code>Error: The IP address is a bogon IP. No data for this IP address.</code>，此时则需要您联系运营商，告知需要转公网模式，建议转为<code>公网桥接</code>模式，也叫<code>公网拨号</code>模式，该操作实测在成都电信无需任何额外费用，拨打10000号客服直接操作后重启光猫即可，随后在路由器进行拨号上网，切换公网拨号并在路由器配置拨号连接需要熟悉网络配置的人员操作，断网状态下无法提供远程技术支持，所以建议联系宽带师傅处理。</p>
-<p>若您光猫WAN口的IP查询结果如图所示，则您不具备公网IP</p>
-<p><img src="https://img.hackerbs.com//20240718103250.png" alt="20240718103250"></p>
-<hr>
-<h4 id="已有公网IP"><a href="#已有公网IP" class="headerlink" title="已有公网IP"></a>已有公网IP</h4><p>现在，假设您有公网IP，如果您的IP是固定IP,则略过以下(动态IP)</p>
-<p>那么我们还需要一个域名，若您已有域名，请直接跳转到已有域名一栏</p>
-<h5 id="没有域名"><a href="#没有域名" class="headerlink" title="没有域名"></a>没有域名</h5><p>打开<a href="https://aliyun.com/">阿里云</a>购买一个域名，购买域名的方法网上有很多，此处不再赘述。</p>
-<p>因为阿里云配置DDNS是以https方式传输，所以推荐选择阿里云，腾讯云是非加密传输，不建议使用</p>
-<p>购买域名后需要完成域名的实名认证，备案则不必，因为通常情况下几乎备不了，如果您的域名能备案，也不会需要查看本教程此部分，域名备案是专业互联网公司才会涉及到的内容，我们只需要完成域名的实名认证，认证后便可正常进行域名的DNS解析</p>
-<h5 id="已有域名"><a href="#已有域名" class="headerlink" title="已有域名"></a>已有域名</h5><p>假设您现在已经有了可以正常DNS解析的阿里云域名</p>
-<h6 id="阿里云子账户Access-Key配置"><a href="#阿里云子账户Access-Key配置" class="headerlink" title="阿里云子账户Access Key配置"></a>阿里云子账户Access Key配置</h6><p>登陆<a href="https://aliyun.com/">阿里云</a>，在左上角点击头像选择<code>Access Key</code></p>
-<p><img src="https://img.hackerbs.com//20240718104403.png" alt="20240718104403"></p>
-<p>跳转后通常会弹出提示，无论有没有提示，我们都选择使用<code>子账户AccessKey</code></p>
-<p><img src="https://img.hackerbs.com//20240718104459.png" alt="20240718104459"></p>
-<p>在创建用户页面填入登陆名称点击确定即可</p>
-<p><img src="https://img.hackerbs.com//20240718104556.png" alt="20240718104556"></p>
-<ol>
-<li>勾选刚刚创建的用户</li>
-<li>点击添加权限</li>
-<li>勾选<code>管理云解析（DNS）的权限</code></li>
-<li>点击确认新增权限</li>
-</ol>
-<p>完成以上操作后，该子账户便拥有了配置域名DNS的权限</p>
-<p><img src="https://img.hackerbs.com//20240718104707.png" alt="20240718104707"></p>
-<p>直接点击上图中的<code>用户登陆名称</code>即可跳转到下图页面，然后点击<code>创建AccessKey</code></p>
-<p><img src="https://img.hackerbs.com//20240718105017.png" alt="20240718105017"></p>
-<p>此时会弹出窗口，可以看到<code>AccessKey ID</code>和<code>AccessKey Secret</code>，复制下来，在NAS配置DDNS时要用到，这两条信息严禁外泄，否则别人可以通过该Key和Secret获得控制你阿里云DNS的权限</p>
-<p><img src="https://img.hackerbs.com//20240718105238.png" alt="20240718105238"></p>
-<h5 id="YGENAS安装动态域名管理"><a href="#YGENAS安装动态域名管理" class="headerlink" title="YGENAS安装动态域名管理"></a>YGENAS安装动态域名管理</h5><p>打开NAS的网页，访问应用市场，在所有套件中找到动态域名管理，安装套件</p>
-<p><img src="https://img.hackerbs.com//20240719142901.png" alt="20240719142901"></p>
-<p>回到NAS网页桌面，打开动态域名管理</p>
-<p><img src="https://img.hackerbs.com//20240719142935.png" alt="20240719142935"></p>
-<p>在DNS服务商中选择阿里云，填入AccessKey ID和AccessKey Secret</p>
-<p>在Doimains中填入你的域名，可以使用顶级域名如：ygeit.cn或者使用二级域名如：nas.ygeit.cn</p>
-<p><img src="https://img.hackerbs.com//20240719143154.png" alt="20240719143154"></p>
-<p>通常不需要配置IPv6和Webhook，取消IPv6的勾选并将webhook留空即可</p>
-<p><img src="https://img.hackerbs.com//20240719143303.png" alt="20240719143303"></p>
-<p>我们预置了一些接口用于获取IP，但这些第三方接口可能会存在无法访问的情况，根据报错内容删除对应接口即可，记得删除逗号分隔符，如果接口没有出现报错则无需更改</p>
-<p><img src="https://img.hackerbs.com//20240719143516.png" alt="20240719143516"></p>
-<p>配置完成后点击页面最下方保存，动态域名管理便会通过API自动配置阿里云DNS解析</p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>NAS</tag>
-        <tag>RAID</tag>
-        <tag>存储</tag>
-        <tag>YGENAS</tag>
-        <tag>昱格NAS</tag>
-        <tag>DDNS</tag>
-        <tag>zfs</tag>
-        <tag>磁盘阵列</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>YgeCloud创建虚拟机教程</title>
-    <url>/YgeCloud%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%95%99%E7%A8%8B.html</url>
-    <content><![CDATA[<p>昱格服务器虚拟化系统创建虚拟机教程</p>
-<p><img src="https://www.ygeit.com/upload/1/cms/content/editor/1643091301539.png" alt="YgeCloud"></p>
-<span id="more"></span>
-
-<h1 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h1><p>YgeCloud安装后默认有<code>local</code>和<code>local-lvm</code>两个存储，<code>local-lvm</code>可以忽略掉，通常情况下都会外挂其他存储或是切换为目录模式挂载，目录模式支持的内容有：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>磁盘映像</td>
-<td>用于存放虚拟机磁盘，要将虚拟机创建到该存储则必选该项</td>
-</tr>
-<tr>
-<td>ISO镜像</td>
-<td>勾选后可以将iso上传到此存储</td>
-</tr>
-<tr>
-<td>VZDump备份文件</td>
-<td>勾选后支持将虚拟机备份到该存储</td>
-</tr>
-<tr>
-<td>片段</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="Windows安装前准备"><a href="#Windows安装前准备" class="headerlink" title="Windows安装前准备"></a>Windows安装前准备</h2><p>Windows因为没有kvm驱动，安装前还需获取最新的kvm驱动iso，选择最新的<code>virtio-win-x.x.xxx.iso</code>下载即可，然后上传到YgeCloud</p>
-<p><a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/?C=M;O=D">下载驱动</a></p>
-<h1 id="YgeCloud创建Debian虚拟机"><a href="#YgeCloud创建Debian虚拟机" class="headerlink" title="YgeCloud创建Debian虚拟机"></a>YgeCloud创建Debian虚拟机</h1><p><strong>本教材也适用于OpenEuler、Arch Linux、Ubuntu等其他Linux发行版</strong></p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Proxmox-VE</tag>
-        <tag>YgeCloud</tag>
-        <tag>虚拟机</tag>
-        <tag>Windows</tag>
-        <tag>昱格虚拟化平台</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>YgeCloud安装教程</title>
-    <url>/YgeCloud%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.html</url>
-    <content><![CDATA[<h1 id="YgeCloud-2-0-6-安装教程"><a href="#YgeCloud-2-0-6-安装教程" class="headerlink" title="YgeCloud 2.0-6 安装教程"></a>YgeCloud 2.0-6 安装教程</h1><h2 id="进入安装程序"><a href="#进入安装程序" class="headerlink" title="进入安装程序"></a>进入安装程序</h2><p>直接回车进入安装程序</p>
-<p><img src="https://img.hackerbs.com//20240606152823.png" alt="20240606152823"></p>
-<span id="more"></span>
-
-<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>点击下一步，选择目标磁盘</p>
-<p><img src="https://img.hackerbs.com//20240606152855.png" alt="20240606152855"></p>
-<p>保持默认的国家地区即可</p>
-<p><img src="https://img.hackerbs.com//20240606152920.png" alt="20240606152920"></p>
-<p>设置密码，邮箱的话，除非有邮件服务器，否则没必要修改，默认即可</p>
-<p><img src="https://img.hackerbs.com//20240606152956.png" alt="20240606152956"></p>
-<p>选择目标网卡，然后编辑主机名（hostname），配置IP地址，掩码，网关，互联网公共DNS服务器推荐119.29.29.29</p>
-<p><img src="https://img.hackerbs.com//20240606153113.png" alt="20240606153113"></p>
-<p>继续点击下一步</p>
-<p><img src="https://img.hackerbs.com//20240606153223.png" alt="20240606153223"></p>
-<p>等待安装进行</p>
-<p><img src="https://img.hackerbs.com//20240606153245.png" alt="20240606153245"></p>
-<p>安装完毕</p>
-<p><img src="https://img.hackerbs.com//20240606153923.png" alt="20240606153923"></p>
-<h2 id="进入网页激活YgeCloud"><a href="#进入网页激活YgeCloud" class="headerlink" title="进入网页激活YgeCloud"></a>进入网页激活YgeCloud</h2><p>使用<code>https://ip:8006</code>格式访问YgeCloud网页，用户名root，密码是安装过程中设置的</p>
-<p><img src="https://img.hackerbs.com//20240606154113.png" alt="20240606154113"></p>
-<p>点击节点，进入授权，将服务器ID提供给销售后获取激活码，点击激活填入激活码即可</p>
-<p><img src="https://img.hackerbs.com//20240606172103.png" alt="20240606172103"></p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>YgeCloud</tag>
-        <tag>昱格</tag>
-        <tag>虚拟机</tag>
-        <tag>虚拟化</tag>
       </tags>
   </entry>
   <entry>
@@ -2444,6 +2087,24 @@
       </tags>
   </entry>
   <entry>
+    <title>关于磁盘残留lvm的解决办法</title>
+    <url>/%E5%85%B3%E4%BA%8E%E7%A3%81%E7%9B%98%E6%AE%8B%E7%95%99lvm%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html</url>
+    <content><![CDATA[<p>很多时候从其他机器拿过来的盘通常是没有经过格式化的，这样就会出现一些残留的lvm信息，导致无法正常使用。</p>
+<p>出现该残留lvm的原因是因为设备映射器device mapper正在管理该磁盘，所以wipefs -a -f和dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;&#x2F;dev&#x2F;disk命令无法清除该lvm</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">lsblk显示如下</span></span><br><span class="line">nvme0n1					disk</span><br><span class="line">└storage-data			lvm</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">ls</span> -l /dev/mapper查询device mapper管理的磁盘信息</span></span><br><span class="line">lrwxrwxrwx 1 root root 		7 Nov 28 18:04 storage-data -&gt;../dm-0</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">dmsetup remove删除</span></span><br><span class="line">dmsetup remove /dev/mapper/storage-data</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>lvm</tag>
+        <tag>磁盘</tag>
+        <tag>解决办法</tag>
+        <tag>dmsetup</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>国内docker hub无法使用的解决办法</title>
     <url>/%E5%9B%BD%E5%86%85docker-hub%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html</url>
     <content><![CDATA[<h1 id="首先你得有代理，比如v2ray，然后系统里有socks5，这个就不能放在网站上说明了，懂得都懂，需要技术支持的页面底部，联系我"><a href="#首先你得有代理，比如v2ray，然后系统里有socks5，这个就不能放在网站上说明了，懂得都懂，需要技术支持的页面底部，联系我" class="headerlink" title="首先你得有代理，比如v2ray，然后系统里有socks5，这个就不能放在网站上说明了，懂得都懂，需要技术支持的页面底部，联系我"></a>首先你得有代理，比如v2ray，然后系统里有socks5，这个就不能放在网站上说明了，懂得都懂，需要技术支持的页面底部，联系我</h1><p><strong>在QQ<code>粒子｜服主社区 ①群</code>的用户，直接群里@hackerbs即可</strong></p>
@@ -2556,13 +2217,13 @@
       </categories>
       <tags>
         <tag>Linux</tag>
-        <tag>NAS</tag>
-        <tag>存储</tag>
-        <tag>虚拟化</tag>
         <tag>IT技术</tag>
         <tag>知识库</tag>
         <tag>随手记</tag>
+        <tag>NAS</tag>
+        <tag>存储</tag>
         <tag>网络</tag>
+        <tag>虚拟化</tag>
         <tag>Shell</tag>
       </tags>
   </entry>
@@ -2620,12 +2281,10 @@
       </categories>
       <tags>
         <tag>NAS</tag>
-        <tag>RAID</tag>
         <tag>存储</tag>
-        <tag>YGENAS</tag>
-        <tag>昱格NAS</tag>
         <tag>DDNS</tag>
         <tag>zfs</tag>
+        <tag>RAID</tag>
         <tag>磁盘阵列</tag>
       </tags>
   </entry>
@@ -2646,103 +2305,6 @@
       </tags>
   </entry>
   <entry>
-    <title>硬盘容量为何达不到厂家标称的容量？硬盘容量造假缩水？</title>
-    <url>/%E7%A1%AC%E7%9B%98%E5%AE%B9%E9%87%8F%E4%B8%BA%E4%BD%95%E8%BE%BE%E4%B8%8D%E5%88%B0%E5%8E%82%E5%AE%B6%E6%A0%87%E7%A7%B0%E7%9A%84%E5%AE%B9%E9%87%8F%EF%BC%9F%E7%A1%AC%E7%9B%98%E5%AE%B9%E9%87%8F%E9%80%A0%E5%81%87%E7%BC%A9%E6%B0%B4%EF%BC%9F.html</url>
-    <content><![CDATA[<p>标注16TB的硬盘为何实际容量只有14.5T左右？硬盘容量造假？缩水？真相是。。。</p>
-<span id="more"></span>
-
-<p>因为硬盘厂家对于容量的计算是以1000为单位，而操作系统是以1024为单位，所以硬盘厂家的容量转换为操作系统识别到的容量是会低于硬盘标称的容量，根据容量单位乘除对应的单位次幂，以T为例：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">T = 1024G = 1024M = 1024K = 1024B</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">所以计算的公式应该是</span></span><br><span class="line">容量 * 1000^4 / 1024^4</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以16TB硬盘为例</span></span><br><span class="line">16*1000^4/1024^4≈14.55</span><br></pre></td></tr></table></figure>
-
-<p>对于使用磁盘阵列的用户，容量计算方式如下：</p>
-<table>
-<thead>
-<tr>
-<th>阵列类型</th>
-<th>盘数</th>
-<th>容量</th>
-<th>阵列特征</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>RAID0（条带）</td>
-<td>1块及以上</td>
-<td>N块</td>
-<td>拥有最快的速度和最高的容量，当然，也拥有着最低的安全性，一旦掉盘数据便会丢失</td>
-</tr>
-<tr>
-<td>RAID1（镜像）</td>
-<td>2块</td>
-<td>一半</td>
-<td>拥有1倍的写入速度2倍的读取速度，安全性最高，一块盘故障时还可使用镜像盘继续工作</td>
-</tr>
-<tr>
-<td>RAID5（单重校验）</td>
-<td>3块及以上</td>
-<td>N-1</td>
-<td>性价比最高的阵列方式，读写速度为N-1，也就是3块盘时有两块盘的速度之和，8块盘时有7块盘的速度之和，出现一块故障盘时仍然能正常工作，不丢失数据（建议单个RAID5不要超过8块盘，可将多组RAID5组RAID0也就是RAID50阵列）</td>
-</tr>
-<tr>
-<td>RAID6（双重校验）</td>
-<td>4块及以上</td>
-<td>N-2</td>
-<td>性价比略低于RAID5，读写速度为N-2，可故障两块盘</td>
-</tr>
-<tr>
-<td>RAIDZ3（三重校验，ZFS专属）</td>
-<td>5块盘及以上</td>
-<td>N-3</td>
-<td>略低于RAID6，N-3，可故障3块盘</td>
-</tr>
-</tbody></table>
-<p>在ZFS文件系统中，有以下几种阵列方式：</p>
-<table>
-<thead>
-<tr>
-<th>ZFS阵列</th>
-<th>RAID阵列</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Strip（条带）</td>
-<td>RAID0</td>
-</tr>
-<tr>
-<td>Mirror（镜像）</td>
-<td>RAID1</td>
-</tr>
-<tr>
-<td>RAIDZ1</td>
-<td>RAID5</td>
-</tr>
-<tr>
-<td>RAIDZ2</td>
-<td>RAID6</td>
-</tr>
-<tr>
-<td>RAIDZ3</td>
-<td>无</td>
-</tr>
-</tbody></table>
-<p><strong>2024年1月13日补充：考虑到zfs文件系统的特性，减少文件系统日志等占用容量0.5%，减少余量空间分配占用容量2.93%</strong></p>
-<p>若您使用的是昱格NAS，在创建存储池时我们会默认为您做容量限制，以防存储池容量被撑爆卡死系统，会将可用容量限制为实际容量的95%</p>
-<p>若您采购了昱格的YGENAS-VH5（桌面式5盘位NAS）且配备了5块16TB硬盘，做RAIDZ1阵列并开启默认限额，那您的实际可用容量计算公式如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">16*1000^4/1024^4*(5-1)*(1-0.05)=55.2972 TiB</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2024年1月13日更新后计算公式为</span></span><br><span class="line">16*1000^4/1024^4*(5-1)*(1-0.05-0.005-0.0293)=53.3 TiB</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">计算解析</span></span><br><span class="line">16 TB转换为TiB：*1000^4/1024^4</span><br><span class="line">计算RAIDZ1 N-1容量：*(5-1)</span><br><span class="line">计算zfs存储池占用容量：*(1-0.05-0.005-0.0293)</span><br></pre></td></tr></table></figure>
-
-<p>2024.1.13 昱格YGENAS-RH16s高性能全闪NAS配合希捷5U84磁盘扩展柜，建设了百T级U.2高性能SSD+PB级大容量HDD存储池，采用100G光纤链路发布共享，项目金额二百多万</p>
-<p>昱格——科技智能服务商</p>
-<p>为您提供专业虚拟化、云桌面、NAS存储等建设方案，从服务器、存储到网络全方位覆盖，一站式解决方案提供。</p>
-<p>欢迎致电400-028-0061（亦可通过文末WeChat扫描二维码添加微信联系我，请注明来自hackerbs）</p>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>硬盘</tag>
-        <tag>基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>记录qemu虚拟机网卡的一次坑</title>
     <url>/%E8%AE%B0%E5%BD%95Proxmox-VE%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E5%8D%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%9D%91.html</url>
     <content><![CDATA[<p>qemu的虚拟机网卡推荐设置如下</p>
@@ -2759,7 +2321,6 @@
       </categories>
       <tags>
         <tag>Proxmox-VE</tag>
-        <tag>YgeCloud</tag>
         <tag>虚拟机</tag>
         <tag>虚拟网卡</tag>
         <tag>qemu</tag>
@@ -2779,6 +2340,22 @@
         <tag>v2ray</tag>
         <tag>v2ray客户端</tag>
         <tag>config.json</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记录初学Python开发fio测试工具</title>
+    <url>/%E8%AE%B0%E5%BD%95%E5%88%9D%E5%AD%A6Python%E5%BC%80%E5%8F%91fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.html</url>
+    <content><![CDATA[<h1 id="使用Python自动测试IOPS性能并格式化输出"><a href="#使用Python自动测试IOPS性能并格式化输出" class="headerlink" title="使用Python自动测试IOPS性能并格式化输出"></a>使用Python自动测试IOPS性能并格式化输出</h1><blockquote>
+<p>代码过多,请点击<strong>阅读全文</strong>查看</p>
+</blockquote>
+<span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">TODO:</span></span><br><span class="line"><span class="string">    此脚本已测试兼容环境为Debian 11.6</span></span><br><span class="line"><span class="string">    此脚本的测试路径为&quot;/iopsTest&quot;,请提前将你要测试的设备挂载到&quot;/iopsTest&quot;</span></span><br><span class="line"><span class="string">    注意自行根据盘位修改下列numjobs参数</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> subprocess, re, os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机写</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randwrite</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机写进行中...&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=60s&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-time_base&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-numjobs=8&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-filename=/iopsTest/<span class="subst">&#123;i&#125;</span>&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-randrepeat=0&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次带宽运行结果:<span class="subst">&#123;bw_num&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次IOPS运行结果:<span class="subst">&#123;iops_num&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 跳过第一次运行结果</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 格式化fio结果</span></span><br><span class="line">            <span class="keyword">for</span> KorM <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">                <span class="comment"># 判断格式化的结果中是否存在MiB单位的值</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;MiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="comment"># 若有则转换为KiB</span></span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为MiB单位,将进行转换&quot;</span>)</span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>] * <span class="number">1024</span></span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">elif</span> <span class="string">&quot;KiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为KiB单位,不转换&quot;</span>)</span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    bwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    bwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    bwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;\n\n\n随机写均值如下:\n带宽最小值:<span class="subst">&#123;bwMin&#125;</span>,最大值<span class="subst">&#123;bwMax&#125;</span>,均值<span class="subst">&#123;bwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;iopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;iopsMax&#125;</span>,均值<span class="subst">&#123;iopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建读文件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_readFile</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;初始化读测试环境,至少需要十几分钟甚至几十分钟,等着...&quot;</span>)</span><br><span class="line">    clear = subprocess.Popen([<span class="string">&quot;rm&quot;</span>, <span class="string">&quot;-rf&quot;</span>, <span class="string">&quot;/iopsTest/*&quot;</span>], shell=<span class="literal">False</span>)</span><br><span class="line">    clear.wait()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;环境检测完成,创建读测试文件...&quot;</span>)</span><br><span class="line">    cmd = [</span><br><span class="line">        <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-name=create_read&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-size=32G&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-bs=1M&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-rw=write&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-numjobs=8&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-filename=/iopsTest/read&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line">    create = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">    done = create.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机读</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randread</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机读进行中...&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=60s&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-time_base&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-numjobs=8&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-filename=/iopsTest/read&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-randrepeat=0&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次带宽运行结果:<span class="subst">&#123;bw_num&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次IOPS运行结果:<span class="subst">&#123;iops_num&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 跳过第一次运行结果</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 格式化fio结果</span></span><br><span class="line">            <span class="keyword">for</span> KorM <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">                <span class="comment"># 判断格式化的结果中是否存在MiB单位的值</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;MiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="comment"># 若有则转换为KiB</span></span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为MiB单位,将进行转换&quot;</span>)</span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>] * <span class="number">1024</span></span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">elif</span> <span class="string">&quot;KiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为KiB单位,不转换&quot;</span>)</span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    bwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    bwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    bwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;\n\n\n随机读均值如下:\n带宽最小值:<span class="subst">&#123;bwMin&#125;</span>,最大值<span class="subst">&#123;bwMax&#125;</span>,均值<span class="subst">&#123;bwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;iopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;iopsMax&#125;</span>,均值<span class="subst">&#123;iopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机读写</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randrw</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机读写进行中...&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=60s&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-time_base&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rw=randrw&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-numjobs=8&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-filename=/iopsTest/read&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rwmixwrite=30&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-randrepeat=0&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次带宽运行结果:<span class="subst">&#123;bw_num&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次IOPS运行结果:<span class="subst">&#123;iops_num&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment"># 跳过第一次运行结果</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 格式化fio结果</span></span><br><span class="line">            <span class="keyword">for</span> KorM <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">                <span class="comment"># 判断格式化的结果中是否存在MiB单位的值</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;MiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为MiB单位,将进行转换&quot;</span>)</span><br><span class="line">                    <span class="comment"># 若有则转换为KiB</span></span><br><span class="line">                    <span class="comment"># 读带宽</span></span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>] * <span class="number">1024</span></span><br><span class="line">                    <span class="comment"># 写带宽</span></span><br><span class="line">                    bw[<span class="number">3</span>] += bw_num[<span class="number">6</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">4</span>] += bw_num[<span class="number">7</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">5</span>] += bw_num[<span class="number">9</span>] * <span class="number">1024</span></span><br><span class="line">                    <span class="comment"># 读IOPS</span></span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="comment"># 写IOPS</span></span><br><span class="line">                    iops[<span class="number">3</span>] += iops_num[<span class="number">5</span>]</span><br><span class="line">                    iops[<span class="number">4</span>] += iops_num[<span class="number">6</span>]</span><br><span class="line">                    iops[<span class="number">5</span>] += iops_num[<span class="number">7</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="comment"># 因fio结果存在读写两行，避免重复执行，所以直接跳过后续循环</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">elif</span> <span class="string">&quot;KiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为KiB单位,不转换&quot;</span>)</span><br><span class="line">                    <span class="comment"># 读带宽</span></span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">                    <span class="comment"># 写带宽</span></span><br><span class="line">                    bw[<span class="number">3</span>] += bw_num[<span class="number">6</span>]</span><br><span class="line">                    bw[<span class="number">4</span>] += bw_num[<span class="number">7</span>]</span><br><span class="line">                    bw[<span class="number">5</span>] += bw_num[<span class="number">9</span>]</span><br><span class="line">                    <span class="comment"># 读IOPS</span></span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="comment"># 写IOPS</span></span><br><span class="line">                    iops[<span class="number">3</span>] += iops_num[<span class="number">5</span>]</span><br><span class="line">                    iops[<span class="number">4</span>] += iops_num[<span class="number">6</span>]</span><br><span class="line">                    iops[<span class="number">5</span>] += iops_num[<span class="number">7</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="comment"># 因fio结果存在读写两行，避免重复执行，所以直接跳过后续循环</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    RbwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    RbwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    RbwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    WbwMin = <span class="built_in">int</span>(bw[<span class="number">3</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwMax = <span class="built_in">int</span>(bw[<span class="number">4</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwAvg = <span class="built_in">int</span>(bw[<span class="number">5</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    RiopsMin = <span class="built_in">int</span>(iops[<span class="number">3</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsMax = <span class="built_in">int</span>(iops[<span class="number">4</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsAvg = <span class="built_in">int</span>(iops[<span class="number">5</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    WiopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;\n\n\n随机读写均值如下:\n&quot;</span></span><br><span class="line">        <span class="string">f&quot;读:\n带宽最小值:<span class="subst">&#123;RbwMin&#125;</span>,最大值<span class="subst">&#123;RbwMax&#125;</span>,均值<span class="subst">&#123;RbwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;RiopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;RiopsMax&#125;</span>,均值<span class="subst">&#123;RiopsAvg&#125;</span>&quot;</span></span><br><span class="line">        <span class="string">&quot;\n&quot;</span></span><br><span class="line">        <span class="string">f&quot;写:\n带宽最小值:<span class="subst">&#123;WbwMin&#125;</span>,最大值<span class="subst">&#123;WbwMax&#125;</span>,均值<span class="subst">&#123;WbwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;WiopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;WiopsMax&#125;</span>,均值<span class="subst">&#123;WiopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rm_file</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请等待程序清除测试残留文件...&quot;</span>)</span><br><span class="line">    rm = os.system(<span class="string">&quot;rm -rf /smbTest/*&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;清除完毕,程序结束!&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;欢迎使用群晖测试工具\n本工具测试内容:\n路径挂载模式下IOPS性能测试&quot;</span>)</span><br><span class="line">    rm_file()</span><br><span class="line">    randwrite()</span><br><span class="line">    rm_file()</span><br><span class="line">    create_readFile()</span><br><span class="line">    randread()</span><br><span class="line">    randrw()</span><br><span class="line">    rm_file()</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>软件开发</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -2806,22 +2383,6 @@
         <tag>Docker</tag>
         <tag>armv8</tag>
         <tag>vsftpd</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>记录初学Python开发fio测试工具</title>
-    <url>/%E8%AE%B0%E5%BD%95%E5%88%9D%E5%AD%A6Python%E5%BC%80%E5%8F%91fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.html</url>
-    <content><![CDATA[<h1 id="使用Python自动测试IOPS性能并格式化输出"><a href="#使用Python自动测试IOPS性能并格式化输出" class="headerlink" title="使用Python自动测试IOPS性能并格式化输出"></a>使用Python自动测试IOPS性能并格式化输出</h1><blockquote>
-<p>代码过多,请点击<strong>阅读全文</strong>查看</p>
-</blockquote>
-<span id="more"></span>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">TODO:</span></span><br><span class="line"><span class="string">    此脚本已测试兼容环境为Debian 11.6</span></span><br><span class="line"><span class="string">    此脚本的测试路径为&quot;/iopsTest&quot;,请提前将你要测试的设备挂载到&quot;/iopsTest&quot;</span></span><br><span class="line"><span class="string">    注意自行根据盘位修改下列numjobs参数</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> subprocess, re, os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机写</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randwrite</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机写进行中...&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=60s&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-time_base&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-numjobs=8&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">f&quot;-filename=/iopsTest/<span class="subst">&#123;i&#125;</span>&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-randrepeat=0&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次带宽运行结果:<span class="subst">&#123;bw_num&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次IOPS运行结果:<span class="subst">&#123;iops_num&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 跳过第一次运行结果</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 格式化fio结果</span></span><br><span class="line">            <span class="keyword">for</span> KorM <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">                <span class="comment"># 判断格式化的结果中是否存在MiB单位的值</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;MiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="comment"># 若有则转换为KiB</span></span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为MiB单位,将进行转换&quot;</span>)</span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>] * <span class="number">1024</span></span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">elif</span> <span class="string">&quot;KiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为KiB单位,不转换&quot;</span>)</span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    bwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    bwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    bwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;\n\n\n随机写均值如下:\n带宽最小值:<span class="subst">&#123;bwMin&#125;</span>,最大值<span class="subst">&#123;bwMax&#125;</span>,均值<span class="subst">&#123;bwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;iopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;iopsMax&#125;</span>,均值<span class="subst">&#123;iopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建读文件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_readFile</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;初始化读测试环境,至少需要十几分钟甚至几十分钟,等着...&quot;</span>)</span><br><span class="line">    clear = subprocess.Popen([<span class="string">&quot;rm&quot;</span>, <span class="string">&quot;-rf&quot;</span>, <span class="string">&quot;/iopsTest/*&quot;</span>], shell=<span class="literal">False</span>)</span><br><span class="line">    clear.wait()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;环境检测完成,创建读测试文件...&quot;</span>)</span><br><span class="line">    cmd = [</span><br><span class="line">        <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-name=create_read&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-size=32G&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-bs=1M&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-rw=write&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-numjobs=8&quot;</span>,</span><br><span class="line">        <span class="string">&quot;-filename=/iopsTest/read&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line">    create = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">    done = create.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机读</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randread</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机读进行中...&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=60s&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-time_base&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rw=randwrite&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-numjobs=8&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-filename=/iopsTest/read&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-randrepeat=0&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次带宽运行结果:<span class="subst">&#123;bw_num&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次IOPS运行结果:<span class="subst">&#123;iops_num&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 跳过第一次运行结果</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 格式化fio结果</span></span><br><span class="line">            <span class="keyword">for</span> KorM <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">                <span class="comment"># 判断格式化的结果中是否存在MiB单位的值</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;MiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="comment"># 若有则转换为KiB</span></span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为MiB单位,将进行转换&quot;</span>)</span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>] * <span class="number">1024</span></span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">elif</span> <span class="string">&quot;KiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为KiB单位,不转换&quot;</span>)</span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    bwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    bwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    bwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    iopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;\n\n\n随机读均值如下:\n带宽最小值:<span class="subst">&#123;bwMin&#125;</span>,最大值<span class="subst">&#123;bwMax&#125;</span>,均值<span class="subst">&#123;bwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;iopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;iopsMax&#125;</span>,均值<span class="subst">&#123;iopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机读写</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randrw</span>():</span><br><span class="line">    <span class="comment"># 初始化用于存储运行结果的列表</span></span><br><span class="line">    bw = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    iops = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="comment"># fio重复运行4次</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;随机读写进行中...&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        cmd = [</span><br><span class="line">            <span class="string">&quot;fio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-name=YEOS&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-size=32G&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-runtime=60s&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-time_base&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-bs=4k&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-direct=1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rw=randrw&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-ioengine=libaio&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-numjobs=8&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-group_reporting&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-iodepth=64&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-filename=/iopsTest/read&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-rwmixwrite=30&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-randrepeat=0&quot;</span>,</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将fio运行结果标准输出到管道</span></span><br><span class="line">        fio1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">        fio2 = subprocess.Popen(</span><br><span class="line">            [<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;samples&quot;</span>], stdin=fio1.stdout, stdout=subprocess.PIPE, shell=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用communicate获取子进程的标准输出并格式化为utf-8编码</span></span><br><span class="line">        fio = fio2.communicate()[<span class="number">0</span>].decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化列表</span></span><br><span class="line">        bw_num = []</span><br><span class="line">        iops_num = []</span><br><span class="line">        <span class="comment"># 匹配数字和小数点，并将其元素更新</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;bw&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                bw_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&quot;iops&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                iops_num.extend(re.findall(<span class="string">r&quot;\d+\.\d+|\d+&quot;</span>, line))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将str类型转换为float后再转换为int</span></span><br><span class="line">        bw_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> bw_num]</span><br><span class="line">        iops_num = [<span class="built_in">int</span>(<span class="built_in">float</span>(e)) <span class="keyword">for</span> e <span class="keyword">in</span> iops_num]</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次带宽运行结果:<span class="subst">&#123;bw_num&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;单次IOPS运行结果:<span class="subst">&#123;iops_num&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment"># 跳过第一次运行结果</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 格式化fio结果</span></span><br><span class="line">            <span class="keyword">for</span> KorM <span class="keyword">in</span> fio.split(<span class="string">&quot;\n&quot;</span>):</span><br><span class="line">                <span class="comment"># 判断格式化的结果中是否存在MiB单位的值</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;MiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为MiB单位,将进行转换&quot;</span>)</span><br><span class="line">                    <span class="comment"># 若有则转换为KiB</span></span><br><span class="line">                    <span class="comment"># 读带宽</span></span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>] * <span class="number">1024</span></span><br><span class="line">                    <span class="comment"># 写带宽</span></span><br><span class="line">                    bw[<span class="number">3</span>] += bw_num[<span class="number">6</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">4</span>] += bw_num[<span class="number">7</span>] * <span class="number">1024</span></span><br><span class="line">                    bw[<span class="number">5</span>] += bw_num[<span class="number">9</span>] * <span class="number">1024</span></span><br><span class="line">                    <span class="comment"># 读IOPS</span></span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="comment"># 写IOPS</span></span><br><span class="line">                    iops[<span class="number">3</span>] += iops_num[<span class="number">5</span>]</span><br><span class="line">                    iops[<span class="number">4</span>] += iops_num[<span class="number">6</span>]</span><br><span class="line">                    iops[<span class="number">5</span>] += iops_num[<span class="number">7</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="comment"># 因fio结果存在读写两行，避免重复执行，所以直接跳过后续循环</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">elif</span> <span class="string">&quot;KiB&quot;</span> <span class="keyword">in</span> KorM:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;输出结果为KiB单位,不转换&quot;</span>)</span><br><span class="line">                    <span class="comment"># 读带宽</span></span><br><span class="line">                    bw[<span class="number">0</span>] += bw_num[<span class="number">0</span>]</span><br><span class="line">                    bw[<span class="number">1</span>] += bw_num[<span class="number">1</span>]</span><br><span class="line">                    bw[<span class="number">2</span>] += bw_num[<span class="number">3</span>]</span><br><span class="line">                    <span class="comment"># 写带宽</span></span><br><span class="line">                    bw[<span class="number">3</span>] += bw_num[<span class="number">6</span>]</span><br><span class="line">                    bw[<span class="number">4</span>] += bw_num[<span class="number">7</span>]</span><br><span class="line">                    bw[<span class="number">5</span>] += bw_num[<span class="number">9</span>]</span><br><span class="line">                    <span class="comment"># 读IOPS</span></span><br><span class="line">                    iops[<span class="number">0</span>] += iops_num[<span class="number">0</span>]</span><br><span class="line">                    iops[<span class="number">1</span>] += iops_num[<span class="number">1</span>]</span><br><span class="line">                    iops[<span class="number">2</span>] += iops_num[<span class="number">2</span>]</span><br><span class="line">                    <span class="comment"># 写IOPS</span></span><br><span class="line">                    iops[<span class="number">3</span>] += iops_num[<span class="number">5</span>]</span><br><span class="line">                    iops[<span class="number">4</span>] += iops_num[<span class="number">6</span>]</span><br><span class="line">                    iops[<span class="number">5</span>] += iops_num[<span class="number">7</span>]</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;带宽第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;bw&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;IOPS第<span class="subst">&#123;i&#125;</span>次值:<span class="subst">&#123;iops&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="comment"># 因fio结果存在读写两行，避免重复执行，所以直接跳过后续循环</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    RbwMin = <span class="built_in">int</span>(bw[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    RbwMax = <span class="built_in">int</span>(bw[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    RbwAvg = <span class="built_in">int</span>(bw[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    WbwMin = <span class="built_in">int</span>(bw[<span class="number">3</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwMax = <span class="built_in">int</span>(bw[<span class="number">4</span>] / <span class="number">3</span>)</span><br><span class="line">    WbwAvg = <span class="built_in">int</span>(bw[<span class="number">5</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    RiopsMin = <span class="built_in">int</span>(iops[<span class="number">3</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsMax = <span class="built_in">int</span>(iops[<span class="number">4</span>] / <span class="number">3</span>)</span><br><span class="line">    RiopsAvg = <span class="built_in">int</span>(iops[<span class="number">5</span>] / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    WiopsMin = <span class="built_in">int</span>(iops[<span class="number">0</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsMax = <span class="built_in">int</span>(iops[<span class="number">1</span>] / <span class="number">3</span>)</span><br><span class="line">    WiopsAvg = <span class="built_in">int</span>(iops[<span class="number">2</span>] / <span class="number">3</span>)</span><br><span class="line">    <span class="built_in">print</span>(</span><br><span class="line">        <span class="string">f&quot;\n\n\n随机读写均值如下:\n&quot;</span></span><br><span class="line">        <span class="string">f&quot;读:\n带宽最小值:<span class="subst">&#123;RbwMin&#125;</span>,最大值<span class="subst">&#123;RbwMax&#125;</span>,均值<span class="subst">&#123;RbwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;RiopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;RiopsMax&#125;</span>,均值<span class="subst">&#123;RiopsAvg&#125;</span>&quot;</span></span><br><span class="line">        <span class="string">&quot;\n&quot;</span></span><br><span class="line">        <span class="string">f&quot;写:\n带宽最小值:<span class="subst">&#123;WbwMin&#125;</span>,最大值<span class="subst">&#123;WbwMax&#125;</span>,均值<span class="subst">&#123;WbwAvg&#125;</span>\nIOPS最小值:<span class="subst">&#123;WiopsMin&#125;</span>,&quot;</span></span><br><span class="line">        <span class="string">f&quot;最大值<span class="subst">&#123;WiopsMax&#125;</span>,均值<span class="subst">&#123;WiopsAvg&#125;</span>&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rm_file</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请等待程序清除测试残留文件...&quot;</span>)</span><br><span class="line">    rm = os.system(<span class="string">&quot;rm -rf /smbTest/*&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;清除完毕,程序结束!&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;欢迎使用群晖测试工具\n本工具测试内容:\n路径挂载模式下IOPS性能测试&quot;</span>)</span><br><span class="line">    rm_file()</span><br><span class="line">    randwrite()</span><br><span class="line">    rm_file()</span><br><span class="line">    create_readFile()</span><br><span class="line">    randread()</span><br><span class="line">    randrw()</span><br><span class="line">    rm_file()</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>软件开发</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -2905,24 +2466,6 @@
       </categories>
       <tags>
         <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于磁盘残留lvm的解决办法</title>
-    <url>/%E5%85%B3%E4%BA%8E%E7%A3%81%E7%9B%98%E6%AE%8B%E7%95%99lvm%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html</url>
-    <content><![CDATA[<p>很多时候从其他机器拿过来的盘通常是没有经过格式化的，这样就会出现一些残留的lvm信息，导致无法正常使用。</p>
-<p>出现该残留lvm的原因是因为设备映射器device mapper正在管理该磁盘，所以wipefs -a -f和dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;&#x2F;dev&#x2F;disk命令无法清除该lvm</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">lsblk显示如下</span></span><br><span class="line">nvme0n1					disk</span><br><span class="line">└storage-data			lvm</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">ls</span> -l /dev/mapper查询device mapper管理的磁盘信息</span></span><br><span class="line">lrwxrwxrwx 1 root root 		7 Nov 28 18:04 storage-data -&gt;../dm-0</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">dmsetup remove删除</span></span><br><span class="line">dmsetup remove /dev/mapper/storage-data</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>知识库</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>lvm</tag>
-        <tag>磁盘</tag>
-        <tag>解决办法</tag>
-        <tag>dmsetup</tag>
       </tags>
   </entry>
 </search>
