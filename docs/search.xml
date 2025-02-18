@@ -2238,8 +2238,77 @@
 <span id="more"></span>
 
 <h2 id="单向异地组网"><a href="#单向异地组网" class="headerlink" title="单向异地组网"></a>单向异地组网</h2><blockquote>
-<p>2025.2.18补充：组网成功后大概十几分钟，被运营商墙了，太狗了，因为wireguard走的是UDP协议，被运营商检测到了。目前有两个思路，找运营商加个公网IP或者想其他办法组网</p>
+<p>2025.2.18补充：组网成功后大概十几分钟，被运营商墙了，太狗了，因为wireguard走的是UDP协议，被运营商检测到了。目前有两个思路，找运营商加个公网IP或者想其他办法组网<br>2025.2.18 10:55记录思路：使用udp2raw将UDP流量封装到TCP流量中，并伪装成HTTPS<br>2025.2.18 10:57补充，尝试udp2raw能打通后先用着，如果再次被封则换为xtls-rprx-vision透明代理UDP流量，实现最强HTTPS伪装</p>
 </blockquote>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th><code>udp2raw</code></th>
+<th><code>xtls-rprx-vision</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>工作原理</strong></td>
+<td>把 UDP 伪装成 TCP 或 ICMP，进行 NAT 穿透</td>
+<td>通过 Xray Vision 协议将流量伪装成 HTTPS&#x2F;TLS</td>
+</tr>
+<tr>
+<td><strong>支持协议</strong></td>
+<td>任何 UDP 流量（WireGuard、IPSec、OpenVPN等）</td>
+<td>任何 TCP&#x2F;UDP 流量（支持 UDP over TCP）</td>
+</tr>
+<tr>
+<td><strong>流量伪装</strong></td>
+<td>可伪装为 TCP（HTTPS、SSH）或 ICMP</td>
+<td>伪装成合法 HTTPS 流量</td>
+</tr>
+<tr>
+<td><strong>加密方式</strong></td>
+<td>XOR、AES（轻量级加密，防止 DPI 识别）</td>
+<td>XTLS（高级 TLS 伪装，难以被识别）</td>
+</tr>
+<tr>
+<td><strong>端口</strong></td>
+<td>可伪装成 443（HTTPS）等，但仍是伪 TCP</td>
+<td>直接监听 443 端口，真实 HTTPS 伪装</td>
+</tr>
+<tr>
+<td><strong>数据包特征</strong></td>
+<td>模拟 TCP，但仍然是 UDP 数据包封装</td>
+<td>真实 HTTPS 流量，运营商难以检测</td>
+</tr>
+<tr>
+<td><strong>防 DPI</strong></td>
+<td>基本防御，部分 DPI 仍能检测出伪 TCP</td>
+<td>最高级别防御，难以被识别</td>
+</tr>
+<tr>
+<td><strong>延迟</strong></td>
+<td>低，基本无影响</td>
+<td>略高，取决于 TLS 处理开销</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>适用于 UDP 被封但 TCP 可用的环境</td>
+<td>适用于 DPI 严格的环境，如中国大陆或企业网络</td>
+</tr>
+<tr>
+<td><strong>是否需要证书</strong></td>
+<td>不需要</td>
+<td>需要 TLS 证书（Let’s Encrypt 等）</td>
+</tr>
+<tr>
+<td><strong>稳定性</strong></td>
+<td>高，几乎无性能损耗</td>
+<td>高，但 TLS 可能增加 CPU 负担</td>
+</tr>
+<tr>
+<td><strong>适合长期使用</strong></td>
+<td>可以，但可能被进一步分析</td>
+<td>更适合长期使用，难以封锁</td>
+</tr>
+</tbody></table>
 <h3 id="服务器部分"><a href="#服务器部分" class="headerlink" title="服务器部分"></a>服务器部分</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装wireguard</span></span><br><span class="line">apt install wireguard -y</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成私钥公钥到/etc/wireguard/目录下</span></span><br><span class="line">wg genkey | tee /etc/wireguard/server_private.key | wg pubkey | tee /etc/wireguard/server_public.key</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看私钥公钥，稍后需要写入到配置文件中</span></span><br><span class="line">cat /etc/wireguard/server_private.key</span><br><span class="line">cat /etc/wireguard/server_public.key</span><br></pre></td></tr></table></figure>
 
 <p>在<code>/etc/wireguard/</code>下创建一个配置文件，例如<code>wg0.conf</code>，按如下所述写入配置：</p>
