@@ -83,11 +83,6 @@ MTU=1420
 # iptables -A FORWARD -i wg0 -j ACCEPT
 # 将eth0上的流量进行源地址伪装，让对方以为来自局域网的流量是从公网IP发出的
 # iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-# 将 51820 端口的 UDP 流量转发到内网服务器 192.168.1.200 的 51820 端口
-# [其中内网服务器192.168.1.200的IP根据自己的情况替换，内网和云服务器的端口也都是可以替换的]
-# iptables -t nat -A PREROUTING -p udp --dport 51820 -j DNAT --to-destination 192.168.1.200:51820
-# 允许转发到 192.168.1.200:51820 的 UDP 流量
-# iptables -A FORWARD -p udp -d 192.168.1.200 --dport 51820 -j ACCEPT
 
 # 端口启动时执行，其中-A是添加
 PostUp   = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
