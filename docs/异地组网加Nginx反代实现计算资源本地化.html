@@ -30,7 +30,7 @@
     <meta name="description" content="本次部署的目的是利用本地高性能的计算资源和云服务器畅通无阻的公网，实现无公网环境也可正常部署业务。  本文所用到的技术如下   名称 作用 软件    单向异地组网 将云服务器和本地服务器组成局域网，因本地服务器没有公网，所以由云服务器建立UDP连接实现组网 WireGuard   反代 将对云服务器发起的访问根据配置的业务转发到本地服务器进行处理 Nginx   网络转发 配合wireguar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="异地组网+Nginx反代 | 计算资源本地化">
-<meta property="og:url" content="https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91+Nginx%E5%8F%8D%E4%BB%A3%EF%BC%8C%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html">
+<meta property="og:url" content="https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8A%A0Nginx%E5%8F%8D%E4%BB%A3%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html">
 <meta property="og:site_name" content="hackerbs&#39;s Blog - 探索知识的宇宙">
 <meta property="og:description" content="本次部署的目的是利用本地高性能的计算资源和云服务器畅通无阻的公网，实现无公网环境也可正常部署业务。  本文所用到的技术如下   名称 作用 软件    单向异地组网 将云服务器和本地服务器组成局域网，因本地服务器没有公网，所以由云服务器建立UDP连接实现组网 WireGuard   反代 将对云服务器发起的访问根据配置的业务转发到本地服务器进行处理 Nginx   网络转发 配合wireguar">
 <meta property="og:locale" content="zh_CN">
@@ -47,11 +47,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91+Nginx%E5%8F%8D%E4%BB%A3%EF%BC%8C%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html">
+<link rel="canonical" href="https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8A%A0Nginx%E5%8F%8D%E4%BB%A3%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91+Nginx%E5%8F%8D%E4%BB%A3%EF%BC%8C%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html","path":"异地组网+Nginx反代，计算资源本地化.html","title":"异地组网+Nginx反代 | 计算资源本地化"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8A%A0Nginx%E5%8F%8D%E4%BB%A3%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html","path":"异地组网加Nginx反代实现计算资源本地化.html","title":"异地组网+Nginx反代 | 计算资源本地化"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>异地组网+Nginx反代 | 计算资源本地化 | hackerbs's Blog - 探索知识的宇宙</title>
@@ -253,7 +253,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91+Nginx%E5%8F%8D%E4%BB%A3%EF%BC%8C%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html">
+    <link itemprop="mainEntityOfPage" href="https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8A%A0Nginx%E5%8F%8D%E4%BB%A3%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -271,7 +271,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          异地组网+Nginx反代 | 计算资源本地化<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91+Nginx%E5%8F%8D%E4%BB%A3%EF%BC%8C%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          异地组网+Nginx反代 | 计算资源本地化<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8A%A0Nginx%E5%8F%8D%E4%BB%A3%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -317,8 +317,8 @@
     </span>
     <span class="post-meta-item-text">Waline：</span>
   
-    <a title="waline" href="/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91+Nginx%E5%8F%8D%E4%BB%A3%EF%BC%8C%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91+Nginx%E5%8F%8D%E4%BB%A3%EF%BC%8C%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html" itemprop="commentCount"></span>
+    <a title="waline" href="/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8A%A0Nginx%E5%8F%8D%E4%BB%A3%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8A%A0Nginx%E5%8F%8D%E4%BB%A3%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -504,7 +504,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91+Nginx%E5%8F%8D%E4%BB%A3%EF%BC%8C%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html" title="异地组网+Nginx反代 | 计算资源本地化">https://hackerbs.com/异地组网+Nginx反代，计算资源本地化.html</a>
+      <a href="https://hackerbs.com/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8A%A0Nginx%E5%8F%8D%E4%BB%A3%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html" title="异地组网+Nginx反代 | 计算资源本地化">https://hackerbs.com/异地组网加Nginx反代实现计算资源本地化.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -672,7 +672,7 @@
 
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.hackerbs.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"欢迎评论！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","admin":false,"theme":"waline-theme-onepiece","emojiCDN":"","emojiMaps":{},"emojiExt":".png","emojiSize":32,"CDN":"","dark":true,"el":"#waline","comment":true,"path":"/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91+Nginx%E5%8F%8D%E4%BB%A3%EF%BC%8C%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.hackerbs.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"欢迎评论！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","admin":false,"theme":"waline-theme-onepiece","emojiCDN":"","emojiMaps":{},"emojiExt":".png","emojiSize":32,"CDN":"","dark":true,"el":"#waline","comment":true,"path":"/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%8A%A0Nginx%E5%8F%8D%E4%BB%A3%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E5%8C%96.html"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {
