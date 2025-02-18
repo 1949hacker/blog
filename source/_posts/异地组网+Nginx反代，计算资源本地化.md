@@ -35,6 +35,8 @@ tags:
 
 ## 单向异地组网
 
+> 2025.2.18补充：组网成功后大概十几分钟，被运营商墙了，太狗了，因为wireguard走的是UDP协议，被运营商检测到了。目前有两个思路，找运营商加个公网IP或者想其他办法组网
+
 ### 服务器部分
 
 ```shell
@@ -129,3 +131,5 @@ sudo systemctl start wg-quick@wg0
 echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
 sysctl -p
 ```
+
+## 反向代理
