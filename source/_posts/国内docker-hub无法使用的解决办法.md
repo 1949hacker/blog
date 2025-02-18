@@ -1,6 +1,5 @@
 ---
 title: 国内docker hub无法使用的解决办法
-sticky: 99
 comments: true
 categories: [知识库]
 date: 2024-06-12 18:16:26
