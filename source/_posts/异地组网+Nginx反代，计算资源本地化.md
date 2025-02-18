@@ -53,8 +53,10 @@ cat /etc/wireguard/server_public.key
 ```conf
 [Interface]
 Address = 10.0.0.1/24 # 服务器的局域网IP，/24是前缀，对应255.255.255.0
-ListenPort = 51820 # 端口协议是UDP
+ListenPort = 26666 # 端口协议是UDP，端口可以自定义
 PrivateKey = 云服务器私钥 # 刚刚生成的服务器私钥
+DNS=8.8.8.8
+MTU=1420
 
 # 这部分是配置的iptables的转发，其中eth0替换为云服务器公网的网卡名称
 # 原理：
@@ -69,19 +71,15 @@ PrivateKey = 云服务器私钥 # 刚刚生成的服务器私钥
 # iptables -A FORWARD -p udp -d 192.168.1.200 --dport 51820 -j ACCEPT
 
 # 端口启动时执行，其中-A是添加
-PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -t nat -A PREROUTING -p udp --dport 51820 -j DNAT --to-destination 192.168.1.200:51820; iptables -A FORWARD -p udp -d 192.168.1.200 --dport 51820 -j ACCEPT
+PostUp   = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 # 端口关闭时执行，其中-D是删除
-PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -t nat -D PREROUTING -p udp --dport 51820 -j DNAT --to-destination 192.168.1.200:51820; iptables -D FORWARD -p udp -d 192.168.1.200 --dport 51820 -j ACCEPT
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
 
 [Peer]
 PublicKey = 内网服务器公钥 # 稍后在内网服务器生成的公钥
 # 允许内网服务器连接，IP是10.0.0.2，前缀32对应255.255.255.255
 # 作用是仅允许这一个IP连接。可以根据需要自行组合IP段和前缀
 AllowedIPs = 10.0.0.2/32
-# 指定客户端的IP和端口
-Endpoint = 192.168.1.200:51820
-# 每25秒发送一个数据，确保连接持续
-PersistentKeepalive = 25
 ```
 
 ```shell
@@ -108,12 +106,11 @@ cat /etc/wireguard/client_public.key
 [Interface]
 Address = 10.0.0.2/24 # 10.0.0.2则是内网服务器在组网内的IP地址
 PrivateKey = 内网服务器私钥
-ListenPort = 51820
 
 [Peer]
 PublicKey = 云服务器公钥
 AllowedIPs = 10.0.0.1/32 # 前缀32限制只允许云服务器IP连入
-Endpoint = 6.6.6.6:51820 # 指向云服务器IP和端口
+Endpoint = 云服务器IP:26666 # 指向云服务器IP和端口
 PersistentKeepalive = 25
 ```
 
