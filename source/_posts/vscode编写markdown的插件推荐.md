@@ -27,7 +27,6 @@ tags:
 该插件可以对 Markdown 源码进行实时渲染预览，通过配置插件的
 
 > Markdown-preview-enhanced: Automatically Show Preview Of Markdown Being Edited
-> 
 > - [x] Automatically show preview of markdown being edited.
 
 可以实现点击 md 文件编辑的同时自动打开实时渲染界面
