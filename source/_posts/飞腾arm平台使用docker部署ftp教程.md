@@ -5,7 +5,7 @@ comments: true
 date: 2023-09-12 20:50:38
 keywords: vsftpd
 tags:
-    -   Docker
+    - Docker
 ---
 
 **因飞腾平台为armv8，暂未发现简单易用的vsftpd Docker镜像，特此提供打包完毕的Docker镜像及教程以供各位使用**
