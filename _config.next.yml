@@ -203,7 +203,9 @@ language_switcher: false
 footer:
   # Specify the year when the site was setup. If not defined, current year will be used.
   #since: 2021
-
+  custom_text: |
+      🌍 Reliable China–Global Logistics Solutions ✈️🚢📦
+      Contact us for postal, air, sea freight & procurement services.
   # Icon between year and copyright info.
   icon:
     # Icon name in Font Awesome. See: https://fontawesome.com/icons
@@ -467,6 +469,12 @@ font:
 # SEO Settings
 # See: https://theme-next.js.org/docs/theme-settings/seo
 # ---------------------------------------------------------------
+seo:
+  enable: true
+  # 设置全局关键词
+keywords: China logistics, parcel forwarding, international shipping, Halbyte
+description: Halbyte provides global logistics solutions from China, including postal, air, sea freight, and parcel consolidation services.
+
 
 # If true, site-subtitle will be added to the title of index page.
 # Remember to set up your site-subtitle in Hexo `_config.yml` (e.g. subtitle: Subtitle)
