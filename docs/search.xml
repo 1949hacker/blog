@@ -2579,4 +2579,32 @@
         <tag>Docker</tag>
       </tags>
   </entry>
+  <entry>
+    <title>DELL报错The PERC1 battery is low</title>
+    <url>/DELL%E6%8A%A5%E9%94%99The-PERC1-battery-is-low.html</url>
+    <content><![CDATA[<h2 id="关于DELL-iDRAC日志中PERC报错问题的记录及解答"><a href="#关于DELL-iDRAC日志中PERC报错问题的记录及解答" class="headerlink" title="关于DELL iDRAC日志中PERC报错问题的记录及解答"></a>关于DELL iDRAC日志中PERC报错问题的记录及解答</h2><p>报错信息如下</p>
+<blockquote>
+<p>Sun Jul 06 2025 07:24:49	The PERC1 battery is operating normally.	<br>Sun Jul 06 2025 06:50:13	The PERC1 battery is low.	<br>Mon Apr 07 2025 04:22:23	The PERC1 battery is operating normally.	<br>Mon Apr 07 2025 04:20:18	The PERC1 battery is low.</p>
+</blockquote>
+<p>报错内容为PERC电量低，随后又恢复正常，错误复现周期为3个月</p>
+<span id="more"></span>
+
+<p>查询发现DELL官方文档有记录<a href="https://www.dell.com/support/kbdoc/zh-cn/000351229/poweredge-%E4%BA%86%E8%A7%A3-perc-%E7%94%B5%E6%B1%A0%E9%94%99%E8%AF%AF#bat15">《了解 PERC 电池错误》</a>，其中《充电问题示例》中的报错疑似与该报错一致，但报错循环周期不同。</p>
+<p>查询后了解到PERC是DELL阵列卡的电池，也就是俗称的RAID卡的BBU（Battery Backup Unit），而其中每三个月复现一次的该报错为DELL PERC的正常循环充放电操作，属于正常现象</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>PERC每3个月重复报错<code>The PERC1 battery is low.	</code>随后恢复<code>The PERC1 battery is operating normally.	</code></p>
+<p>该报错为RAID卡BBU，电池的充放电报错，每3个月为周期的循环报错是DELL的自检行为，属于正常现象。</p>
+<p><strong>2025-9-4已致电DELL800-858-0613核实，该信息可信</strong></p>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>IT知识</tag>
+        <tag>百科</tag>
+        <tag>DELL</tag>
+        <tag>PERC</tag>
+        <tag>BBU</tag>
+        <tag>阵列卡</tag>
+      </tags>
+  </entry>
 </search>
