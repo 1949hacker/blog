@@ -283,7 +283,7 @@ reward:
 # Usage: `Key: permalink || icon` (Font Awesome)
 follow_me:
   #Twitter: https://twitter.com/username || fab fa-twitter
-  Telegram: https://t.me/hacker1949 || fab fa-telegram
+  # Telegram: https://t.me/hacker1949 || fab fa-telegram
   e-mail: mailto:0@hackerbs.com || fab fa-envelope
   WeChat: /images/wechat_channel.jpg || fab fa-weixin
   #RSS: /atom.xml || fa fa-rss
