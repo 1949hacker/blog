@@ -7,18 +7,18 @@ categories: [知识库]
 date: 2025-09-04 16:16:54
 keywords:
   - DELL
-	- ECC
+  - ECC
   - IT知识
   - 百科
-	- 内存
-	- iDRAC
+  - 内存
+  - iDRAC
 tags:
   - DELL
-	- ECC
+  - ECC
   - IT知识
   - 百科
-	- 内存
-	- iDRAC
+  - 内存
+  - iDRAC
 ---
 
 ## 关于DELL PowerEdge R740XD iDRAC报内存设备的可纠正内存错误日志记录已禁用问题的说明及解答

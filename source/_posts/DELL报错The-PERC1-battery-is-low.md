@@ -5,18 +5,18 @@ categories: [知识库]
 date: 2025-09-04 14:56:26
 keywords:
   - DELL
-	- PERC
+  - PERC
   - IT知识
   - 百科
-	- BBU
-	- 阵列卡
+  - BBU
+  - 阵列卡
 tags:
   - DELL
-	- PERC
+  - PERC
   - IT知识
   - 百科
-	- BBU
-	- 阵列卡
+  - BBU
+  - 阵列卡
 ---
 
 ## 关于DELL iDRAC日志中PERC报错问题的记录及解答
