@@ -80,12 +80,12 @@ symbol:
   period: "。"
   colon: "："
 reward:
-  donate: 赞赏
+  donate: 捐助
   wechatpay: 微信
   alipay: 支付宝
   paypal: PayPal
-  binance: 币安BNB Smart Chain(BEP20)主网0x9dd19b635b29c2185df3eba27e574b244313b58c
-  comment: 请我喝冰阔落~
+  binance: USDT 币安BNB Smart Chain(BEP20)
+  comment: 您的捐助可以帮助我们更好的更新技术文章
 follow_me:
   welcome: 欢迎关注我的其它发布渠道
 accessibility:
