@@ -2770,7 +2770,9 @@
 <td>CPU、内存、IO全面压力测试</td>
 </tr>
 </tbody></table>
-<h2 id="内存基准和稳定性测试"><a href="#内存基准和稳定性测试" class="headerlink" title="内存基准和稳定性测试"></a>内存基准和稳定性测试</h2><table>
+<h2 id="内存基准和稳定性测试"><a href="#内存基准和稳定性测试" class="headerlink" title="内存基准和稳定性测试"></a>内存基准和稳定性测试</h2><span id="more"></span>
+
+<table>
 <thead>
 <tr>
 <th>测试项</th>
