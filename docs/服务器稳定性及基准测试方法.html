@@ -27,15 +27,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hackerbs.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac","show_result":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="CPU基准和稳定性测试   测试项 测试工具 参考业务场景    浮点运算 Linpack 数据分析、大量数值计算、机器学习推理&#x2F;训练   整数运算 sysbench cpu Redis、Kafka   稳定性 Stress-NG CPU、内存、IO全面压力测试   内存基准和稳定性测试">
+    <meta name="description" content="测试项CPU基准和稳定性测试   测试项 测试工具 参考业务场景    浮点运算 Linpack 数据分析、大量数值计算、机器学习推理&#x2F;训练   整数运算 sysbench cpu Redis、Kafka   稳定性 Stress-NG CPU、内存、IO全面压力测试   内存基准和稳定性测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务器稳定性及基准测试方法">
 <meta property="og:url" content="https://hackerbs.com/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%8F%8A%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95.html">
 <meta property="og:site_name" content="hackerbs&#39;s Blog - 探索知识的宇宙">
-<meta property="og:description" content="CPU基准和稳定性测试   测试项 测试工具 参考业务场景    浮点运算 Linpack 数据分析、大量数值计算、机器学习推理&#x2F;训练   整数运算 sysbench cpu Redis、Kafka   稳定性 Stress-NG CPU、内存、IO全面压力测试   内存基准和稳定性测试">
+<meta property="og:description" content="测试项CPU基准和稳定性测试   测试项 测试工具 参考业务场景    浮点运算 Linpack 数据分析、大量数值计算、机器学习推理&#x2F;训练   整数运算 sysbench cpu Redis、Kafka   稳定性 Stress-NG CPU、内存、IO全面压力测试   内存基准和稳定性测试">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-09-11T07:40:24.000Z">
-<meta property="article:modified_time" content="2025-09-11T08:23:57.013Z">
+<meta property="article:modified_time" content="2025-09-12T03:15:33.652Z">
 <meta property="article:author" content="hackerbs.com">
 <meta property="article:tag" content="内存">
 <meta property="article:tag" content="硬盘">
@@ -198,7 +198,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%E5%9F%BA%E5%87%86%E5%92%8C%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">CPU基准和稳定性测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%9F%BA%E5%87%86%E5%92%8C%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">内存基准和稳定性测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">网络基准测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E7%9B%98%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">硬盘测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">综合基准测试</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E9%A1%B9"><span class="nav-number">1.</span> <span class="nav-text">测试项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU%E5%9F%BA%E5%87%86%E5%92%8C%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.</span> <span class="nav-text">CPU基准和稳定性测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%9F%BA%E5%87%86%E5%92%8C%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-number">1.2.</span> <span class="nav-text">内存基准和稳定性测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="nav-number">1.3.</span> <span class="nav-text">网络基准测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AC%E7%9B%98%E6%B5%8B%E8%AF%95"><span class="nav-number">1.4.</span> <span class="nav-text">硬盘测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="nav-number">1.5.</span> <span class="nav-text">综合基准测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">测试过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AMD-9F14%E5%B9%B3%E5%8F%B0%E6%B5%8B%E8%AF%95"><span class="nav-number">2.1.</span> <span class="nav-text">AMD 9F14平台测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85CentOS-7-9-2009"><span class="nav-number">2.1.1.</span> <span class="nav-text">安装CentOS 7.9.2009</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87CPU%E7%9A%84Linpack%E6%B5%8B%E8%AF%95"><span class="nav-number">2.1.2.</span> <span class="nav-text">准备CPU的Linpack测试</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -282,9 +282,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-09-11 15:40:24 / 修改时间：16:23:57" itemprop="dateCreated datePublished" datetime="2025-09-11T15:40:24+08:00">2025-09-11</time>
+      <time title="创建时间：2025-09-11 15:40:24" itemprop="dateCreated datePublished" datetime="2025-09-11T15:40:24+08:00">2025-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-12 11:15:33" itemprop="dateModified" datetime="2025-09-12T11:15:33+08:00">2025-09-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -324,14 +330,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>876</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -342,7 +348,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="CPU基准和稳定性测试"><a href="#CPU基准和稳定性测试" class="headerlink" title="CPU基准和稳定性测试"></a>CPU基准和稳定性测试</h2><table>
+        <h2 id="测试项"><a href="#测试项" class="headerlink" title="测试项"></a>测试项</h2><h3 id="CPU基准和稳定性测试"><a href="#CPU基准和稳定性测试" class="headerlink" title="CPU基准和稳定性测试"></a>CPU基准和稳定性测试</h3><table>
 <thead>
 <tr>
 <th>测试项</th>
@@ -366,7 +372,7 @@
 <td>CPU、内存、IO全面压力测试</td>
 </tr>
 </tbody></table>
-<h2 id="内存基准和稳定性测试"><a href="#内存基准和稳定性测试" class="headerlink" title="内存基准和稳定性测试"></a>内存基准和稳定性测试</h2><span id="more"></span>
+<h3 id="内存基准和稳定性测试"><a href="#内存基准和稳定性测试" class="headerlink" title="内存基准和稳定性测试"></a>内存基准和稳定性测试</h3><span id="more"></span>
 
 <table>
 <thead>
@@ -392,7 +398,7 @@
 <td>持续运行数小时,测试稳定性</td>
 </tr>
 </tbody></table>
-<h2 id="网络基准测试"><a href="#网络基准测试" class="headerlink" title="网络基准测试"></a>网络基准测试</h2><table>
+<h3 id="网络基准测试"><a href="#网络基准测试" class="headerlink" title="网络基准测试"></a>网络基准测试</h3><table>
 <thead>
 <tr>
 <th>测试项</th>
@@ -411,7 +417,7 @@
 <td>微服务 RPC、数据库访问、API 调用、Kafka 消息传输</td>
 </tr>
 </tbody></table>
-<h2 id="硬盘测试"><a href="#硬盘测试" class="headerlink" title="硬盘测试"></a>硬盘测试</h2><table>
+<h3 id="硬盘测试"><a href="#硬盘测试" class="headerlink" title="硬盘测试"></a>硬盘测试</h3><table>
 <thead>
 <tr>
 <th>测试项</th>
@@ -449,7 +455,7 @@
 <p>例如单台服务器4个数据库，则<code>fio bs=4k iodepth=32 numjobs=4</code>。</p>
 <p><code>iodepth</code>对应单个线程的队列深度，用于存储设备并发能力测试</p>
 <p><code>numjobs</code>对应多个线程并发，用于测试操作系统&#x2F;应用层并发能力</p>
-<h2 id="综合基准测试"><a href="#综合基准测试" class="headerlink" title="综合基准测试"></a>综合基准测试</h2><table>
+<h3 id="综合基准测试"><a href="#综合基准测试" class="headerlink" title="综合基准测试"></a>综合基准测试</h3><table>
 <thead>
 <tr>
 <th>测试项</th>
@@ -463,6 +469,17 @@
 <td>横向比较整机性能</td>
 </tr>
 </tbody></table>
+<h2 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h2><h3 id="AMD-9F14平台测试"><a href="#AMD-9F14平台测试" class="headerlink" title="AMD 9F14平台测试"></a>AMD 9F14平台测试</h3><h4 id="安装CentOS-7-9-2009"><a href="#安装CentOS-7-9-2009" class="headerlink" title="安装CentOS 7.9.2009"></a>安装CentOS 7.9.2009</h4><p>替换源为清华大学CentOS-Vault源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed -e &quot;s|^mirrorlist=|#mirrorlist=|g&quot; \</span><br><span class="line">    -e &quot;s|^#baseurl=http://mirror.centos.org/centos/\$releasever|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos-vault/7.9.2009|g&quot; \</span><br><span class="line">    -e &quot;s|^#baseurl=http://mirror.centos.org/\$contentdir/\$releasever|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos-vault/7.9.2009|g&quot; \</span><br><span class="line">    -i.bak \</span><br><span class="line">    /etc/yum.repos.d/CentOS-*.repo</span><br></pre></td></tr></table></figure>
+
+<p>该命令执行后会将原本的所有源配置文件备份为带<code>.bak</code>后缀名的备份</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用bash扩展通配符</span></span><br><span class="line">shopt -s extglob</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用通配符快速删除不带.bak的文件</span></span><br><span class="line">rm !(*.bak) -f</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用<span class="keyword">for</span>循环快速去掉.bak后缀</span></span><br><span class="line">for f in *.bak;do mv -- &quot;$f&quot; &quot;$&#123;f%.bak&#125;&quot;;done</span><br></pre></td></tr></table></figure>
+
+<p><code>yum makecache</code>更新源</p>
+<p><code>yum install vim</code>安装vim编辑器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新源</span></span><br><span class="line">yum makecache</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装vim</span></span><br><span class="line">yum install vim</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑ssh配置文件</span></span><br><span class="line">vim /etc/ssh/sshd_config</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置心跳</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">取消注释，设置为每60秒发送一次心跳重复9999999次</span></span><br><span class="line">ClientAliveInterval 60</span><br><span class="line">ClientAliveCountMax 99999</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置允许root用户登录</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">取消注释并配置为<span class="built_in">yes</span></span></span><br><span class="line">PermitRootLogin yes</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启ssh服务</span></span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<h4 id="准备CPU的Linpack测试"><a href="#准备CPU的Linpack测试" class="headerlink" title="准备CPU的Linpack测试"></a>准备CPU的Linpack测试</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装OpenBLAS</span></span><br><span class="line">yum install -y epel-release</span><br><span class="line">yum install -y openblas-devel</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载High Performance Linpack</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">去官网检查最新版https://www.netlib.org/benchmark/hpl/</span></span><br><span class="line">wget https://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz</span><br><span class="line">tar xvf hpl-2.3.tar.gz</span><br><span class="line">cd hpl-2.3</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -592,14 +609,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">45k</span>
+    <span title="站点总字数">46k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">41 分钟</span>
+    <span title="站点阅读时长">42 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
