@@ -101,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html</loc>
+    <loc>https://hackerbs.com/%E6%9C%AC%E7%AB%99%E4%B8%8A%E7%BA%BF%E7%A7%81%E6%9C%89apt%E6%BA%90%E4%BB%93%E5%BA%93%E5%8F%8A%E8%87%AA%E5%88%B6%E5%AE%9E%E7%94%A8deb%E5%8C%85.html</loc>
     
     <lastmod>2025-09-04</lastmod>
     
@@ -110,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/%E6%9C%AC%E7%AB%99%E4%B8%8A%E7%BA%BF%E7%A7%81%E6%9C%89apt%E6%BA%90%E4%BB%93%E5%BA%93%E5%8F%8A%E8%87%AA%E5%88%B6%E5%AE%9E%E7%94%A8deb%E5%8C%85.html</loc>
+    <loc>https://hackerbs.com/%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99crontab%E4%BD%BF%E7%94%A8%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90Proxmox-VE%E6%89%80%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E5%85%A8%E5%85%B3%E6%9C%BA.html</loc>
     
     <lastmod>2025-09-04</lastmod>
     
@@ -164,15 +164,6 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E5%85%B7%E6%9C%89GPGkey%E9%AA%8C%E8%AF%81%E7%9A%84%E5%8F%AF%E4%BF%A1%E4%BB%BBapt%E6%BA%90.html</loc>
-    
-    <lastmod>2025-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hackerbs.com/%E5%9B%BD%E5%86%85docker-hub%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html</loc>
     
     <lastmod>2025-09-04</lastmod>
@@ -182,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/cpp%E7%BC%96%E5%86%99fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%EF%BC%8C%E6%88%91%E5%9C%A8%E5%8F%91%E7%96%AF.html</loc>
+    <loc>https://hackerbs.com/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E5%85%B7%E6%9C%89GPGkey%E9%AA%8C%E8%AF%81%E7%9A%84%E5%8F%AF%E4%BF%A1%E4%BB%BBapt%E6%BA%90.html</loc>
     
     <lastmod>2025-09-04</lastmod>
     
@@ -200,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html</loc>
+    <loc>https://hackerbs.com/cpp%E7%BC%96%E5%86%99fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%EF%BC%8C%E6%88%91%E5%9C%A8%E5%8F%91%E7%96%AF.html</loc>
     
     <lastmod>2025-09-04</lastmod>
     
@@ -209,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/apt%E7%AD%89%E5%90%84%E7%A7%8D%E6%BA%90%E5%88%97%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.html</loc>
+    <loc>https://hackerbs.com/%E5%85%B3%E4%BA%8EProxmox-VE%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BAUEFI%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E5%8D%95%E7%8B%AC%E6%B7%BB%E5%8A%A0EFI%E7%A3%81%E7%9B%98%E7%9A%84%E9%97%AE%E9%A2%98.html</loc>
     
     <lastmod>2025-09-04</lastmod>
     
@@ -227,6 +218,15 @@
   </url>
   
   <url>
+    <loc>https://hackerbs.com/apt%E7%AD%89%E5%90%84%E7%A7%8D%E6%BA%90%E5%88%97%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.html</loc>
+    
+    <lastmod>2025-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hackerbs.com/Proxmox-VE-%E5%AF%BC%E5%85%A5SylixOS-VMware%E7%89%88.html</loc>
     
     <lastmod>2025-09-04</lastmod>
@@ -236,7 +236,7 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/Python%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%B0%86GFWList%E8%A7%84%E5%88%99%E8%BD%AC%E6%8D%A2%E4%B8%BAClash%E8%A7%84%E5%88%99.html</loc>
+    <loc>https://hackerbs.com/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.html</loc>
     
     <lastmod>2025-09-04</lastmod>
     
@@ -245,7 +245,7 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/Proxmox-VE%E6%89%B9%E9%87%8F%E5%8A%A0%E9%9B%86%E7%BE%A4%E3%80%81%E6%89%B9%E9%87%8F%E5%85%8B%E9%9A%86%E3%80%81%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%B9%B6%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4%E3%80%81%E6%89%B9%E9%87%8F%E6%B8%85%E9%99%A4%E9%9B%86%E7%BE%A4%E6%AE%8B%E7%95%99%E3%80%81%E6%89%B9%E9%87%8F%E5%88%9B%E5%BB%BA%E7%BD%91%E5%8D%A1%E7%AD%89%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81%EF%BC%88%E6%9C%AC%E6%95%99%E7%A8%8B%E9%87%87%E7%94%A8YgeCloud%E5%AE%9E%E6%B5%8B%EF%BC%89.html</loc>
+    <loc>https://hackerbs.com/Python%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%B0%86GFWList%E8%A7%84%E5%88%99%E8%BD%AC%E6%8D%A2%E4%B8%BAClash%E8%A7%84%E5%88%99.html</loc>
     
     <lastmod>2025-09-04</lastmod>
     
@@ -342,6 +342,34 @@
   </url>
   
   <url>
+    <loc>https://hackerbs.com/tags/Docker/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/ARM/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/Linux/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/Debian/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://hackerbs.com/tags/DELL/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -384,27 +412,6 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/tags/Linux/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/Debian/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hackerbs.com/tags/Debian%E5%AE%89%E8%A3%85/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -426,14 +433,7 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/tags/Docker/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/ARM/</loc>
+    <loc>https://hackerbs.com/tags/%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -475,14 +475,7 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/tags/apt%E6%BA%90/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/docker%E6%BA%90/</loc>
+    <loc>https://hackerbs.com/tags/%E6%89%B9%E9%87%8F/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -552,7 +545,21 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/tags/%E6%89%B9%E9%87%8F/</loc>
+    <loc>https://hackerbs.com/tags/apt%E6%BA%90/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/docker%E6%BA%90/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/markdown/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -566,7 +573,28 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/tags/markdown/</loc>
+    <loc>https://hackerbs.com/tags/ECC/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E5%86%85%E5%AD%98/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/iDRAC/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -595,34 +623,6 @@
   
   <url>
     <loc>https://hackerbs.com/tags/dmsetup/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/apt/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/GPG-key/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E5%8F%AF%E4%BF%A1%E4%BB%BBapt%E6%BA%90/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -658,6 +658,27 @@
   
   <url>
     <loc>https://hackerbs.com/tags/deb/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/apt/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/GPG-key/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E5%8F%AF%E4%BF%A1%E4%BB%BBapt%E6%BA%90/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -707,6 +728,83 @@
   
   <url>
     <loc>https://hackerbs.com/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E5%B8%A6%E5%A4%96/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E5%AE%95%E6%9C%BA/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E6%8E%92%E9%9A%9C/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/BMC/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%8B%E6%B5%8B/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/Stress-NG/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/Sysbench/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/CPU/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hackerbs.com/tags/%E7%A1%AC%E7%9B%98/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -769,6 +867,13 @@
   </url>
   
   <url>
+    <loc>https://hackerbs.com/tags/aptdownloader/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://hackerbs.com/tags/DDNS/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -797,13 +902,6 @@
   </url>
   
   <url>
-    <loc>https://hackerbs.com/tags/aptdownloader/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hackerbs.com/tags/%E7%9B%B8%E5%8F%98/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -826,27 +924,6 @@
   
   <url>
     <loc>https://hackerbs.com/tags/qemu/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/ECC/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E5%86%85%E5%AD%98/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/iDRAC/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -889,27 +966,6 @@
   
   <url>
     <loc>https://hackerbs.com/tags/%E6%B5%AA%E6%BD%AE/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E7%A1%AC%E7%9B%98/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E5%B8%A6%E5%A4%96/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/BMC/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -959,62 +1015,6 @@
   
   <url>
     <loc>https://hackerbs.com/tags/redis/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E5%AE%95%E6%9C%BA/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E6%8E%92%E9%9A%9C/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%8B%E6%B5%8B/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/Stress-NG/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/Sysbench/</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hackerbs.com/tags/CPU/</loc>
     <lastmod>2025-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
