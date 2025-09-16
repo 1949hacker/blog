@@ -2530,28 +2530,6 @@
 <td>正常压测</td>
 </tr>
 </tbody></table>
-<h3 id="网络基准测试"><a href="#网络基准测试" class="headerlink" title="网络基准测试"></a>网络基准测试</h3><table>
-<thead>
-<tr>
-<th>测试项</th>
-<th>测试工具</th>
-<th>参考业务场景</th>
-<th>测试方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>带宽极限</td>
-<td>iperf3</td>
-<td>测试带宽极限性能是否接近理论极限值</td>
-<td>测试3次取均值</td>
-</tr>
-<tr>
-<td>吞吐测试</td>
-<td>netperf TCP_RR &#x2F; UDP_RR</td>
-<td>微服务 RPC、数据库访问、API 调用、Kafka 消息传输</td>
-<td>测试3次取均值</td>
-</tr>
-</tbody></table>
 <h3 id="硬盘测试"><a href="#硬盘测试" class="headerlink" title="硬盘测试"></a>硬盘测试</h3><table>
 <thead>
 <tr>
