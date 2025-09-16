@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://img.hackerbs.com//20250915145114.png">
 <meta property="og:image" content="https://img.hackerbs.com//20250915173052.png">
 <meta property="article:published_time" content="2025-09-11T07:40:24.000Z">
-<meta property="article:modified_time" content="2025-09-16T06:44:28.324Z">
+<meta property="article:modified_time" content="2025-09-16T07:07:09.678Z">
 <meta property="article:author" content="hackerbs.com">
 <meta property="article:tag" content="内存">
 <meta property="article:tag" content="服务器">
@@ -293,7 +293,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-16 14:44:28" itemprop="dateModified" datetime="2025-09-16T14:44:28+08:00">2025-09-16</time>
+      <time title="修改时间：2025-09-16 15:07:09" itemprop="dateModified" datetime="2025-09-16T15:07:09+08:00">2025-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -333,7 +333,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>16k</span>
+      <span>3.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -533,7 +533,7 @@
 <p>建议使用这个版本，用有ventoy的盘直接引导就能用了，很方便，在带外iKVM直接挂载引导也行</p>
 <p>启动界面</p>
 <h4 id="硬盘性能fio测试"><a href="#硬盘性能fio测试" class="headerlink" title="硬盘性能fio测试"></a>硬盘性能fio测试</h4><p>使用fio进行硬盘的性能测试，测试结果包含IOPS、带宽、延迟</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装fio</span></span><br><span class="line">yum install fio</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">准备好测试路径或硬盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这里采用指向目录的方式测试</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如需直接测试硬盘，则指向硬盘即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-name=本次测试的名称，自定义即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-size=本次测试的文件大小，建议大于内存的2倍，避免某些文件系统使用内存缓存</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">鉴于CentOS 7.9.2009的xfs和参数设置了direct=1，所以size不用大于内存</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-runtime=运行时间，单位支持秒s、分m、时h、天d</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-time_base 即使写入了指定大小的文件，依旧继续重复写入，直到runtime时间结束</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-direct=1设置不使用系统缓存，直写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-ioengine=libaio直接使用Linux的异步IO引擎</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-randrepeat=0设置每次IO的随机性都不同，模拟真实业务场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-numjobs=8设置8个进程，模拟真实业务场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-group_reporting多进程的运行结果汇总汇报</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-bs=4k 块大小4k</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-rw=randrw随机读写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-rwmixwrite=30设置30%写70%读，模拟真实业务场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-filename=/root/fio 在/root目录下创建一个名为fio的文件进行测试</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-directory=/dir/上方的filename也可替换为该命令指向目录，会在目录下根据numjobs的数量生成多个文件测试</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意下你的目录容量，别装不下size*numjobs的文件</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-iodepth= IO队列深度</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行5分钟，采用路径模式8进程写入，模拟最真实的业务场景</span></span><br><span class="line">fio -name=disk_benchmark -size=10G -runtime=5m -time_base -direct=1 -ioengine=libaio -randrepeat=0 -numjobs=8 -group_reporting -bs=4k -rw=randrw -rwmixwrite=30 -directory=/home/fio/ -iodepth=1</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装fio</span></span><br><span class="line">yum install fio</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">准备好测试路径或硬盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这里采用指向目录的方式测试</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如需直接测试硬盘，则指向硬盘即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-name=本次测试的名称，自定义即可</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-size=本次测试的文件大小，建议大于内存的2倍，避免某些文件系统使用内存缓存</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">鉴于CentOS 7.9.2009的xfs和参数设置了direct=1，所以size不用大于内存</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-runtime=运行时间，单位支持秒s、分m、时h、天d</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-time_base 即使写入了指定大小的文件，依旧继续重复写入，直到runtime时间结束</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-direct=1设置不使用系统缓存，直写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-ioengine=libaio直接使用Linux的异步IO引擎</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-randrepeat=0设置每次IO的随机性都不同，模拟真实业务场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-numjobs=8设置8个进程，模拟真实业务场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-group_reporting多进程的运行结果汇总汇报</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-bs=4k 块大小4k</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-rw=randrw随机读写</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-rwmixwrite=30设置30%写70%读，模拟真实业务场景</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-filename=/root/fio 在/root目录下创建一个名为fio的文件进行测试</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-directory=/dir/上方的filename也可替换为该命令指向目录，会在目录下根据numjobs的数量生成多个文件测试</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意下你的目录容量，别装不下size*numjobs的文件</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-iodepth= IO队列深度</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行5分钟，采用路径模式8进程写入，模拟最真实的业务场景</span></span><br><span class="line">fio -name=disk_benchmark -size=10G -runtime=5m -time_base -direct=1 -ioengine=libaio -randrepeat=0 -numjobs=8 -group_reporting -bs=4k -rw=randrw -rwmixwrite=30 -filename=/home/fio -iodepth=1</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -663,14 +663,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">194k</span>
+    <span title="站点总字数">182k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:56</span>
+    <span title="站点阅读时长">11:03</span>
   </span>
 </div>
 <div class="busuanzi-count">
