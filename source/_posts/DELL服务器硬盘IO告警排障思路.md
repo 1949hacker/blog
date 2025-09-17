@@ -118,20 +118,20 @@ for raid in {a..d}; do
             if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then
                 # 获取完整的SMART数据
                 output=$(smartctl -a -d megaraid,$disk /dev/sd$raid)
-                
+
                 # 从输出中提取序列号
                 serial=$(echo "$output" | grep "Serial number:" | awk '{print $3}')
-                
+
                 # 检测磁盘类型（SSD或HDD）
                 if echo "$output" | grep -q "SSD"; then
                     # SSD磁盘：使用Media_and_Data_Integrity_Errors等属性
                     media_errors=$(echo "$output" | grep "Media_and_Data_Integrity_Errors" | awk '{print $10}')
                     media_errors=${media_errors:-0}
-                    
+
                     # 对于SSD，我们主要关注媒体错误和ECC错误
                     uncorrected_errors=$(echo "$output" | grep "Error_Information_Log_Entries" | awk '{print $10}')
                     uncorrected_errors=${uncorrected_errors:-0}
-                    
+
                     # 检查SSD错误
                     if [ "$media_errors" -gt 0 ] || [ "$uncorrected_errors" -gt 0 ]; then
                         echo "$output" >> disk_error.log
@@ -144,13 +144,13 @@ for raid in {a..d}; do
                     # HDD磁盘：使用原有的错误计数器
                     read_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^read:" | awk '{print $NF}')
                     read_uncorrected=${read_uncorrected:-0}
-                    
+
                     verify_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^verify:" | awk '{print $NF}')
                     verify_uncorrected=${verify_uncorrected:-0}
-                    
+
                     non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '{print $NF}')
                     non_medium=${non_medium:-0}
-                    
+
                     # 检查HDD错误
                     if [ "$read_uncorrected" -gt 0 ] || [ "$verify_uncorrected" -gt 0 ] || [ "$non_medium" -gt 0 ]; then
                         echo "$output" >> disk_error.log
@@ -168,7 +168,11 @@ done
 
 # 一条龙服务
 for raid in {a..d}; do if [ -b "/dev/sd$raid" ]; then for disk in {0..23}; do if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then output=$(smartctl -a -d megaraid,$disk /dev/sd$raid); serial=$(echo "$output" | grep "Serial number:" | awk '{print $3}'); if echo "$output" | grep -q "SSD"; then media_errors=$(echo "$output" | grep "Media_and_Data_Integrity_Errors" | awk '{print $10}'); media_errors=${media_errors:-0}; uncorrected_errors=$(echo "$output" | grep "Error_Information_Log_Entries" | awk '{print $10}'); uncorrected_errors=${uncorrected_errors:-0}; if [ "$media_errors" -gt 0 ] || [ "$uncorrected_errors" -gt 0 ]; then echo "$output" >> disk_error.log; echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 SSD Disk \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) \033[36;1m存在以下错误：\n"; echo -e "\033[36;1m媒体和数据完整性错误：\033[31;1m$media_errors\033[36;1m"; echo -e "\033[36;1m错误信息日志条目：\033[31;1m$uncorrected_errors\033[36;1m"; echo -e "\n"; fi; else read_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^read:" | awk '{print $NF}'); read_uncorrected=${read_uncorrected:-0}; verify_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^verify:" | awk '{print $NF}'); verify_uncorrected=${verify_uncorrected:-0}; non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '{print $NF}'); non_medium=${non_medium:-0}; if [ "$read_uncorrected" -gt 0 ] || [ "$verify_uncorrected" -gt 0 ] || [ "$non_medium" -gt 0 ]; then echo "$output" >> disk_error.log; echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 HDD Disk \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) \033[36;1m存在以下错误：\n"; echo -e "\033[36;1m读取错误无法纠正次数：\033[31;1m$read_uncorrected\033[36;1m"; echo -e "\033[36;1m磁盘自检无法纠错次数：\033[31;1m$verify_uncorrected\033[36;1m"; echo -e "\033[36;1m非介质错误次数：\033[31;1m$non_medium\033[36;1m"; echo -e "\n"; fi; fi; fi; done; fi; done
+```
 
+HDD SSD二合一版
+
+```shell
 # 测试版
 
 #!/bin/bash
