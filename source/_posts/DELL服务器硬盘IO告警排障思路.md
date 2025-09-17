@@ -57,24 +57,33 @@ smartctl -a -d megaraid,2 /dev/sdb
 # 其中0..10是用于遍历一个阵列下有多少个硬盘，根据你的阵列情况调整
 for raid in {a..d};do for disk in {0..10};do smartctl -a -d megaraid,$disk /dev/sd$raid | grep -i "CRC\|Error";done;done
 
+# 批量巡检脚本
 for raid in {a..d}; do
-    # 检查RAID虚拟设备（如/dev/sda）是否存在
     if [ -b "/dev/sd$raid" ]; then
-        for disk in {0..23}; do # 扩大范围以覆盖更多磁盘
-            # 尝试获取设备信息，如果命令成功退出（设备存在）则执行查询
+        for disk in {0..23}; do
             if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then
-                echo "==== Checking /dev/sd$raid, Physical Disk #$disk ===="
-                smartctl -a -d megaraid,$disk /dev/sd$raid | grep -A 20 -B 2 "Error counter log:"
-                echo -e "\n"
+                # 获取并分析smart数据
+                output=$(smartctl -a -d megaraid,$disk /dev/sd$raid)
+                echo "$output" >> disk_error.log
+
+                # 检查是否有无法纠正的错误或非介质错误
+                uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep -E "read:|write:|verify:" | awk '$NF > 0')
+                non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '$NF > 0')
+
+                # 如果有错误则输出简洁信息
+                if [ -n "$uncorrected" ] || [ -n "$non_medium" ]; then
+                    echo "RAID sd$raid 中的 Disk #$disk 存在以下错误："
+                    [ -n "$uncorrected" ] && echo "$uncorrected"
+                    [ -n "$non_medium" ] && echo "$non_medium"
+                    echo -e "\n"
+                fi
             fi
         done
-    else
-        echo "RAID device /dev/sd$raid does not exist, skipping..."
     fi
 done
 
-# 整合为一行，方便直接粘贴运行
-for raid in {a..d}; do if [ -b "/dev/sd$raid" ]; then for disk in {0..23}; do if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then echo "==== Checking /dev/sd$raid, Physical Disk #$disk ===="; smartctl -a -d megaraid,$disk /dev/sd$raid | grep -A 20 -B 2 "Error counter log:"; echo -e "\n"; fi; done; fi; done
+# 整合为一行，一条龙服务
+for raid in {a..d}; do if [ -b "/dev/sd$raid" ]; then for disk in {0..23}; do if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then output=$(smartctl -a -d megaraid,$disk /dev/sd$raid); echo "$output" >> disk_error.log; uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep -E "read:|write:|verify:" | awk '$NF > 0'); non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '$NF > 0'); if [ -n "$uncorrected" ] || [ -n "$non_medium" ]; then echo "RAID sd$raid 中的 Disk #$disk 存在以下错误："; [ -n "$uncorrected" ] && echo "$uncorrected"; [ -n "$non_medium" ] && echo "$non_medium"; echo -e "\n"; fi; fi; done; fi; done
 ```
 
 #### 错误日志解读
