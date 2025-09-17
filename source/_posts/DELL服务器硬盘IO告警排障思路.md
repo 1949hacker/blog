@@ -58,23 +58,40 @@ smartctl -a -d megaraid,2 /dev/sdb
 for raid in {a..d};do for disk in {0..10};do smartctl -a -d megaraid,$disk /dev/sd$raid | grep -i "CRC\|Error";done;done
 
 # 批量巡检脚本
+
+# 遍历可能的RAID设备（sda, sdb, sdc, sdd）
 for raid in {a..d}; do
+    # 检查设备是否存在
     if [ -b "/dev/sd$raid" ]; then
+        # 遍历每个RAID设备上的物理磁盘（0到23号）
         for disk in {0..23}; do
+            # 检查磁盘是否可访问（尝试获取基本信息，输出重定向到/dev/null）
             if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then
-                # 获取并分析smart数据
+                # 获取完整的SMART数据
                 output=$(smartctl -a -d megaraid,$disk /dev/sd$raid)
+
+                # 从输出中提取序列号
+                serial=$(echo "$output" | grep "Serial Number:" | awk '{print $3}')
+
+                # 将完整的SMART数据追加到日志文件
                 echo "$output" >> disk_error.log
 
-                # 检查是否有无法纠正的错误或非介质错误
-                uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep -E "read:|write:|verify:" | awk '$NF > 0')
-                non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '$NF > 0')
+                # 提取读取无法纠正错误次数（最后一列）
+                read_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^read:" | awk '{print $NF}')
 
-                # 如果有错误则输出简洁信息
-                if [ -n "$uncorrected" ] || [ -n "$non_medium" ]; then
-                    echo "RAID sd$raid 中的 Disk #$disk 存在以下错误："
-                    [ -n "$uncorrected" ] && echo "$uncorrected"
-                    [ -n "$non_medium" ] && echo "$non_medium"
+                # 提取验证无法纠正错误次数（最后一列）
+                verify_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^verify:" | awk '{print $NF}')
+
+                # 提取非介质错误次数（最后一列）
+                non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '{print $NF}')
+
+                # 检查是否有任何错误（任一错误计数大于0）
+                if [ "$read_uncorrected" -gt 0 ] || [ "$verify_uncorrected" -gt 0 ] || [ "$non_medium" -gt 0 ]; then
+                    # 输出格式化错误信息
+                    echo "RAID sd$raid 中的 Disk #$disk (SN: $serial) 存在以下错误："
+                    echo "读取错误无法纠正次数：$read_uncorrected"
+                    echo "磁盘自检无法纠错次数：$verify_uncorrected"
+                    echo "非介质错误次数：$non_medium"
                     echo -e "\n"
                 fi
             fi
@@ -83,10 +100,10 @@ for raid in {a..d}; do
 done
 
 # 整合为一行，一条龙服务
-for raid in {a..d}; do if [ -b "/dev/sd$raid" ]; then for disk in {0..23}; do if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then output=$(smartctl -a -d megaraid,$disk /dev/sd$raid); echo "$output" >> disk_error.log; uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep -E "read:|write:|verify:" | awk '$NF > 0'); non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '$NF > 0'); if [ -n "$uncorrected" ] || [ -n "$non_medium" ]; then echo "RAID sd$raid 中的 Disk #$disk 存在以下错误："; [ -n "$uncorrected" ] && echo "$uncorrected"; [ -n "$non_medium" ] && echo "$non_medium"; echo -e "\n"; fi; fi; done; fi; done
+for raid in {a..d}; do if [ -b "/dev/sd$raid" ]; then for disk in {0..23}; do if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then output=$(smartctl -a -d megaraid,$disk /dev/sd$raid); serial=$(echo "$output" | grep "Serial Number:" | awk '{print $3}'); echo "$output" >> disk_error.log; read_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^read:" | awk '{print $NF}'); verify_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^verify:" | awk '{print $NF}'); non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '{print $NF}'); if [ "$read_uncorrected" -gt 0 ] || [ "$verify_uncorrected" -gt 0 ] || [ "$non_medium" -gt 0 ]; then echo "RAID sd$raid 中的 Disk #$disk (SN: $serial) 存在以下错误：读取错误无法纠正次数：$read_uncorrected\n磁盘自检无法纠错次数：$verify_uncorrected\n非介质错误次数：$non_medium"; echo -e "\n"; fi; fi; done; fi; done
 ```
 
-#### 错误日志解读
+#### 原始错误日志解读
 
 范例：
 
