@@ -252,8 +252,6 @@ log_file="disk_error_$(date +%Y%m%d_%H%M%S).log"; for raid in {a..d}; do if [ -b
 
 输出效果如下
 
-
-
 #### 原始错误日志解读
 
 范例：
