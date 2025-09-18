@@ -33,48 +33,38 @@ tags:
 
 ## 情况说明
 
-收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL发出了确认函，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的书面回复
+收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL进行了咨询，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的回复
 
 **厂商对日志中以下内容的告警表示认可并作为报修依据**
 
 | 硬盘类型 | 参数 | 翻译 | 说明 | 来源 |
 | --- | --- | --- | --- | --- |
-| SSD  | ID 05 Reallocated Sector Count | 重分配扇区计数     | 因坏块被重新分配的扇区数量，值越高健康状况越差        | 新华三书面邮件回复 |
-| SSD  | ID 197 Current Pending Sector Count | 当前待处理扇区计数   | 有潜在读写错误、待重新映射的扇区数量             | 新华三书面邮件回复 |
-| HDD  | Total uncorrected errors | 总无法纠正错误 | 所有无法纠正的读/写错误之和 | 新华三书面邮件回复 |
-| HDD | Verify total uncorrected errors | 校验无法纠正错误 | 硬盘控制器自检时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三书面邮件回复 |
-| HDD | Read total uncorrected errors | 读无法纠正错误 | 读取/写入IO时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三书面邮件回复 |
+| SSD  | ID 05 Reallocated Sector Count | 重分配扇区计数     | 因坏块被重新分配的扇区数量，值越高健康状况越差        | 新华三 |
+| SSD  | ID 197 Current Pending Sector Count | 当前待处理扇区计数   | 有潜在读写错误、待重新映射的扇区数量             | 新华三 |
+| HDD  | Total uncorrected errors | 总无法纠正错误 | 所有无法纠正的读/写错误之和 | 新华三 |
+| HDD | Verify total uncorrected errors | 校验无法纠正错误 | 硬盘控制器自检时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三 |
+| HDD | Read total uncorrected errors | 读无法纠正错误 | 读取/写入IO时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三 |
 | HDD  | Elements in grown defect list | 已增长缺陷列表中的元素 | 硬盘运行中登记的坏块数量，用于追踪坏块增长          | [@Icenowy](https://github.com/icenowy)于清华TUNA协会技术群组内回复 |
-| HDD  | Write total uncorrected errors | 写入无法纠正错误总数  | 实际日志中无此项，参考上方总无法纠正错误即可 | 浪潮书面邮件回复 |
-| SSD | Reported Uncorrectable Errors | 已报告的不可纠正错误 | 硬盘向主机报告的读/写过程中发生的不可恢复错误次数(>10更换) | 浪潮书面邮件回复 |
-| SSD | Current Pending Sector Count | 当前待处理扇区计数 | 检测到潜在读写错误、等待重新分配的扇区数量(>100更换) | 浪潮书面邮件回复 |
-| SSD | Offline Uncorrectable | 离线不可纠正错误 | 硬盘在离线自检/后台扫描时检测到的不可恢复错误次数(>0更换) | 浪潮书面邮件回复 |
+| HDD  | Write total uncorrected errors | 写入无法纠正错误总数  | 实际日志中无此项，参考上方总无法纠正错误即可 | 浪潮 |
+| SSD | Reported Uncorrectable Errors | 已报告的不可纠正错误 | 硬盘向主机报告的读/写过程中发生的不可恢复错误次数(>10更换) | 浪潮 |
+| SSD | Current Pending Sector Count | 当前待处理扇区计数 | 检测到潜在读写错误、等待重新分配的扇区数量(>100更换) | 浪潮 |
+| SSD | Offline Uncorrectable | 离线不可纠正错误 | 硬盘在离线自检/后台扫描时检测到的不可恢复错误次数(>0更换) | 浪潮 |
 
 **以下是辅助日志，作为协助排障参考，不作为直接依据**
 
 | 硬盘类型 | 参数 | 翻译 | 说明 | 来源 |
 | --- | --- | --- | --- | --- |
-| SSD | Reallocated Sector Count | 重分配扇区计数 | 记录因物理损坏被替换到备用扇区的次数，数值增加说明介质退化(>500为不可靠) | 浪潮书面邮件回复 |
-| SSD | CRC Error Count | CRC 错误计数 | 记录主机与硬盘之间传输数据时发生的 CRC 校验错误次数，常见原因包括数据线接触不良、电磁干扰或接口问题，单盘较多则可能为该盘本体故障，多个硬盘则进一步筛查是否位于同一个硬盘背板或同一个SAS端口 | 浪潮书面邮件回复 |
-| HDD | Non-medium error count | 非介质故障 | 与上方SSD的是一样的意思 | 浪潮书面邮件回复 |
+| SSD | Reallocated Sector Count | 重分配扇区计数 | 记录因物理损坏被替换到备用扇区的次数，数值增加说明介质退化(>500为不可靠) | 浪潮 |
+| SSD | CRC Error Count | CRC 错误计数 | 记录主机与硬盘之间传输数据时发生的 CRC 校验错误次数，常见原因包括数据线接触不良、电磁干扰或接口问题，单盘较多则可能为该盘本体故障，多个硬盘则进一步筛查是否位于同一个硬盘背板或同一个SAS端口 | 浪潮 |
+| HDD | Non-medium error count | 非介质故障 | 与上方SSD的是一样的意思 | 浪潮 |
 
 ---
 
-以下是回复的截图
-
 <!-- more -->
-
-Inspur 浪潮
-
-![20250918175952](https://img.hackerbs.com//20250918175952.png)
-
-H3C 华三
-
-![20250918175913](https://img.hackerbs.com//20250918175913.png)
 
 清华大学TUNA协会技术群组
 
-非书面回复，感谢[@Icenowy](https://github.com/icenowy)于*清华TUNA协会技术群组*内回复提出参考`Elements in grown defect list`参数的值，该值是HDD独有的指标，记录的是在使用过长中新发现的物理坏块数，数值持续增长则意味着该硬盘可靠性正在下降
+感谢[@Icenowy](https://github.com/icenowy)于*清华TUNA协会技术群组*内回复提出参考`Elements in grown defect list`参数的值，该值是HDD独有的指标，记录的是在使用过长中新发现的物理坏块数，数值持续增长则意味着该硬盘可靠性正在下降
 
 ## 排查过程
 
