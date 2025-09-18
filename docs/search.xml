@@ -2264,7 +2264,8 @@
   <entry>
     <title>关于服务器硬盘故障但带外没有错误日志的排障与报修笔记</title>
     <url>/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html</url>
-    <content><![CDATA[<h2 id="情况说明"><a href="#情况说明" class="headerlink" title="情况说明"></a>情况说明</h2><p>收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL发出了确认函，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的书面回复，厂商对日志中以下内容的告警表示认可并作为报修依据</p>
+    <content><![CDATA[<h2 id="情况说明"><a href="#情况说明" class="headerlink" title="情况说明"></a>情况说明</h2><p>收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL发出了确认函，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的书面回复</p>
+<p><strong>厂商对日志中以下内容的告警表示认可并作为报修依据</strong></p>
 <table>
 <thead>
 <tr>
@@ -2293,7 +2294,7 @@
 <td>HDD</td>
 <td>Total uncorrected errors</td>
 <td>总无法纠正错误</td>
-<td></td>
+<td>所有无法纠正的读&#x2F;写错误之和</td>
 <td>新华三书面邮件回复</td>
 </tr>
 <tr>
@@ -2384,9 +2385,9 @@
 <span id="more"></span>
 
 <p>Inspur 浪潮</p>
-<p><img src="https://img.hackerbs.com//20250918162644.png" alt="20250918162644"></p>
+<p><img src="https://img.hackerbs.com//20250918175952.png" alt="20250918175952"></p>
 <p>H3C 华三</p>
-<p><img src="https://img.hackerbs.com//20250918162724.png" alt="20250918162724"></p>
+<p><img src="https://img.hackerbs.com//20250918175913.png" alt="20250918175913"></p>
 <p>清华大学TUNA协会技术群组</p>
 <p>非书面回复，感谢<a href="https://github.com/icenowy">@Icenowy</a>于<em>清华TUNA协会技术群组</em>内回复提出参考<code>Elements in grown defect list</code>参数的值，该值是HDD独有的指标，记录的是在使用过长中新发现的物理坏块数，数值持续增长则意味着该硬盘可靠性正在下降</p>
 <h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><h3 id="对于JBOD模式的硬盘"><a href="#对于JBOD模式的硬盘" class="headerlink" title="对于JBOD模式的硬盘"></a>对于JBOD模式的硬盘</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用smartctl直接查询即可</span></span><br><span class="line">smartctl -a /dev/sdX</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以增加grep快速筛选想要查询的参数，在替换双引号中的即可</span></span><br><span class="line">smartctl -a /dev/sdX | grep -E &quot;Elements in grown defect list&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配合<span class="keyword">for</span>迅速遍历磁盘，&#123;a..z&#125;则是遍历sda到sdz的所有盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果盘很多那可以直接写为&#123;a..zz&#125;，则是遍历sda到sdzz共702个盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[ -b <span class="string">&quot;/dev/sd<span class="variable">$i</span>&quot;</span> ] <span class="built_in">test</span>命令的简写，判断该设备是不是一个硬盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;sd<span class="variable">$i</span>&quot;</span>是在输出日志前输出盘号，避免不知道是哪个盘的报错</span></span><br><span class="line">for i in &#123;a..z&#125;; do [ -b &quot;/dev/sd$i&quot; ] &amp;&amp; echo &quot;sd$i:&quot; &amp;&amp; sudo smartctl -a &quot;/dev/sd$i&quot; | grep &quot;Elements in grown defect list&quot;; done</span><br></pre></td></tr></table></figure>

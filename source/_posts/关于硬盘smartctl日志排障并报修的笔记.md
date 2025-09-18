@@ -33,13 +33,15 @@ tags:
 
 ## 情况说明
 
-收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL发出了确认函，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的书面回复，厂商对日志中以下内容的告警表示认可并作为报修依据
+收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL发出了确认函，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的书面回复
+
+**厂商对日志中以下内容的告警表示认可并作为报修依据**
 
 | 硬盘类型 | 参数 | 翻译 | 说明 | 来源 |
 | --- | --- | --- | --- | --- |
 | SSD  | ID 05 Reallocated Sector Count | 重分配扇区计数     | 因坏块被重新分配的扇区数量，值越高健康状况越差        | 新华三书面邮件回复 |
 | SSD  | ID 197 Current Pending Sector Count | 当前待处理扇区计数   | 有潜在读写错误、待重新映射的扇区数量             | 新华三书面邮件回复 |
-| HDD  | Total uncorrected errors | 总无法纠正错误     |  | 新华三书面邮件回复 |
+| HDD  | Total uncorrected errors | 总无法纠正错误 | 所有无法纠正的读/写错误之和 | 新华三书面邮件回复 |
 | HDD | Verify total uncorrected errors | 校验无法纠正错误 | 硬盘控制器自检时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三书面邮件回复 |
 | HDD | Read total uncorrected errors | 读无法纠正错误 | 读取/写入IO时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三书面邮件回复 |
 | HDD  | Elements in grown defect list | 已增长缺陷列表中的元素 | 硬盘运行中登记的坏块数量，用于追踪坏块增长          | [@Icenowy](https://github.com/icenowy)于清华TUNA协会技术群组内回复 |
@@ -64,11 +66,11 @@ tags:
 
 Inspur 浪潮
 
-![20250918162644](https://img.hackerbs.com//20250918162644.png)
+![20250918175952](https://img.hackerbs.com//20250918175952.png)
 
 H3C 华三
 
-![20250918162724](https://img.hackerbs.com//20250918162724.png)
+![20250918175913](https://img.hackerbs.com//20250918175913.png)
 
 清华大学TUNA协会技术群组
 
