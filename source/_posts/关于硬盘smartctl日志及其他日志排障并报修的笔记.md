@@ -117,6 +117,8 @@ done
 ```
 ## 进阶脚本
 
+**该脚本会在当前目录输出`smartctl`的日志源码到`disk_error_$(date +%Y%m%d_%H%M%S).log`文件**
+
 ```shell
 #!/bin/bash
 
