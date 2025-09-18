@@ -2569,7 +2569,14 @@
 <td>并发大文件读写，大规模备份，分布式存储，对象存储</td>
 <td>测试3次取均值</td>
 </tr>
+<tr>
+<td>硬盘压测</td>
+<td>fio -numjobs&#x3D;32 -bs&#x3D;4k -iodepth&#x3D;64 -directory</td>
+<td>具体代码见下方及下文中有关于fio参数的解释</td>
+<td></td>
+</tr>
 </tbody></table>
+<p><code>fio -name=disk_benchmark -size=5G -runtime=5d -time_base -direct=1 -ioengine=libaio -randrepeat=0 -numjobs=32 -group_reporting -bs=4k -rw=randrw -rwmixwrite=30 -directory=/home/test/ -iodepth=64</code></p>
 <p>其中针对业务场景，根据单台服务器部署的业务数量适当设置<code>numjobs</code>以模拟操作系统&#x2F;应用层并发。</p>
 <p>例如单台服务器4个数据库，则<code>fio bs=4k iodepth=32 numjobs=4</code>。</p>
 <p><code>iodepth</code>对应单个线程的队列深度，用于存储设备并发能力测试</p>
