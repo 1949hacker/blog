@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- vercel统计 -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hackerbs.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac","show_result":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="情况说明收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL发出了确认函，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的书面回复，厂商对日志中以下内容的告警表示认可并作为报修依据    硬盘类型 参数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于服务器硬盘故障但带外没有错误日志的排障与报修笔记">
+<meta property="og:url" content="https://hackerbs.com/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html">
+<meta property="og:site_name" content="hackerbs&#39;s Blog - 探索知识的宇宙">
+<meta property="og:description" content="情况说明收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL发出了确认函，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的书面回复，厂商对日志中以下内容的告警表示认可并作为报修依据    硬盘类型 参数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.hackerbs.com//20250918162644.png">
+<meta property="og:image" content="https://img.hackerbs.com//20250918162724.png">
+<meta property="article:published_time" content="2025-09-18T07:49:46.000Z">
+<meta property="article:modified_time" content="2025-09-18T08:53:40.581Z">
+<meta property="article:author" content="hackerbs.com">
+<meta property="article:tag" content="DELL">
+<meta property="article:tag" content="带外">
+<meta property="article:tag" content="排障">
+<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="硬盘">
+<meta property="article:tag" content="浪潮">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="联想">
+<meta property="article:tag" content="华三">
+<meta property="article:tag" content="超聚变">
+<meta property="article:tag" content="故障">
+<meta property="article:tag" content="日志">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.hackerbs.com//20250918162644.png">
+
+
+<link rel="canonical" href="https://hackerbs.com/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hackerbs.com/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html","path":"关于硬盘smartctl日志及其他日志排障并报修的笔记.html","title":"关于服务器硬盘故障但带外没有错误日志的排障与报修笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>关于服务器硬盘故障但带外没有错误日志的排障与报修笔记 | hackerbs's Blog - 探索知识的宇宙</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENLG4193WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ENLG4193WB","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;5eb3e0169ac749219c5fa4aeb27aa7b8&quot;}'></script>
+
+
+
+
+<link rel="dns-prefetch" href="https://waline.hackerbs.com">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+  <style>
+    .ad {
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      width: auto;
+      background-color: #fff;
+      display: flex;
+      align-items: flex-end;
+      justify-content: right;
+      margin: 0 auto;
+    }
+    .ad p, .ad a {
+      margin: 0;
+      border: 0;
+      padding: 0;
+      line-height: 1rem;
+    }
+
+    .notice {
+      width: auto;
+      background-color: #fff;
+      display: flex;
+      justify-content: left;
+      margin: 0 auto;
+    }
+    .notice p, .notice a {
+      margin: 0;
+      border: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  
+  <div class="ad">
+
+  </div>
+
+  
+  <div class="notice">
+
+  </div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">hackerbs's Blog - 探索知识的宇宙</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">hackerbs是hacker brainstorm的缩写，意为：黑客头脑风暴<br>人生价值的体现从来就不是个体利益，人生的价值是集体利益<br>人生的价值取决于你能为全人类带来什么<br>而知识，就是全人类的瑰宝<br>  🌍 Need shipping from China?  <a href="https://halbyte.com" target="_blank">Visit Halbyte Logistics</a></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">情况说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">排查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8EJBOD%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%A1%AC%E7%9B%98"><span class="nav-number">2.1.</span> <span class="nav-text">对于JBOD模式的硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8ELSI-MegaRAID%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%8CRAID%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%A1%AC%E7%9B%98"><span class="nav-number">2.2.</span> <span class="nav-text">对于LSI MegaRAID控制器，RAID模式的硬盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">进阶脚本</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hackerbs.com</p>
+  <div class="site-description" itemprop="description">hackerbs's Blog - 探索知识的宇宙</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">106</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hackerbs.com/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hackerbs.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hackerbs's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="hackerbs's Blog - 探索知识的宇宙">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="关于服务器硬盘故障但带外没有错误日志的排障与报修笔记 | hackerbs's Blog - 探索知识的宇宙">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于服务器硬盘故障但带外没有错误日志的排障与报修笔记<a href="https://github.com/1949hacker/blog/tree/main/source/_posts/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-09-18 15:49:46 / 修改时间：16:53:40" itemprop="dateCreated datePublished" datetime="2025-09-18T15:49:46+08:00">2025-09-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%9F%A5%E8%AF%86%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">知识库</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>13k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="情况说明"><a href="#情况说明" class="headerlink" title="情况说明"></a>情况说明</h2><p>收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL发出了确认函，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的书面回复，厂商对日志中以下内容的告警表示认可并作为报修依据</p>
+<table>
+<thead>
+<tr>
+<th>硬盘类型</th>
+<th>参数</th>
+<th>翻译</th>
+<th>说明</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SSD</td>
+<td>ID 05 Reallocated Sector Count</td>
+<td>重分配扇区计数</td>
+<td>因坏块被重新分配的扇区数量，值越高健康状况越差</td>
+<td>H3C书面邮件回复</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>ID 197 Current Pending Sector Count</td>
+<td>当前待处理扇区计数</td>
+<td>有潜在读写错误、待重新映射的扇区数量</td>
+<td>H3C书面邮件回复</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>Total uncorrected errors</td>
+<td>总无法纠正错误</td>
+<td></td>
+<td>H3C书面邮件回复</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>Verify total uncorrected errors</td>
+<td>校验无法纠正错误</td>
+<td>硬盘控制器自检时无法通过ECC纠正的错误总数，高值表示可靠性下降</td>
+<td>H3C书面邮件回复</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>Read total uncorrected errors</td>
+<td>读无法纠正错误</td>
+<td>读取&#x2F;写入IO时无法通过ECC纠正的错误总数，高值表示可靠性下降</td>
+<td>H3C书面邮件回复</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>Elements in grown defect list</td>
+<td>已增长缺陷列表中的元素</td>
+<td>硬盘运行中登记的坏块数量，用于追踪坏块增长</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/icenowy">@Icenowy</a>于清华TUNA协会技术群组内回复</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>Write total uncorrected errors</td>
+<td>写入无法纠正错误总数</td>
+<td>实际日志中无此项，参考上方总无法纠正错误即可</td>
+<td>Inspur书面邮件回复</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>Reported Uncorrectable Errors</td>
+<td>已报告的不可纠正错误</td>
+<td>硬盘向主机报告的读&#x2F;写过程中发生的不可恢复错误次数(&gt;10更换)</td>
+<td>Inspur书面邮件回复</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>Current Pending Sector Count</td>
+<td>当前待处理扇区计数</td>
+<td>检测到潜在读写错误、等待重新分配的扇区数量(&gt;100更换)</td>
+<td>Inspur书面邮件回复</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>Offline Uncorrectable</td>
+<td>离线不可纠正错误</td>
+<td>硬盘在离线自检&#x2F;后台扫描时检测到的不可恢复错误次数(&gt;0更换)</td>
+<td>Inspur书面邮件回复</td>
+</tr>
+</tbody></table>
+<p><strong>以下是辅助日志，作为协助排障参考，不作为直接依据</strong></p>
+<table>
+<thead>
+<tr>
+<th>硬盘类型</th>
+<th>参数</th>
+<th>翻译</th>
+<th>说明</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SSD</td>
+<td>Reallocated Sector Count</td>
+<td>重分配扇区计数</td>
+<td>记录因物理损坏被替换到备用扇区的次数，数值增加说明介质退化(&gt;500为不可靠)</td>
+<td>Inspur书面邮件回复</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>CRC Error Count</td>
+<td>CRC 错误计数</td>
+<td>记录主机与硬盘之间传输数据时发生的 CRC 校验错误次数，常见原因包括数据线接触不良、电磁干扰或接口问题，单盘较多则可能为该盘本体故障，多个硬盘则进一步筛查是否位于同一个硬盘背板或同一个SAS端口</td>
+<td>Inspur书面邮件回复</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>Non-medium error count</td>
+<td>非介质故障</td>
+<td>与上方SSD的是一样的意思</td>
+<td>Inspur书面邮件回复</td>
+</tr>
+</tbody></table>
+<hr>
+<p>以下是回复的截图</p>
+<span id="more"></span>
+
+<p>Inspur 浪潮</p>
+<p><img src="https://img.hackerbs.com//20250918162644.png" alt="20250918162644"></p>
+<p>H3C 华三</p>
+<p><img src="https://img.hackerbs.com//20250918162724.png" alt="20250918162724"></p>
+<p>清华大学TUNA协会技术群组</p>
+<p>非书面回复，感谢<a target="_blank" rel="noopener" href="https://github.com/icenowy">@Icenowy</a>于<em>清华TUNA协会技术群组</em>内回复提出参考<code>Elements in grown defect list</code>参数的值，该值是HDD独有的指标，记录的是在使用过长中新发现的物理坏块数，数值持续增长则意味着该硬盘可靠性正在下降</p>
+<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><h3 id="对于JBOD模式的硬盘"><a href="#对于JBOD模式的硬盘" class="headerlink" title="对于JBOD模式的硬盘"></a>对于JBOD模式的硬盘</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用smartctl直接查询即可</span></span><br><span class="line">smartctl -a /dev/sdX</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以增加grep快速筛选想要查询的参数，在替换双引号中的即可</span></span><br><span class="line">smartctl -a /dev/sdX | grep -E &quot;Elements in grown defect list&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配合<span class="keyword">for</span>迅速遍历磁盘，&#123;a..z&#125;则是遍历sda到sdz的所有盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果盘很多那可以直接写为&#123;a..zz&#125;，则是遍历sda到sdzz共702个盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[ -b <span class="string">&quot;/dev/sd<span class="variable">$i</span>&quot;</span> ] <span class="built_in">test</span>命令的简写，判断该设备是不是一个硬盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;sd<span class="variable">$i</span>&quot;</span>是在输出日志前输出盘号，避免不知道是哪个盘的报错</span></span><br><span class="line">for i in &#123;a..z&#125;; do [ -b &quot;/dev/sd$i&quot; ] &amp;&amp; echo &quot;sd$i:&quot; &amp;&amp; sudo smartctl -a &quot;/dev/sd$i&quot; | grep &quot;Elements in grown defect list&quot;; done</span><br></pre></td></tr></table></figure>
+
+<h3 id="对于LSI-MegaRAID控制器，RAID模式的硬盘"><a href="#对于LSI-MegaRAID控制器，RAID模式的硬盘" class="headerlink" title="对于LSI MegaRAID控制器，RAID模式的硬盘"></a>对于LSI MegaRAID控制器，RAID模式的硬盘</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">由于硬盘由阵列卡接管，所以需要调用MegaRAID驱动程序才可访问</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/dev/sdX输入你挂载到系统的阵列，例如通常/dev/sda是RAID1系统盘</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其中megaraid,后面的数字对应该硬盘是该阵列中的第几个盘，从编号0开始是第一个</span></span><br><span class="line">smartctl -a -d megaraid,0 /dev/sdX</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同样的grep筛选</span></span><br><span class="line">smartctl -a -d megaraid,0 /dev/sdX | grep -E &quot;Non-medium error count&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">遍历快速排查所有盘</span></span><br><span class="line">for raid in &#123;a..z&#125;;do [ -b &quot;/dev/sd$raid&quot; ] &amp;&amp; for disk in &#123;0..20&#125;;do echo -e &quot;\033[36;1m阵列 sd$raid 中硬盘 $disk 日志: &quot; &amp;&amp; smartctl -a -d megaraid,$disk /dev/sd$raid | grep -E &quot;Non-medium error count&quot;;done;done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上方命令为单行，方便复制粘贴执行，以下是拆解后可读的版本</span></span><br><span class="line">for raid in &#123;a..z&#125;; do # 遍历sda到sdz的设备</span><br><span class="line">    [ -b &quot;/dev/sd$raid&quot; ] &amp;&amp; # 判断是不是硬盘，不是就跳过</span><br><span class="line">    for disk in &#123;0..20&#125;; do # 预设是0到20共21个硬盘，可以自行设置</span><br><span class="line">        echo -e &quot;\033[36;1m阵列 sd$raid 中硬盘 $disk 日志: &quot; # 打印个开头，不然不知道是哪个设备的日志</span><br><span class="line">        smartctl -a -d megaraid,$disk /dev/sd$raid | grep -E &quot;Non-medium error count&quot; # 根据你的需要调整grep筛选的内容</span><br><span class="line">    done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h2 id="进阶脚本"><a href="#进阶脚本" class="headerlink" title="进阶脚本"></a>进阶脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">日志文件以日期时间命名</span></span><br><span class="line">log_file=&quot;disk_error_$(date +%Y%m%d_%H%M%S).log&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">遍历可能的RAID设备（sda, sdb, sdc, sdd）</span></span><br><span class="line">for raid in &#123;a..d&#125;; do</span><br><span class="line">    if [ -b &quot;/dev/sd$raid&quot; ]; then</span><br><span class="line">        for disk in &#123;0..23&#125;; do</span><br><span class="line">            if smartctl -d megaraid,$disk /dev/sd$raid -i &gt;/dev/null 2&gt;&amp;1; then</span><br><span class="line">                output=$(smartctl -a -d megaraid,$disk /dev/sd$raid)</span><br><span class="line"></span><br><span class="line">                serial=$(echo &quot;$output&quot; | grep &quot;Serial number:&quot; | awk &#x27;&#123;print $3&#125;&#x27;)</span><br><span class="line"></span><br><span class="line">                if echo &quot;$output&quot; | grep -q &quot;SSD&quot;; then</span><br><span class="line">                    # ================= SSD =================</span><br><span class="line">                    reallocated_sectors=$(echo &quot;$output&quot; | grep &quot;Reallocated_Sector_Ct&quot; | awk &#x27;&#123;print $10&#125;&#x27;)</span><br><span class="line">                    reallocated_sectors=$&#123;reallocated_sectors:-0&#125;</span><br><span class="line"></span><br><span class="line">                    current_pending=$(echo &quot;$output&quot; | grep &quot;Current_Pending_Sector&quot; | awk &#x27;&#123;print $10&#125;&#x27;)</span><br><span class="line">                    current_pending=$&#123;current_pending:-0&#125;</span><br><span class="line"></span><br><span class="line">                    reported_uncorrect=$(echo &quot;$output&quot; | grep &quot;Reported_Uncorrect&quot; | awk &#x27;&#123;print $10&#125;&#x27;)</span><br><span class="line">                    reported_uncorrect=$&#123;reported_uncorrect:-0&#125;</span><br><span class="line"></span><br><span class="line">                    offline_uncorrect=$(echo &quot;$output&quot; | grep &quot;Offline_Uncorrectable&quot; | awk &#x27;&#123;print $10&#125;&#x27;)</span><br><span class="line">                    offline_uncorrect=$&#123;offline_uncorrect:-0&#125;</span><br><span class="line"></span><br><span class="line">                    crc_errors=$(echo &quot;$output&quot; | grep &quot;CRC_Error_Count&quot; | awk &#x27;&#123;print $10&#125;&#x27;)</span><br><span class="line">                    crc_errors=$&#123;crc_errors:-0&#125;</span><br><span class="line"></span><br><span class="line">                    if [ &quot;$reallocated_sectors&quot; -gt 0 ] || [ &quot;$current_pending&quot; -gt 0 ] || \</span><br><span class="line">                       [ &quot;$reported_uncorrect&quot; -gt 0 ] || [ &quot;$offline_uncorrect&quot; -gt 0 ] || [ &quot;$crc_errors&quot; -gt 0 ]; then</span><br><span class="line">                        echo &quot;$output&quot; &gt;&gt; &quot;$log_file&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 SSD 磁盘 \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) 检测到异常：\033[0m\n&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m05 重分配扇区计数(Reallocated Sector Count)：\033[31;1m$reallocated_sectors\033[0m&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m197 当前待处理扇区(Current Pending Sector Count)：\033[31;1m$current_pending\033[0m&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m已报告的不可纠正错误(Reported Uncorrectable Errors)：\033[31;1m$reported_uncorrect\033[0m&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m离线不可纠正错误(Offline Uncorrectable)：\033[31;1m$offline_uncorrect\033[0m&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m接口CRC错误计数(CRC Error Count)：\033[31;1m$crc_errors\033[0m\n&quot;</span><br><span class="line">                    fi</span><br><span class="line">                else</span><br><span class="line">                    # ================= HDD =================</span><br><span class="line">                    read_uncorrected=$(echo &quot;$output&quot; | grep -A 10 &quot;Error counter log:&quot; | grep &quot;^read:&quot; | awk &#x27;&#123;print $NF&#125;&#x27;)</span><br><span class="line">                    read_uncorrected=$&#123;read_uncorrected:-0&#125;</span><br><span class="line"></span><br><span class="line">                    verify_uncorrected=$(echo &quot;$output&quot; | grep -A 10 &quot;Error counter log:&quot; | grep &quot;^verify:&quot; | awk &#x27;&#123;print $NF&#125;&#x27;)</span><br><span class="line">                    verify_uncorrected=$&#123;verify_uncorrected:-0&#125;</span><br><span class="line"></span><br><span class="line">                    total_uncorrected=$(echo &quot;$output&quot; | grep &quot;Total uncorrected errors&quot; | awk &#x27;&#123;print $NF&#125;&#x27;)</span><br><span class="line">                    total_uncorrected=$&#123;total_uncorrected:-0&#125;</span><br><span class="line"></span><br><span class="line">                    grown_defect_list=$(echo &quot;$output&quot; | grep &quot;Elements in grown defect list&quot; | awk &#x27;&#123;print $NF&#125;&#x27;)</span><br><span class="line">                    grown_defect_list=$&#123;grown_defect_list:-0&#125;</span><br><span class="line"></span><br><span class="line">                    non_medium=$(echo &quot;$output&quot; | grep &quot;Non-medium error count:&quot; | awk &#x27;&#123;print $NF&#125;&#x27;)</span><br><span class="line">                    non_medium=$&#123;non_medium:-0&#125;</span><br><span class="line"></span><br><span class="line">                    if [ &quot;$read_uncorrected&quot; -gt 0 ] || [ &quot;$verify_uncorrected&quot; -gt 0 ] || \</span><br><span class="line">                       [ &quot;$total_uncorrected&quot; -gt 0 ] || [ &quot;$grown_defect_list&quot; -gt 0 ] || [ &quot;$non_medium&quot; -gt 0 ]; then</span><br><span class="line">                        echo &quot;$output&quot; &gt;&gt; &quot;$log_file&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 HDD 磁盘 \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) 检测到异常：\033[0m\n&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m读无法纠正错误(Read total uncorrected errors)：\033[31;1m$read_uncorrected\033[0m&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m写无法纠正错误(Write total uncorrected errors)：\033[33;1m日志中无此项，请参考总错误\033[0m&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m校验无法纠正错误(Verify total uncorrected errors)：\033[31;1m$verify_uncorrected\033[0m&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m总无法纠正错误(Total uncorrected errors)：\033[31;1m$total_uncorrected\033[0m&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m已增长缺陷列表元素(Elements in grown defect list)：\033[31;1m$grown_defect_list\033[0m&quot;</span><br><span class="line">                        echo -e &quot;\033[36;1m非介质错误(Non-medium error count)：\033[31;1m$non_medium\033[0m\n&quot;</span><br><span class="line">                    fi</span><br><span class="line">                fi</span><br><span class="line">            fi</span><br><span class="line">        done</span><br><span class="line">    fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>该脚本的单行模式，方便直接在终端复制运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash; log_file=<span class="string">&quot;disk_error_<span class="subst">$(date +%Y%m%d_%H%M%S)</span>.log&quot;</span>; <span class="keyword">for</span> raid <span class="keyword">in</span> &#123;a..d&#125;; <span class="keyword">do</span> <span class="keyword">if</span> [ -b <span class="string">&quot;/dev/sd<span class="variable">$raid</span>&quot;</span> ]; <span class="keyword">then</span> <span class="keyword">for</span> disk <span class="keyword">in</span> &#123;0..23&#125;; <span class="keyword">do</span> <span class="keyword">if</span> smartctl -d megaraid,<span class="variable">$disk</span> /dev/sd<span class="variable">$raid</span> -i &gt;/dev/null 2&gt;&amp;1; <span class="keyword">then</span> output=$(smartctl -a -d megaraid,<span class="variable">$disk</span> /dev/sd<span class="variable">$raid</span>); serial=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep <span class="string">&quot;Serial number:&quot;</span> | awk <span class="string">&#x27;&#123;print $3&#125;&#x27;</span>); <span class="keyword">if</span> <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep -q <span class="string">&quot;SSD&quot;</span>; <span class="keyword">then</span> reallocated_sectors=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep <span class="string">&quot;Reallocated_Sector_Ct&quot;</span> | awk <span class="string">&#x27;&#123;print $10&#125;&#x27;</span>); reallocated_sectors=<span class="variable">$&#123;reallocated_sectors:-0&#125;</span>; current_pending=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep <span class="string">&quot;Current_Pending_Sector&quot;</span> | awk <span class="string">&#x27;&#123;print $10&#125;&#x27;</span>); current_pending=<span class="variable">$&#123;current_pending:-0&#125;</span>; reported_uncorrect=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep <span class="string">&quot;Reported_Uncorrect&quot;</span> | awk <span class="string">&#x27;&#123;print $10&#125;&#x27;</span>); reported_uncorrect=<span class="variable">$&#123;reported_uncorrect:-0&#125;</span>; offline_uncorrect=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep <span class="string">&quot;Offline_Uncorrectable&quot;</span> | awk <span class="string">&#x27;&#123;print $10&#125;&#x27;</span>); offline_uncorrect=<span class="variable">$&#123;offline_uncorrect:-0&#125;</span>; crc_errors=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep <span class="string">&quot;CRC_Error_Count&quot;</span> | awk <span class="string">&#x27;&#123;print $10&#125;&#x27;</span>); crc_errors=<span class="variable">$&#123;crc_errors:-0&#125;</span>; <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$reallocated_sectors</span>&quot;</span> -gt 0 ] || [ <span class="string">&quot;<span class="variable">$current_pending</span>&quot;</span> -gt 0 ] || [ <span class="string">&quot;<span class="variable">$reported_uncorrect</span>&quot;</span> -gt 0 ] || [ <span class="string">&quot;<span class="variable">$offline_uncorrect</span>&quot;</span> -gt 0 ] || [ <span class="string">&quot;<span class="variable">$crc_errors</span>&quot;</span> -gt 0 ]; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$log_file</span>&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1mRAID \033[32;1msd<span class="variable">$raid</span> \033[36;1m中的 SSD 磁盘 \033[32;1m#<span class="variable">$disk</span> \033[36;1m(SN:\033[33;1m <span class="variable">$serial</span>) 检测到异常：\033[0m\n&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m05 重分配扇区计数(Reallocated Sector Count)：\033[31;1m<span class="variable">$reallocated_sectors</span>\033[0m&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m197 当前待处理扇区(Current Pending Sector Count)：\033[31;1m<span class="variable">$current_pending</span>\033[0m&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m已报告的不可纠正错误(Reported Uncorrectable Errors)：\033[31;1m<span class="variable">$reported_uncorrect</span>\033[0m&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m离线不可纠正错误(Offline Uncorrectable)：\033[31;1m<span class="variable">$offline_uncorrect</span>\033[0m&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m接口CRC错误计数(CRC Error Count)：\033[31;1m<span class="variable">$crc_errors</span>\033[0m\n&quot;</span>; <span class="keyword">fi</span>; <span class="keyword">else</span> read_uncorrected=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep -A 10 <span class="string">&quot;Error counter log:&quot;</span> | grep <span class="string">&quot;^read:&quot;</span> | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>); read_uncorrected=<span class="variable">$&#123;read_uncorrected:-0&#125;</span>; verify_uncorrected=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep -A 10 <span class="string">&quot;Error counter log:&quot;</span> | grep <span class="string">&quot;^verify:&quot;</span> | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>); verify_uncorrected=<span class="variable">$&#123;verify_uncorrected:-0&#125;</span>; total_uncorrected=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep <span class="string">&quot;Total uncorrected errors&quot;</span> | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>); total_uncorrected=<span class="variable">$&#123;total_uncorrected:-0&#125;</span>; grown_defect_list=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep <span class="string">&quot;Elements in grown defect list&quot;</span> | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>); grown_defect_list=<span class="variable">$&#123;grown_defect_list:-0&#125;</span>; non_medium=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> | grep <span class="string">&quot;Non-medium error count:&quot;</span> | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>); non_medium=<span class="variable">$&#123;non_medium:-0&#125;</span>; <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$read_uncorrected</span>&quot;</span> -gt 0 ] || [ <span class="string">&quot;<span class="variable">$verify_uncorrected</span>&quot;</span> -gt 0 ] || [ <span class="string">&quot;<span class="variable">$total_uncorrected</span>&quot;</span> -gt 0 ] || [ <span class="string">&quot;<span class="variable">$grown_defect_list</span>&quot;</span> -gt 0 ] || [ <span class="string">&quot;<span class="variable">$non_medium</span>&quot;</span> -gt 0 ]; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$output</span>&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$log_file</span>&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1mRAID \033[32;1msd<span class="variable">$raid</span> \033[36;1m中的 HDD 磁盘 \033[32;1m#<span class="variable">$disk</span> \033[36;1m(SN:\033[33;1m <span class="variable">$serial</span>) 检测到异常：\033[0m\n&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m读无法纠正错误(Read total uncorrected errors)：\033[31;1m<span class="variable">$read_uncorrected</span>\033[0m&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m写无法纠正错误(Write total uncorrected errors)：\033[33;1m日志中无此项，请参考总错误\033[0m&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m校验无法纠正错误(Verify total uncorrected errors)：\033[31;1m<span class="variable">$verify_uncorrected</span>\033[0m&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m总无法纠正错误(Total uncorrected errors)：\033[31;1m<span class="variable">$total_uncorrected</span>\033[0m&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m已增长缺陷列表元素(Elements in grown defect list)：\033[31;1m<span class="variable">$grown_defect_list</span>\033[0m&quot;</span>; <span class="built_in">echo</span> -e <span class="string">&quot;\033[36;1m非介质错误(Non-medium error count)：\033[31;1m<span class="variable">$non_medium</span>\033[0m\n&quot;</span>; <span class="keyword">fi</span>; <span class="keyword">fi</span>; <span class="keyword">fi</span>; <span class="keyword">done</span>; <span class="keyword">fi</span>; <span class="keyword">done</span></span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>您的捐助可以帮助我们更好的更新技术文章</div>
+  <button>
+    捐助
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="hackerbs.com 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="hackerbs.com 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/binance.jpg" alt="hackerbs.com binance">
+        <span>binance</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>hackerbs.com
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://hackerbs.com/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html" title="关于服务器硬盘故障但带外没有错误日志的排障与报修笔记">https://hackerbs.com/关于硬盘smartctl日志及其他日志排障并报修的笔记.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="mailto:0@hackerbs.com">
+            <span class="icon">
+              <i class="fab fa-envelope"></i>
+            </span>
+
+            <span class="label">e-mail</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/DELL/" rel="tag"># DELL</a>
+              <a href="/tags/%E5%B8%A6%E5%A4%96/" rel="tag"># 带外</a>
+              <a href="/tags/%E6%8E%92%E9%9A%9C/" rel="tag"># 排障</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 服务器</a>
+              <a href="/tags/%E7%A1%AC%E7%9B%98/" rel="tag"># 硬盘</a>
+              <a href="/tags/%E6%B5%AA%E6%BD%AE/" rel="tag"># 浪潮</a>
+              <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"># 运维</a>
+              <a href="/tags/%E8%81%94%E6%83%B3/" rel="tag"># 联想</a>
+              <a href="/tags/%E5%8D%8E%E4%B8%89/" rel="tag"># 华三</a>
+              <a href="/tags/%E8%B6%85%E8%81%9A%E5%8F%98/" rel="tag"># 超聚变</a>
+              <a href="/tags/%E6%95%85%E9%9A%9C/" rel="tag"># 故障</a>
+              <a href="/tags/%E6%97%A5%E5%BF%97/" rel="tag"># 日志</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/DELL%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A1%AC%E7%9B%98IO%E5%91%8A%E8%AD%A6%E6%8E%92%E9%9A%9C%E6%80%9D%E8%B7%AF.html" rel="prev" title="DELL服务器硬盘IO告警排障思路">
+                  <i class="fa fa-chevron-left"></i> DELL服务器硬盘IO告警排障思路
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hackerbs.com</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">231k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:30</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+<div class="footer-halbyte">
+  🚢 Powered by <a href="https://halbyte.com" target="_blank">Halbyte Logistics</a> — China to World Shipping Solutions
+</div>
+
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.hackerbs.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"欢迎评论！","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","admin":false,"theme":"waline-theme-onepiece","emojiCDN":"","emojiMaps":{},"emojiExt":".png","emojiSize":32,"CDN":"","dark":true,"el":"#waline","comment":true,"path":"/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
