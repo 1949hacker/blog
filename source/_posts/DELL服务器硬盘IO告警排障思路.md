@@ -58,6 +58,98 @@ smartctl -a -d megaraid,2 /dev/sdb
 for raid in {a..d};do for disk in {0..10};do smartctl -a -d megaraid,$disk /dev/sd$raid | grep -i "CRC\|Error";done;done
 ```
 
+HDD SSD二合一版
+
+复制粘贴直接用，不需要创建为脚本文件
+
+```shell
+#!/bin/bash;log_file="disk_error_$(date +%Y%m%d_%H%M%S).log";for raid in {a..d};do [ -b "/dev/sd$raid" ] && for disk in {0..23};do smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1 && output=$(smartctl -a -d megaraid,$disk /dev/sd$raid) && serial=$(echo "$output" | grep "Serial number:" | awk '{print $3}') && if echo "$output" | grep -q "SSD";then reallocated_sectors=$(echo "$output" | grep "Reallocated_Sector_Ct" | awk '{print $10}');reallocated_sectors=${reallocated_sectors:-0};current_pending=$(echo "$output" | grep "Current_Pending_Sector" | awk '{print $10}');current_pending=${current_pending:-0};reported_uncorrect=$(echo "$output" | grep "Reported_Uncorrect" | awk '{print $10}');reported_uncorrect=${reported_uncorrect:-0};offline_uncorrect=$(echo "$output" | grep "Offline_Uncorrectable" | awk '{print $10}');offline_uncorrect=${offline_uncorrect:-0};crc_errors=$(echo "$output" | grep "CRC_Error_Count" | awk '{print $10}');crc_errors=${crc_errors:-0};if [ "$reallocated_sectors" -gt 0 ] || [ "$current_pending" -gt 0 ] || [ "$reported_uncorrect" -gt 0 ] || [ "$offline_uncorrect" -gt 0 ] || [ "$crc_errors" -gt 0 ];then echo "$output" >> "$log_file";echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 SSD 磁盘 \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) 检测到异常：\033[0m\n";echo -e "\033[36;1m05 重分配扇区计数(Reallocated Sector Count)：\033[31;1m$reallocated_sectors\033[0m";echo -e "\033[36;1m197 当前待处理扇区(Current Pending Sector Count)：\033[31;1m$current_pending\033[0m";echo -e "\033[36;1m已报告的不可纠正错误(Reported Uncorrectable Errors)：\033[31;1m$reported_uncorrect\033[0m";echo -e "\033[36;1m离线不可纠正错误(Offline Uncorrectable)：\033[31;1m$offline_uncorrect\033[0m";echo -e "\033[36;1m接口CRC错误计数(CRC Error Count)：\033[31;1m$crc_errors\033[0m\n";fi;else read_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^read:" | awk '{print $NF}');read_uncorrected=${read_uncorrected:-0};verify_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^verify:" | awk '{print $NF}');verify_uncorrected=${verify_uncorrected:-0};total_uncorrected=$(echo "$output" | grep "Total uncorrected errors" | awk '{print $NF}');total_uncorrected=${total_uncorrected:-0};grown_defect_list=$(echo "$output" | grep "Elements in grown defect list" | awk '{print $NF}');grown_defect_list=${grown_defect_list:-0};non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '{print $NF}');non_medium=${non_medium:-0};if [ "$read_uncorrected" -gt 0 ] || [ "$verify_uncorrected" -gt 0 ] || [ "$total_uncorrected" -gt 0 ] || [ "$grown_defect_list" -gt 0 ] || [ "$non_medium" -gt 0 ];then echo "$output" >> "$log_file";echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 HDD 磁盘 \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) 检测到异常：\033[0m\n";echo -e "\033[36;1m读无法纠正错误(Read total uncorrected errors)：\033[31;1m$read_uncorrected\033[0m";echo -e "\033[36;1m校验无法纠正错误(Verify total uncorrected errors)：\033[31;1m$verify_uncorrected\033[0m";echo -e "\033[36;1m总无法纠正错误(Total uncorrected errors)：\033[31;1m$total_uncorrected\033[0m";echo -e "\033[36;1m已增长缺陷列表元素(Elements in grown defect list)：\033[31;1m$grown_defect_list\033[0m";echo -e "\033[36;1m非介质错误(Non-medium error count)：\033[31;1m$non_medium\033[0m\n";fi;fi;fi;done;done
+```
+
+以下需要创建个`smartctl.sh`的脚本然后`chmod +x smartctl.sh`才能用，推荐上方的复制粘贴即用
+
+```shell
+#!/bin/bash
+
+# 日志文件以日期时间命名
+log_file="disk_error_$(date +%Y%m%d_%H%M%S).log"
+
+# 遍历可能的RAID设备（sda, sdb, sdc, sdd）
+for raid in {a..d}; do
+    if [ -b "/dev/sd$raid" ]; then
+        for disk in {0..23}; do
+            if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then
+                output=$(smartctl -a -d megaraid,$disk /dev/sd$raid)
+
+                serial=$(echo "$output" | grep "Serial number:" | awk '{print $3}')
+
+                if echo "$output" | grep -q "SSD"; then
+                    # ================= SSD =================
+                    reallocated_sectors=$(echo "$output" | grep "Reallocated_Sector_Ct" | awk '{print $10}')
+                    reallocated_sectors=${reallocated_sectors:-0}
+
+                    current_pending=$(echo "$output" | grep "Current_Pending_Sector" | awk '{print $10}')
+                    current_pending=${current_pending:-0}
+
+                    reported_uncorrect=$(echo "$output" | grep "Reported_Uncorrect" | awk '{print $10}')
+                    reported_uncorrect=${reported_uncorrect:-0}
+
+                    offline_uncorrect=$(echo "$output" | grep "Offline_Uncorrectable" | awk '{print $10}')
+                    offline_uncorrect=${offline_uncorrect:-0}
+
+                    crc_errors=$(echo "$output" | grep "CRC_Error_Count" | awk '{print $10}')
+                    crc_errors=${crc_errors:-0}
+
+                    if [ "$reallocated_sectors" -gt 0 ] || [ "$current_pending" -gt 0 ] || \
+                       [ "$reported_uncorrect" -gt 0 ] || [ "$offline_uncorrect" -gt 0 ] || [ "$crc_errors" -gt 0 ]; then
+                        echo "$output" >> "$log_file"
+                        echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 SSD 磁盘 \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) 检测到异常：\033[0m\n"
+                        echo -e "\033[36;1m05 重分配扇区计数(Reallocated Sector Count)：\033[31;1m$reallocated_sectors\033[0m"
+                        echo -e "\033[36;1m197 当前待处理扇区(Current Pending Sector Count)：\033[31;1m$current_pending\033[0m"
+                        echo -e "\033[36;1m已报告的不可纠正错误(Reported Uncorrectable Errors)：\033[31;1m$reported_uncorrect\033[0m"
+                        echo -e "\033[36;1m离线不可纠正错误(Offline Uncorrectable)：\033[31;1m$offline_uncorrect\033[0m"
+                        echo -e "\033[36;1m接口CRC错误计数(CRC Error Count)：\033[31;1m$crc_errors\033[0m\n"
+                    fi
+                else
+                    # ================= HDD =================
+                    read_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^read:" | awk '{print $NF}')
+                    read_uncorrected=${read_uncorrected:-0}
+
+                    verify_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^verify:" | awk '{print $NF}')
+                    verify_uncorrected=${verify_uncorrected:-0}
+
+                    total_uncorrected=$(echo "$output" | grep "Total uncorrected errors" | awk '{print $NF}')
+                    total_uncorrected=${total_uncorrected:-0}
+
+                    grown_defect_list=$(echo "$output" | grep "Elements in grown defect list" | awk '{print $NF}')
+                    grown_defect_list=${grown_defect_list:-0}
+
+                    non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '{print $NF}')
+                    non_medium=${non_medium:-0}
+
+                    if [ "$read_uncorrected" -gt 0 ] || [ "$verify_uncorrected" -gt 0 ] || \
+                       [ "$total_uncorrected" -gt 0 ] || [ "$grown_defect_list" -gt 0 ] || [ "$non_medium" -gt 0 ]; then
+                        echo "$output" >> "$log_file"
+                        echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 HDD 磁盘 \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) 检测到异常：\033[0m\n"
+                        echo -e "\033[36;1m读无法纠正错误(Read total uncorrected errors)：\033[31;1m$read_uncorrected\033[0m"
+                        echo -e "\033[36;1m校验无法纠正错误(Verify total uncorrected errors)：\033[31;1m$verify_uncorrected\033[0m"
+                        echo -e "\033[36;1m总无法纠正错误(Total uncorrected errors)：\033[31;1m$total_uncorrected\033[0m"
+                        echo -e "\033[36;1m已增长缺陷列表元素(Elements in grown defect list)：\033[31;1m$grown_defect_list\033[0m"
+                        echo -e "\033[36;1m非介质错误(Non-medium error count)：\033[31;1m$non_medium\033[0m\n"
+                    fi
+                fi
+            fi
+        done
+    fi
+done
+```
+
+输出效果如下
+
+**以下部分的忽略掉即可，老版本的**
+
+---
+
 ```shell
 # 批量巡检脚本 - 适用于HDD
 
@@ -170,93 +262,9 @@ done
 for raid in {a..d}; do if [ -b "/dev/sd$raid" ]; then for disk in {0..23}; do if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then output=$(smartctl -a -d megaraid,$disk /dev/sd$raid); serial=$(echo "$output" | grep "Serial number:" | awk '{print $3}'); if echo "$output" | grep -q "SSD"; then media_errors=$(echo "$output" | grep "Media_and_Data_Integrity_Errors" | awk '{print $10}'); media_errors=${media_errors:-0}; uncorrected_errors=$(echo "$output" | grep "Error_Information_Log_Entries" | awk '{print $10}'); uncorrected_errors=${uncorrected_errors:-0}; if [ "$media_errors" -gt 0 ] || [ "$uncorrected_errors" -gt 0 ]; then echo "$output" >> disk_error.log; echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 SSD Disk \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) \033[36;1m存在以下错误：\n"; echo -e "\033[36;1m媒体和数据完整性错误：\033[31;1m$media_errors\033[36;1m"; echo -e "\033[36;1m错误信息日志条目：\033[31;1m$uncorrected_errors\033[36;1m"; echo -e "\n"; fi; else read_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^read:" | awk '{print $NF}'); read_uncorrected=${read_uncorrected:-0}; verify_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^verify:" | awk '{print $NF}'); verify_uncorrected=${verify_uncorrected:-0}; non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '{print $NF}'); non_medium=${non_medium:-0}; if [ "$read_uncorrected" -gt 0 ] || [ "$verify_uncorrected" -gt 0 ] || [ "$non_medium" -gt 0 ]; then echo "$output" >> disk_error.log; echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 HDD Disk \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) \033[36;1m存在以下错误：\n"; echo -e "\033[36;1m读取错误无法纠正次数：\033[31;1m$read_uncorrected\033[36;1m"; echo -e "\033[36;1m磁盘自检无法纠错次数：\033[31;1m$verify_uncorrected\033[36;1m"; echo -e "\033[36;1m非介质错误次数：\033[31;1m$non_medium\033[36;1m"; echo -e "\n"; fi; fi; fi; done; fi; done
 ```
 
-HDD SSD二合一版
+---
 
-```shell
-# 测试版
-
-#!/bin/bash
-
-# 日志文件以日期时间命名
-log_file="disk_error_$(date +%Y%m%d_%H%M%S).log"
-
-# 遍历可能的RAID设备（sda, sdb, sdc, sdd）
-for raid in {a..d}; do
-    # 检查设备是否存在
-    if [ -b "/dev/sd$raid" ]; then
-        # 遍历每个RAID设备上的物理磁盘（0到23号）
-        for disk in {0..23}; do
-            # 检查磁盘是否可访问（尝试获取基本信息，输出重定向到/dev/null）
-            if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then
-                # 获取完整的SMART数据
-                output=$(smartctl -a -d megaraid,$disk /dev/sd$raid)
-
-                # 从输出中提取序列号
-                serial=$(echo "$output" | grep "Serial number:" | awk '{print $3}')
-
-                # 检测磁盘类型（SSD或HDD）
-                if echo "$output" | grep -q "SSD"; then
-                    # SSD磁盘：检查关键错误属性
-                    reallocated_sectors=$(echo "$output" | grep "Reallocated_Sector_Ct" | awk '{print $10}')
-                    reallocated_sectors=${reallocated_sectors:-0}
-
-                    reported_uncorrect=$(echo "$output" | grep "Reported_Uncorrect" | awk '{print $10}')
-                    reported_uncorrect=${reported_uncorrect:-0}
-
-                    current_pending=$(echo "$output" | grep "Current_Pending_Sector" | awk '{print $10}')
-                    current_pending=${current_pending:-0}
-
-                    offline_uncorrect=$(echo "$output" | grep "Offline_Uncorrectable" | awk '{print $10}')
-                    offline_uncorrect=${offline_uncorrect:-0}
-
-                    crc_errors=$(echo "$output" | grep "CRC_Error_Count" | awk '{print $10}')
-                    crc_errors=${crc_errors:-0}
-
-                    # 检查SSD错误
-                    if [ "$reallocated_sectors" -gt 0 ] || [ "$reported_uncorrect" -gt 0 ] || \
-                       [ "$current_pending" -gt 0 ] || [ "$offline_uncorrect" -gt 0 ] || [ "$crc_errors" -gt 0 ]; then
-                        echo "$output" >> "$log_file"
-                        echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 SSD Disk \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) \033[36;1m存在以下错误：\n"
-                        echo -e "\033[36;1m重分配扇区计数：\033[31;1m$reallocated_sectors\033[36;1m"
-                        echo -e "\033[36;1m报告无法纠正错误：\033[31;1m$reported_uncorrect\033[36;1m"
-                        echo -e "\033[36;1m当前待处理扇区：\033[31;1m$current_pending\033[36;1m"
-                        echo -e "\033[36;1m离线不可校正错误：\033[31;1m$offline_uncorrect\033[36;1m"
-                        echo -e "\033[36;1m接口CRC错误次数：\033[31;1m$crc_errors\033[36;1m"
-                        echo -e "\n"
-                    fi
-                else
-                    # HDD磁盘：使用原有的错误计数器
-                    read_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^read:" | awk '{print $NF}')
-                    read_uncorrected=${read_uncorrected:-0}
-
-                    verify_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^verify:" | awk '{print $NF}')
-                    verify_uncorrected=${verify_uncorrected:-0}
-
-                    non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '{print $NF}')
-                    non_medium=${non_medium:-0}
-
-                    # 检查HDD错误
-                    if [ "$read_uncorrected" -gt 0 ] || [ "$verify_uncorrected" -gt 0 ] || [ "$non_medium" -gt 0 ]; then
-                        echo "$output" >> "$log_file"
-                        echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 HDD Disk \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) \033[36;1m存在以下错误：\n"
-                        echo -e "\033[36;1m读取错误无法纠正次数：\033[31;1m$read_uncorrected\033[36;1m"
-                        echo -e "\033[36;1m磁盘自检无法纠错次数：\033[31;1m$verify_uncorrected\033[36;1m"
-                        echo -e "\033[36;1m非介质错误次数：\033[31;1m$non_medium\033[36;1m"
-                        echo -e "\n"
-                    fi
-                fi
-            fi
-        done
-    fi
-done
-
-# 一条龙服务
-log_file="disk_error_$(date +%Y%m%d_%H%M%S).log"; for raid in {a..d}; do if [ -b "/dev/sd$raid" ]; then for disk in {0..23}; do if smartctl -d megaraid,$disk /dev/sd$raid -i >/dev/null 2>&1; then output=$(smartctl -a -d megaraid,$disk /dev/sd$raid); serial=$(echo "$output" | grep "Serial number:" | awk '{print $3}'); if echo "$output" | grep -q "SSD"; then reallocated_sectors=$(echo "$output" | grep "Reallocated_Sector_Ct" | awk '{print $10}'); reallocated_sectors=${reallocated_sectors:-0}; reported_uncorrect=$(echo "$output" | grep "Reported_Uncorrect" | awk '{print $10}'); reported_uncorrect=${reported_uncorrect:-0}; current_pending=$(echo "$output" | grep "Current_Pending_Sector" | awk '{print $10}'); current_pending=${current_pending:-0}; offline_uncorrect=$(echo "$output" | grep "Offline_Uncorrectable" | awk '{print $10}'); offline_uncorrect=${offline_uncorrect:-0}; crc_errors=$(echo "$output" | grep "CRC_Error_Count" | awk '{print $10}'); crc_errors=${crc_errors:-0}; if [ "$reallocated_sectors" -gt 0 ] || [ "$reported_uncorrect" -gt 0 ] || [ "$current_pending" -gt 0 ] || [ "$offline_uncorrect" -gt 0 ] || [ "$crc_errors" -gt 0 ]; then echo "$output" >> "$log_file"; echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 SSD Disk \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) \033[36;1m存在以下错误：\n"; echo -e "\033[36;1m重分配扇区计数：\033[31;1m$reallocated_sectors\033[36;1m"; echo -e "\033[36;1m报告无法纠正错误：\033[31;1m$reported_uncorrect\033[36;1m"; echo -e "\033[36;1m当前待处理扇区：\033[31;1m$current_pending\033[36;1m"; echo -e "\033[36;1m离线不可校正错误：\033[31;1m$offline_uncorrect\033[36;1m"; echo -e "\033[36;1m接口CRC错误次数：\033[31;1m$crc_errors\033[36;1m\n"; fi; else read_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^read:" | awk '{print $NF}'); read_uncorrected=${read_uncorrected:-0}; verify_uncorrected=$(echo "$output" | grep -A 10 "Error counter log:" | grep "^verify:" | awk '{print $NF}'); verify_uncorrected=${verify_uncorrected:-0}; non_medium=$(echo "$output" | grep "Non-medium error count:" | awk '{print $NF}'); non_medium=${non_medium:-0}; if [ "$read_uncorrected" -gt 0 ] || [ "$verify_uncorrected" -gt 0 ] || [ "$non_medium" -gt 0 ]; then echo "$output" >> "$log_file"; echo -e "\033[36;1mRAID \033[32;1msd$raid \033[36;1m中的 HDD Disk \033[32;1m#$disk \033[36;1m(SN:\033[33;1m $serial) \033[36;1m存在以下错误：\n"; echo -e "\033[36;1m读取错误无法纠正次数：\033[31;1m$read_uncorrected\033[36;1m"; echo -e "\033[36;1m磁盘自检无法纠错次数：\033[31;1m$verify_uncorrected\033[36;1m"; echo -e "\033[36;1m非介质错误次数：\033[31;1m$non_medium\033[36;1m\n"; fi; fi; fi; done; fi; done
-```
-
-输出效果如下
-
-![企业微信截图_17580931121073](https://img.hackerbs.com//企业微信截图_17580931121073.png)
+**以上部分的忽略掉即可，老版本的**
 
 #### 原始错误日志解读
 
