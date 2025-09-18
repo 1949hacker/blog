@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset> 
    <url>
-    <loc>https://hackerbs.com/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E5%8F%8A%E5%85%B6%E4%BB%96%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html</loc>
+    <loc>https://hackerbs.com/%E5%85%B3%E4%BA%8E%E7%A1%AC%E7%9B%98smartctl%E6%97%A5%E5%BF%97%E6%8E%92%E9%9A%9C%E5%B9%B6%E6%8A%A5%E4%BF%AE%E7%9A%84%E7%AC%94%E8%AE%B0.html</loc>
     
     <lastmod>
       2025-09-18
@@ -65,14 +65,6 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url> <url>
-    <loc>https://hackerbs.com/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%9E%84%E5%BB%BAarmv8%E5%B9%B3%E5%8F%B0vsftpd-Docker%E9%95%9C%E5%83%8F%E7%9A%84%E8%BF%87%E7%A8%8B.html</loc>
-    
-    <lastmod>
-      2025-09-04
-    </lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url> <url>
     <loc>https://hackerbs.com/%E8%AE%B0%E5%BD%95%E5%88%9D%E5%AD%A6Python%E5%BC%80%E5%8F%91fio%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.html</loc>
     
     <lastmod>
@@ -82,6 +74,14 @@
     <priority>0.8</priority>
   </url> <url>
     <loc>https://hackerbs.com/%E8%AE%B0%E5%BD%95%E7%94%A8docker%E9%83%A8%E7%BD%B2nextcloud%E5%8F%8A%E9%85%8D%E5%A5%97mariadb%E3%80%81redis%E5%92%8C%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8.html</loc>
+    
+    <lastmod>
+      2025-09-04
+    </lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url> <url>
+    <loc>https://hackerbs.com/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%9E%84%E5%BB%BAarmv8%E5%B9%B3%E5%8F%B0vsftpd-Docker%E9%95%9C%E5%83%8F%E7%9A%84%E8%BF%87%E7%A8%8B.html</loc>
     
     <lastmod>
       2025-09-04
@@ -241,7 +241,7 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url> <url>
-    <loc>https://hackerbs.com/IT%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%99%BE%E7%A7%91.html</loc>
+    <loc>https://hackerbs.com/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html</loc>
     
     <lastmod>
       2025-09-04
@@ -249,7 +249,7 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url> <url>
-    <loc>https://hackerbs.com/Linux%E6%8A%80%E5%B7%A7%E3%80%90%E9%9A%8F%E6%97%B6%E6%9B%B4%E6%96%B0%E3%80%91.html</loc>
+    <loc>https://hackerbs.com/IT%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%99%BE%E7%A7%91.html</loc>
     
     <lastmod>
       2025-09-04

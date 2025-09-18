@@ -37,24 +37,24 @@ tags:
 
 | 硬盘类型 | 参数 | 翻译 | 说明 | 来源 |
 | --- | --- | --- | --- | --- |
-| SSD  | ID 05 Reallocated Sector Count | 重分配扇区计数     | 因坏块被重新分配的扇区数量，值越高健康状况越差        | H3C书面邮件回复 |
-| SSD  | ID 197 Current Pending Sector Count | 当前待处理扇区计数   | 有潜在读写错误、待重新映射的扇区数量             | H3C书面邮件回复 |
-| HDD  | Total uncorrected errors | 总无法纠正错误     |  | H3C书面邮件回复 |
-| HDD | Verify total uncorrected errors | 校验无法纠正错误 | 硬盘控制器自检时无法通过ECC纠正的错误总数，高值表示可靠性下降 | H3C书面邮件回复 |
-| HDD | Read total uncorrected errors | 读无法纠正错误 | 读取/写入IO时无法通过ECC纠正的错误总数，高值表示可靠性下降 | H3C书面邮件回复 |
+| SSD  | ID 05 Reallocated Sector Count | 重分配扇区计数     | 因坏块被重新分配的扇区数量，值越高健康状况越差        | 新华三书面邮件回复 |
+| SSD  | ID 197 Current Pending Sector Count | 当前待处理扇区计数   | 有潜在读写错误、待重新映射的扇区数量             | 新华三书面邮件回复 |
+| HDD  | Total uncorrected errors | 总无法纠正错误     |  | 新华三书面邮件回复 |
+| HDD | Verify total uncorrected errors | 校验无法纠正错误 | 硬盘控制器自检时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三书面邮件回复 |
+| HDD | Read total uncorrected errors | 读无法纠正错误 | 读取/写入IO时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三书面邮件回复 |
 | HDD  | Elements in grown defect list | 已增长缺陷列表中的元素 | 硬盘运行中登记的坏块数量，用于追踪坏块增长          | [@Icenowy](https://github.com/icenowy)于清华TUNA协会技术群组内回复 |
-| HDD  | Write total uncorrected errors | 写入无法纠正错误总数  | 实际日志中无此项，参考上方总无法纠正错误即可 | Inspur书面邮件回复 |
-| SSD | Reported Uncorrectable Errors | 已报告的不可纠正错误 | 硬盘向主机报告的读/写过程中发生的不可恢复错误次数(>10更换) | Inspur书面邮件回复 |
-| SSD | Current Pending Sector Count | 当前待处理扇区计数 | 检测到潜在读写错误、等待重新分配的扇区数量(>100更换) | Inspur书面邮件回复 |
-| SSD | Offline Uncorrectable | 离线不可纠正错误 | 硬盘在离线自检/后台扫描时检测到的不可恢复错误次数(>0更换) | Inspur书面邮件回复 |
+| HDD  | Write total uncorrected errors | 写入无法纠正错误总数  | 实际日志中无此项，参考上方总无法纠正错误即可 | 浪潮书面邮件回复 |
+| SSD | Reported Uncorrectable Errors | 已报告的不可纠正错误 | 硬盘向主机报告的读/写过程中发生的不可恢复错误次数(>10更换) | 浪潮书面邮件回复 |
+| SSD | Current Pending Sector Count | 当前待处理扇区计数 | 检测到潜在读写错误、等待重新分配的扇区数量(>100更换) | 浪潮书面邮件回复 |
+| SSD | Offline Uncorrectable | 离线不可纠正错误 | 硬盘在离线自检/后台扫描时检测到的不可恢复错误次数(>0更换) | 浪潮书面邮件回复 |
 
 **以下是辅助日志，作为协助排障参考，不作为直接依据**
 
 | 硬盘类型 | 参数 | 翻译 | 说明 | 来源 |
 | --- | --- | --- | --- | --- |
-| SSD | Reallocated Sector Count | 重分配扇区计数 | 记录因物理损坏被替换到备用扇区的次数，数值增加说明介质退化(>500为不可靠) | Inspur书面邮件回复 |
-| SSD | CRC Error Count | CRC 错误计数 | 记录主机与硬盘之间传输数据时发生的 CRC 校验错误次数，常见原因包括数据线接触不良、电磁干扰或接口问题，单盘较多则可能为该盘本体故障，多个硬盘则进一步筛查是否位于同一个硬盘背板或同一个SAS端口 | Inspur书面邮件回复 |
-| HDD | Non-medium error count | 非介质故障 | 与上方SSD的是一样的意思 | Inspur书面邮件回复 |
+| SSD | Reallocated Sector Count | 重分配扇区计数 | 记录因物理损坏被替换到备用扇区的次数，数值增加说明介质退化(>500为不可靠) | 浪潮书面邮件回复 |
+| SSD | CRC Error Count | CRC 错误计数 | 记录主机与硬盘之间传输数据时发生的 CRC 校验错误次数，常见原因包括数据线接触不良、电磁干扰或接口问题，单盘较多则可能为该盘本体故障，多个硬盘则进一步筛查是否位于同一个硬盘背板或同一个SAS端口 | 浪潮书面邮件回复 |
+| HDD | Non-medium error count | 非介质故障 | 与上方SSD的是一样的意思 | 浪潮书面邮件回复 |
 
 ---
 
