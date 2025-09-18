@@ -256,6 +256,8 @@ log_file="disk_error_$(date +%Y%m%d_%H%M%S).log"; for raid in {a..d}; do if [ -b
 
 输出效果如下
 
+![企业微信截图_17580931121073](https://img.hackerbs.com//企业微信截图_17580931121073.png)
+
 #### 原始错误日志解读
 
 ##### HDD范例
