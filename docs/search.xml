@@ -3007,7 +3007,7 @@
 </tr>
 <tr>
 <td>Non-medium error count</td>
-<td>非硬盘故障错误次数</td>
+<td>非介质故障错误次数</td>
 <td>非存储介质故障，例如线缆、背板、接口等硬件通信故障</td>
 </tr>
 <tr>

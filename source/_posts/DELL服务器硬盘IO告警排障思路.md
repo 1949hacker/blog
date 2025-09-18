@@ -269,7 +269,7 @@ log_file="disk_error_$(date +%Y%m%d_%H%M%S).log"; for raid in {a..d}; do if [ -b
 |Correction algorithm invocations|纠错算法调用次数|忽略|
 |Gigabytes processed|纠错数据数量GB|记录总共纠正了多少GB数据|
 |Total uncorrected errors|未能纠错总数|无法纠错的次数|
-|Non-medium error count|非硬盘故障错误次数|非存储介质故障，例如线缆、背板、接口等硬件通信故障|
+|Non-medium error count|非介质故障错误次数|非存储介质故障，例如线缆、背板、接口等硬件通信故障|
 |fast rereads|快速重读|ECC快速无感纠错|
 |delayed rereads|延迟重读|ECC延迟重读，导致IO延迟高|
 |rewrites|重写|重读成功后重写数据|
