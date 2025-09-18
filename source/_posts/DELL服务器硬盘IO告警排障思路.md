@@ -263,7 +263,7 @@ log_file="disk_error_$(date +%Y%m%d_%H%M%S).log"; for raid in {a..d}; do if [ -b
 ![20250917112407](https://img.hackerbs.com//20250917112407.png)
 
 |报错内容|翻译|说明|
-|---|---|
+|---|---|---|
 |Error Corrected by ECC|ECC纠错|硬盘自纠错，某个扇区存在错误时的自动纠正|
 |Total errors corrected|已纠错总次数|记录总共纠正多少次|
 |Correction algorithm invocations|纠错算法调用次数|忽略|
