@@ -2983,47 +2983,47 @@
 <tbody><tr>
 <td>Error Corrected by ECC</td>
 <td>ECC纠错</td>
-<td>硬盘自纠错，某个扇区存在错误时的自动纠正</td>
+<td>当某个扇区存在错误时，硬盘通过内置的错误校正码（ECC）机制自动完成的纠错次数。</td>
 </tr>
 <tr>
 <td>Total errors corrected</td>
 <td>已纠错总次数</td>
-<td>记录总共纠正多少次</td>
+<td>记录累计成功纠正的错误总数（包含所有纠错方式）。</td>
 </tr>
 <tr>
 <td>Correction algorithm invocations</td>
 <td>纠错算法调用次数</td>
-<td>忽略</td>
+<td>硬盘调用纠错算法的次数，部分可能无需实际改写即可修复；一般无需重点关注。</td>
 </tr>
 <tr>
 <td>Gigabytes processed</td>
-<td>纠错数据数量GB</td>
-<td>记录总共纠正了多少GB数据</td>
+<td>已处理数据量（GB）</td>
+<td>表示在统计期间，通过 ECC 机制处理过的数据总量（以 GB 计）。</td>
 </tr>
 <tr>
 <td>Total uncorrected errors</td>
 <td>未能纠错总数</td>
-<td>无法纠错的次数</td>
+<td>ECC 无法修复的错误次数，表示确实发生了数据损坏；若大于 0，需立即关注。</td>
 </tr>
 <tr>
 <td>Non-medium error count</td>
-<td>非介质故障错误次数</td>
-<td>非存储介质故障，例如线缆、背板、接口等硬件通信故障</td>
+<td>非介质错误计数</td>
+<td>非存储介质本身的故障，例如接口、背板、线缆、电源等导致的通信或传输错误。</td>
 </tr>
 <tr>
 <td>fast rereads</td>
 <td>快速重读</td>
-<td>ECC快速无感纠错</td>
+<td>通过快速重读实现的自动纠错，对性能影响较小。</td>
 </tr>
 <tr>
 <td>delayed rereads</td>
 <td>延迟重读</td>
-<td>ECC延迟重读，导致IO延迟高</td>
+<td>通过延迟重读实现的纠错，通常会增加 I&#x2F;O 响应时间。</td>
 </tr>
 <tr>
 <td>rewrites</td>
 <td>重写</td>
-<td>重读成功后重写数据</td>
+<td>当重读成功后，将正确的数据重新写回故障扇区，以防止未来再次出错。</td>
 </tr>
 </tbody></table>
 <p>范例中ECC纠错高达2555次，且存在4次无法纠错，且非介质故障高达13次，该硬盘急需维护。</p>

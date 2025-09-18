@@ -262,16 +262,16 @@ log_file="disk_error_$(date +%Y%m%d_%H%M%S).log"; for raid in {a..d}; do if [ -b
 
 ![20250917112407](https://img.hackerbs.com//20250917112407.png)
 
-|报错内容|翻译|说明|
-|---|---|---|
-|Error Corrected by ECC|ECC纠错|硬盘自纠错，某个扇区存在错误时的自动纠正|
-|Total errors corrected|已纠错总次数|记录总共纠正多少次|
-|Correction algorithm invocations|纠错算法调用次数|忽略|
-|Gigabytes processed|纠错数据数量GB|记录总共纠正了多少GB数据|
-|Total uncorrected errors|未能纠错总数|无法纠错的次数|
-|Non-medium error count|非介质故障错误次数|非存储介质故障，例如线缆、背板、接口等硬件通信故障|
-|fast rereads|快速重读|ECC快速无感纠错|
-|delayed rereads|延迟重读|ECC延迟重读，导致IO延迟高|
-|rewrites|重写|重读成功后重写数据|
+| 报错内容 | 翻译 | 说明 |
+| ---- | ---- | ---- |
+| Error Corrected by ECC           | ECC纠错      | 当某个扇区存在错误时，硬盘通过内置的错误校正码（ECC）机制自动完成的纠错次数。 |
+| Total errors corrected           | 已纠错总次数     | 记录累计成功纠正的错误总数（包含所有纠错方式）。                 |
+| Correction algorithm invocations | 纠错算法调用次数   | 硬盘调用纠错算法的次数，部分可能无需实际改写即可修复；一般无需重点关注。     |
+| Gigabytes processed              | 已处理数据量（GB） | 表示在统计期间，通过 ECC 机制处理过的数据总量（以 GB 计）。       |
+| Total uncorrected errors         | 未能纠错总数     | ECC 无法修复的错误次数，表示确实发生了数据损坏；若大于 0，需立即关注。   |
+| Non-medium error count           | 非介质错误计数    | 非存储介质本身的故障，例如接口、背板、线缆、电源等导致的通信或传输错误。     |
+| fast rereads                     | 快速重读       | 通过快速重读实现的自动纠错，对性能影响较小。                   |
+| delayed rereads                  | 延迟重读       | 通过延迟重读实现的纠错，通常会增加 I/O 响应时间。              |
+| rewrites                         | 重写         | 当重读成功后，将正确的数据重新写回故障扇区，以防止未来再次出错。         |
 
 范例中ECC纠错高达2555次，且存在4次无法纠错，且非介质故障高达13次，该硬盘急需维护。
