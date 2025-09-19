@@ -39,16 +39,13 @@ tags:
 
 | 硬盘类型 | 参数 | 翻译 | 说明 | 来源 |
 | --- | --- | --- | --- | --- |
-| SSD  | ID 05 Reallocated Sector Count | 重分配扇区计数     | 因坏块被重新分配的扇区数量，值越高健康状况越差        | 新华三 |
-| SSD  | ID 197 Current Pending Sector Count | 当前待处理扇区计数   | 有潜在读写错误、待重新映射的扇区数量             | 新华三 |
-| HDD  | Total uncorrected errors | 总无法纠正错误 | 所有无法纠正的读/写错误之和 | 新华三 |
+| SSD  | ID 5 Reallocated_Sector_Ct | 重分配扇区计数     | 因坏块被重新分配的扇区数量，值越高健康状况越差        | 新华三 |
+| SSD  | ID 197 Current_Pending_Sector | 当前待处理扇区计数   | 有潜在读写错误、待重新映射的扇区数量(>100更换) | 浪潮/新华三 |
+| SSD | ID 187 Reported_Uncorrect | 已报告的不可纠正错误 | 硬盘向主机报告的读/写过程中发生的不可恢复错误次数(>10更换) | 浪潮 |
+| HDD  | Total uncorrected errors | 总无法纠正错误 | 所有无法纠正的读/写错误之和 | 浪潮/新华三 |
 | HDD | Verify total uncorrected errors | 校验无法纠正错误 | 硬盘控制器自检时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三 |
 | HDD | Read total uncorrected errors | 读无法纠正错误 | 读取/写入IO时无法通过ECC纠正的错误总数，高值表示可靠性下降 | 新华三 |
 | HDD  | Elements in grown defect list | 已增长缺陷列表中的元素 | 硬盘运行中登记的坏块数量，用于追踪坏块增长          | [@Icenowy](https://github.com/icenowy)于清华TUNA协会技术群组内回复 |
-| HDD  | Write total uncorrected errors | 写入无法纠正错误总数  | 实际日志中无此项，参考上方总无法纠正错误即可 | 浪潮 |
-| SSD | Reported Uncorrectable Errors | 已报告的不可纠正错误 | 硬盘向主机报告的读/写过程中发生的不可恢复错误次数(>10更换) | 浪潮 |
-| SSD | Current Pending Sector Count | 当前待处理扇区计数 | 检测到潜在读写错误、等待重新分配的扇区数量(>100更换) | 浪潮 |
-| SSD | Offline Uncorrectable | 离线不可纠正错误 | 硬盘在离线自检/后台扫描时检测到的不可恢复错误次数(>0更换) | 浪潮 |
 
 **以下是辅助日志，作为协助排障参考，不作为直接依据**
 
