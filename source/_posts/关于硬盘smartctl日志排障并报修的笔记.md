@@ -193,3 +193,63 @@ done
 输出效果如下
 
 ![20250918173418](https://img.hackerbs.com//20250918173418.png)
+
+## 关于DELL TSR日志(iDRAC)没有硬盘故障告警的报修办法
+
+DELL通常只认可其自身硬件的告警日志。
+在硬盘出现非致命故障，无法直观的在操作系统看到硬盘离线或RAID降级，同时TSR日志中没有记录到硬盘故障，iDRAC网页也没有显示硬盘故障时。
+DELL通常不会认可运维工程师提供的smartctl日志和其他非DELL硬件报告的日志，
+且有时smartctl也并不能很好的定位故障。
+
+为此和DELL进行漫长的沟通后，最终定下来以下排障方式：
+
+![DELL承认的额外日志](https://img.hackerbs.com//企业微信截图_1760520869936.png)
+
+- 带外由故障日志时：提供TSR日志报修
+- 带外没有故障日志时：提供TSR日志+perccli64 /call show alilog的日志用于报修
+
+此外还可通过分析上文提到的smartctl日志和以下日志用于综合定位问题：
+
+```shell
+ls -l /sys/class/block > /tmp/lsblock.txt
+perccli64 /call show alilog > /tmp/target.txt
+perccli64 /call/eall/sall show all > /tmp/slot.txt
+```
+
+以下是本次案例的记录，可以作为排障及报修的参考
+
+情况说明：
+本次是日常巡检时运维平台报障IO延迟大于100ms
+随后排查了带外，没有告警，继续排查smartctl，定位slot8存在无法纠正的错误记录1次。
+随后向DELL提出报修，并上传TSR日志，但因为没有记录告警，所以DELL并不认可，要求进一步调查故障。
+排障过程中针对`smartctl -a -d megaraid`输出的`Error counter log`，也就是上文解释的smartctl日志；
+其中有巨量的`Errors Corrected by ECC`的`fast纠正`错误计数，达到了`1737961798`次，
+针对该项报错，DELL不参考，并且未对此进行分析，所以只能自行分析。
+结合硬盘运行时间约5.8年，且几乎从未停机；而这份报错是由RAID卡报告给smartctl，
+所以在计数准确性上无法验证，同时鉴于运行了很长时间，计数的累计也是可能的因素；
+此处有个疑点：该天文数字般的ECC纠错计数是否可能是整个RAID5阵列的纠错被记录到了其中？
+再加上硬盘存在故障长期未发现，导致了频繁的纠错？
+以上两个疑问仅为猜测，不过该ECC纠错确实会导致IO延迟增加。
+在进一步的排查中发现slot9才是故障盘，且其中的`Errors Corrected by ECC`的`fast纠正`为0，
+反而是`delayed纠正`为`8396`次，因此进一步核实这块盘才是真正的故障盘。
+因为`fast`纠正是常规现象，`delayed`纠正才是有可能存在问题的，`delayed`纠正是无法快速纠错时进行的深度纠错
+
+[见此处说明](https://hackerbs.com/DELL%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A1%AC%E7%9B%98IO%E5%91%8A%E8%AD%A6%E6%8E%92%E9%9A%9C%E6%80%9D%E8%B7%AF?highlight=delay#HDD%E8%8C%83%E4%BE%8B)
+
+接下来讲如何通过分析`perccli64 /call show alilog`定位到了真正故障的硬盘
+首先，`perccli64`，顾名思义，这是DELL PERC官方的工具，用于操作DELL RAID卡。
+因为日志内容较多，所以选择使用`perccli64 /call show alilog > /tmp/target.txt`查询适配器日志并输出到文件。
+随后使用vscode浏览发现，在35200行日志中，光是PD02和PD09的timeout就出现了11938行，
+因此该日志足以说明`slot2`和`slot9`这两个硬盘出现了故障，
+并进一步结合`smartctl`日志交叉验证了这两块盘存在故障，也就是上文说的`delayed`的错误计数。
+随后同时将`TSR日志`和`perccli64`的`alilog`适配器日志提交给DELL，DELL认可并以此作为依据成功报修。
+
+```shell
+# PD02的timeout
+24368: YY-MM-DD HH:MM:SS WARNING:Command timeout on PD 02(e0x20/s2) Path 5000c500cdda6095, CDB: 2a 00 0f 1a ee 00 00 00 80 00
+# PD09的timeout
+2413: YY-MM-DD HH:MM:SS WARNING:Command timeout on PD 09(e0x20/s9) Path 5000c500cdd04681, CDB: 4d 00 4e 00 00 00 00 00 04 00
+
+# 同时在这份日志顶部部分也输出了RAID控制器和磁盘的详情
+# Device Information部分的Slot Number也对应了PD02 PD09
+```

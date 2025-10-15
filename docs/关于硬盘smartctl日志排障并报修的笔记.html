@@ -35,8 +35,9 @@
 <meta property="og:description" content="情况说明收到系统发出IO占用率和IO延迟的告警，登录带外排查无任何错误日志，随后进入操作系统使用脚本批量排查smartctl日志，发现存在错误计数，因smartctl并非厂家带外的告警日志，所以特此向Inspur、H3C、Lenovo、DELL进行了咨询，其中提到了一些日志参数的告警，目前已收到H3C、Inspur的回复 厂商对日志中以下内容的告警表示认可并作为报修依据    硬盘类型 参数 翻译">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.hackerbs.com//20250918173418.png">
+<meta property="og:image" content="https://img.hackerbs.com//%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_1760520869936.png">
 <meta property="article:published_time" content="2025-09-18T07:49:46.000Z">
-<meta property="article:modified_time" content="2025-09-19T03:49:46.890Z">
+<meta property="article:modified_time" content="2025-10-15T10:42:14.189Z">
 <meta property="article:author" content="hackerbs.com">
 <meta property="article:tag" content="DELL">
 <meta property="article:tag" content="硬盘">
@@ -204,7 +205,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">情况说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">排查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8EJBOD%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%A1%AC%E7%9B%98"><span class="nav-number">2.1.</span> <span class="nav-text">对于JBOD模式的硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8ELSI-MegaRAID%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%8CRAID%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%A1%AC%E7%9B%98"><span class="nav-number">2.2.</span> <span class="nav-text">对于LSI MegaRAID控制器，RAID模式的硬盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">进阶脚本</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">情况说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">排查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8EJBOD%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%A1%AC%E7%9B%98"><span class="nav-number">2.1.</span> <span class="nav-text">对于JBOD模式的硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8ELSI-MegaRAID%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%8CRAID%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%A1%AC%E7%9B%98"><span class="nav-number">2.2.</span> <span class="nav-text">对于LSI MegaRAID控制器，RAID模式的硬盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">进阶脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EDELL-TSR%E6%97%A5%E5%BF%97-iDRAC-%E6%B2%A1%E6%9C%89%E7%A1%AC%E7%9B%98%E6%95%85%E9%9A%9C%E5%91%8A%E8%AD%A6%E7%9A%84%E6%8A%A5%E4%BF%AE%E5%8A%9E%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">关于DELL TSR日志(iDRAC)没有硬盘故障告警的报修办法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -296,7 +297,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-19 11:49:46" itemprop="dateModified" datetime="2025-09-19T11:49:46+08:00">2025-09-19</time>
+      <time title="修改时间：2025-10-15 18:42:14" itemprop="dateModified" datetime="2025-10-15T18:42:14+08:00">2025-10-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -336,14 +337,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.3k</span>
+      <span>14k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>8 分钟</span>
+      <span>13 分钟</span>
     </span>
 </div>
 
@@ -465,6 +466,21 @@
 
 <p>输出效果如下</p>
 <p><img src="https://img.hackerbs.com//20250918173418.png" alt="20250918173418"></p>
+<h2 id="关于DELL-TSR日志-iDRAC-没有硬盘故障告警的报修办法"><a href="#关于DELL-TSR日志-iDRAC-没有硬盘故障告警的报修办法" class="headerlink" title="关于DELL TSR日志(iDRAC)没有硬盘故障告警的报修办法"></a>关于DELL TSR日志(iDRAC)没有硬盘故障告警的报修办法</h2><p>DELL通常只认可其自身硬件的告警日志。<br>在硬盘出现非致命故障，无法直观的在操作系统看到硬盘离线或RAID降级，同时TSR日志中没有记录到硬盘故障，iDRAC网页也没有显示硬盘故障时。<br>DELL通常不会认可运维工程师提供的smartctl日志和其他非DELL硬件报告的日志，<br>且有时smartctl也并不能很好的定位故障。</p>
+<p>为此和DELL进行漫长的沟通后，最终定下来以下排障方式：</p>
+<p><img src="https://img.hackerbs.com//%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_1760520869936.png" alt="DELL承认的额外日志"></p>
+<ul>
+<li>带外由故障日志时：提供TSR日志报修</li>
+<li>带外没有故障日志时：提供TSR日志+perccli64 &#x2F;call show alilog的日志用于报修</li>
+</ul>
+<p>此外还可通过分析上文提到的smartctl日志和以下日志用于综合定位问题：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ls -l /sys/class/block &gt; /tmp/lsblock.txt</span><br><span class="line">perccli64 /call show alilog &gt; /tmp/target.txt</span><br><span class="line">perccli64 /call/eall/sall show all &gt; /tmp/slot.txt</span><br></pre></td></tr></table></figure>
+
+<p>以下是本次案例的记录，可以作为排障及报修的参考</p>
+<p>情况说明：<br>本次是日常巡检时运维平台报障IO延迟大于100ms<br>随后排查了带外，没有告警，继续排查smartctl，定位slot8存在无法纠正的错误记录1次。<br>随后向DELL提出报修，并上传TSR日志，但因为没有记录告警，所以DELL并不认可，要求进一步调查故障。<br>排障过程中针对<code>smartctl -a -d megaraid</code>输出的<code>Error counter log</code>，也就是上文解释的smartctl日志；<br>其中有巨量的<code>Errors Corrected by ECC</code>的<code>fast纠正</code>错误计数，达到了<code>1737961798</code>次，<br>针对该项报错，DELL不参考，并且未对此进行分析，所以只能自行分析。<br>结合硬盘运行时间约5.8年，且几乎从未停机；而这份报错是由RAID卡报告给smartctl，<br>所以在计数准确性上无法验证，同时鉴于运行了很长时间，计数的累计也是可能的因素；<br>此处有个疑点：该天文数字般的ECC纠错计数是否可能是整个RAID5阵列的纠错被记录到了其中？<br>再加上硬盘存在故障长期未发现，导致了频繁的纠错？<br>以上两个疑问仅为猜测，不过该ECC纠错确实会导致IO延迟增加。<br>在进一步的排查中发现slot9才是故障盘，且其中的<code>Errors Corrected by ECC</code>的<code>fast纠正</code>为0，<br>反而是<code>delayed纠正</code>为<code>8396</code>次，因此进一步核实这块盘才是真正的故障盘。<br>因为<code>fast</code>纠正是常规现象，<code>delayed</code>纠正才是有可能存在问题的，<code>delayed</code>纠正是无法快速纠错时进行的深度纠错</p>
+<p><a href="https://hackerbs.com/DELL%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A1%AC%E7%9B%98IO%E5%91%8A%E8%AD%A6%E6%8E%92%E9%9A%9C%E6%80%9D%E8%B7%AF?highlight=delay#HDD%E8%8C%83%E4%BE%8B">见此处说明</a></p>
+<p>接下来讲如何通过分析<code>perccli64 /call show alilog</code>定位到了真正故障的硬盘<br>首先，<code>perccli64</code>，顾名思义，这是DELL PERC官方的工具，用于操作DELL RAID卡。<br>因为日志内容较多，所以选择使用<code>perccli64 /call show alilog &gt; /tmp/target.txt</code>查询适配器日志并输出到文件。<br>随后使用vscode浏览发现，在35200行日志中，光是PD02和PD09的timeout就出现了11938行，<br>因此该日志足以说明<code>slot2</code>和<code>slot9</code>这两个硬盘出现了故障，<br>并进一步结合<code>smartctl</code>日志交叉验证了这两块盘存在故障，也就是上文说的<code>delayed</code>的错误计数。<br>随后同时将<code>TSR日志</code>和<code>perccli64</code>的<code>alilog</code>适配器日志提交给DELL，DELL认可并以此作为依据成功报修。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">PD02的<span class="built_in">timeout</span></span></span><br><span class="line">24368: YY-MM-DD HH:MM:SS WARNING:Command timeout on PD 02(e0x20/s2) Path 5000c500cdda6095, CDB: 2a 00 0f 1a ee 00 00 00 80 00</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">PD09的<span class="built_in">timeout</span></span></span><br><span class="line">2413: YY-MM-DD HH:MM:SS WARNING:Command timeout on PD 09(e0x20/s9) Path 5000c500cdd04681, CDB: 4d 00 4e 00 00 00 00 00 04 00</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同时在这份日志顶部部分也输出了RAID控制器和磁盘的详情</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Device Information部分的Slot Number也对应了PD02 PD09</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -598,14 +614,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">55k</span>
+    <span title="站点总字数">67k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:21</span>
+    <span title="站点阅读时长">1:01</span>
   </span>
 </div>
 <div class="busuanzi-count">
