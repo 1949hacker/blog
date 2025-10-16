@@ -2390,6 +2390,23 @@
 <p><a href="https://hackerbs.com/DELL%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A1%AC%E7%9B%98IO%E5%91%8A%E8%AD%A6%E6%8E%92%E9%9A%9C%E6%80%9D%E8%B7%AF?highlight=delay#HDD%E8%8C%83%E4%BE%8B">见此处说明</a></p>
 <p>接下来讲如何通过分析<code>perccli64 /call show alilog</code>定位到了真正故障的硬盘<br>首先，<code>perccli64</code>，顾名思义，这是DELL PERC官方的工具，用于操作DELL RAID卡。<br>因为日志内容较多，所以选择使用<code>perccli64 /call show alilog &gt; /tmp/target.txt</code>查询适配器日志并输出到文件。<br>随后使用vscode浏览发现，在35200行日志中，光是PD02和PD09的timeout就出现了11938行，<br>因此该日志足以说明<code>slot2</code>和<code>slot9</code>这两个硬盘出现了故障，<br>并进一步结合<code>smartctl</code>日志交叉验证了这两块盘存在故障，也就是上文说的<code>delayed</code>的错误计数。<br>随后同时将<code>TSR日志</code>和<code>perccli64</code>的<code>alilog</code>适配器日志提交给DELL，DELL认可并以此作为依据成功报修。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">PD02的<span class="built_in">timeout</span></span></span><br><span class="line">24368: YY-MM-DD HH:MM:SS WARNING:Command timeout on PD 02(e0x20/s2) Path 5000c500cdda6095, CDB: 2a 00 0f 1a ee 00 00 00 80 00</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">PD09的<span class="built_in">timeout</span></span></span><br><span class="line">2413: YY-MM-DD HH:MM:SS WARNING:Command timeout on PD 09(e0x20/s9) Path 5000c500cdd04681, CDB: 4d 00 4e 00 00 00 00 00 04 00</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同时在这份日志顶部部分也输出了RAID控制器和磁盘的详情</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Device Information部分的Slot Number也对应了PD02 PD09</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2025-10-16最新消息：DELL高级工程师驳回了维修请求"><a href="#2025-10-16最新消息：DELL高级工程师驳回了维修请求" class="headerlink" title="2025-10-16最新消息：DELL高级工程师驳回了维修请求"></a>2025-10-16最新消息：DELL高级工程师驳回了维修请求</h3><p>然后给出了下面两篇文章</p>
+<p><a href="https://www.dell.com/support/kbdoc/zh-cn/000147878/poweredge-%E6%9F%90%E4%BA%9B%E4%BC%81%E4%B8%9A%E7%A1%AC%E7%9B%98%E9%A9%B1%E5%8A%A8%E5%99%A8%E4%B8%8A%E8%AF%BB%E5%8F%96%E5%92%8C%E9%AA%8C%E8%AF%81-ecc-%E9%94%99%E8%AF%AF%E7%9A%84-smart-%E9%94%99%E8%AF%AF%E7%8E%87%E8%BE%83%E9%AB%98">PowerEdge：某些企业硬盘驱动器上读取和验证 ECC 错误的 SMART 错误率较高</a></p>
+<p><a href="https://www.dell.com/support/kbdoc/zh-cn/000168487/scaleio-%E7%A1%AC%E4%BB%B6%E6%84%9F%E7%9F%A5%E5%8A%9F%E8%83%BD%E5%A1%AB%E5%86%99-perc-%E6%9C%AF%E8%AF%AD?lang=zh">ScaleIO 硬件感知功能填写 PERC 术语</a></p>
+<p>故障盘PD 02&#x2F;09</p>
+<p>slot2、9: TOSHIBA AL14SXB30ENY</p>
+<p>slot3-8、10-13: Seagate ST300MP0026</p>
+<p>结合上面两篇文章和硬盘情况来看，确实，iDRAC没有报故障，同时smartctl和perccli64调查出所谓的”故障”，恰好是两块TOSHIBA的硬盘。<br>TOSHIBA的其他硬盘确实也被记录到了文章中，提到了会在<code>perccli64</code>中误报<code>timeout</code>，<br>结合<code>smartctl</code>记录的ECC纠错数量为天文数字，侧面反映了DELL所说的<code>smartctl</code>ECC纠错计数不可靠也是事实。<br><strong>目前看来，维修诉求被DELL工程师驳回也属于合理范围</strong><br><strong>且故障仅仅体现在运维监测平台告警IO延迟达到128ms，持续时间不足1分钟，随后恢复</strong><br><strong>故本次报障取消</strong></p>
+<p>补充：</p>
+<p>该问题提交给了DELL客户经理</p>
+<blockquote>
+<p>您好，我这边有台XXX PowerEdge XXX，在我们运维监控平台发现告警 IO延迟过高，触发时值: XXXms。<br>针对该告警我们筛查了TSR日志，并未发现告警记录；<br>进一步筛查了smartctl日志，发现PD 02&#x2F;09存在 perccli64告警 Command timeout on PD 02&#x2F;09；<br>且smartctl记录到ECC delayed纠正8XXX次。</p>
+<p>目前工程师回复提到了smartctl日志错误率，对于某些企业的硬盘仅供参考，实际现象：<br>其他Seagate硬盘存在1X亿次ECC fast纠错计数，故我们忽略该告警。<br>故障的PD02&#x2F;09为TOSHIBA，存在8XXX次 ECC delayed纠错计数，不过尚未出现无法纠错和扇区故障记录，我们暂时忽略。</p>
+<p>工程师回复提到了perccli64日志告警timeout，文章解释为：<br>某个供应商的固态硬盘 （SSD） 不支持其中一个命令 （cdb&#x3D; 4d 00 51 00 00 00 00 00 00 04 00）<br>复查后发现，PD 02&#x2F;09恰好是TOSHIBA的硬盘，且在文章中也有提到TOSHIBA的某个型号SSD不支持该命令，且其他Seagate硬盘均为记录该错误。<br>故我们根据文章内容，忽略该告警。</p>
+<p>鉴于本次排障报修涉及的日志和排障过程较为繁琐，目前理清楚前因后果之后，XXX要求我询问下您，看看这次的报障是驳回继续观察，还是说直接安排更换？</p>
+</blockquote>
+<p>目前尚未收到回复…</p>
 ]]></content>
       <categories>
         <category>知识库</category>

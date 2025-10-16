@@ -253,3 +253,46 @@ perccli64 /call/eall/sall show all > /tmp/slot.txt
 # 同时在这份日志顶部部分也输出了RAID控制器和磁盘的详情
 # Device Information部分的Slot Number也对应了PD02 PD09
 ```
+
+### 2025-10-16最新消息：DELL高级工程师驳回了维修请求
+
+然后给出了下面两篇文章
+
+[PowerEdge：某些企业硬盘驱动器上读取和验证 ECC 错误的 SMART 错误率较高](https://www.dell.com/support/kbdoc/zh-cn/000147878/poweredge-%E6%9F%90%E4%BA%9B%E4%BC%81%E4%B8%9A%E7%A1%AC%E7%9B%98%E9%A9%B1%E5%8A%A8%E5%99%A8%E4%B8%8A%E8%AF%BB%E5%8F%96%E5%92%8C%E9%AA%8C%E8%AF%81-ecc-%E9%94%99%E8%AF%AF%E7%9A%84-smart-%E9%94%99%E8%AF%AF%E7%8E%87%E8%BE%83%E9%AB%98)
+
+[ScaleIO 硬件感知功能填写 PERC 术语](https://www.dell.com/support/kbdoc/zh-cn/000168487/scaleio-%E7%A1%AC%E4%BB%B6%E6%84%9F%E7%9F%A5%E5%8A%9F%E8%83%BD%E5%A1%AB%E5%86%99-perc-%E6%9C%AF%E8%AF%AD?lang=zh)
+
+故障盘PD 02/09
+
+slot2、9: TOSHIBA AL14SXB30ENY
+
+slot3-8、10-13: Seagate ST300MP0026
+
+结合上面两篇文章和硬盘情况来看，确实，iDRAC没有报故障，同时smartctl和perccli64调查出所谓的"故障"，恰好是两块TOSHIBA的硬盘。
+TOSHIBA的其他硬盘确实也被记录到了文章中，提到了会在`perccli64`中误报`timeout`，
+结合`smartctl`记录的ECC纠错数量为天文数字，侧面反映了DELL所说的`smartctl`ECC纠错计数不可靠也是事实。
+**目前看来，维修诉求被DELL工程师驳回也属于合理范围**
+**且故障仅仅体现在运维监测平台告警IO延迟达到128ms，持续时间不足1分钟，随后恢复**
+**故本次报障取消**
+
+补充：
+
+该问题提交给了DELL客户经理
+
+> 您好，我这边有台XXX PowerEdge XXX，在我们运维监控平台发现告警 IO延迟过高，触发时值: XXXms。
+针对该告警我们筛查了TSR日志，并未发现告警记录；
+进一步筛查了smartctl日志，发现PD 02/09存在 perccli64告警 Command timeout on PD 02/09；
+且smartctl记录到ECC delayed纠正8XXX次。
+>
+> 目前工程师回复提到了smartctl日志错误率，对于某些企业的硬盘仅供参考，实际现象：
+其他Seagate硬盘存在1X亿次ECC fast纠错计数，故我们忽略该告警。
+故障的PD02/09为TOSHIBA，存在8XXX次 ECC delayed纠错计数，不过尚未出现无法纠错和扇区故障记录，我们暂时忽略。
+>
+> 工程师回复提到了perccli64日志告警timeout，文章解释为：
+某个供应商的固态硬盘 （SSD） 不支持其中一个命令 （cdb= 4d 00 51 00 00 00 00 00 00 04 00）
+复查后发现，PD 02/09恰好是TOSHIBA的硬盘，且在文章中也有提到TOSHIBA的某个型号SSD不支持该命令，且其他Seagate硬盘均为记录该错误。
+故我们根据文章内容，忽略该告警。
+>
+> 鉴于本次排障报修涉及的日志和排障过程较为繁琐，目前理清楚前因后果之后，XXX要求我询问下您，看看这次的报障是驳回继续观察，还是说直接安排更换？
+
+目前尚未收到回复...
