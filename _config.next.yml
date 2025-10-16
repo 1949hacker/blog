@@ -154,8 +154,8 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
-  #GitHub: https://github.com/yourname || fab fa-github
-  #E-Mail: mailto:yourname@gmail.com || fa fa-envelope
+  GitHub: https://github.com/1949hacker || fab fa-github
+  E-Mail: mailto:ly4012@hw.ac.uk || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
   #Twitter: https://twitter.com/yourname || fab fa-twitter
   #FB Page: https://www.facebook.com/yourname || fab fa-facebook
@@ -285,7 +285,7 @@ follow_me:
   #Twitter: https://twitter.com/username || fab fa-twitter
   # Telegram: https://t.me/hacker1949 || fab fa-telegram
   GitHub: https://github.com/1949hacker || fab fa-github
-  e-mail: mailto:ly4012@hw.ac.uk || fab fa-envelope
+  E-mail: mailto:ly4012@hw.ac.uk || fab fa-envelope
   WeChat: /images/wechat_channel.jpg || fab fa-weixin
   #RSS: /atom.xml || fa fa-rss
 
