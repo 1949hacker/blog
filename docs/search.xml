@@ -3254,4 +3254,126 @@
         <tag>Docker</tag>
       </tags>
   </entry>
+  <entry>
+    <title>IT场景专业术语表</title>
+    <url>/IT%E5%9C%BA%E6%99%AF%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD%E8%A1%A8.html</url>
+    <content><![CDATA[<h1 id="用于各IT场景的专业术语的中英文对照"><a href="#用于各IT场景的专业术语的中英文对照" class="headerlink" title="用于各IT场景的专业术语的中英文对照"></a>用于各IT场景的专业术语的中英文对照</h1><h2 id="工单场景"><a href="#工单场景" class="headerlink" title="工单场景"></a>工单场景</h2><table>
+<thead>
+<tr>
+<th>英文</th>
+<th>英文全称</th>
+<th>中文</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TC</td>
+<td>Ticket Created</td>
+<td>新建工单</td>
+<td>工单已在系统中被成功创建，并进入待处理队列</td>
+</tr>
+<tr>
+<td>PR</td>
+<td>Pending Report</td>
+<td>等待报告</td>
+<td>工单处理因等待（用户、第三方或系统提供的）额外信息、日志或报告而暂时挂起</td>
+</tr>
+<tr>
+<td>SM</td>
+<td>Self-Maintenance</td>
+<td>自行维护</td>
+<td>问题由用户自行解决或无需运维团队介入（如过保服务器），随后工单可被关闭</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Resolved</td>
+<td>已解决</td>
+<td>问题已被运维团队成功修复，该工单处理完毕</td>
+</tr>
+<tr>
+<td>IW</td>
+<td>In Warranty</td>
+<td>在保内</td>
+<td>表示设备或服务处于保修期内，维修通常由供应商免费提供</td>
+</tr>
+<tr>
+<td>OOW</td>
+<td>Out of Warranty</td>
+<td>已过保</td>
+<td>表示设备或服务已超出保修期，维修通常需要付费</td>
+</tr>
+<tr>
+<td>TPM</td>
+<td>Third-Party Maintenance</td>
+<td>第三方维保</td>
+<td>表示设备由原厂之外的第三方服务商提供维护支持</td>
+</tr>
+</tbody></table>
+<h2 id="日常运维场景"><a href="#日常运维场景" class="headerlink" title="日常运维场景"></a>日常运维场景</h2><table>
+<thead>
+<tr>
+<th>英文</th>
+<th>英文全称</th>
+<th>中文</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ops Task Status Board</td>
+<td>Ops(Operations )</td>
+<td>运维任务状态看板</td>
+<td>一个实时展示运维任务进度和状态的可视化看板</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>知识库</category>
+      </categories>
+      <tags>
+        <tag>IT专业术语</tag>
+        <tag>英语</tag>
+        <tag>英文缩写</tag>
+        <tag>中英对照</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔 - 《存在的痕迹：不在于石碑，而于涟漪》</title>
+    <url>/%E9%9A%8F%E7%AC%94-%E3%80%8A%E5%AD%98%E5%9C%A8%E7%9A%84%E7%97%95%E8%BF%B9%EF%BC%9A%E4%B8%8D%E5%9C%A8%E4%BA%8E%E7%9F%B3%E7%A2%91%EF%BC%8C%E8%80%8C%E4%BA%8E%E6%B6%9F%E6%BC%AA%E3%80%8B.html</url>
+    <content><![CDATA[<p>《存在的痕迹：不在于石碑，而于涟漪》</p>
+<p>小时候我就在想——<br>人生的价值是什么？<br>是钱吗？是权吗？是骄奢淫逸吗？<br>那些生不带来、死不带去的东西罢了。</p>
+<p>人生没多长，<br>人生不应该只是一场体验，<br>人生应该留下些什么，<br>人生应该有价值。</p>
+<p>钱、权，这些终将在你死去的那一刻消散。<br>或许你为家人带来了财富，让他们享了福，<br>我不能说这没有价值，<br>但这还不够，远远不够。<br>五十年、百年之后，他们也会逝去，<br>你的存在，也将被慢慢淡忘。</p>
+<p>如果这世间没有了你存在的痕迹，<br>那么，你在这个世界上真的活过吗？</p>
+<p>年幼的我，怀揣着科研的梦想，<br>认为知识是宝贵的财富。<br>我曾以为，一切都是虚妄，<br>唯有将知识——这人类的瑰宝——传承下去，<br>让若干年、数十年之后，<br>还有人使用这些知识，<br>那便是人生价值的体现。</p>
+<p>后来，时间冲刷着一切。<br>麻木、迷茫，混杂着泥沙一团糟的日子，<br>似乎，好像也就这样活一辈子了。</p>
+<p>苦难是什么？<br>是肉体上的饥寒交迫吗？<br>确实，那也是苦难。<br>可最痛苦的折磨是什么呢？<br>是当我遇见像那个视频里一样的事情时，<br>什么都做不了——<br>没有能力伸出援手，<br>没有能力改变任何，<br>只能眼睁睁地看着一切发生。<br>那种精神上的撕裂与无力，<br>不就是最大的苦难吗？</p>
+<p>我年幼时满怀希望，<br>以科研去证明人生价值。<br>后来才发现，这并不如我想象中那般简单。<br>那是一个遥远的理想。<br>不过，无需气馁，也无需放弃。<br>在前行的路上，<br>若能拉起身边跌倒的人，<br>那亦是值得的。</p>
+<p>无论如何，<br>我不喜欢这种苦难。<br>我不喜欢清醒地看着一切坍塌，<br>连逃避都成了奢望。</p>
+<p>也许，这就是活着的意义吧——<br>即使努力是一种痛苦，<br>那就让更大的痛苦逼着自己前进。<br>比苦难甜，就行了。</p>
+<p>勿要，力不能挽流年，唯有目送山河倾——追悔莫及</p>
+<p><strong>The Traces of Existence: Not in Stone Monuments, But in Ripples</strong></p>
+<p>When I was young, I often wondered—<br>What is the value of life?<br>Is it money? Power? Debauchery?<br>But these are merely things we cannot bring with us at birth, nor take with us in death.</p>
+<p>Life is not long.<br>Life should not be just an experience.<br>Life ought to leave something behind,<br>Life ought to have value.</p>
+<p>Money, power—these will vanish the moment you die.<br>Perhaps you have brought wealth to your family, granted them comfort.<br>I cannot say this holds no value,<br>But it is not enough, far from enough.<br>Fifty years, a century later, they too will pass away,<br>And your existence will slowly fade from memory.</p>
+<p>If no trace of you remains in this world,<br>Then, have you truly lived at all?</p>
+<p>As a child, I cherished dreams of scientific research,<br>Believing knowledge to be a precious treasure.<br>I once thought that all else was illusion,<br>That only knowledge—this gem of humanity—passed down through generations,<br>So that years, decades later,<br>People would still make use of this knowledge—<br>That would be the manifestation of life’s value.</p>
+<p>But as time washed over everything,<br>Numbness, confusion, and days muddled with chaos<br>Made it seem as if living out a lifetime this way was just how things were.</p>
+<p>What is suffering?<br>Is it the pangs of hunger and cold?<br>Yes, that too is suffering.<br>But what is the most agonizing torment?<br>It is when I encounter situations like the one in that video,<br>And can do nothing—<br>Unable to reach out and help,<br>Unable to change anything,<br>Only able to watch it all unfold before my eyes.<br>That spiritual tearing and powerlessness—<br>Is that not the greatest suffering of all?</p>
+<p>In my youth, I was full of hope,<br>Determined to prove life’s value through scientific research.<br>Only later did I realize it was not as simple as I had imagined.<br>It was a distant ideal.<br>Yet, there is no need for despair, no need to give up.<br>On the path forward,<br>If we can lift up those who have fallen beside us,<br>That too is meaningful.</p>
+<p>No matter what,<br>I do not like this kind of suffering.<br>I do not like watching everything collapse with clear eyes,<br>Where even escape becomes a luxury.</p>
+<p>Perhaps this is the meaning of living—<br>Even if effort is a form of pain,<br>Let a greater pain compel you to move forward.<br>As long as it is sweeter than the suffering, it is enough.</p>
+<p>Do not let it be<br>That you lack the strength to hold back the flowing years, and can only watch the mountains and rivers fall—<br>Left with nothing but regret.<br>​<br>​اللّٰهُ أَكْبَرُ</p>
+]]></content>
+      <categories>
+        <category>文学</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>《存在的痕迹：不在于石碑，而于涟漪》</tag>
+        <tag>文学</tag>
+        <tag>哲学</tag>
+        <tag>思想</tag>
+        <tag>人生价值</tag>
+      </tags>
+  </entry>
 </search>
