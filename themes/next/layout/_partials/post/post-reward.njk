@@ -5,17 +5,13 @@
   </button>
   <div class="post-reward">
 
-    {%- for name, value in theme.reward %}
-      {%- set builtin = ['wechatpay', 'alipay', 'paypal', 'okx', 'xmr'] %}
-      {%- if builtin.includes(name) %}
-        {%- set translation = __('reward.' + name) %}  {# 内置支付方式走翻译 #}
-        {%- set image = url_for(value) %}              {# 图片路径 #}
-      {%- else %}
-        {%- set translation = value %}                 {# 自定义支付方式直接显示 YAML 内容 #}
-        {%- set image = '/images/' + name + '.jpg' %}  {# 对应图片路径，可自行修改 #}
+    {%- for name, image in theme.reward %}
+      {%- set translation = __('reward.' + name) %}
+      {%- if translation == 'reward.' + name %}
+        {%- set translation = name %}
       {%- endif %}
       <div>
-        <img src="{{ image }}" alt="{{ author }} {{ translation }}">
+        <img src="{{ url_for(image) }}" alt="{{ author }} {{ translation }}">
         <span>{{ translation }}</span>
       </div>
     {%- endfor %}

@@ -80,11 +80,11 @@ symbol:
   period: "。"
   colon: "："
 reward:
-  donate: 看这里->土豪有钱的话打赏一下咯 | 给我介绍份高薪工作也行
+  donate: "看这里->土豪有钱的话打赏一下咯 | 给我介绍份高薪工作也行"
   wechatpay: 微信
   alipay: 支付宝
   paypal: PayPal
-  binance: USDT TRC20 TEpxok72yidM8LLCZhh8s2BgR4QT8mNHB9
+  binance: "USDT TRC20捐赠地址: TEpxok72yidM8LLCZhh8s2BgR4QT8mNHB9"
   aiopay: 全功能收款支持信用卡花呗等（推荐）
   comment: 您的捐助可以帮助我们更好的更新技术文章
 follow_me:
