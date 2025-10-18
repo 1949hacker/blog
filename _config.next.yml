@@ -271,7 +271,7 @@ tag_icon: false
 reward_settings:
   # If true, a donate button will be displayed in every article by default.
   enable: true
-  animation: true
+  animation: false
 
 reward:
   wechatpay: /images/wechatpay.png
