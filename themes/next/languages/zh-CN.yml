@@ -84,7 +84,8 @@ reward:
   wechatpay: 微信
   alipay: 支付宝
   paypal: PayPal
-  binance: USDT 币安BNB Smart Chain(BEP20)
+  binance: USDT TRC20 TEpxok72yidM8LLCZhh8s2BgR4QT8mNHB9
+  aiopay: 全功能收款支持信用卡花呗等（推荐）
   comment: 您的捐助可以帮助我们更好的更新技术文章
 follow_me:
   welcome: 欢迎关注我的其它发布渠道

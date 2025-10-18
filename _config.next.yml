@@ -271,10 +271,11 @@ tag_icon: false
 reward_settings:
   # If true, a donate button will be displayed in every article by default.
   enable: true
-  animation: false
+  animation: true
 
 reward:
   wechatpay: /images/wechatpay.png
+  aiopay: /images/All-in-One_Payment.png
   alipay: /images/alipay.jpg
   #paypal: /images/paypal.png
   binance: /images/binance.jpg
