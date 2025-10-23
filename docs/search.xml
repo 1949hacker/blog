@@ -669,8 +669,6 @@
       
         <tags>
             
-            <tag> Linux </tag>
-            
             <tag> Debian </tag>
             
             <tag> Debian安装 </tag>
@@ -678,6 +676,8 @@
             <tag> Linux安装 </tag>
             
             <tag> Debian服务器 </tag>
+            
+            <tag> Linux </tag>
             
         </tags>
       
@@ -702,9 +702,9 @@
       
         <tags>
             
-            <tag> Linux </tag>
-            
             <tag> Linux安装 </tag>
+            
+            <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
             
@@ -948,9 +948,9 @@
       
         <tags>
             
-            <tag> Linux </tag>
-            
             <tag> Debian </tag>
+            
+            <tag> Linux </tag>
             
             <tag> deb </tag>
             
@@ -1108,9 +1108,9 @@
       
         <tags>
             
-            <tag> Linux </tag>
-            
             <tag> Debian </tag>
+            
+            <tag> Linux </tag>
             
         </tags>
       
